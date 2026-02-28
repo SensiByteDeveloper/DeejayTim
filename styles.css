@@ -1761,20 +1761,28 @@ body.handsup-zoom-open .music-player * {
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background 0.2s, box-shadow 0.2s;
+  color: #fff;
 }
 .music-icon-btn-primary {
   background: var(--neon-red);
-  color: #fff;
 }
 .music-icon-btn-primary:hover {
   background: rgba(255, 23, 68, 0.9);
   box-shadow: 0 0 20px rgba(255, 23, 68, 0.4);
 }
+.music-btn-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.music-icon-play { display: flex; }
+.music-icon-pause { display: none; }
+.music-play.is-playing .music-icon-play { display: none; }
+.music-play.is-playing .music-icon-pause { display: flex; }
 .music-play:focus, .music-next:focus { outline: none; }
 .music-play:focus-visible, .music-next:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 

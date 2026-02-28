@@ -187,6 +187,37 @@ function initMusicPlayer() {
     });
   };
 
+  const updateMediaSession = () => {
+    if (!('mediaSession' in navigator)) return;
+    const track = getCurrentTrack();
+    const baseUrl = typeof location !== 'undefined' ? new URL('.', location.href).href : '';
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: track?.title ?? 'Deejay Tim',
+      artist: 'Deejay Tim',
+      album: 'Deejay Tim',
+      artwork: [
+        { src: baseUrl + 'favicon-180.png', sizes: '180x180', type: 'image/png' },
+        { src: baseUrl + 'favicon.svg', sizes: 'any', type: 'image/svg+xml' }
+      ]
+    });
+  };
+
+  const setupMediaSessionHandlers = () => {
+    if (!('mediaSession' in navigator)) return;
+    navigator.mediaSession.setActionHandler('play', () => {
+      if (!player?.classList.contains('muted')) audio?.play().catch(() => {});
+    });
+    navigator.mediaSession.setActionHandler('pause', () => audio?.pause());
+    navigator.mediaSession.setActionHandler('nexttrack', () => playNext());
+    navigator.mediaSession.setActionHandler('previoustrack', () => playPrev());
+    navigator.mediaSession.setActionHandler('seekbackward', (d) => {
+      audio.currentTime = Math.max(0, audio.currentTime - (d.seekOffset || 10));
+    });
+    navigator.mediaSession.setActionHandler('seekforward', (d) => {
+      audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + (d.seekOffset || 10));
+    });
+  };
+
   const loadAndPlay = (displayIndex) => {
     if (displayIndex < 0 || displayIndex >= PLAYLIST_ORDER.length) return;
     const t = PLAYLIST_ORDER[displayIndex];
@@ -196,9 +227,9 @@ function initMusicPlayer() {
     audio.load();
     if (!player.classList.contains('muted')) {
       audio.play().catch(() => {});
-      playBtn.textContent = '⏸';
     }
     updateUI();
+    updateMediaSession();
   };
 
   const playNext = () => {
@@ -323,7 +354,7 @@ function initMusicPlayer() {
   const updatePlayState = () => {
     const playing = !audio.paused;
     if (playBtn) {
-      playBtn.textContent = playing ? '⏸' : '▶';
+      playBtn.classList.toggle('is-playing', playing);
       playBtn.setAttribute('aria-label', playing ? (t('music.pauseAria') || 'Pauzeren') : (t('music.playAria') || 'Afspelen'));
     }
   };
@@ -416,6 +447,8 @@ function initMusicPlayer() {
   updateMuteAria();
   updateUI();
   updateProgress();
+  updateMediaSession();
+  setupMediaSessionHandlers();
 
   player?.classList.add('draw-attention');
   const stopAttention = () => player?.classList.remove('draw-attention');
