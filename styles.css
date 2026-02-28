@@ -1404,7 +1404,8 @@ body.handsup-zoom-open .music-player * {
 .form-group input:focus + label,
 .form-group input:not(:placeholder-shown) + label,
 .form-group textarea:focus + label,
-.form-group textarea:not(:placeholder-shown) + label {
+.form-group textarea:not(:placeholder-shown) + label,
+.form-group.label-floated label {
   top: -0.5rem;
   left: 0;
   font-size: var(--text-caption);
@@ -1452,11 +1453,13 @@ body.handsup-zoom-open .music-player * {
 .contact-actions {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-bottom: 2rem;
 }
 .contact-whatsapp {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
   background: #25d366;
@@ -1464,14 +1467,19 @@ body.handsup-zoom-open .music-player * {
   text-decoration: none;
   font-weight: 600;
   border-radius: 8px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid rgba(255, 23, 68, 0.4);
+  box-shadow: 0 0 20px rgba(255, 23, 68, 0.3), 0 0 40px rgba(255, 23, 68, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .contact-whatsapp:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+  box-shadow: 0 0 30px rgba(255, 23, 68, 0.5), 0 0 50px rgba(255, 23, 68, 0.25);
 }
 .contact-whatsapp:focus { outline: none; }
-.contact-whatsapp:focus-visible { outline: 2px solid #25d366; outline-offset: 2px; }
+.contact-whatsapp:focus-visible {
+  outline: 2px solid var(--neon-red);
+  outline-offset: 2px;
+}
 .whatsapp-icon {
   width: 24px;
   height: 24px;
@@ -1482,14 +1490,15 @@ body.handsup-zoom-open .music-player * {
   color: var(--text-dim);
   padding-bottom: 6rem;
 }
+/* WCAG 4.5:1 contrast op donkere achtergrond */
 .contact-link {
   display: inline-block;
-  color: var(--neon-cyan);
+  color: #7df9ff;
   text-decoration: none;
   margin: 0 1rem 0.5rem;
-  transition: text-shadow 0.3s;
+  transition: text-shadow 0.3s, color 0.2s;
 }
-.contact-link:hover { text-shadow: 0 0 10px var(--neon-cyan); }
+.contact-link:hover { color: #99fbff; text-shadow: 0 0 10px rgba(0, 229, 255, 0.6); }
 
 /* Floating Music Player - Luxe */
 .music-player {
@@ -1665,123 +1674,48 @@ body.handsup-zoom-open .music-player * {
   box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
 }
 
-/* WhatsApp Chat Widget – Authkey-style popup */
-.whatsapp-widget { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 199; }
-
+/* Tijdelijk uitgeschakeld tot activatie WhatsApp Business */
+/*
+.whatsapp-widget { position: fixed; bottom: 0.75rem; right: 1.5rem; z-index: 199; }
 .whatsapp-float {
-  width: 56px;
-  height: 56px;
-  padding: 0;
-  border: none;
-  cursor: pointer;
-  background: #25D366;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 56px; height: 56px; padding: 0; border: none; cursor: pointer;
+  background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4), 0 0 20px rgba(0, 229, 255, 0.3);
+  border: 1px solid rgba(0, 229, 255, 0.4); transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.whatsapp-float:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 28px rgba(37, 211, 102, 0.5);
-}
+.whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37, 211, 102, 0.5), 0 0 32px rgba(0, 229, 255, 0.4); }
 .whatsapp-float:focus { outline: none; }
-.whatsapp-float:focus-visible { outline: 2px solid #25D366; outline-offset: 2px; }
-
-/* Popup – Authkey-style chat card */
+.whatsapp-float:focus-visible { outline: 2px solid var(--neon-cyan); outline-offset: 2px; }
 .whatsapp-popup {
-  position: absolute;
-  bottom: calc(100% + 12px);
-  right: 0;
-  width: 320px;
-  max-width: calc(100vw - 2rem);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(8px) scale(0.96);
+  position: absolute; bottom: calc(100% + 12px); right: 0; width: 320px; max-width: calc(100vw - 2rem);
+  opacity: 0; visibility: hidden; transform: translateY(8px) scale(0.96);
   transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
 }
-.whatsapp-widget.open .whatsapp-popup {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0) scale(1);
-}
-
-.whatsapp-popup-inner {
-  background: #fff;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-}
-
-/* Header – groen zoals Authkey */
+.whatsapp-widget.open .whatsapp-popup { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+.whatsapp-popup-inner { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35); }
 .whatsapp-popup-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 16px;
-  background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
-  color: #fff;
+  display: flex; align-items: center; gap: 10px; padding: 14px 16px;
+  background: linear-gradient(135deg, #128C7E 0%, #075E54 100%); color: #fff;
 }
-.whatsapp-popup-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-}
+.whatsapp-popup-avatar { width: 40px; height: 40px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
 .whatsapp-popup-info { flex: 1; }
 .whatsapp-popup-name { font-weight: 600; font-size: var(--text-body); display: block; }
 .whatsapp-popup-status { font-size: var(--text-caption); opacity: 0.9; }
-.whatsapp-popup-close {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.5rem;
-  line-height: 1;
-  cursor: pointer;
-  padding: 4px;
-  opacity: 0.9;
-}
+.whatsapp-popup-close { background: none; border: none; color: #fff; font-size: 1.5rem; line-height: 1; cursor: pointer; padding: 4px; opacity: 0.9; }
 .whatsapp-popup-close:hover { opacity: 1; }
-
-/* Body – chat bubble + CTA */
-.whatsapp-popup-body {
-  padding: 16px;
-  background: #f0f2f5;
-}
+.whatsapp-popup-body { padding: 16px; background: #f0f2f5; }
 .whatsapp-popup-msg {
-  background: #fff;
-  padding: 10px 14px;
-  border-radius: 12px 12px 4px 12px;
-  margin-bottom: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 8px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  background: #fff; padding: 10px 14px; border-radius: 12px 12px 4px 12px; margin-bottom: 12px;
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 8px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 .whatsapp-popup-time { font-size: var(--text-micro); color: #667781; }
 .whatsapp-popup-cta {
-  display: block;
-  text-align: center;
-  padding: 12px 20px;
-  background: #25D366;
-  color: #fff;
-  font-weight: 600;
-  font-size: var(--text-body-sm);
-  border-radius: 10px;
-  text-decoration: none;
+  display: block; text-align: center; padding: 12px 20px; background: #25D366; color: #fff;
+  font-weight: 600; font-size: var(--text-body-sm); border-radius: 10px; text-decoration: none;
   transition: background 0.2s, transform 0.2s;
 }
-.whatsapp-popup-cta:hover {
-  background: #20bd5a;
-  color: #fff;
-  transform: translateY(-1px);
-}
+.whatsapp-popup-cta:hover { background: #20bd5a; color: #fff; transform: translateY(-1px); }
+*/
 
 /* Mobile & Tablet – grid layout, video’s overlappen nooit tekst (ook bij zoom) */
 @media (max-width: 1599px) {
@@ -1827,12 +1761,8 @@ body.handsup-zoom-open .music-player * {
   .video-desktop-only { display: none !important; }
   .video-mobile-only { display: block !important; }
 
-  /* WhatsApp widget iets hoger op mobiel (boven muziekspeler) */
-  .whatsapp-widget {
-    bottom: 5.5rem;
-    right: 1rem;
-    transition: opacity 0.25s ease, visibility 0.25s;
-  }
+  /* Tijdelijk uit – WhatsApp widget */
+  /* .whatsapp-widget { bottom: 5rem; right: 1rem; transition: opacity 0.25s ease, visibility 0.25s; } */
 
   /* Video modal: géén frame op mobiel, fullscreen */
   .video-modal { padding: 0; }
@@ -1884,12 +1814,8 @@ body.handsup-zoom-open .music-player * {
     opacity: 1;
     visibility: visible;
   }
-  .nav.menu-open ~ .whatsapp-widget {
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s ease, visibility 0.25s;
-  }
+  /* Tijdelijk uit – WhatsApp widget */
+  /* .nav.menu-open ~ .whatsapp-widget { visibility: hidden; opacity: 0; pointer-events: none; transition: opacity 0.25s ease, visibility 0.25s; } */
 
   /* Menu – smaller, strakker, met subtiele afronding */
   .nav-links {

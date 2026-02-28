@@ -500,6 +500,21 @@ function initForm() {
       }
     });
   });
+
+  // Floating label – JS-fallback voor textarea (Safari :placeholder-shown werkt niet goed)
+  const syncFloatingLabel = (el) => {
+    const group = el?.closest('.form-group');
+    if (!group) return;
+    const hasValue = el.value.trim().length > 0;
+    const hasFocus = document.activeElement === el;
+    group.classList.toggle('label-floated', hasValue || hasFocus);
+  };
+  form.querySelectorAll('input, textarea').forEach((el) => {
+    el.addEventListener('focus', () => syncFloatingLabel(el));
+    el.addEventListener('blur', () => syncFloatingLabel(el));
+    el.addEventListener('input', () => syncFloatingLabel(el));
+    syncFloatingLabel(el);
+  });
 }
 
 function showFormSuccess(form) {
