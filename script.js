@@ -94,12 +94,12 @@ function initNav() {
   });
 }
 
-// Music Player – multi-track, shuffle, 3 statussen (minimal/player/playlist)
+// Music Player – multi-track, shuffle
 const MUSIC_TRACKS = [
-  { src: "media/DJ Tim - Let's Go DJ Tim.wav", title: "Let's Go DJ Tim" },
-  { src: "media/DJ Tim - Bounce Control.wav", title: "Bounce Control" },
-  { src: "media/DJ Tim - Ey ey ey.wav", title: "Ey ey ey" },
-  { src: "media/DJ Tim - Ey!.wav", title: "Ey!" }
+  { src: "media/DJ Tim - Let's Go DJ Tim.mp3", title: "Let's Go DJ Tim" },
+  { src: "media/DJ Tim - Bounce Control.mp3", title: "Bounce Control" },
+  { src: "media/DJ Tim - Faz Assim.mp3", title: "Faz Assim" },
+  { src: "media/DJ Tim - Waistline Spin.mp3", title: "Waistline Spin" }
 ];
 const PLAYLIST_ORDER = [...MUSIC_TRACKS];
 
@@ -116,7 +116,11 @@ function initMusicPlayer() {
   const player = document.getElementById('musicPlayer');
   const muteBtn = document.getElementById('musicMute');
   const playBtn = document.getElementById('musicPlay');
-  const handle = document.querySelector('.music-player-handle');
+  const collapseBtn = document.getElementById('musicCollapse');
+  const expandBtn = document.getElementById('musicExpand');
+  const progressEl = document.getElementById('musicProgress');
+  const progressFill = document.getElementById('musicProgressFill');
+  const trackTrigger = document.getElementById('musicTrackTrigger');
   const introOverlay = document.getElementById('musicIntroOverlay');
   const pageContent = document.getElementById('page-content');
   const audio = document.getElementById('bgMusic');
@@ -160,7 +164,6 @@ function initMusicPlayer() {
   }
   const trackDisplay = document.getElementById('musicTrackDisplay');
   const playlistEl = document.getElementById('musicPlaylist');
-  const prevBtn = player?.querySelector('.music-prev');
   const nextBtn = player?.querySelector('.music-next');
 
   if (!audio || !player) return;
@@ -223,7 +226,7 @@ function initMusicPlayer() {
     if (introDone) return;
     introDone = true;
     setPageContentInert(false);
-    handle?.classList.remove('draw-attention');
+    player?.classList.remove('draw-attention');
     document.body.classList.remove('intro-pending');
     document.body.classList.add('intro-done');
     introOverlay?.classList.add('faded');
@@ -232,18 +235,19 @@ function initMusicPlayer() {
     setTimeout(() => introOverlay?.remove(), 600);
   };
 
-  let uiState = 1;
-  const setUIState = (s) => {
-    uiState = (s + 3) % 3;
-    player.classList.remove('state-minimal', 'state-player', 'state-playlist');
-    player.classList.add(['state-minimal', 'state-player', 'state-playlist'][uiState]);
-    handle.setAttribute('aria-expanded', uiState > 0);
+  const setCollapsed = (collapsed) => {
+    player.classList.toggle('state-collapsed', collapsed);
+    player.classList.toggle('state-expanded', !collapsed);
+    collapseBtn?.setAttribute('aria-expanded', !collapsed);
+    expandBtn?.setAttribute('aria-expanded', collapsed);
+    expandBtn?.toggleAttribute('hidden', !collapsed);
   };
 
   loadAndPlay(indexInPlaylist(playbackOrder[0]));
 
   const startExperience = () => {
     player.classList.remove('muted');
+    muteBtn?.setAttribute('aria-pressed', 'false');
     audio.play().then(() => { playBtn.textContent = '⏸'; }).catch(() => {});
     runIntroDone();
   };
@@ -279,6 +283,7 @@ function initMusicPlayer() {
       if (withMusic) {
         document.body.classList.remove('no-music');
         player?.classList.remove('muted');
+        muteBtn?.setAttribute('aria-pressed', 'false');
         audio?.play().catch(() => {});
       } else {
         document.body.classList.add('no-music');
@@ -310,18 +315,44 @@ function initMusicPlayer() {
   });
 
   audio.addEventListener('ended', playNext);
+  audio.addEventListener('play', () => { if (playBtn) playBtn.textContent = '⏸'; });
+  audio.addEventListener('pause', () => { if (playBtn) playBtn.textContent = '▶'; });
 
   muteBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
     player.classList.toggle('muted');
+    muteBtn?.setAttribute('aria-pressed', player.classList.contains('muted'));
     if (player.classList.contains('muted')) {
       audio.pause();
+      playBtn.textContent = '▶';
     } else {
       audio.play().catch(() => {});
+      playBtn.textContent = '⏸';
     }
   });
 
-  handle?.addEventListener('click', () => setUIState(uiState + 1));
+  collapseBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setCollapsed(true);
+  });
+  expandBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setCollapsed(false);
+  });
+
+  trackTrigger?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = player.classList.toggle('playlist-open');
+    trackTrigger?.setAttribute('aria-expanded', open);
+    playlistEl?.setAttribute('aria-hidden', !open);
+  });
+
+  progressEl?.addEventListener('click', (e) => {
+    if (!audio.duration || isNaN(audio.duration)) return;
+    const rect = progressEl.getBoundingClientRect();
+    const pct = (e.clientX - rect.left) / rect.width;
+    audio.currentTime = pct * audio.duration;
+  });
 
   playBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -335,8 +366,16 @@ function initMusicPlayer() {
     }
   });
 
-  prevBtn?.addEventListener('click', (e) => { e.stopPropagation(); playPrev(); });
   nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); playNext(); });
+
+  const updateProgress = () => {
+    if (!progressFill || !audio.duration || isNaN(audio.duration)) return;
+    const pct = (audio.currentTime / audio.duration) * 100;
+    progressFill.style.width = pct + '%';
+    progressEl?.setAttribute('aria-valuenow', Math.round(pct));
+  };
+  audio.addEventListener('timeupdate', updateProgress);
+  audio.addEventListener('loadedmetadata', updateProgress);
 
   // Playlist UI – Let's Go altijd bovenaan
   PLAYLIST_ORDER.forEach((t, i) => {
@@ -345,19 +384,25 @@ function initMusicPlayer() {
     div.setAttribute('aria-selected', i === 0);
     div.className = 'music-playlist-item' + (i === 0 ? ' active' : '');
     div.textContent = t.title;
-    div.addEventListener('click', () => loadAndPlay(i));
+    div.addEventListener('click', (e) => {
+      e.stopPropagation();
+      loadAndPlay(i);
+      player.classList.remove('playlist-open');
+      trackTrigger?.setAttribute('aria-expanded', 'false');
+      playlistEl?.setAttribute('aria-hidden', 'true');
+    });
     playlistEl?.appendChild(div);
   });
 
-  setUIState(1); // Start in player-view zodat songtitel zichtbaar is
+  setCollapsed(false);
+  muteBtn?.setAttribute('aria-pressed', player.classList.contains('muted'));
   updateUI();
+  updateProgress();
 
-  handle?.classList.add('draw-attention');
-  const stopAttention = () => {
-    handle?.classList.remove('draw-attention');
-  };
+  player?.classList.add('draw-attention');
+  const stopAttention = () => player?.classList.remove('draw-attention');
   setTimeout(stopAttention, 6200);
-  handle?.addEventListener('click', stopAttention);
+  collapseBtn?.addEventListener('click', stopAttention);
   document.addEventListener('scroll', stopAttention, { once: true });
 }
 

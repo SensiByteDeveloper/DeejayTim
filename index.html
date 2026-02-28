@@ -316,27 +316,33 @@
   </div>
   -->
 
-  <!-- Floating Music Player – initieel groot, inkrimpt na klik -->
-  <div class="music-player state-player" id="musicPlayer">
-    <div class="music-player-handle" aria-expanded="true" aria-controls="musicPlayerContent" data-i18n-aria="music.toggleAria">♪</div>
-    <div class="music-player-content" id="musicPlayerContent">
-      <div class="music-player-row">
-        <button class="music-mute" id="musicMute" data-i18n-aria="music.muteAria">
-          <span class="music-mute-icon music-muted">🔇</span>
-          <span class="music-mute-icon">🔊</span>
-        </button>
-        <div class="music-info">
+  <!-- Sticky Player Bar – compacte balk onderaan, inklapbaar naar icoon -->
+  <div class="music-player state-expanded" id="musicPlayer">
+    <div class="music-player-progress" id="musicProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Afspeelvoortgang">
+      <div class="music-player-progress-fill" id="musicProgressFill"></div>
+    </div>
+    <div class="music-player-bar" id="musicPlayerBar">
+      <button class="music-player-collapse" id="musicCollapse" aria-label="Speler minimaliseren" aria-expanded="true" aria-controls="musicPlayerContent" title="Minimaliseren">−</button>
+      <div class="music-player-info" id="musicPlayerContent">
+        <div class="music-player-thumb">
+          <span class="music-vinyl" aria-hidden="true">◉</span>
+        </div>
+        <button class="music-track-trigger" id="musicTrackTrigger" aria-expanded="false" aria-controls="musicPlaylist" data-i18n-aria="music.playlistAria">
           <span class="music-label" data-i18n="music.label">Deejay Tim</span>
           <span class="music-track" id="musicTrackDisplay">Let's Go DJ Tim</span>
-        </div>
-        <div class="music-controls">
-          <button class="music-prev" data-i18n-aria="music.prevAria">⏮</button>
-          <button class="music-play" id="musicPlay" data-i18n-aria="music.playAria">▶</button>
-          <button class="music-next" data-i18n-aria="music.nextAria">⏭</button>
-        </div>
+        </button>
       </div>
-      <div class="music-playlist" id="musicPlaylist" role="listbox" aria-label="Nummeroverzicht" data-i18n-aria="music.playlistAria"></div>
+      <div class="music-player-controls">
+        <button class="music-mute" id="musicMute" data-i18n-aria="music.muteAria" aria-pressed="false">
+          <span class="music-mute-icon music-muted" aria-hidden="true">🔇</span>
+          <span class="music-mute-icon" aria-hidden="true">🔊</span>
+        </button>
+        <button class="music-play" id="musicPlay" data-i18n-aria="music.playAria">▶</button>
+        <button class="music-next" data-i18n-aria="music.nextAria">⏭</button>
+      </div>
     </div>
+    <div class="music-playlist" id="musicPlaylist" role="listbox" aria-label="Nummeroverzicht" data-i18n-aria="music.playlistAria" aria-hidden="true"></div>
+    <button class="music-player-mini" id="musicExpand" aria-label="Speler uitklappen" aria-expanded="false" hidden>♪</button>
   </div>
 
   <!-- Hands Up! – full-page overlay met iPhone mockups -->
