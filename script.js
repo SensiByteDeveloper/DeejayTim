@@ -407,12 +407,14 @@ function initMusicPlayer() {
   playBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
     if (player.classList.contains('muted')) return;
-    if (audio.paused) {
+    const willPlay = audio.paused;
+    if (willPlay) {
       audio.play().catch(() => {});
     } else {
       audio.pause();
     }
-    updatePlayState();
+    playBtn?.classList.toggle('is-playing', willPlay);
+    if (playBtn) playBtn.setAttribute('aria-label', willPlay ? (t('music.pauseAria') || 'Pauzeren') : (t('music.playAria') || 'Afspelen'));
   });
 
   nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); playNext(); });
@@ -815,16 +817,81 @@ function initHandsUpModal() {
   });
 }
 
-// Video previews: muted afspelen, klik opent modal met geluid + site muziek uit
+// Video previews: muted afspelen, klik opent modal met carousel (zoals Hands Up)
 function initVideoPreviews() {
   const modal = document.getElementById('videoModal');
   const modalPlayer = document.getElementById('videoModalPlayer');
   const modalClose = modal?.querySelector('.video-modal-close');
   const modalBackdrop = modal?.querySelector('.video-modal-backdrop');
+  const prevBtn = modal?.querySelector('.video-carousel-prev');
+  const nextBtn = modal?.querySelector('.video-carousel-next');
+  const dotsEl = modal?.querySelector('.video-carousel-dots');
+  const content = modal?.querySelector('.video-modal-content');
   const bgMusic = document.getElementById('bgMusic');
   const musicPlayer = document.getElementById('musicPlayer');
 
   if (!modal || !modalPlayer) return;
+
+  // Lijst van video-sources op basis van zichtbare video-floats (desktop vs mobiel)
+  const getVideoList = () => {
+    return [...document.querySelectorAll('.video-float[data-video]')]
+      .filter(el => getComputedStyle(el).display !== 'none')
+      .map(el => el.getAttribute('data-video'));
+  };
+
+  let videoIndex = 0;
+
+  const goToVideo = (idx) => {
+    const videos = getVideoList();
+    if (videos.length === 0) return;
+    if (idx < 0) idx = videos.length - 1;
+    if (idx >= videos.length) idx = 0;
+    videoIndex = idx;
+    modalPlayer.src = videos[idx];
+    modalPlayer.muted = false;
+    modalPlayer.play().catch(() => {});
+    dotsEl?.querySelectorAll('button').forEach((btn, i) => {
+      btn.setAttribute('aria-selected', i === idx);
+    });
+  };
+
+  const openVideo = (srcOrIndex) => {
+    const videos = getVideoList();
+    if (videos.length === 0) return;
+    const idx = typeof srcOrIndex === 'number'
+      ? srcOrIndex
+      : Math.max(0, videos.indexOf(srcOrIndex));
+    videoIndex = idx;
+    goToVideo(videoIndex);
+
+    // Dots opnieuw opbouwen (viewport kan gewisseld zijn)
+    dotsEl.innerHTML = '';
+    videos.forEach((_, i) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.role = 'tab';
+      btn.setAttribute('aria-label', `Video ${i + 1}`);
+      btn.setAttribute('aria-selected', i === videoIndex);
+      btn.addEventListener('click', () => goToVideo(i));
+      dotsEl?.appendChild(btn);
+    });
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if (bgMusic && !musicPlayer?.classList.contains('muted')) {
+      bgMusic.pause();
+    }
+  };
+
+  const closeVideo = () => {
+    modal.classList.remove('open');
+    modalPlayer.pause();
+    modalPlayer.src = '';
+    document.body.style.overflow = '';
+    if (bgMusic && !musicPlayer?.classList.contains('muted')) {
+      bgMusic.play().catch(() => {});
+    }
+  };
 
   // Start muted video previews
   document.querySelectorAll('.video-float video').forEach(video => {
@@ -833,29 +900,6 @@ function initVideoPreviews() {
     video.loop = true;
     video.play().catch(() => {});
   });
-
-  const openVideo = (src) => {
-    modalPlayer.src = src;
-    modalPlayer.muted = false;
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-
-    if (bgMusic && !musicPlayer?.classList.contains('muted')) {
-      bgMusic.pause();
-    }
-    modalPlayer.play().catch(() => {});
-  };
-
-  const closeVideo = () => {
-    modal.classList.remove('open');
-    modalPlayer.pause();
-    modalPlayer.src = '';
-    document.body.style.overflow = '';
-
-    if (bgMusic && !musicPlayer?.classList.contains('muted')) {
-      bgMusic.play().catch(() => {});
-    }
-  };
 
   document.querySelectorAll('.video-float[data-video]').forEach(el => {
     el.addEventListener('click', () => {
@@ -871,15 +915,27 @@ function initVideoPreviews() {
     });
   });
 
+  prevBtn?.addEventListener('click', (e) => { e.stopPropagation(); goToVideo(videoIndex - 1); });
+  nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); goToVideo(videoIndex + 1); });
+
+  let touchStartX = 0;
+  content?.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  content?.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) goToVideo(dx < 0 ? videoIndex + 1 : videoIndex - 1);
+  }, { passive: true });
+
   modalClose?.addEventListener('click', closeVideo);
   modalBackdrop?.addEventListener('click', closeVideo);
-
-  modal?.addEventListener('click', (e) => {
-    if (e.target === modal) closeVideo();
-  });
+  modal?.addEventListener('click', (e) => { if (e.target === modal) closeVideo(); });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal?.classList.contains('open')) closeVideo();
+    if (modal?.classList.contains('open')) {
+      if (e.key === 'Escape') closeVideo();
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); goToVideo(videoIndex - 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); goToVideo(videoIndex + 1); }
+      return;
+    }
   });
 }
 

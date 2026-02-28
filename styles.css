@@ -1065,6 +1065,67 @@ body.handsup-zoom-open .music-player * {
   background: rgba(230, 0, 255, 0.3);
   border-color: var(--neon-pink);
 }
+
+/* Video carousel – pijlen en dots (zoals Hands Up) */
+.video-carousel-prev,
+.video-carousel-next {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9999;
+  width: 56px;
+  height: 56px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.video-carousel-prev:hover,
+.video-carousel-next:hover {
+  background: rgba(230, 0, 255, 0.3);
+  color: var(--neon-pink);
+}
+.video-carousel-prev { left: 1.5rem; }
+.video-carousel-next { right: 1.5rem; }
+@media (max-width: 600px) {
+  .video-carousel-prev, .video-carousel-next { width: 44px; height: 44px; font-size: 1.5rem; }
+  .video-carousel-prev { left: 0.75rem; }
+  .video-carousel-next { right: 0.75rem; }
+}
+
+.video-carousel-dots {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.5rem;
+}
+.video-carousel-dots button {
+  width: 10px;
+  height: 10px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.video-carousel-dots button:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+.video-carousel-dots button[aria-selected="true"] {
+  background: var(--neon-pink);
+  transform: scale(1.2);
+}
+
 .video-modal-content {
   position: relative;
   width: 100%;
@@ -1779,10 +1840,10 @@ body.handsup-zoom-open .music-player * {
   height: 18px;
   flex-shrink: 0;
 }
-.music-icon-play { display: flex; }
-.music-icon-pause { display: none; }
-.music-play.is-playing .music-icon-play { display: none; }
-.music-play.is-playing .music-icon-pause { display: flex; }
+.music-icon-play { display: flex !important; }
+.music-icon-pause { display: none !important; }
+.music-play.is-playing .music-icon-play { display: none !important; }
+.music-play.is-playing .music-icon-pause { display: flex !important; }
 .music-play:focus, .music-next:focus { outline: none; }
 .music-play:focus-visible, .music-next:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
