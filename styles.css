@@ -1125,7 +1125,15 @@ body.handsup-zoom-open .music-player * {
   letter-spacing: 0.3em;
 }
 .section-title + .section-subtitle,
-.section-title + .hands-up-tagline { margin-top: 0; }
+.section-title + .hands-up-tagline,
+.section-title + .contact-subtitle { margin-top: 0; }
+
+.contact-subtitle {
+  font-size: var(--text-body);
+  text-align: center;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+}
 
 .section-subtitle {
   font-size: var(--text-body);
@@ -1405,11 +1413,18 @@ body.handsup-zoom-open .music-player * {
 .form-group input:not(:placeholder-shown) + label,
 .form-group textarea:focus + label,
 .form-group textarea:not(:placeholder-shown) + label,
+.form-group:focus-within label,
 .form-group.label-floated label {
   top: -0.5rem;
   left: 0;
   font-size: var(--text-caption);
   color: var(--neon-cyan);
+}
+/* Textarea-label: expliciet boven veld bij focus (override default top: 1.5rem) */
+.form-group:focus-within textarea + label,
+.form-group.label-floated textarea + label {
+  top: -0.5rem !important;
+  transform: none;
 }
 .form-group.has-error input,
 .form-group.has-error textarea {

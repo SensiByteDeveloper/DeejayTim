@@ -510,7 +510,8 @@ function initForm() {
     group.classList.toggle('label-floated', hasValue || hasFocus);
   };
   form.querySelectorAll('input, textarea').forEach((el) => {
-    el.addEventListener('focus', () => syncFloatingLabel(el));
+    el.addEventListener('focus', () => requestAnimationFrame(() => syncFloatingLabel(el)));
+    el.addEventListener('focusin', () => syncFloatingLabel(el));
     el.addEventListener('blur', () => syncFloatingLabel(el));
     el.addEventListener('input', () => syncFloatingLabel(el));
     syncFloatingLabel(el);
