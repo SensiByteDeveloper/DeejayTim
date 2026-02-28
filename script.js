@@ -187,6 +187,7 @@ function initMusicPlayer() {
     });
   };
 
+  const FAVICON_DATA_URL = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAD/ElEQVR4nO3dO3LbMABFUVvjsYpUWU72X3g5qdmlSCZRJD5+IIoEiHN6yx7iEgAlG37//Pz29gLD9x+veFmS68+vt629bxiHIE4WygZxaOKslZTHoYnTV1IYx2wZr1gC2XlEVscx8UMIohJbjdG6OEa/qyaq9eR4LY1DFu0qHrtFcTy+utmiOQWDeHnFi1Khx1Gb3cPOxKGMnvuYWlbuvtKEcRoLRzbOHMo4sbsa0vwxHocyTm9JH/MbUqvJWZU8rfjQpE/Dw+RxH4cFpSvXycVlalmxoPRgYpQvKRxl9ON2rG8b+BeHrQZ3JYwvK6aN3oyO+PyjLN36E4fdBteHnYeZg0gcTH4qa01h5lEW7oiDSBxEFxsO0gOtmYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgfRx9txHPqw0FGHHhwThywKLtf+iewdhywaSmTXPYcy2rqGR+45nB9U+U2138zhEMtXn0Z9kkdZc0YTV2ynOPxF7usOhHwdb4IRiYNIHETiIBIHkTiIxEEkDiJxEImDKr8bKV1w/p3otp6a1gcJYbSNyiP+s2MMpYVInGsNjz9uUYrv9ciDiJxcKIN6emfEerRUhydPCPUw7JC+3H084xQj2biYH/i4BQb0g155Fmiuzg88ixnWSHqKw6PPKv0FQeriINIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgeROGg/jucPUHAEw2njYH8t/Tnk71vfn7nupqU4frM67MayQiQOInEQiYNIHETiIBIHkTiIxEEkDiJxrHbt5vNhcRD1FcdWN/3151fZSxV/4SHa+1S2Htd2hrnqmeP2Oh77ry3avemHm+u2z09yzMwxfP9x7IVu7qYfjrijLkeNh3+Ns9zdtdqt7CP3HPqo3K5PK81N5hXa8xp+tPJLwlx3v7WOWVYk0sSMe+SewypTub7eIWUVcRCJg0gcROIgEgeROIjEQSQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB9Glnr9/pwa3DZg5iMRBJA4m47DtYPTwIDMHkTiYi8PKwvBwIJ2Zg2g8Du+G9WZ0xP/F4SgV7kr4b+aw8+jTEI6/ndpzWFx6MDHK93E4SrYrw+TxtyMzh81Hn64PZxbOP8paXM5qdmTH47C4nN6S89TjzKGPE1t40v775+e35a9iR9K6VQM6s+d4/EpbkHatvdXnN6T6OIeCRWBmWZl4aUtMK4rHbmkcT34bDvHkeK2LY3rPoZJKbDVGq+OY/fYFPwTPe8WIFMbhsaUtZfdqeRx/ebit1pPz9wZx/KWStzpstab/AnRBX+OzKb6ZAAAAAElFTkSuQmCC';
   const updateMediaSession = () => {
     if (!('mediaSession' in navigator)) return;
     const track = getCurrentTrack();
@@ -196,8 +197,9 @@ function initMusicPlayer() {
       artist: 'Deejay Tim',
       album: 'Deejay Tim',
       artwork: [
-        { src: baseUrl + 'favicon-180.png', sizes: '180x180', type: 'image/png' },
-        { src: baseUrl + 'favicon.svg', sizes: 'any', type: 'image/svg+xml' }
+        { src: FAVICON_DATA_URL, sizes: '180x180', type: 'image/png' },
+        { src: baseUrl + 'favicon-512.png', sizes: '512x512', type: 'image/png' },
+        { src: baseUrl + 'favicon-180.png', sizes: '180x180', type: 'image/png' }
       ]
     });
   };
