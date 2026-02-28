@@ -776,14 +776,23 @@ body.no-music .music-player {
   justify-content: center;
   line-height: 1;
 }
-/* Music player verborgen alleen in Hands Up zoom-carousel (niet bij 2 voorbeelden) */
-body.handsup-zoom-open .music-player {
+/* Music player verborgen bij Hands Up zoom én video modal – video op voorgrond */
+body.handsup-zoom-open .music-player,
+body.video-modal-open .music-player {
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
   transition: none !important;
 }
-body.handsup-zoom-open .music-player * {
+
+/* Kleine video-preview blokken verbergen – voorkomen dat ze door modal heen schijnen */
+body.video-modal-open .video-float {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+body.handsup-zoom-open .music-player *,
+body.video-modal-open .music-player * {
   transition: none !important;
 }
 
@@ -1088,8 +1097,8 @@ body.handsup-zoom-open .music-player * {
 }
 .video-carousel-prev:hover,
 .video-carousel-next:hover {
-  background: rgba(230, 0, 255, 0.3);
-  color: var(--neon-pink);
+  background: rgba(255, 23, 68, 0.3);
+  color: var(--neon-red);
 }
 .video-carousel-prev { left: 1.5rem; }
 .video-carousel-next { right: 1.5rem; }
@@ -1122,7 +1131,7 @@ body.handsup-zoom-open .music-player * {
   background: rgba(255, 255, 255, 0.6);
 }
 .video-carousel-dots button[aria-selected="true"] {
-  background: var(--neon-pink);
+  background: var(--neon-red);
   transform: scale(1.2);
 }
 
@@ -1726,7 +1735,8 @@ body.handsup-zoom-open .music-player * {
   text-shadow: 0 0 8px rgba(255, 23, 68, 0.6);
   animation: musicVinylSpin 4s linear infinite;
 }
-.music-player.muted .music-vinyl { animation-play-state: paused; }
+.music-player.muted .music-vinyl,
+.music-player:not(.playing) .music-vinyl { animation-play-state: paused; }
 @keyframes musicVinylSpin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

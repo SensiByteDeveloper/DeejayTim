@@ -281,7 +281,7 @@ function initMusicPlayer() {
   const startExperience = () => {
     player.classList.remove('muted');
     muteBtn?.setAttribute('aria-pressed', 'false');
-    audio.play().then(() => { playBtn.textContent = '⏸'; }).catch(() => {});
+    audio.play().then(() => { updatePlayState(); }).catch(() => {});
     runIntroDone();
   };
 
@@ -355,6 +355,7 @@ function initMusicPlayer() {
 
   const updatePlayState = () => {
     const playing = !audio.paused;
+    player?.classList.toggle('playing', playing);
     if (playBtn) {
       playBtn.classList.toggle('is-playing', playing);
       playBtn.setAttribute('aria-label', playing ? (t('music.pauseAria') || 'Pauzeren') : (t('music.playAria') || 'Afspelen'));
@@ -384,6 +385,9 @@ function initMusicPlayer() {
   collapseBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
     setCollapsed(true);
+    player.classList.remove('playlist-open');
+    trackTrigger?.setAttribute('aria-expanded', 'false');
+    playlistEl?.setAttribute('aria-hidden', 'true');
   });
   expandBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -877,7 +881,9 @@ function initVideoPreviews() {
     });
 
     modal.classList.add('open');
+    document.body.classList.add('video-modal-open');
     document.body.style.overflow = 'hidden';
+    document.querySelectorAll('.video-float video').forEach(v => v.pause());
     if (bgMusic && !musicPlayer?.classList.contains('muted')) {
       bgMusic.pause();
     }
@@ -885,7 +891,9 @@ function initVideoPreviews() {
 
   const closeVideo = () => {
     modal.classList.remove('open');
+    document.body.classList.remove('video-modal-open');
     modalPlayer.pause();
+    document.querySelectorAll('.video-float video').forEach(v => v.play().catch(() => {}));
     modalPlayer.src = '';
     document.body.style.overflow = '';
     if (bgMusic && !musicPlayer?.classList.contains('muted')) {
