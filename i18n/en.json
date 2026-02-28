@@ -83,6 +83,7 @@
     "label": "Deejay Tim",
     "track": "Let's Go DJ Tim",
     "muteAria": "Mute music",
+    "unmuteAria": "Unmute music",
     "toggleAria": "Expand or collapse music player",
     "toggleOnAria": "Music on",
     "toggleOffAria": "Music off",
@@ -90,7 +91,8 @@
     "toggleOffTitle": "Turn music off",
     "playlistAria": "Track list",
     "prevAria": "Previous",
-    "playAria": "Play/Pause",
+    "playAria": "Play",
+    "pauseAria": "Pause",
     "nextAria": "Next"
   },
   "video": {

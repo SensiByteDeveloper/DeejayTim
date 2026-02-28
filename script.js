@@ -285,6 +285,8 @@ function initMusicPlayer() {
         player?.classList.remove('muted');
         muteBtn?.setAttribute('aria-pressed', 'false');
         audio?.play().catch(() => {});
+        updateMuteAria();
+        updatePlayState();
       } else {
         document.body.classList.add('no-music');
         audio?.pause();
@@ -297,7 +299,11 @@ function initMusicPlayer() {
     const on = musicToggle.getAttribute('aria-pressed') === 'true';
     window.deejayTimMusic?.setPreference(!on);
   });
-  window.addEventListener('langchange', updateMusicToggleState);
+  window.addEventListener('langchange', () => {
+    updateMusicToggleState();
+    updatePlayState();
+    updateMuteAria();
+  });
 
   // Verder: start ervaring na expliciete klik (audio NOOIT automatisch)
   const onSubmit = () => {
@@ -314,21 +320,32 @@ function initMusicPlayer() {
     }
   });
 
+  const updatePlayState = () => {
+    const playing = !audio.paused;
+    if (playBtn) {
+      playBtn.textContent = playing ? '⏸' : '▶';
+      playBtn.setAttribute('aria-label', playing ? (t('music.pauseAria') || 'Pauzeren') : (t('music.playAria') || 'Afspelen'));
+    }
+  };
+  const updateMuteAria = () => {
+    if (muteBtn) muteBtn.setAttribute('aria-label', player?.classList.contains('muted') ? (t('music.unmuteAria') || 'Muziek aanzetten') : (t('music.muteAria') || 'Muziek dempen'));
+  };
+
   audio.addEventListener('ended', playNext);
-  audio.addEventListener('play', () => { if (playBtn) playBtn.textContent = '⏸'; });
-  audio.addEventListener('pause', () => { if (playBtn) playBtn.textContent = '▶'; });
+  audio.addEventListener('play', updatePlayState);
+  audio.addEventListener('pause', updatePlayState);
 
   muteBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
     player.classList.toggle('muted');
     muteBtn?.setAttribute('aria-pressed', player.classList.contains('muted'));
+    updateMuteAria();
     if (player.classList.contains('muted')) {
       audio.pause();
-      playBtn.textContent = '▶';
     } else {
       audio.play().catch(() => {});
-      playBtn.textContent = '⏸';
     }
+    updatePlayState();
   });
 
   collapseBtn?.addEventListener('click', (e) => {
@@ -359,11 +376,10 @@ function initMusicPlayer() {
     if (player.classList.contains('muted')) return;
     if (audio.paused) {
       audio.play().catch(() => {});
-      playBtn.textContent = '⏸';
     } else {
       audio.pause();
-      playBtn.textContent = '▶';
     }
+    updatePlayState();
   });
 
   nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); playNext(); });
@@ -396,6 +412,8 @@ function initMusicPlayer() {
 
   setCollapsed(false);
   muteBtn?.setAttribute('aria-pressed', player.classList.contains('muted'));
+  updatePlayState();
+  updateMuteAria();
   updateUI();
   updateProgress();
 

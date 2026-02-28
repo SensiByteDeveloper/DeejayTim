@@ -82,7 +82,8 @@
     "submit": "Verder",
     "label": "Deejay Tim",
     "track": "Let's Go DJ Tim",
-    "muteAria": "Mute muziek",
+    "muteAria": "Muziek dempen",
+    "unmuteAria": "Muziek aanzetten",
     "toggleAria": "Muziekspeler uitklappen of inklappen",
     "toggleOnAria": "Muziek aan",
     "toggleOffAria": "Muziek uit",
@@ -90,7 +91,8 @@
     "toggleOffTitle": "Muziek uitschakelen",
     "playlistAria": "Nummeroverzicht",
     "prevAria": "Vorige",
-    "playAria": "Play/Pause",
+    "playAria": "Afspelen",
+    "pauseAria": "Pauzeren",
     "nextAria": "Volgende"
   },
   "video": {
