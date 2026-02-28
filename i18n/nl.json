@@ -1,0 +1,109 @@
+{
+  "page": {
+    "title": "Deejay Tim | DJ voor jouw evenement"
+  },
+  "nav": {
+    "ariaLabel": "Hoofdnavigatie",
+    "intro": "Intro",
+    "diensten": "Diensten",
+    "handsUp": "Hands Up!",
+    "contact": "Contact",
+    "instagram": "Instagram",
+    "instagramAria": "Instagram (opent in nieuw tabblad)"
+  },
+  "hero": {
+    "tagline": "De perfecte soundtrack voor elk moment",
+    "cta": "Boek nu",
+    "instagramAria": "Instagram @deejaytimr (opent in nieuw tabblad)"
+  },
+  "intro": {
+    "title": "De ervaring",
+    "p1": "Zoek je de perfecte DJ voor jouw evenement? Deejay Tim levert professionele muziek voor feesten, bruiloften en bedrijfsevenementen.",
+    "p2prefix": "Mijn missie: ",
+    "highlight": "de menigte laten dansen",
+    "p2suffix": " en iedereen een onvergetelijke avond bezorgen. Breed repertoire, voor elk moment de juiste sfeer.",
+    "cta": "Laten we er samen een mooi feest van maken!"
+  },
+  "diensten": {
+    "title": "Diensten & prijzen",
+    "subtitle": "Prijzen zijn excl. BTW, incl. 4 uur DJ en incl. reiskosten tot 30km vanuit 3332 SN. Extra km: €0,25. Extra uur: €100.",
+    "allIn": {
+      "title": "All-in",
+      "subtitle": "Complete DJ set + DJ",
+      "badge": "Populair",
+      "features": ["DJ-set (Pioneer XDJ-RX3)", "DJ Booth", "Lichtset", "Rookmachine", "Speakerset", "Microfoon"],
+      "audience": "Goed voor tot ±100 personen",
+      "note": "Extra materiaal (bijv. extra speakers of licht) kan optioneel worden ingehuurd. Dit regelen we in overleg.",
+      "price": "€500",
+      "cta": "Boek All-in"
+    },
+    "justDj": {
+      "title": "Just DJ",
+      "subtitle": "Enkel Deejay Tim",
+      "features": ["Heb je al een complete DJ- en geluidsset?", "Ik verzorg de muziek op maat", "USB-sticks en headset mee", "Draai enkel digitaal"],
+      "price": "€250",
+      "cta": "Boek Just DJ"
+    }
+  },
+  "handsUp": {
+    "title": "Hands Up!",
+    "tagline": "Interactieve DJ ervaring",
+    "ariaPreview": "Bekijk Hands Up! app",
+    "clickHint": "Klik om de app te bekijken",
+    "p1": "Live interactie via de Hands Up! app: song requests, stemmen op de volgende track en meebepalen wat er gedraaid wordt. Jullie sturen, ik draai.",
+    "p2": "Perfect voor bruiloften, feesten en events waar iedereen meebeslist.",
+    "modalTitle": "Hands Up! in actie",
+    "screenParty": "Hands Up! welkom – Verzoeknummers aanvragen, Loterij, Support",
+    "screenRequests": "Hands Up! verzoeknummers wachtrij"
+  },
+  "contact": {
+    "title": "Let's talk!",
+    "subtitle": "Feestje bouwen?",
+    "whatsapp": "WhatsApp",
+    "form": {
+      "name": "Naam *",
+      "phone": "Telefoonnummer *",
+      "email": "E-mail *",
+      "message": "Wat kunt u al delen over uw feestje? *",
+      "submit": "Verstuur",
+      "errorEmail": "Voer een geldig e-mailadres in (bijv. naam@domein.nl)",
+      "errorPhone": "Voer een geldig telefoonnummer in (bijv. 06 12345678 of +31 6 12345678)"
+    },
+    "success": "Bedankt! We nemen zo snel mogelijk contact op."
+  },
+  "music": {
+    "introLangLabel": "Taal:",
+    "introHeading": "Welkom",
+    "introInstruction": "Kies hoe je de website wilt bezoeken.",
+    "introLegend": "Achtergrondmuziek",
+    "optionWith": "Bezoek website met achtergrondmuziek",
+    "optionWithout": "Bezoek website zonder achtergrondmuziek",
+    "submit": "Verder",
+    "label": "Deejay Tim",
+    "track": "Let's Go DJ Tim",
+    "muteAria": "Mute muziek",
+    "toggleAria": "Muziekspeler uitklappen of inklappen",
+    "toggleOnAria": "Muziek aan",
+    "toggleOffAria": "Muziek uit",
+    "toggleOnTitle": "Muziek inschakelen",
+    "toggleOffTitle": "Muziek uitschakelen",
+    "playlistAria": "Nummeroverzicht",
+    "prevAria": "Vorige",
+    "playAria": "Play/Pause",
+    "nextAria": "Volgende"
+  },
+  "video": {
+    "clickHint": "♪ Klik voor geluid"
+  },
+  "whatsapp": {
+    "status": "Online",
+    "welcome": "Hoi! 👋 Waar kan ik je mee helpen?",
+    "cta": "Chat op WhatsApp"
+  },
+  "lang": {
+    "toggleAria": "Taal wijzigen",
+    "nl": "Nederlands",
+    "en": "Engels",
+    "current": "Huidige taal: {lang}"
+  }
+}

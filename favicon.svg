@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#06060b"/>
+  <!-- DJ mixer - 3 vertical faders in neon red, verticaal gecentreerd in blok -->
+  <rect x="6" y="9" width="20" height="14" rx="2" fill="none" stroke="#ff1744" stroke-width="1.5"/>
+  <rect x="10" y="13" width="3" height="6" rx="1" fill="#ff1744"/>
+  <rect x="14.5" y="14" width="3" height="8" rx="1" fill="#ff1744"/>
+  <rect x="19" y="12" width="3" height="10" rx="1" fill="#ff1744"/>
+</svg>
