@@ -1702,12 +1702,12 @@ body.video-modal-open .music-player * {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 0.75rem 0.5rem 0.5rem;
+  padding: 0.25rem 0.75rem 0.75rem 0.5rem;
   min-height: 56px;
   flex: 1;
 }
 @media (min-width: 480px) {
-  .music-player-bar { padding: 0.5rem 1rem 0.5rem 0.6rem; gap: 0.6rem; }
+  .music-player-bar { padding: 0.25rem 1rem 0.75rem 0.6rem; gap: 0.6rem; }
 }
 
 /* Collapse-knop */
@@ -2088,6 +2088,22 @@ body.video-modal-open .music-player * {
 /* Contact video-row verbergen op desktop */
 @media (min-width: 1600px) {
   .video-row-contact { display: none !important; }
+}
+
+/* Muziekspeler op mobiel – knoppen hoger, meer ruimte onderaan */
+@media (max-width: 480px) {
+  .music-player {
+    bottom: calc(1.5rem + env(safe-area-inset-bottom, 0));
+  }
+  .music-player::after {
+    height: calc(1.5rem + env(safe-area-inset-bottom, 0));
+  }
+  body.intro-done:not(.no-music) {
+    padding-bottom: calc(var(--music-player-height) + 1.5rem + env(safe-area-inset-bottom, 0px));
+  }
+  .music-player-mini {
+    bottom: calc(1.5rem + env(safe-area-inset-bottom, 0));
+  }
 }
 
 @media (max-width: 768px) {
