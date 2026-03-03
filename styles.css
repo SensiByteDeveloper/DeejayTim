@@ -1,6 +1,7 @@
 /* ===== DEEJAY TIM - Luxe Dark Neon Theme ===== */
 :root {
   --music-player-height: 76px;
+  --music-player-bottom: 1rem; /* Afstand van onderkant scherm */
   --bg-dark: #06060b;
   --bg-darker: #030306;
   --neon-pink: #e600ff;
@@ -48,7 +49,7 @@ body {
   overflow-x: hidden;
 }
 body.intro-done:not(.no-music) {
-  padding-bottom: calc(var(--music-player-height) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(var(--music-player-height) + var(--music-player-bottom) + env(safe-area-inset-bottom, 0px));
 }
 
 .sr-only {
@@ -1592,7 +1593,7 @@ body.video-modal-open .music-player * {
 /* Sticky Player Bar – compacte balk onderaan, inklapbaar */
 .music-player {
   position: fixed;
-  bottom: env(safe-area-inset-bottom, 0);
+  bottom: calc(var(--music-player-bottom) + env(safe-area-inset-bottom, 0));
   left: 0;
   right: 0;
   z-index: 10000;
@@ -1606,8 +1607,24 @@ body.video-modal-open .music-player * {
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
 }
+/* Achtergrond door tot onderkant scherm */
+.music-player::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: calc(var(--music-player-bottom) + env(safe-area-inset-bottom, 0));
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: -1;
+}
+.music-player.state-collapsed::after {
+  display: none;
+}
 .music-player.state-collapsed .music-player-bar,
-.music-player.state-collapsed .music-player-progress {
+.music-player.state-collapsed .music-player-progress-wrap {
   display: none !important;
 }
 .music-player.state-collapsed .music-player-mini {
@@ -1622,18 +1639,62 @@ body.video-modal-open .music-player * {
   border: none;
 }
 
-/* Progress bar – dunne rode lijn bovenaan */
-.music-player-progress {
-  height: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  cursor: pointer;
+/* Progress bar – range input voor betrouwbare seek */
+.music-player-progress-wrap {
   flex-shrink: 0;
+  padding: 10px 0; /* Grotere touch-target */
 }
-.music-player-progress-fill {
-  height: 100%;
-  width: 0%;
-  background: var(--neon-red);
-  transition: width 0.1s linear;
+.music-player-progress {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.music-player-progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ff4569 0%, var(--neon-red) 50%, #c41030 100%);
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 12px rgba(255, 69, 105, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-top: -5px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.music-player-progress::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 16px rgba(255, 69, 105, 0.7), 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+.music-player-progress::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ff4569 0%, var(--neon-red) 50%, #c41030 100%);
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 12px rgba(255, 69, 105, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.music-player-progress::-moz-range-thumb:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 16px rgba(255, 69, 105, 0.7), 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+.music-player-progress::-webkit-slider-runnable-track {
+  height: 6px;
+  background: linear-gradient(to right, var(--neon-red) 0%, var(--neon-red) var(--progress, 0%), rgba(255, 255, 255, 0.08) var(--progress, 0%));
+  border-radius: 4px;
+}
+.music-player-progress::-moz-range-track {
+  height: 6px;
+  background: linear-gradient(to right, var(--neon-red) 0%, var(--neon-red) var(--progress, 0%), rgba(255, 255, 255, 0.08) var(--progress, 0%));
+  border-radius: 4px;
 }
 
 /* Hoofdbalk */
@@ -1674,7 +1735,7 @@ body.video-modal-open .music-player * {
 .music-player-mini {
   display: none;
   position: fixed;
-  bottom: calc(1rem + env(safe-area-inset-bottom, 0));
+  bottom: calc(var(--music-player-bottom) + env(safe-area-inset-bottom, 0));
   right: calc(1rem + env(safe-area-inset-right, 0));
   width: 48px;
   height: 48px;
@@ -1865,6 +1926,24 @@ body.video-modal-open .music-player * {
   background: rgba(0, 0, 0, 0.3);
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 23, 68, 0.5) rgba(255, 255, 255, 0.06);
+}
+.music-playlist::-webkit-scrollbar {
+  width: 8px;
+}
+.music-playlist::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  margin: 4px 0;
+}
+.music-playlist::-webkit-scrollbar-thumb {
+  background: rgba(255, 23, 68, 0.5);
+  border-radius: 4px;
+}
+.music-playlist::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 23, 68, 0.75);
 }
 .music-player.playlist-open .music-playlist {
   max-height: 280px;

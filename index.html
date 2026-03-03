@@ -319,8 +319,8 @@
 
   <!-- Sticky Player Bar – compacte balk onderaan, inklapbaar naar icoon -->
   <div class="music-player state-expanded" id="musicPlayer">
-    <div class="music-player-progress" id="musicProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Afspeelvoortgang">
-      <div class="music-player-progress-fill" id="musicProgressFill"></div>
+    <div class="music-player-progress-wrap">
+      <input type="range" class="music-player-progress" id="musicProgress" min="0" max="100" value="0" step="0.1" aria-label="Tijdlijn – klik of sleep om vooruit te spoelen">
     </div>
     <div class="music-player-bar" id="musicPlayerBar">
       <button class="music-player-collapse" id="musicCollapse" aria-label="Speler minimaliseren" aria-expanded="true" aria-controls="musicPlayerContent" title="Minimaliseren">−</button>

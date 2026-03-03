@@ -99,7 +99,12 @@ const MUSIC_TRACKS = [
   { src: "media/DJ Tim - Let's Go DJ Tim.mp3", title: "Let's Go DJ Tim" },
   { src: "media/DJ Tim - Bounce Control.mp3", title: "Bounce Control" },
   { src: "media/DJ Tim - Faz Assim.mp3", title: "Faz Assim" },
-  { src: "media/DJ Tim - Waistline Spin.mp3", title: "Waistline Spin" }
+  { src: "media/DJ Tim - Waistline Spin.mp3", title: "Waistline Spin" },
+  { src: "media/DJ Tim - Under The Same Rhythm.mp3", title: "Under The Same Rhythm" },
+  { src: "media/DJ Tim - Fiesta Fusion.mp3", title: "Fiesta Fusion" },
+  { src: "media/DJ Tim - Súbelo.mp3", title: "Súbelo" },
+  { src: "media/DJ Tim - Bachata en la Noche.mp3", title: "Bachata en la Noche" },
+  { src: "media/DJ Tim - Baila Conmigo.mp3", title: "Baila Conmigo" }
 ];
 const PLAYLIST_ORDER = [...MUSIC_TRACKS];
 
@@ -119,7 +124,6 @@ function initMusicPlayer() {
   const collapseBtn = document.getElementById('musicCollapse');
   const expandBtn = document.getElementById('musicExpand');
   const progressEl = document.getElementById('musicProgress');
-  const progressFill = document.getElementById('musicProgressFill');
   const trackTrigger = document.getElementById('musicTrackTrigger');
   const introOverlay = document.getElementById('musicIntroOverlay');
   const pageContent = document.getElementById('page-content');
@@ -170,6 +174,8 @@ function initMusicPlayer() {
 
   player.classList.add('muted'); // Geen geluid tot expliciete user action (Verder met "met muziek")
 
+  let userSeeking = false;
+  let progressBarProgrammatic = false; /* Voorkom dat updateProgress → input → seek 0 */
   let playbackOrder = shuffleArray(MUSIC_TRACKS);
   let currentIndex = 0;
 
@@ -222,11 +228,13 @@ function initMusicPlayer() {
 
   const loadAndPlay = (displayIndex) => {
     if (displayIndex < 0 || displayIndex >= PLAYLIST_ORDER.length) return;
+    userSeeking = false;
     const t = PLAYLIST_ORDER[displayIndex];
     currentIndex = playbackOrder.findIndex((x) => x.src === t.src);
     if (currentIndex < 0) currentIndex = 0;
     audio.src = t.src;
     audio.load();
+    if (progressEl) { progressEl.value = '0'; progressEl.style.setProperty('--progress', '0%'); }
     if (!player.classList.contains('muted')) {
       audio.play().catch(() => {});
     }
@@ -368,6 +376,10 @@ function initMusicPlayer() {
   audio.addEventListener('ended', playNext);
   audio.addEventListener('play', updatePlayState);
   audio.addEventListener('pause', updatePlayState);
+  audio.addEventListener('error', () => {
+    if (userSeeking) return; /* Niet wisselen tijdens seek */
+    playNext();
+  });
 
   muteBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -401,12 +413,16 @@ function initMusicPlayer() {
     playlistEl?.setAttribute('aria-hidden', !open);
   });
 
-  progressEl?.addEventListener('click', (e) => {
-    if (!audio.duration || isNaN(audio.duration)) return;
-    const rect = progressEl.getBoundingClientRect();
-    const pct = (e.clientX - rect.left) / rect.width;
-    audio.currentTime = pct * audio.duration;
+  progressEl?.addEventListener('input', () => {
+    if (progressBarProgrammatic) return; /* Niet reageren op onze eigen update */
+    const d = audio.duration;
+    if (!d || !isFinite(d) || d <= 0) return;
+    userSeeking = true;
+    const pct = Number(progressEl.value) / 100;
+    audio.currentTime = pct * d;
+    progressEl.style.setProperty('--progress', progressEl.value + '%');
   });
+  progressEl?.addEventListener('change', () => { userSeeking = false; });
 
   playBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -424,24 +440,30 @@ function initMusicPlayer() {
   nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); playNext(); });
 
   const updateProgress = () => {
-    if (!progressFill || !audio.duration || isNaN(audio.duration)) return;
+    if (userSeeking || !progressEl || !audio.duration || !isFinite(audio.duration)) return;
     const pct = (audio.currentTime / audio.duration) * 100;
-    progressFill.style.width = pct + '%';
-    progressEl?.setAttribute('aria-valuenow', Math.round(pct));
+    progressBarProgrammatic = true;
+    progressEl.value = String(pct);
+    progressEl.style.setProperty('--progress', pct + '%');
+    /* Reset na event-loop: sommige browsers firen input bij programmatische value-change */
+    requestAnimationFrame(() => { progressBarProgrammatic = false; });
   };
   audio.addEventListener('timeupdate', updateProgress);
   audio.addEventListener('loadedmetadata', updateProgress);
 
   // Playlist UI – Let's Go altijd bovenaan
+  playlistEl?.replaceChildren(); /* Leeg maken voor herbouw */
   PLAYLIST_ORDER.forEach((t, i) => {
     const div = document.createElement('div');
     div.role = 'option';
     div.setAttribute('aria-selected', i === 0);
+    div.setAttribute('data-track-index', String(i));
     div.className = 'music-playlist-item' + (i === 0 ? ' active' : '');
     div.textContent = t.title;
     div.addEventListener('click', (e) => {
       e.stopPropagation();
-      loadAndPlay(i);
+      const idx = parseInt(div.getAttribute('data-track-index'), 10);
+      if (!isNaN(idx)) loadAndPlay(idx);
       player.classList.remove('playlist-open');
       trackTrigger?.setAttribute('aria-expanded', 'false');
       playlistEl?.setAttribute('aria-hidden', 'true');
