@@ -377,8 +377,23 @@ function initMusicPlayer() {
   audio.addEventListener('play', updatePlayState);
   audio.addEventListener('pause', updatePlayState);
   audio.addEventListener('error', () => {
-    if (userSeeking) return; /* Niet wisselen tijdens seek */
+    if (userSeeking) return;
     playNext();
+  });
+
+  /* Herstel na tab-inactiviteit: probeer te hervatten wanneer gebruiker terugkeert */
+  const tryResumeIfShouldPlay = () => {
+    if (document.hidden) return;
+    if (document.body.classList.contains('no-music')) return;
+    if (player?.classList.contains('muted')) return;
+    if (audio.paused && audio.src) {
+      audio.play().then(() => updatePlayState()).catch(() => {});
+    }
+  };
+  document.addEventListener('visibilitychange', tryResumeIfShouldPlay);
+  window.addEventListener('focus', tryResumeIfShouldPlay);
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) tryResumeIfShouldPlay(); /* Herstel na bfcache */
   });
 
   muteBtn?.addEventListener('click', (e) => {
@@ -389,7 +404,10 @@ function initMusicPlayer() {
     if (player.classList.contains('muted')) {
       audio.pause();
     } else {
-      audio.play().catch(() => {});
+      audio.play().then(() => updatePlayState()).catch(() => {
+        const idx = indexInPlaylist(getCurrentTrack());
+        if (idx >= 0) loadAndPlay(idx);
+      });
     }
     updatePlayState();
   });
@@ -429,7 +447,11 @@ function initMusicPlayer() {
     if (player.classList.contains('muted')) return;
     const willPlay = audio.paused;
     if (willPlay) {
-      audio.play().catch(() => {});
+      audio.play().then(() => updatePlayState()).catch(() => {
+        /* Herstel: herlaad huidige track bij gefaalde play (bv. na tab-suspend) */
+        const idx = indexInPlaylist(getCurrentTrack());
+        if (idx >= 0) loadAndPlay(idx);
+      });
     } else {
       audio.pause();
     }
