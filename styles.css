@@ -2191,3 +2191,8 @@ body.video-modal-open .music-player * {
 .faq-item { margin-bottom: 1rem; border: 1px solid var(--glass-border); border-radius: 8px; overflow: hidden; }
 .faq-item summary { padding: 1rem; cursor: pointer; font-weight: 500; }
 .faq-item p { margin: 0; padding: 0 1rem 1rem; color: var(--text-dim); }
+
+/* Breadcrumb */
+.breadcrumb { font-size: var(--text-caption); color: var(--text-dim); margin-bottom: 1rem; }
+.breadcrumb a { color: var(--neon-cyan); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }

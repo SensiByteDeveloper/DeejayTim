@@ -5,21 +5,121 @@
     "country": "Nederland"
   },
   "locations": [
-    { "slug": "zwijndrecht", "city": "Zwijndrecht", "isCore30km": true, "extendedArea": false },
-    { "slug": "dordrecht", "city": "Dordrecht", "isCore30km": true, "extendedArea": false },
-    { "slug": "rotterdam", "city": "Rotterdam", "isCore30km": true, "extendedArea": false },
-    { "slug": "barendrecht", "city": "Barendrecht", "isCore30km": true, "extendedArea": false },
-    { "slug": "papendrecht", "city": "Papendrecht", "isCore30km": true, "extendedArea": false },
-    { "slug": "alblasserdam", "city": "Alblasserdam", "isCore30km": true, "extendedArea": false },
-    { "slug": "ridderkerk", "city": "Ridderkerk", "isCore30km": true, "extendedArea": false },
-    { "slug": "sliedrecht", "city": "Sliedrecht", "isCore30km": true, "extendedArea": false },
-    { "slug": "hendrik-ido-ambacht", "city": "Hendrik-Ido-Ambacht", "isCore30km": true, "extendedArea": false },
-    { "slug": "hardinxveld-giessendam", "city": "Hardinxveld-Giessendam", "isCore30km": true, "extendedArea": false },
-    { "slug": "gorinchem", "city": "Gorinchem", "isCore30km": true, "extendedArea": false },
-    { "slug": "delft", "city": "Delft", "isCore30km": true, "extendedArea": false },
-    { "slug": "den-haag", "city": "Den Haag", "isCore30km": true, "extendedArea": false },
-    { "slug": "breda", "city": "Breda", "isCore30km": false, "extendedArea": true },
-    { "slug": "utrecht", "city": "Utrecht", "isCore30km": false, "extendedArea": true },
-    { "slug": "amsterdam", "city": "Amsterdam", "isCore30km": false, "extendedArea": true }
+    {
+      "slug": "dj-zwijndrecht",
+      "name": "Zwijndrecht",
+      "province": "Zuid-Holland",
+      "isCore30km": true,
+      "extendedArea": false,
+      "shortIntro": "DJ in Zwijndrecht – vanuit 3332 SN verzorg ik feesten in eigen dorp en omgeving.",
+      "nearbySlugs": ["dj-dordrecht", "dj-barendrecht", "dj-papendrecht", "dj-hendrik-ido-ambacht", "dj-ridderkerk", "dj-rotterdam"]
+    },
+    {
+      "slug": "dj-dordrecht",
+      "name": "Dordrecht",
+      "province": "Zuid-Holland",
+      "isCore30km": true,
+      "extendedArea": false,
+      "shortIntro": "DJ in Dordrecht – professionele muziek voor bruiloften, verjaardagen en bedrijfsfeesten in de Drechtsteden.",
+      "nearbySlugs": ["dj-zwijndrecht", "dj-papendrecht", "dj-ridderkerk", "dj-barendrecht", "dj-alblasserdam", "dj-sliedrecht", "dj-rotterdam"]
+    },
+    {
+      "slug": "dj-hendrik-ido-ambacht",
+      "name": "Hendrik-Ido-Ambacht",
+      "province": "Zuid-Holland",
+      "isCore30km": true,
+      "extendedArea": false,
+      "shortIntro": "DJ in Hendrik-Ido-Ambacht – feesten in het hart van de Drechtsteden.",
+      "nearbySlugs": ["dj-zwijndrecht", "dj-dordrecht", "dj-papendrecht", "dj-ridderkerk", "dj-barendrecht", "dj-rotterdam"]
+    },
+    {
+      "slug": "dj-barendrecht",
+      "name": "Barendrecht",
+      "province": "Zuid-Holland",
+      "isCore30km": true,
+      "extendedArea": false,
+      "shortIntro": "DJ in Barendrecht – professionele muziek voor elk feest in de regio Rotterdam.",
+      "nearbySlugs": ["dj-zwijndrecht", "dj-dordrecht", "dj-ridderkerk", "dj-rotterdam", "dj-capelle-aan-den-ijssel", "dj-papendrecht"]
+    },
+    {
+      "slug": "dj-ridderkerk",
+      "name": "Ridderkerk",
+      "province": "Zuid-Holland",
+      "isCore30km": true,
+      "extendedArea": false,
+      "shortIntro": "DJ in Ridderkerk – bruiloften, verjaardagen en bedrijfsfeesten in de Rijnmond.",
+      "nearbySlugs": ["dj-zwijndrecht", "dj-dordrecht", "dj-barendrecht", "dj-rotterdam", "dj-capelle-aan-den-ijssel", "dj-papendrecht"]
+    },
+    {
+      "slug": "dj-papendrecht",
+      "name": "Papendrecht",
+      "province": "Zuid-Holland",
+      "isCore30km": true,
+      "extendedArea": false,
+      "shortIntro": "DJ in Papendrecht – feesten in de Drechtsteden, vlak bij Zwijndrecht.",
+      "nearbySlugs": ["dj-zwijndrecht", "dj-dordrecht", "dj-hendrik-ido-ambacht", "dj-alblasserdam", "dj-sliedrecht", "dj-ridderkerk"]
+    },
+    {
+      "slug": "dj-alblasserdam",
+      "name": "Alblasserdam",
+      "province": "Zuid-Holland",
+      "isCore30km": true,
+      "extendedArea": false,
+      "shortIntro": "DJ in Alblasserdam – professionele muziek voor feesten in de Alblasserwaard.",
+      "nearbySlugs": ["dj-dordrecht", "dj-papendrecht", "dj-sliedrecht", "dj-zwijndrecht", "dj-hendrik-ido-ambacht"]
+    },
+    {
+      "slug": "dj-sliedrecht",
+      "name": "Sliedrecht",
+      "province": "Zuid-Holland",
+      "isCore30km": true,
+      "extendedArea": false,
+      "shortIntro": "DJ in Sliedrecht – bruiloften, verjaardagen en bedrijfsfeesten in de Drechtsteden.",
+      "nearbySlugs": ["dj-dordrecht", "dj-papendrecht", "dj-alblasserdam", "dj-zwijndrecht", "dj-hendrik-ido-ambacht"]
+    },
+    {
+      "slug": "dj-rotterdam",
+      "name": "Rotterdam",
+      "province": "Zuid-Holland",
+      "isCore30km": true,
+      "extendedArea": false,
+      "shortIntro": "DJ in Rotterdam – professionele muziek voor feesten in de Rijnmond.",
+      "nearbySlugs": ["dj-zwijndrecht", "dj-dordrecht", "dj-barendrecht", "dj-ridderkerk", "dj-capelle-aan-den-ijssel", "dj-spijkenisse"]
+    },
+    {
+      "slug": "dj-capelle-aan-den-ijssel",
+      "name": "Capelle aan den IJssel",
+      "province": "Zuid-Holland",
+      "isCore30km": true,
+      "extendedArea": false,
+      "shortIntro": "DJ in Capelle aan den IJssel – feesten in de Rijnmond, vlak bij Rotterdam.",
+      "nearbySlugs": ["dj-rotterdam", "dj-barendrecht", "dj-ridderkerk", "dj-spijkenisse", "dj-zwijndrecht"]
+    },
+    {
+      "slug": "dj-spijkenisse",
+      "name": "Spijkenisse",
+      "province": "Zuid-Holland",
+      "isCore30km": true,
+      "extendedArea": false,
+      "shortIntro": "DJ in Spijkenisse – professionele muziek voor feesten op Voorne-Putten.",
+      "nearbySlugs": ["dj-rotterdam", "dj-capelle-aan-den-ijssel", "dj-barendrecht", "dj-ridderkerk", "dj-dordrecht"]
+    },
+    {
+      "slug": "dj-breda",
+      "name": "Breda",
+      "province": "Noord-Brabant",
+      "isCore30km": false,
+      "extendedArea": true,
+      "shortIntro": "DJ in Breda – professionele muziek voor feesten in Noord-Brabant. Reiskosten in overleg.",
+      "nearbySlugs": ["dj-dordrecht", "dj-rotterdam", "dj-zwijndrecht", "dj-barendrecht", "dj-ridderkerk"]
+    }
+  ],
+  "defaultFaq": [
+    { "q": "Hoe ver rijdt u?", "a": "Reiskosten zijn inbegrepen tot 30 km vanuit Zwijndrecht (3332 SN). Daarbuiten €0,25 per extra km." },
+    { "q": "Welke apparatuur heeft u?", "a": "Pioneer XDJ-RX3, lichtset, geluid en rookmachine. Zie DJ set-up voor details." },
+    { "q": "Kunnen gasten nummers aanvragen?", "a": "Ja, via de Hands Up! app. Gasten stemmen en vragen nummers aan." },
+    { "q": "Hoeveel kost een DJ?", "a": "Vanaf €250 (Just DJ) of €500 (All-in). Zie DJ huren voor prijzen." },
+    { "q": "Hoe boek ik?", "a": "Via het contactformulier of WhatsApp. We stemmen datum en wensen af." },
+    { "q": "Vanaf hoeveel personen?", "a": "Van 20 tot 200+ – de All-in set is geschikt voor tot ±100 personen." }
   ]
 }
