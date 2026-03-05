@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHandsUpModal();
   initWhatsAppWidget();
   window.addEventListener('resize', initVideoRandomPositions);
+  document.addEventListener('partialsloaded', initNav);
 });
 
 // WhatsApp Chat Widget – toggle popup
@@ -71,6 +72,7 @@ function initNav() {
   };
 
   window.addEventListener('scroll', () => {
+    if (!nav) return;
     if (window.scrollY > 50) nav.classList.add('scrolled');
     else nav.classList.remove('scrolled');
   });

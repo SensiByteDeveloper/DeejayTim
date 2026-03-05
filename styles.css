@@ -2155,3 +2155,17 @@ body.video-modal-open .music-player * {
   .hero-intro { flex-direction: column; }
   .hero-photo { width: 180px; height: 180px; }
 }
+
+/* Page footer – subpages */
+.page-footer {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: var(--text-body-sm);
+  border-top: 1px solid var(--glass-border);
+}
+.page-footer .container { padding: 0 1rem; }
+.footer-name { font-family: var(--font-display); font-weight: 700; margin: 0 0 0.25rem; color: var(--text-bright); }
+.footer-region { margin: 0 0 0.5rem; }
+.footer-links a { color: var(--neon-cyan); text-decoration: none; }
+.footer-links a:hover { text-decoration: underline; }
