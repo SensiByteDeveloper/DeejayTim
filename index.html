@@ -22,6 +22,26 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=11">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Deejay Tim",
+    "url": "https://deejaytim.nl",
+    "areaServed": [
+      {"@type": "City", "name": "Zwijndrecht"},
+      {"@type": "City", "name": "Dordrecht"},
+      {"@type": "City", "name": "Hendrik-Ido-Ambacht"},
+      {"@type": "City", "name": "Barendrecht"},
+      {"@type": "City", "name": "Ridderkerk"},
+      {"@type": "City", "name": "Papendrecht"},
+      {"@type": "City", "name": "Alblasserdam"},
+      {"@type": "City", "name": "Sliedrecht"},
+      {"@type": "City", "name": "Rotterdam"}
+    ],
+    "serviceType": ["DJ services", "Event DJ", "Wedding DJ", "Corporate event DJ"]
+  }
+  </script>
 </head>
 <body class="intro-done">
   <div id="page-content">
@@ -41,8 +61,10 @@
     <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
     <ul class="nav-links" id="nav-menu">
       <li><a href="#intro" data-i18n="nav.intro">Intro</a></li>
+      <li><a href="/dj-huren.html">DJ huren</a></li>
       <li><a href="#diensten" data-i18n="nav.diensten">Diensten</a></li>
       <li><a href="#hands-up" data-i18n="nav.handsUp">Hands Up!</a></li>
+      <li><a href="/blog/index.html">Blog</a></li>
       <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
       <li class="nav-music-wrap">
         <button type="button" class="nav-music-toggle" id="navMusicToggle" aria-pressed="false" aria-label="Muziek aan" aria-describedby="navMusicToggleDesc" title="Muziek inschakelen">
@@ -112,6 +134,7 @@
         <p data-i18n="intro.p1">Zoek je de perfecte DJ voor jouw evenement? Deejay Tim levert professionele muziek voor feesten, bruiloften en bedrijfsevenementen.</p>
         <p><span data-i18n="intro.p2prefix"></span><span class="neon-highlight" data-i18n="intro.highlight"></span><span data-i18n="intro.p2suffix"></span></p>
         <p class="intro-cta-text" data-i18n="intro.cta">Laten we er samen een mooi feest van maken!</p>
+        <p><a href="/dj-huren.html">Bekijk prijzen</a> · <a href="/contact.html">Neem contact op</a></p>
       </div>
     </div>
     <div class="video-row video-row-intro">
@@ -126,6 +149,21 @@
           <source src="media/IMG_1232.mp4" type="video/mp4">
         </video>
         <span class="video-hint" data-i18n="video.clickHint">♪ Klik voor geluid</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Links Section -->
+  <section id="services-links" class="section section-compact">
+    <div class="container">
+      <h2 class="section-title neon-cyan">DJ voor elk type feest</h2>
+      <div class="service-links-grid">
+        <a href="/diensten/bruiloft-dj.html" class="service-link-card">Bruiloft DJ</a>
+        <a href="/diensten/verjaardag-dj.html" class="service-link-card">Verjaardag DJ</a>
+        <a href="/diensten/bedrijfsfeest-dj.html" class="service-link-card">Bedrijfsfeest DJ</a>
+        <a href="/diensten/schoolfeest-dj.html" class="service-link-card">Schoolfeest DJ</a>
+        <a href="/diensten/buurtfeest-dj.html" class="service-link-card">Buurtfeest DJ</a>
+        <a href="/diensten/slagingsfeest-dj.html" class="service-link-card">Slagingsfeest DJ</a>
       </div>
     </div>
   </section>
@@ -222,6 +260,32 @@
     </div>
   </section>
 
+  <!-- Regions Section -->
+  <section id="regions" class="section section-compact">
+    <div class="container">
+      <h2 class="section-title neon-cyan">DJ in de regio</h2>
+      <p class="regions-intro">Deejay Tim verzorgt feesten in Zuid-Holland: van Zwijndrecht en Dordrecht tot Hendrik-Ido-Ambacht, Barendrecht, Ridderkerk, Papendrecht, Alblasserdam, Sliedrecht en Rotterdam. Boek een professionele DJ in jouw buurt.</p>
+      <div class="region-links">
+        <a href="/locaties/dj-zwijndrecht.html">DJ Zwijndrecht</a>
+        <a href="/locaties/dj-dordrecht.html">DJ Dordrecht</a>
+        <a href="/locaties/dj-hendrik-ido-ambacht.html">DJ Hendrik-Ido-Ambacht</a>
+        <a href="/locaties/dj-barendrecht.html">DJ Barendrecht</a>
+        <a href="/locaties/dj-ridderkerk.html">DJ Ridderkerk</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Preview Section -->
+  <section id="reviews-preview" class="section section-compact">
+    <div class="container">
+      <h2 class="section-title neon-yellow">Wat klanten zeggen</h2>
+      <div class="testimonials-grid testimonials-preview" id="homepage-testimonials" aria-busy="true">
+        <p class="testimonials-loading">Reviews laden…</p>
+      </div>
+      <p class="reviews-cta"><a href="/reviews.html">Bekijk alle reviews →</a></p>
+    </div>
+  </section>
+
   <!-- Contact Section -->
   <section id="contact" class="section contact">
     <!-- Nieuwe video’s 5, 6, 7 – pas src aan naar jouw bestandsnamen -->
@@ -258,6 +322,13 @@
         <a href="mailto:contact@deejaytim.nl" class="contact-link">contact@deejaytim.nl</a>
         <p>3332 SN Zwijndrecht, Nederland</p>
       </div>
+    </div>
+  </section>
+
+  <!-- SEO Text -->
+  <section class="section section-compact seo-text" aria-label="Over Deejay Tim">
+    <div class="container container-narrow">
+      <p>Zoek je een <a href="/dj-huren.html">DJ huren</a> voor je feest? Deejay Tim verzorgt professionele muziek voor elk type evenement: van <a href="/diensten/bruiloft-dj.html">bruiloft DJ</a> en <a href="/diensten/verjaardag-dj.html">verjaardag DJ</a> tot <a href="/diensten/bedrijfsfeest-dj.html">bedrijfsfeest DJ</a> en <a href="/diensten/schoolfeest-dj.html">schoolfeest DJ</a>. Gevestigd in Zwijndrecht, actief in de hele regio: <a href="/locaties/dj-zwijndrecht.html">DJ in Zwijndrecht</a>, <a href="/locaties/dj-dordrecht.html">Dordrecht</a>, <a href="/locaties/dj-barendrecht.html">Barendrecht</a>, Ridderkerk, Papendrecht en Rotterdam. Complete all-in pakketten, de Hands Up! app voor live song requests, en persoonlijke begeleiding van begin tot eind. <a href="/contact.html">Neem contact op</a> voor een vrijblijvende offerte of bekijk de <a href="/blog/index.html">blog</a> voor tips en inspiratie.</p>
     </div>
   </section>
   </main>

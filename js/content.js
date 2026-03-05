@@ -60,30 +60,70 @@ export function renderStars(rating) {
   return `<span class="testimonial-stars" aria-label="${n} van 5 sterren" role="img">${full}${empty}</span>`;
 }
 
+/** Location slug (from testimonials) to display name */
+const LOCATION_NAMES = {
+  dordrecht: 'Dordrecht',
+  rotterdam: 'Rotterdam',
+  zwijndrecht: 'Zwijndrecht',
+  'den-haag': 'Den Haag',
+  barendrecht: 'Barendrecht',
+};
+
 /**
  * Render testimonials list as HTML string.
  * @param {Array} list - Array of testimonial objects
  * @param {number} [limit] - Max number to render
+ * @param {{ showCity?: boolean }} [opts] - Options: showCity to display city instead of eventType
  * @returns {string} HTML string
  */
-export function renderTestimonials(list, limit) {
+export function renderTestimonials(list, limit, opts = {}) {
   const items = limit ? list.slice(0, limit) : list;
+  const showCity = !!opts.showCity;
   return items
     .map(
-      (t) =>
-        `<article class="testimonial-card">
+      (t) => {
+        const city = showCity && t.location ? (LOCATION_NAMES[t.location] || t.location) : '';
+        const footerContent = showCity && city
+          ? `<span class="testimonial-location">${escapeHtml(city)}</span>`
+          : `<span class="testimonial-event">${escapeHtml(t.eventType)}</span>${t.date ? ` <time datetime="${t.date}">${formatDate(t.date)}</time>` : ''}`;
+        return `<article class="testimonial-card">
           <div class="testimonial-meta">
             <span class="testimonial-name">${escapeHtml(t.name)}</span>
             <span class="testimonial-rating">${renderStars(t.rating)}</span>
           </div>
           <p class="testimonial-text">${escapeHtml(t.text)}</p>
-          <footer class="testimonial-footer">
-            <span class="testimonial-event">${escapeHtml(t.eventType)}</span>
-            ${t.date ? `<time datetime="${t.date}">${formatDate(t.date)}</time>` : ''}
-          </footer>
-        </article>`
+          <footer class="testimonial-footer">${footerContent}</footer>
+        </article>`;
+      }
     )
     .join('');
+}
+
+/**
+ * Init homepage testimonials: load and render into #homepage-testimonials if present.
+ */
+export async function initHomepageTestimonials() {
+  const el = document.getElementById('homepage-testimonials');
+  if (!el) return;
+  try {
+    const data = await loadJSON('data/testimonials.json');
+    const list = data?.testimonials ?? [];
+    el.setAttribute('aria-busy', 'false');
+    el.innerHTML = list.length
+      ? renderTestimonials(list, 5, { showCity: true })
+      : '<p class="testimonials-empty">Nog geen reviews.</p>';
+  } catch (err) {
+    el.setAttribute('aria-busy', 'false');
+    el.innerHTML = '<p class="testimonials-error">Reviews konden niet worden geladen.</p>';
+  }
+}
+
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHomepageTestimonials);
+  } else {
+    initHomepageTestimonials();
+  }
 }
 
 function escapeHtml(str) {

@@ -1256,6 +1256,70 @@ body.video-modal-open .music-player * {
   background: rgba(0, 229, 255, 0.05);
 }
 
+/* Section compact – less padding for SEO/link sections */
+.section-compact { padding: 2.5rem 1rem; }
+.section-compact .section-title { margin-bottom: 1rem; }
+
+/* Service links grid – homepage "DJ voor elk type feest" */
+.service-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+.service-link-card {
+  display: block;
+  padding: 0.75rem 1rem;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  color: var(--neon-cyan);
+  text-decoration: none;
+  text-align: center;
+  font-weight: 500;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.service-link-card:hover {
+  color: var(--text-bright);
+  border-color: rgba(0, 229, 255, 0.4);
+  background: rgba(0, 229, 255, 0.05);
+}
+
+/* Regions section */
+.regions-intro {
+  margin: 0 0 1.25rem;
+  color: var(--text-dim);
+  max-width: 600px;
+  line-height: 1.6;
+}
+.region-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+.region-links a {
+  color: var(--neon-cyan);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.region-links a:hover { color: var(--text-bright); text-decoration: underline; }
+
+/* Reviews preview – homepage */
+.testimonials-preview { min-height: 120px; }
+.testimonials-preview.testimonials-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.testimonial-card .testimonial-location { font-size: var(--text-caption); color: var(--text-dim); }
+.testimonials-loading, .testimonials-empty, .testimonials-error { color: var(--text-dim); margin: 0; }
+.reviews-cta { margin: 1rem 0 0; }
+.reviews-cta a { color: var(--neon-yellow); text-decoration: none; font-weight: 500; }
+.reviews-cta a:hover { text-decoration: underline; }
+
+/* SEO text block */
+.seo-text { padding: 2rem 1rem; }
+.container-narrow { max-width: 680px; }
+.seo-text p { margin: 0; color: var(--text-dim); font-size: var(--text-body-sm); line-height: 1.7; }
+.seo-text a { color: var(--neon-cyan); text-decoration: none; }
+.seo-text a:hover { text-decoration: underline; }
+
 /* Hands Up */
 .hands-up { 
   background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, transparent 50%, rgba(0,0,0,0.1) 100%); 
