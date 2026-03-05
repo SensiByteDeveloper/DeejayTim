@@ -46,6 +46,17 @@
     document.documentElement.lang = currentLang;
     const title = get(dict[currentLang], 'page.title');
     if (title) document.title = title;
+    const desc = get(dict[currentLang], 'page.description');
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc && desc) metaDesc.setAttribute('content', desc);
+    const metaOgTitle = document.querySelector('meta[property="og:title"]');
+    if (metaOgTitle && title) metaOgTitle.setAttribute('content', title);
+    const metaOgDesc = document.querySelector('meta[property="og:description"]');
+    if (metaOgDesc && desc) metaOgDesc.setAttribute('content', desc);
+    const metaTwTitle = document.querySelector('meta[name="twitter:title"]');
+    if (metaTwTitle && title) metaTwTitle.setAttribute('content', title);
+    const metaTwDesc = document.querySelector('meta[name="twitter:description"]');
+    if (metaTwDesc && desc) metaTwDesc.setAttribute('content', desc);
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
