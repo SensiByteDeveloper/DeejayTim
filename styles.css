@@ -2169,3 +2169,25 @@ body.video-modal-open .music-player * {
 .footer-region { margin: 0 0 0.5rem; }
 .footer-links a { color: var(--neon-cyan); text-decoration: none; }
 .footer-links a:hover { text-decoration: underline; }
+
+/* Service pages – testimonials, FAQ */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.testimonial-card {
+  padding: 1.25rem;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+}
+.testimonial-card .testimonial-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+.testimonial-card .testimonial-name { font-weight: 600; color: var(--text-bright); }
+.testimonial-card .testimonial-stars { color: var(--neon-yellow); }
+.testimonial-card .testimonial-text { margin: 0; color: var(--text-dim); font-size: var(--text-body-sm); }
+.testimonial-card time { font-size: var(--text-caption); color: var(--text-dim); }
+.faq-item { margin-bottom: 1rem; border: 1px solid var(--glass-border); border-radius: 8px; overflow: hidden; }
+.faq-item summary { padding: 1rem; cursor: pointer; font-weight: 500; }
+.faq-item p { margin: 0; padding: 0 1rem 1rem; color: var(--text-dim); }

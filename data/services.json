@@ -69,5 +69,184 @@
       "cta": { "nl": "Boek Verjaardag", "en": "Book Birthday" },
       "isBirthdayVariant": true
     }
+  ],
+  "servicePages": [
+    {
+      "slug": "bruiloft-dj",
+      "eventType": "bruiloft",
+      "title": "Bruiloft DJ",
+      "metaTitle": "Bruiloft DJ | Deejay Tim – Zwijndrecht & Rotterdam",
+      "metaDescription": "Bruiloft DJ voor jouw bruiloft. Professionele muziek, sfeer voor elk moment. Hands Up! app voor song requests.",
+      "intro": "De perfecte soundtrack voor jullie bruiloft. Van cocktail tot dans – ik zorg voor de juiste sfeer op elk moment.",
+      "watJeKrijgt": ["Complete DJ-set of alleen DJ", "Hands Up! app voor song requests", "Overleg over programma en sfeer"],
+      "muziek": ["Breed repertoire", "Aanpasbaar aan jullie wensen", "Van rustig tot feest"],
+      "apparatuur": ["Pioneer XDJ-RX3", "Lichtset", "Geluid", "Rookmachine (optioneel)"],
+      "werkwijzeSteps": ["Kennismaking", "Programma afstemmen", "Feest!"],
+      "faq": [
+        { "q": "Hoe ver van tevoren boeken?", "a": "Bij voorkeur 2–6 maanden." },
+        { "q": "Kunnen gasten nummers aanvragen?", "a": "Ja, via de Hands Up! app." }
+      ],
+      "ctaText": "Boek bruiloft DJ"
+    },
+    {
+      "slug": "verjaardag-dj",
+      "eventType": "verjaardag",
+      "title": "Verjaardag DJ",
+      "metaTitle": "Verjaardag DJ | Deejay Tim – Zwijndrecht & Rotterdam",
+      "metaDescription": "DJ voor verjaardagsfeest. 18, 30, 40, 50 jaar – professionele muziek voor elk feest.",
+      "intro": "Een verjaardag verdient een feest. Ik draai de muziek die bij jouw feest past.",
+      "watJeKrijgt": ["All-in of Just DJ pakket", "Hands Up! voor song requests", "Flexibele tijden"],
+      "muziek": ["Breed repertoire", "Aanpasbaar aan leeftijd en sfeer"],
+      "apparatuur": ["Complete set of alleen DJ", "Licht en geluid"],
+      "werkwijzeSteps": ["Contact", "Afspraken", "Feest"],
+      "faq": [
+        { "q": "Hoeveel kost een verjaardag DJ?", "a": "Vanaf €225 (Just DJ) of €450 (All-in)." }
+      ],
+      "ctaText": "Boek verjaardag DJ"
+    },
+    {
+      "slug": "bedrijfsfeest-dj",
+      "eventType": "bedrijfsfeest",
+      "title": "Bedrijfsfeest DJ",
+      "metaTitle": "Bedrijfsfeest DJ | Deejay Tim – Zwijndrecht & Rotterdam",
+      "metaDescription": "DJ voor bedrijfsfeest. Van cocktail tot dans – professionele uitvoering voor uw bedrijf.",
+      "intro": "Professionele DJ voor uw bedrijfsfeest. Van netwerkborrel tot dansavond.",
+      "watJeKrijgt": ["Complete DJ-set", "Professionele uitvoering", "Aanpasbaar aan thema"],
+      "muziek": ["Breed repertoire", "Van achtergrond tot feest"],
+      "apparatuur": ["Pioneer XDJ-RX3", "Licht", "Geluid"],
+      "werkwijzeSteps": ["Intake", "Programma", "Uitvoering"],
+      "faq": [
+        { "q": "Factuur mogelijk?", "a": "Ja, via de factuur." }
+      ],
+      "ctaText": "Boek bedrijfsfeest DJ"
+    },
+    {
+      "slug": "schoolfeest-dj",
+      "eventType": "feest",
+      "title": "Schoolfeest DJ",
+      "metaTitle": "Schoolfeest DJ | Deejay Tim – Zwijndrecht & Rotterdam",
+      "metaDescription": "DJ voor schoolfeest. Professionele muziek en entertainment voor jouw school.",
+      "intro": "De perfecte DJ voor jouw schoolfeest. Muziek die jongeren aanspreekt.",
+      "watJeKrijgt": ["Complete DJ-set", "Leeftijdsgeschikte muziek", "Hands Up! app"],
+      "muziek": ["Populaire hits", "Aanpasbaar aan doelgroep"],
+      "apparatuur": ["Pioneer XDJ-RX3", "Licht", "Geluid"],
+      "werkwijzeSteps": ["Afspraken", "Feest"],
+      "faq": [
+        { "q": "Vanaf welke leeftijd?", "a": "Vanaf ongeveer 12 jaar." }
+      ],
+      "ctaText": "Boek schoolfeest DJ"
+    },
+    {
+      "slug": "buurtfeest-dj",
+      "eventType": "feest",
+      "title": "Buurtfeest DJ",
+      "metaTitle": "Buurtfeest DJ | Deejay Tim – Zwijndrecht & Rotterdam",
+      "metaDescription": "DJ voor buurtfeest. Professionele muziek voor straatfeest of buurtbarbecue.",
+      "intro": "Muziek voor jouw buurtfeest. Van gezellig tot feest.",
+      "watJeKrijgt": ["Complete DJ-set of Just DJ", "Flexibele opzet"],
+      "muziek": ["Breed repertoire", "Voor alle leeftijden"],
+      "apparatuur": ["Pioneer XDJ-RX3", "Licht", "Geluid"],
+      "werkwijzeSteps": ["Contact", "Afspraken", "Feest"],
+      "faq": [],
+      "ctaText": "Boek buurtfeest DJ"
+    },
+    {
+      "slug": "slagingsfeest-dj",
+      "eventType": "feest",
+      "title": "Slagingsfeest DJ",
+      "metaTitle": "Slagingsfeest DJ | Deejay Tim – Zwijndrecht & Rotterdam",
+      "metaDescription": "DJ voor slagingsfeest. Professionele muziek voor jouw geslaagde examenkandidaten.",
+      "intro": "Vier je diploma met de juiste muziek. Een slagingsfeest om nooit te vergeten.",
+      "watJeKrijgt": ["Complete DJ-set", "Hands Up! app", "Feest voor iedereen"],
+      "muziek": ["Breed repertoire", "Aanpasbaar aan sfeer"],
+      "apparatuur": ["Pioneer XDJ-RX3", "Licht", "Geluid"],
+      "werkwijzeSteps": ["Afspraken", "Feest"],
+      "faq": [],
+      "ctaText": "Boek slagingsfeest DJ"
+    },
+    {
+      "slug": "dj-18-jaar",
+      "eventType": "verjaardag",
+      "title": "DJ 18 jaar",
+      "metaTitle": "DJ 18 jaar | Deejay Tim – Zwijndrecht & Rotterdam",
+      "metaDescription": "DJ voor 18e verjaardag. Professionele muziek voor een feest 18 jaar.",
+      "intro": "18 jaar – tijd voor een feest! Ik draai de muziek die bij jouw feest past.",
+      "watJeKrijgt": ["All-in of Just DJ", "Hands Up! app", "Feest voor iedereen"],
+      "muziek": ["Populaire hits", "Aanpasbaar aan sfeer"],
+      "apparatuur": ["Pioneer XDJ-RX3", "Licht", "Geluid"],
+      "werkwijzeSteps": ["Contact", "Afspraken", "Feest"],
+      "faq": [],
+      "ctaText": "Boek DJ 18 jaar"
+    },
+    {
+      "slug": "dj-20-jaar",
+      "eventType": "verjaardag",
+      "title": "DJ 20 jaar",
+      "metaTitle": "DJ 20 jaar | Deejay Tim – Zwijndrecht & Rotterdam",
+      "metaDescription": "DJ voor 20e verjaardag. Professionele muziek voor een feest 20 jaar.",
+      "intro": "20 jaar – een mooie mijlpaal. Ik zorg voor de perfecte soundtrack.",
+      "watJeKrijgt": ["All-in of Just DJ", "Hands Up! app"],
+      "muziek": ["Breed repertoire"],
+      "apparatuur": ["Pioneer XDJ-RX3", "Licht", "Geluid"],
+      "werkwijzeSteps": ["Contact", "Afspraken", "Feest"],
+      "faq": [],
+      "ctaText": "Boek DJ 20 jaar"
+    },
+    {
+      "slug": "dj-30-jaar",
+      "eventType": "verjaardag",
+      "title": "DJ 30 jaar",
+      "metaTitle": "DJ 30 jaar | Deejay Tim – Zwijndrecht & Rotterdam",
+      "metaDescription": "DJ voor 30e verjaardag. Professionele muziek voor een feest 30 jaar.",
+      "intro": "30 jaar – een feest waard! Ik draai de muziek die bij jouw feest past.",
+      "watJeKrijgt": ["All-in of Just DJ", "Hands Up! app"],
+      "muziek": ["Breed repertoire"],
+      "apparatuur": ["Pioneer XDJ-RX3", "Licht", "Geluid"],
+      "werkwijzeSteps": ["Contact", "Afspraken", "Feest"],
+      "faq": [],
+      "ctaText": "Boek DJ 30 jaar"
+    },
+    {
+      "slug": "dj-40-jaar",
+      "eventType": "verjaardag",
+      "title": "DJ 40 jaar",
+      "metaTitle": "DJ 40 jaar | Deejay Tim – Zwijndrecht & Rotterdam",
+      "metaDescription": "DJ voor 40e verjaardag. Professionele muziek voor een feest 40 jaar.",
+      "intro": "40 jaar – tijd voor een feest! Ik zorg voor de juiste sfeer.",
+      "watJeKrijgt": ["All-in of Just DJ", "Hands Up! app"],
+      "muziek": ["Breed repertoire"],
+      "apparatuur": ["Pioneer XDJ-RX3", "Licht", "Geluid"],
+      "werkwijzeSteps": ["Contact", "Afspraken", "Feest"],
+      "faq": [],
+      "ctaText": "Boek DJ 40 jaar"
+    },
+    {
+      "slug": "dj-50-jaar",
+      "eventType": "verjaardag",
+      "title": "DJ 50 jaar",
+      "metaTitle": "DJ 50 jaar | Deejay Tim – Zwijndrecht & Rotterdam",
+      "metaDescription": "DJ voor 50e verjaardag. Professionele muziek voor een feest 50 jaar.",
+      "intro": "50 jaar – een feest om nooit te vergeten! Ik draai de muziek die bij jouw feest past.",
+      "watJeKrijgt": ["All-in of Just DJ", "Hands Up! app"],
+      "muziek": ["Breed repertoire"],
+      "apparatuur": ["Pioneer XDJ-RX3", "Licht", "Geluid"],
+      "werkwijzeSteps": ["Contact", "Afspraken", "Feest"],
+      "faq": [],
+      "ctaText": "Boek DJ 50 jaar"
+    },
+    {
+      "slug": "sweet-16-dj",
+      "eventType": "verjaardag",
+      "title": "Sweet 16 DJ",
+      "metaTitle": "Sweet 16 DJ | Deejay Tim – Zwijndrecht & Rotterdam",
+      "metaDescription": "DJ voor Sweet 16 feest. Professionele muziek voor een feest 16 jaar.",
+      "intro": "Sweet 16 – een feest om nooit te vergeten! Ik draai de muziek die bij jouw feest past.",
+      "watJeKrijgt": ["All-in of Just DJ", "Hands Up! app"],
+      "muziek": ["Populaire hits", "Aanpasbaar aan sfeer"],
+      "apparatuur": ["Pioneer XDJ-RX3", "Licht", "Geluid"],
+      "werkwijzeSteps": ["Contact", "Afspraken", "Feest"],
+      "faq": [],
+      "ctaText": "Boek Sweet 16 DJ"
+    }
   ]
 }
