@@ -1,0 +1,44 @@
+{
+  "testimonials": [
+    {
+      "name": "Lisa & Mark",
+      "location": "dordrecht",
+      "eventType": "bruiloft",
+      "rating": 5,
+      "text": "Tim maakte onze bruiloft onvergetelijk! Perfecte mix van rustige momenten en feest. Echt een aanrader.",
+      "date": "2024-09-15"
+    },
+    {
+      "name": "Jan",
+      "location": "rotterdam",
+      "eventType": "verjaardag",
+      "rating": 5,
+      "text": "50e verjaardag was een groot succes dankzij Tim. Iedereen stond op de dansvloer!",
+      "date": "2024-08-22"
+    },
+    {
+      "name": "Sarah",
+      "location": "zwijndrecht",
+      "eventType": "feest",
+      "rating": 5,
+      "text": "Hands Up! app was een hit. Gasten konden zelf nummers aanvragen – super interactief.",
+      "date": "2024-07-10"
+    },
+    {
+      "name": "TechCorp BV",
+      "location": "den-haag",
+      "eventType": "bedrijfsfeest",
+      "rating": 5,
+      "text": "Professionele uitvoering op ons bedrijfsfeest. Van cocktail tot dans – Tim had alles onder controle.",
+      "date": "2024-06-28"
+    },
+    {
+      "name": "Emma",
+      "location": "barendrecht",
+      "eventType": "bruiloft",
+      "rating": 5,
+      "text": "Vanaf het eerste contact tot de laatste track: alles klopte. Heel blij met onze keuze!",
+      "date": "2024-05-12"
+    }
+  ]
+}

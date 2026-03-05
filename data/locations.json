@@ -1,0 +1,25 @@
+{
+  "base": {
+    "postcode": "3332 SN",
+    "city": "Zwijndrecht",
+    "country": "Nederland"
+  },
+  "locations": [
+    { "slug": "zwijndrecht", "city": "Zwijndrecht", "isCore30km": true, "extendedArea": false },
+    { "slug": "dordrecht", "city": "Dordrecht", "isCore30km": true, "extendedArea": false },
+    { "slug": "rotterdam", "city": "Rotterdam", "isCore30km": true, "extendedArea": false },
+    { "slug": "barendrecht", "city": "Barendrecht", "isCore30km": true, "extendedArea": false },
+    { "slug": "papendrecht", "city": "Papendrecht", "isCore30km": true, "extendedArea": false },
+    { "slug": "alblasserdam", "city": "Alblasserdam", "isCore30km": true, "extendedArea": false },
+    { "slug": "ridderkerk", "city": "Ridderkerk", "isCore30km": true, "extendedArea": false },
+    { "slug": "sliedrecht", "city": "Sliedrecht", "isCore30km": true, "extendedArea": false },
+    { "slug": "hendrik-ido-ambacht", "city": "Hendrik-Ido-Ambacht", "isCore30km": true, "extendedArea": false },
+    { "slug": "hardinxveld-giessendam", "city": "Hardinxveld-Giessendam", "isCore30km": true, "extendedArea": false },
+    { "slug": "gorinchem", "city": "Gorinchem", "isCore30km": true, "extendedArea": false },
+    { "slug": "delft", "city": "Delft", "isCore30km": true, "extendedArea": false },
+    { "slug": "den-haag", "city": "Den Haag", "isCore30km": true, "extendedArea": false },
+    { "slug": "breda", "city": "Breda", "isCore30km": false, "extendedArea": true },
+    { "slug": "utrecht", "city": "Utrecht", "isCore30km": false, "extendedArea": true },
+    { "slug": "amsterdam", "city": "Amsterdam", "isCore30km": false, "extendedArea": true }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "eventTypes": [
+    { "id": "bruiloft", "nl": "Bruiloft", "en": "Wedding" },
+    { "id": "verjaardag", "nl": "Verjaardag", "en": "Birthday" },
+    { "id": "bedrijfsfeest", "nl": "Bedrijfsfeest", "en": "Corporate event" },
+    { "id": "feest", "nl": "Feest", "en": "Party" },
+    { "id": "receptie", "nl": "Receptie", "en": "Reception" }
+  ],
+  "services": [
+    {
+      "id": "all-in",
+      "slug": "all-in",
+      "title": { "nl": "All-in", "en": "All-in" },
+      "subtitle": { "nl": "Complete DJ set + DJ", "en": "Complete DJ set + DJ" },
+      "price": 500,
+      "badge": { "nl": "Populair", "en": "Popular" },
+      "features": {
+        "nl": ["DJ-set (Pioneer XDJ-RX3)", "DJ Booth", "Lichtset", "Rookmachine", "Speakerset", "Microfoon"],
+        "en": ["DJ set (Pioneer XDJ-RX3)", "DJ Booth", "Lighting", "Fog machine", "Speaker set", "Microphone"]
+      },
+      "audience": { "nl": "Goed voor tot ±100 personen", "en": "Good for up to ±100 people" },
+      "note": {
+        "nl": "Extra materiaal (bijv. extra speakers of licht) kan optioneel worden ingehuurd. Dit regelen we in overleg.",
+        "en": "Extra equipment (e.g. additional speakers or lights) can be hired optionally. We arrange this in consultation."
+      },
+      "cta": { "nl": "Boek All-in", "en": "Book All-in" },
+      "isBirthdayVariant": false
+    },
+    {
+      "id": "just-dj",
+      "slug": "just-dj",
+      "title": { "nl": "Just DJ", "en": "Just DJ" },
+      "subtitle": { "nl": "Enkel Deejay Tim", "en": "Deejay Tim only" },
+      "price": 250,
+      "features": {
+        "nl": ["Heb je al een complete DJ- en geluidsset?", "Ik verzorg de muziek op maat", "USB-sticks en headset mee", "Draai enkel digitaal"],
+        "en": ["Already have a complete DJ and sound set?", "I'll provide music to match", "USB sticks and headset included", "Digital only"]
+      },
+      "cta": { "nl": "Boek Just DJ", "en": "Book Just DJ" },
+      "isBirthdayVariant": false
+    }
+  ],
+  "birthdayVariants": [
+    {
+      "id": "all-in-birthday",
+      "slug": "all-in-birthday",
+      "parentService": "all-in",
+      "title": { "nl": "All-in Verjaardag", "en": "All-in Birthday" },
+      "subtitle": { "nl": "Complete set voor verjaardagsfeest", "en": "Complete set for birthday party" },
+      "price": 450,
+      "features": {
+        "nl": ["Zelfde als All-in", "Speciaal tarief voor verjaardagen"],
+        "en": ["Same as All-in", "Special rate for birthdays"]
+      },
+      "cta": { "nl": "Boek Verjaardag", "en": "Book Birthday" },
+      "isBirthdayVariant": true
+    },
+    {
+      "id": "just-dj-birthday",
+      "slug": "just-dj-birthday",
+      "parentService": "just-dj",
+      "title": { "nl": "Just DJ Verjaardag", "en": "Just DJ Birthday" },
+      "subtitle": { "nl": "Enkel DJ voor verjaardag", "en": "DJ only for birthday" },
+      "price": 225,
+      "features": {
+        "nl": ["Zelfde als Just DJ", "Speciaal tarief voor verjaardagen"],
+        "en": ["Same as Just DJ", "Special rate for birthdays"]
+      },
+      "cta": { "nl": "Boek Verjaardag", "en": "Book Birthday" },
+      "isBirthdayVariant": true
+    }
+  ]
+}
