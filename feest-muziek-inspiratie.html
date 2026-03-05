@@ -25,7 +25,7 @@
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token":"REPLACE_ME"}'></script>
 </head>
 <body>
-  <div data-include="/pages/partials/header.html"></div>
+  <header id="site-header"></header>
   <main id="main-content">
     <section class="section">
       <div class="container prose-page">
@@ -35,7 +35,7 @@
         <p>In dit artikel vind je curated playlists per type feest en per fase van de avond: inloop, feeststart, piekmoment en afsluiters. Plus tips om de dansvloer vol te houden en een FAQ met veelgestelde vragen. Gebruik de <a href="/feest-playlist-generator.html">playlist generator</a> voor een snelle op maat gemaakte suggestie.</p>
 
         <div class="cta-block cta-block-top">
-          <p><strong>Zoek je een DJ voor jouw feest?</strong> <a href="/dj-huren.html">Bekijk DJ huren</a> of <a href="/contact.html">neem contact op</a>.</p>
+          <p><strong>Zoek je een DJ voor jouw feest?</strong> <a href="/dj-huren.html">Bekijk DJ huren</a> of <a href="/#contact">neem contact op</a>.</p>
         </div>
 
         <h2 id="bruiloft">1. Bruiloft muziek</h2>
@@ -280,7 +280,7 @@
         <p>Staat de vloer vol? Dan kun je experimenteren met minder bekende tracks. Zijn mensen aan het praten? Dan een herkenbare hit om ze te trekken. Kijk naar lichaamstaal: wiegen ze mee, of staan ze stil? Pas daarop aan.</p>
 
         <div class="cta-block cta-block-bottom">
-          <p><strong>Klaar om te boeken?</strong> <a href="/dj-huren.html">Bekijk DJ huren</a> of <a href="/contact.html">neem contact op</a>. Ik help je graag met de muziek voor jouw feest.</p>
+          <p><strong>Klaar om te boeken?</strong> <a href="/dj-huren.html">Bekijk DJ huren</a> of <a href="/#contact">neem contact op</a>. Ik help je graag met de muziek voor jouw feest.</p>
         </div>
 
         <h2 id="faq">Veelgestelde vragen</h2>
@@ -368,6 +368,7 @@
     ]
   }
   </script>
+  <script src="/js/renderHeader.js" defer></script>
   <script src="/i18n/i18n.js?v=6"></script>
   <script src="/script.js?v=11"></script>
   <script type="module" src="/js/includePartials.js"></script>

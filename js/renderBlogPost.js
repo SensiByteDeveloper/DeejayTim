@@ -84,7 +84,7 @@ function getInternalLinksHtml() {
         <li><a href="/locaties/dj-zwijndrecht.html">DJ Zwijndrecht</a></li>
       </ul>
       <div class="blog-cta-buttons">
-        <a href="/contact.html" class="pricing-btn">Neem contact op</a>
+        <a href="/#contact" class="pricing-btn">Check beschikbaarheid</a>
         <a href="https://wa.me/31621888970?text=Hoi%20Tim!%20Ik%20heb%20een%20vraag%20over%20een%20DJ-booking." target="_blank" rel="noopener" class="blog-whatsapp-link">WhatsApp</a>
       </div>
     </nav>
@@ -140,7 +140,7 @@ export async function renderBlogPost() {
   } catch (err) {
     console.warn('[renderBlogPost] Failed:', err);
     container.innerHTML = `
-      <p>Dit artikel kon niet worden geladen. <a href="/blog/index.html">Terug naar het blog</a> of <a href="/contact.html">neem contact op</a>.</p>
+      <p>Dit artikel kon niet worden geladen. <a href="/blog/index.html">Terug naar het blog</a> of <a href="/#contact">neem contact op</a>.</p>
     `;
   }
 }

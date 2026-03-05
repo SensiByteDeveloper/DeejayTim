@@ -57,10 +57,6 @@ function setContent(el, html) {
   if (el) el.innerHTML = html;
 }
 
-/** Slug dj-dordrecht → locationKey dordrecht for testimonial matching */
-function slugToLocationKey(slug) {
-  return (slug || '').replace(/^dj-/, '');
-}
 
 export async function renderLocationPage() {
   const main = document.querySelector('main[data-location]');
@@ -80,7 +76,7 @@ export async function renderLocationPage() {
 
   if (!loc) {
     const fallback = document.getElementById('intro');
-    if (fallback) fallback.innerHTML = '<div class="container"><h1>Locatie</h1><p>Geen gegevens beschikbaar. <a href="/dj-huren.html">Bekijk DJ huren</a> of <a href="/contact.html">neem contact op</a>.</p></div>';
+    if (fallback) fallback.innerHTML = '<div class="container"><h1>Locatie</h1><p>Geen gegevens beschikbaar. <a href="/dj-huren.html">Bekijk DJ huren</a> of <a href="/#contact">neem contact op</a>.</p></div>';
     return;
   }
 
@@ -111,7 +107,7 @@ export async function renderLocationPage() {
       </nav>
       <h1 id="page-title">${escapeHtml(h1Text)}</h1>
       <p>${escapeHtml(loc.shortIntro || `Professionele DJ in ${city} voor bruiloften, verjaardagen en bedrijfsfeesten.`)}</p>
-      <p>${escapeHtml(travelNote)} <a href="/dj-huren.html">Bekijk prijzen</a> <span aria-hidden="true">·</span> <a href="/reviews.html">Reviews</a> <span aria-hidden="true">·</span> <a href="/contact.html" class="cta-button">Boek nu</a>.</p>
+      <p>${escapeHtml(travelNote)} <a href="/prijzen.html">Bekijk prijzen</a> <span aria-hidden="true">·</span> <a href="/reviews.html">Reviews</a> <span aria-hidden="true">·</span> <a href="/#contact" class="cta-button">Check beschikbaarheid</a>.</p>
     </div>
   `);
 
@@ -134,7 +130,7 @@ export async function renderLocationPage() {
   setContent(document.getElementById('services'), `
     <div class="container">
       <h2>Diensten</h2>
-      <p><a href="/dj-huren.html">DJ huren</a> – prijzen en pakketten.</p>
+      <p><a href="/prijzen.html">Prijzen</a> en pakketten.</p>
       <ul class="link-list">
         ${KEY_SERVICES.map((s) => `<li><a href="/diensten/${s.slug}.html">${escapeHtml(s.title)}</a></li>`).join('')}
       </ul>
@@ -145,31 +141,28 @@ export async function renderLocationPage() {
     testimonialsData = await loadJSON('/data/testimonials.json');
   } catch (_) {}
 
-  const locationKey = slugToLocationKey(slug);
   const list = testimonialsData?.testimonials || [];
-  const filtered = list.filter((t) => t.location === locationKey);
-  const fallback = list.slice(0, 6);
-  const toShow = filtered.length ? filtered.slice(0, 6) : fallback;
+  const filtered = list.filter((t) => (t.locationSlugs || []).includes(slug));
+  const toShow = (filtered.length ? filtered : list).slice(0, 3);
 
   const reviewsEl = document.getElementById('reviews');
   if (reviewsEl) {
     if (toShow.length) {
+      const cardHtml = toShow.map((t) => {
+        const city = t.city || '';
+        const source = t.source || 'Google';
+        const footer = city ? `— ${escapeHtml(t.name)}, ${escapeHtml(city)} (${escapeHtml(source)})` : `— ${escapeHtml(t.name)} (${escapeHtml(source)})`;
+        return `<article class="testimonial-card">
+          <div class="testimonial-meta"><span class="testimonial-stars" aria-label="${t.rating} van 5 sterren" role="img">${renderStars(t.rating)}</span></div>
+          <p class="testimonial-text">${escapeHtml(t.text)}</p>
+          <footer class="testimonial-footer">${footer}</footer>
+        </article>`;
+      }).join('');
       reviewsEl.innerHTML = `
         <div class="container">
           <h2>Reviews</h2>
           <p><a href="/reviews.html">Alle reviews</a></p>
-          <div class="testimonials-grid">
-            ${toShow.map((t) => `
-              <article class="testimonial-card">
-                <div class="testimonial-meta">
-                  <span class="testimonial-name">${escapeHtml(t.name)}</span>
-                  <span class="testimonial-stars" aria-label="${t.rating} van 5 sterren">${renderStars(t.rating)}</span>
-                </div>
-                <p class="testimonial-text">${escapeHtml(t.text)}</p>
-                ${t.date ? `<time datetime="${t.date}">${new Date(t.date + 'T12:00:00').toLocaleDateString('nl-NL', { year: 'numeric', month: 'short' })}</time>` : ''}
-              </article>
-            `).join('')}
-          </div>
+          <div class="testimonials-grid">${cardHtml}</div>
         </div>
       `;
     } else {
@@ -178,14 +171,29 @@ export async function renderLocationPage() {
   }
 
   const faq = loc.faq || locationsData?.defaultFaq || [];
-  const faqItems = faq.length ? faq : (locationsData?.defaultFaq || []);
+  let faqItems = faq.length ? faq : (locationsData?.defaultFaq || []);
+  let pricingData = null;
+  try {
+    const prRes = await fetch('/data/pricing.json');
+    if (prRes.ok) pricingData = await prRes.json();
+  } catch (_) {}
+  const formatPrice = (p) => p != null ? `€${Number(p).toLocaleString('nl-NL', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}` : '—';
+  faqItems = faqItems.map((item) => {
+    if (item.q === 'Hoeveel kost een DJ?' && pricingData) {
+      return { ...item, aHtml: `Vanaf ${formatPrice(pricingData.justDj?.from)} (Just DJ) of ${formatPrice(pricingData.allIn?.from)} (All-in). Zie <a href="/prijzen.html">Prijzen</a> voor actuele tarieven.` };
+    }
+    if (item.q === 'Hoe ver rijdt u?' && pricingData?.extraKm != null) {
+      return { ...item, a: `Reiskosten zijn inbegrepen tot 30 km vanuit Zwijndrecht (3332 SN). Daarbuiten ${formatPrice(pricingData.extraKm)} per extra km.` };
+    }
+    return item;
+  });
   setContent(document.getElementById('faq'), `
     <div class="container">
       <h2>Veelgestelde vragen</h2>
       ${faqItems.length ? faqItems.map((item) => `
         <details class="faq-item">
           <summary>${escapeHtml(item.q)}</summary>
-          <p>${escapeHtml(item.a)}</p>
+          <p>${item.aHtml != null ? item.aHtml : escapeHtml(item.a)}</p>
         </details>
       `).join('') : '<p><a href="/veelgestelde-vragen.html">Bekijk algemene FAQ</a>.</p>'}
     </div>
@@ -193,7 +201,7 @@ export async function renderLocationPage() {
 
   setContent(document.getElementById('cta'), `
     <div class="container">
-      <p><a href="/contact.html" class="pricing-btn">Boek DJ in ${escapeHtml(city)}</a></p>
+      <p><a href="/#contact" class="pricing-btn">Check beschikbaarheid</a></p>
       <p><a href="https://wa.me/31621888970?text=Hoi%20Tim!%20Ik%20zoek%20een%20DJ%20voor%20${encodeURIComponent(city)}." target="_blank" rel="noopener">WhatsApp</a></p>
     </div>
   `);
@@ -214,9 +222,9 @@ export async function renderLocationPage() {
       <div class="snelle-links">
         <h3>Snelle links</h3>
         <p>
-          <a href="/dj-huren.html">DJ huren</a> ·
+          <a href="/prijzen.html">Prijzen</a> ·
           <a href="/reviews.html">Reviews</a> ·
-          <a href="/contact.html">Contact</a> ·
+          <a href="/#contact">Contact</a> ·
           <a href="/diensten/bruiloft-dj.html">Bruiloft DJ</a> ·
           <a href="/diensten/verjaardag-dj.html">Verjaardag DJ</a> ·
           <a href="/diensten/bedrijfsfeest-dj.html">Bedrijfsfeest DJ</a>

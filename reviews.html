@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Reviews | Deejay Tim</title>
-  <meta name="description" content="Reviews en ervaringen van klanten van Deejay Tim. Bruiloften, feesten en bedrijfsevenementen.">
+  <title>Reviews | Google reviews van klanten | Deejay Tim</title>
+  <meta name="description" content="Echte Google reviews van klanten van Deejay Tim. Bruiloften, feesten, buurtfeesten en bedrijfsevenementen in Zuid-Holland.">
   <link rel="canonical" href="https://deejaytim.nl/reviews.html">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" href="/favicon.png">
@@ -14,20 +14,87 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css?v=11">
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token":"REPLACE_ME"}'></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Deejay Tim",
+    "image": "https://deejaytim.nl/media/og.jpg",
+    "url": "https://deejaytim.nl",
+    "priceRange": "€€",
+    "address": {
+      "@type": "PostalAddress",
+      "postalCode": "3332SN",
+      "addressLocality": "Zwijndrecht",
+      "addressCountry": "NL"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "5",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Jelle van Velzen" },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
+        "reviewBody": "Great DJ! Good feeling for what is needed to get the party going!",
+        "datePublished": "2025-01-01"
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Niels Hout" },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
+        "reviewBody": "Deejay Tim heeft ons een onvergetelijke feestavond verzorgd. Door een juiste voorbereiding en overleg is de avond uitgepakt zoals wij het van te voren hadden bedacht. Tim is een echte aanrader voor wie een leuk feest wil.",
+        "datePublished": "2024-03-01"
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Arno van der Pol" },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
+        "reviewBody": "Tim mooi buurtfeest gehad je was geweldig. Je betrok ook heel leuk de kinderen erbij. Top avond bedankt!",
+        "datePublished": "2025-01-01"
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Van Rappardhoeve" },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
+        "reviewBody": "DJ Tim heeft het 75 jarig bestaan van onze hondenvereniging (VDH kringgroep De Randstad) een muzikale ondersteuning gegeven. De muziek was perfect afgestemd op het aanwezige publiek en veranderde wanneer dat kon. De voetjes gingen van de vloer! De dagen erna hebben wij als bestuur niets dan goede recensies gekregen van onze leden en genodigden. Ik raad iedereen aan om DJ Tim bij je feest uit te nodigen.",
+        "datePublished": "2024-02-01"
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Caleb Repkes" },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
+        "reviewBody": "DJ Tim is een echte partymeister! Vooraf super goed overleg gehad over de sfeer en muziek stijlen die we wilden op ons feestje. Op het feestje zelf is het altijd een beetje aanvoelen waar het publiek die avond zin in heeft. En dat doet Tim geweldig. We zijn compleet ontzorgd op muziek gebied en de gasten hebben zich top vermaakt. We hebben mensen zien dansen die we nooit zien dansen.",
+        "datePublished": "2024-02-01"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
-  <div data-include="/pages/partials/header.html"></div>
+  <header id="site-header"></header>
   <main id="main-content">
-    <section class="section">
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+    <section class="section" id="reviews">
       <div class="container">
         <h1>Reviews</h1>
-        <p> placeholder </p>
+        <p>Echte Google reviews van klanten. <a href="/#contact">Neem contact op</a> voor jouw feest.</p>
+        <div class="testimonials-grid" id="reviews-container" aria-busy="true">
+          <p class="testimonials-loading">Reviews laden…</p>
+        </div>
       </div>
     </section>
   </main>
   <div data-include="/pages/partials/footer.html"></div>
+  <script src="/js/renderHeader.js" defer></script>
   <script src="/i18n/i18n.js?v=6"></script>
   <script src="/script.js?v=11"></script>
   <script type="module" src="/js/includePartials.js"></script>
+  <script type="module" src="/js/renderReviewsPage.js"></script>
 </body>
 </html>

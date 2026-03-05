@@ -14,7 +14,7 @@
   },
   "hero": {
     "tagline": "De perfecte soundtrack voor elk moment",
-    "cta": "Boek nu",
+    "cta": "Check beschikbaarheid",
     "instagramAria": "Instagram @deejaytimr (opent in nieuw tabblad)"
   },
   "intro": {
@@ -28,6 +28,7 @@
   "diensten": {
     "title": "Diensten & prijzen",
     "subtitle": "Prijzen zijn excl. BTW, incl. 4 uur DJ en incl. reiskosten tot 30km vanuit 3332 SN. Extra km: €0,25. Extra uur: €100.",
+    "cta": "Check beschikbaarheid",
     "allIn": {
       "title": "All-in",
       "subtitle": "Complete DJ set + DJ",
@@ -36,14 +37,14 @@
       "audience": "Goed voor tot ±100 personen",
       "note": "Extra materiaal (bijv. extra speakers of licht) kan optioneel worden ingehuurd. Dit regelen we in overleg.",
       "price": "€500",
-      "cta": "Boek All-in"
+      "cta": "Check beschikbaarheid"
     },
     "justDj": {
       "title": "Just DJ",
       "subtitle": "Enkel Deejay Tim",
       "features": ["Heb je al een complete DJ- en geluidsset?", "Ik verzorg de muziek op maat", "USB-sticks en headset mee", "Draai enkel digitaal"],
       "price": "€250",
-      "cta": "Boek Just DJ"
+      "cta": "Check beschikbaarheid"
     }
   },
   "handsUp": {
@@ -60,12 +61,21 @@
   "contact": {
     "title": "Let's talk!",
     "subtitle": "Feestje bouwen?",
+    "trust": "⚡ Binnen 24 uur reactie • 💬 Vrijblijvende aanvraag • ✅ Geen boekingsverplichting",
     "whatsapp": "WhatsApp",
     "whatsappAria": "Contacteer Deejay Tim via WhatsApp",
     "form": {
       "name": "Naam *",
       "phone": "Telefoonnummer *",
       "email": "E-mail *",
+      "eventType": "Voor wat voor feest zoekt u een DJ? *",
+      "eventTypePlaceholder": "— Kies een optie —",
+      "eventTypeBruiloft": "Bruiloft",
+      "eventTypeVerjaardag": "Verjaardag",
+      "eventTypeBedrijfsfeest": "Bedrijfsfeest",
+      "eventTypeSchoolfeest": "Schoolfeest",
+      "eventTypeAnders": "Anders",
+      "eventDate": "Wanneer is het feest? (optioneel)",
       "message": "Wat kunt u al delen over uw feestje? *",
       "submit": "Verstuur",
       "errorEmail": "Voer een geldig e-mailadres in (bijv. naam@domein.nl)",

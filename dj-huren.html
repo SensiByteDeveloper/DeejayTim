@@ -16,18 +16,32 @@
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token":"REPLACE_ME"}'></script>
 </head>
 <body>
-  <div data-include="/pages/partials/header.html"></div>
+  <header id="site-header"></header>
   <main id="main-content">
     <section class="section">
       <div class="container">
         <h1>DJ huren</h1>
-        <p> placeholder </p>
+        <p>Professionele DJ voor bruiloften, verjaardagen en bedrijfsfeesten. Regio Zwijndrecht en Rotterdam.</p>
+        <p><a href="/prijzen.html" class="cta-button">Bekijk prijzen</a> <a href="/#contact" class="cta-button">Check beschikbaarheid</a></p>
+        <p class="dj-huren-links">Zoek je muziekinspiratie? <a href="/feest-muziek-inspiratie.html">Playlist voorbeelden</a> · <a href="/feest-playlist-generator.html">Playlist generator</a></p>
+      </div>
+    </section>
+    <section class="section section-compact" id="reviews">
+      <div class="container">
+        <h2>Reviews</h2>
+        <div class="testimonials-grid" id="dj-huren-reviews" aria-busy="true">
+          <p class="testimonials-loading">Reviews laden…</p>
+        </div>
+        <p class="reviews-cta"><a href="/reviews.html">Bekijk alle reviews →</a></p>
+        <p class="dj-huren-faq-link">Twijfel je nog ergens over? Bekijk de <a href="/faq.html">FAQ</a>.</p>
       </div>
     </section>
   </main>
   <div data-include="/pages/partials/footer.html"></div>
+  <script src="/js/renderHeader.js" defer></script>
   <script src="/i18n/i18n.js?v=6"></script>
   <script src="/script.js?v=11"></script>
   <script type="module" src="/js/includePartials.js"></script>
+  <script type="module" src="/js/renderDjHurenReviews.js"></script>
 </body>
 </html>

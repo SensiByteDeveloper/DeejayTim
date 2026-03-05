@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWhatsAppWidget();
   window.addEventListener('resize', initVideoRandomPositions);
   document.addEventListener('partialsloaded', initNav);
+  document.addEventListener('headerloaded', initNav);
 });
 
 // WhatsApp Chat Widget – toggle popup

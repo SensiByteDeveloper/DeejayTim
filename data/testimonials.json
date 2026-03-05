@@ -1,44 +1,59 @@
 {
   "testimonials": [
     {
-      "name": "Lisa & Mark",
-      "location": "dordrecht",
-      "eventType": "bruiloft",
+      "id": "rev-jelle-van-velzen",
+      "name": "Jelle van Velzen",
+      "city": "Hendrik-Ido-Ambacht",
       "rating": 5,
-      "text": "Tim maakte onze bruiloft onvergetelijk! Perfecte mix van rustige momenten en feest. Echt een aanrader.",
-      "date": "2024-09-15"
+      "text": "Great DJ! Good feeling for what is needed to get the party going!",
+      "source": "Google",
+      "date": "2025-01-01",
+      "eventType": ["feest"],
+      "locationSlugs": ["dj-hendrik-ido-ambacht"]
     },
     {
-      "name": "Jan",
-      "location": "rotterdam",
-      "eventType": "verjaardag",
+      "id": "rev-niels-hout",
+      "name": "Niels Hout",
+      "city": "Heemskerk",
       "rating": 5,
-      "text": "50e verjaardag was een groot succes dankzij Tim. Iedereen stond op de dansvloer!",
-      "date": "2024-08-22"
+      "text": "Deejay Tim heeft ons een onvergetelijke feestavond verzorgd. Door een juiste voorbereiding en overleg is de avond uitgepakt zoals wij het van te voren hadden bedacht. Tim is een echte aanrader voor wie een leuk feest wil.",
+      "source": "Google",
+      "date": "2024-03-01",
+      "eventType": ["feest"],
+      "locationSlugs": ["dj-heemskerk"]
     },
     {
-      "name": "Sarah",
-      "location": "zwijndrecht",
-      "eventType": "feest",
+      "id": "rev-arno-van-der-pol",
+      "name": "Arno van der Pol",
+      "city": "Hendrik-Ido-Ambacht",
       "rating": 5,
-      "text": "Hands Up! app was een hit. Gasten konden zelf nummers aanvragen – super interactief.",
-      "date": "2024-07-10"
+      "text": "Tim mooi buurtfeest gehad je was geweldig. Je betrok ook heel leuk de kinderen erbij. Top avond bedankt!",
+      "source": "Google",
+      "date": "2025-01-01",
+      "eventType": ["buurtfeest"],
+      "locationSlugs": ["dj-hendrik-ido-ambacht"]
     },
     {
-      "name": "TechCorp BV",
-      "location": "den-haag",
-      "eventType": "bedrijfsfeest",
+      "id": "rev-rappardhoeve",
+      "name": "Van Rappardhoeve",
+      "city": "Den Haag",
       "rating": 5,
-      "text": "Professionele uitvoering op ons bedrijfsfeest. Van cocktail tot dans – Tim had alles onder controle.",
-      "date": "2024-06-28"
+      "text": "DJ Tim heeft het 75 jarig bestaan van onze hondenvereniging (VDH kringgroep De Randstad) een muzikale ondersteuning gegeven. De muziek was perfect afgestemd op het aanwezige publiek en veranderde wanneer dat kon. De voetjes gingen van de vloer! De dagen erna hebben wij als bestuur niets dan goede recensies gekregen van onze leden en genodigden. Ik raad iedereen aan om DJ Tim bij je feest uit te nodigen.",
+      "source": "Google",
+      "date": "2024-02-01",
+      "eventType": ["vereniging", "feest"],
+      "locationSlugs": ["dj-den-haag"]
     },
     {
-      "name": "Emma",
-      "location": "barendrecht",
-      "eventType": "bruiloft",
+      "id": "rev-caleb-repkes",
+      "name": "Caleb Repkes",
+      "city": "Rotterdam",
       "rating": 5,
-      "text": "Vanaf het eerste contact tot de laatste track: alles klopte. Heel blij met onze keuze!",
-      "date": "2024-05-12"
+      "text": "DJ Tim is een echte partymeister! Vooraf super goed overleg gehad over de sfeer en muziek stijlen die we wilden op ons feestje. Op het feestje zelf is het altijd een beetje aanvoelen waar het publiek die avond zin in heeft. En dat doet Tim geweldig. We zijn compleet ontzorgd op muziek gebied en de gasten hebben zich top vermaakt. We hebben mensen zien dansen die we nooit zien dansen.",
+      "source": "Google",
+      "date": "2024-02-01",
+      "eventType": ["feest"],
+      "locationSlugs": ["dj-rotterdam"]
     }
   ]
 }

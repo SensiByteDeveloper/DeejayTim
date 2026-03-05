@@ -100,7 +100,7 @@
       "apparatuur": ["Complete set of alleen DJ", "Licht en geluid"],
       "werkwijzeSteps": ["Contact", "Afspraken", "Feest"],
       "faq": [
-        { "q": "Hoeveel kost een verjaardag DJ?", "a": "Vanaf €225 (Just DJ) of €450 (All-in)." }
+        { "q": "Hoeveel kost een verjaardag DJ?", "aTemplate": "pricing" }
       ],
       "ctaText": "Boek verjaardag DJ"
     },

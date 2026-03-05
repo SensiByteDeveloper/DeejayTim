@@ -62,7 +62,7 @@ export async function renderBlogIndex() {
         <h3>Zoek je een DJ voor jouw feest?</h3>
         <p>
           <a href="/dj-huren.html" class="pricing-btn">Bekijk DJ huren</a>
-          <a href="/contact.html" class="blog-cta-link">Of neem contact op</a>
+          <a href="/#contact" class="blog-cta-link">Of neem contact op</a>
         </p>
       </div>
     `;
@@ -74,7 +74,7 @@ export async function renderBlogIndex() {
   } catch (err) {
     console.warn('[renderBlogIndex] Failed:', err);
     container.innerHTML = `
-      <p>De blogberichten konden niet worden geladen. <a href="/dj-huren.html">Bekijk DJ huren</a> of <a href="/contact.html">neem contact op</a>.</p>
+      <p>De blogberichten konden niet worden geladen. <a href="/dj-huren.html">Bekijk DJ huren</a> of <a href="/#contact">neem contact op</a>.</p>
     `;
   }
 }

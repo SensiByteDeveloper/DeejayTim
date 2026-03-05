@@ -14,7 +14,7 @@
   },
   "hero": {
     "tagline": "The perfect soundtrack for every moment",
-    "cta": "Book now",
+    "cta": "Check availability",
     "instagramAria": "Instagram @deejaytimr (opens in new tab)"
   },
   "intro": {
@@ -28,6 +28,7 @@
   "diensten": {
     "title": "Services & pricing",
     "subtitle": "Prices excl. VAT, incl. 4 hours DJ and incl. travel up to 30km from 3332 SN. Extra km: €0.25. Extra hour: €100.",
+    "cta": "Check availability",
     "allIn": {
       "title": "All-in",
       "subtitle": "Complete DJ set + DJ",
@@ -36,14 +37,14 @@
       "audience": "Good for up to ±100 people",
       "note": "Extra equipment (e.g. additional speakers or lights) can be hired optionally. We arrange this in consultation.",
       "price": "€500",
-      "cta": "Book All-in"
+      "cta": "Check availability"
     },
     "justDj": {
       "title": "Just DJ",
       "subtitle": "Deejay Tim only",
       "features": ["Already have a complete DJ and sound set?", "I'll provide music to match", "USB sticks and headset included", "Digital only"],
       "price": "€250",
-      "cta": "Book Just DJ"
+      "cta": "Check availability"
     }
   },
   "handsUp": {
@@ -60,12 +61,21 @@
   "contact": {
     "title": "Let's talk!",
     "subtitle": "Building a party?",
+    "trust": "⚡ Response within 24 hours • 💬 Non-binding request • ✅ No booking obligation",
     "whatsapp": "WhatsApp",
     "whatsappAria": "Contact Deejay Tim via WhatsApp",
     "form": {
       "name": "Name *",
       "phone": "Phone number *",
       "email": "Email *",
+      "eventType": "What kind of party are you looking for a DJ for? *",
+      "eventTypePlaceholder": "— Choose an option —",
+      "eventTypeBruiloft": "Wedding",
+      "eventTypeVerjaardag": "Birthday",
+      "eventTypeBedrijfsfeest": "Company party",
+      "eventTypeSchoolfeest": "School party",
+      "eventTypeAnders": "Other",
+      "eventDate": "When is the party? (optional)",
       "message": "What can you already share about your party? *",
       "submit": "Send",
       "errorEmail": "Enter a valid email address (e.g. name@domain.com)",

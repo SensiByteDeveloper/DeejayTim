@@ -1,0 +1,80 @@
+{
+  "currency": "EUR",
+  "packages": [
+    {
+      "id": "justDj",
+      "title": "Just DJ",
+      "subtitle": "Enkel Deejay Tim",
+      "from": 250,
+      "hoursIncluded": 4,
+      "note": "locatie met installatie",
+      "bullets": [
+        "Heb je al een complete DJ- en geluidsset?",
+        "Ik verzorg de muziek op maat",
+        "USB-sticks en headset mee",
+        "Draai enkel digitaal"
+      ]
+    },
+    {
+      "id": "allIn",
+      "title": "All-in",
+      "subtitle": "Complete DJ set + DJ",
+      "from": 500,
+      "hoursIncluded": 4,
+      "note": "incl. geluid en verlichting",
+      "badge": "Populair",
+      "bullets": [
+        "DJ-set (Pioneer XDJ-RX3)",
+        "DJ Booth",
+        "Lichtset",
+        "Rookmachine",
+        "Speakerset",
+        "Microfoon"
+      ],
+      "audience": "Goed voor tot ±100 personen"
+    },
+    {
+      "id": "wedding",
+      "title": "Bruiloft DJ",
+      "subtitle": "Premium bruiloft",
+      "from": 750,
+      "hoursIncluded": 4,
+      "note": "incl. geluid en verlichting",
+      "bullets": [
+        "persoonlijk voorgesprek",
+        "openingsdans begeleiding",
+        "professionele DJ show",
+        "geluidsinstallatie + licht",
+        "verzoeknummers",
+        "muziek afgestemd op jullie wensen"
+      ],
+      "optionalNote": "Tarief afhankelijk van tijden & locatie"
+    }
+  ],
+  "justDj": {
+    "from": 250,
+    "hoursIncluded": 4,
+    "note": "locatie met installatie"
+  },
+  "allIn": {
+    "from": 500,
+    "hoursIncluded": 4,
+    "note": "incl. geluid en verlichting"
+  },
+  "wedding": {
+    "from": 750,
+    "hoursIncluded": 4,
+    "note": "incl. geluid en verlichting"
+  },
+  "typicalRange": {
+    "from": 500,
+    "to": 1000
+  },
+  "extraKm": 0.25,
+  "extraHour": 100,
+  "extras": [
+    "verlichte dansvloer",
+    "extra verlichting",
+    "grotere geluidsinstallatie"
+  ]
+}

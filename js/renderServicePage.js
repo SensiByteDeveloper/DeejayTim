@@ -3,13 +3,13 @@
 
 const BASE = typeof location !== 'undefined' ? new URL('.', location.href).href : '';
 
-/** Map service slug → testimonial eventType */
+/** Map service slug → testimonial eventType(s) to match */
 const SLUG_TO_EVENT = {
   'bruiloft-dj': 'bruiloft',
   'verjaardag-dj': 'verjaardag',
   'bedrijfsfeest-dj': 'bedrijfsfeest',
   'schoolfeest-dj': 'feest',
-  'buurtfeest-dj': 'feest',
+  'buurtfeest-dj': 'buurtfeest',
   'slagingsfeest-dj': 'feest',
   'dj-18-jaar': 'verjaardag',
   'dj-20-jaar': 'verjaardag',
@@ -66,7 +66,7 @@ export async function renderServicePage() {
 
   if (!service) {
     const fallback = document.getElementById('intro');
-    if (fallback) fallback.innerHTML = '<div class="container"><h1>Dienst</h1><p>Geen gegevens beschikbaar voor deze dienst. <a href="/dj-huren.html">Bekijk DJ huren</a> of <a href="/contact.html">neem contact op</a>.</p></div>';
+    if (fallback) fallback.innerHTML = '<div class="container"><h1>Dienst</h1><p>Geen gegevens beschikbaar voor deze dienst. <a href="/dj-huren.html">Bekijk DJ huren</a> of <a href="/#contact">neem contact op</a>.</p></div>';
     return;
   }
 
@@ -88,7 +88,7 @@ export async function renderServicePage() {
     <div class="container">
       <h1>${escapeHtml(service.title)}</h1>
       <p>${escapeHtml(service.intro)}</p>
-      <p>Bekijk <a href="/dj-huren.html">DJ huren</a> voor prijzen of lees <a href="/reviews.html">reviews</a> van andere klanten.</p>
+      <p>Bekijk <a href="/prijzen.html">Prijzen</a> of lees <a href="/reviews.html">reviews</a> van andere klanten.</p>
     </div>
   `);
 
@@ -124,14 +124,26 @@ export async function renderServicePage() {
     </div>
   `);
 
+  let pricingData = null;
+  try {
+    const prRes = await fetch('/data/pricing.json');
+    if (prRes.ok) pricingData = await prRes.json();
+  } catch (_) {}
+  const formatPrice = (p) => p != null ? `€${Number(p).toLocaleString('nl-NL', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}` : '—';
   const faq = service.faq || [];
+  const faqItems = faq.map((item) => {
+    if ((item.aTemplate === 'pricing' || /Hoeveel kost/.test(item.q)) && pricingData) {
+      return { ...item, aHtml: `Vanaf ${formatPrice(pricingData.justDj?.from)} (Just DJ) of ${formatPrice(pricingData.allIn?.from)} (All-in). Zie <a href="/prijzen.html">Prijzen</a>.` };
+    }
+    return item;
+  });
   setContent(document.getElementById('faq'), `
     <div class="container">
       <h2>Veelgestelde vragen</h2>
-      ${faq.length ? faq.map((item) => `
+      ${faqItems.length ? faqItems.map((item) => `
         <details class="faq-item">
           <summary>${escapeHtml(item.q)}</summary>
-          <p>${escapeHtml(item.a)}</p>
+          <p>${item.aHtml != null ? item.aHtml : escapeHtml(item.a || '')}</p>
         </details>
       `).join('') : '<p>Geen veelgestelde vragen voor deze dienst. <a href="/veelgestelde-vragen.html">Bekijk algemene FAQ</a>.</p>'}
     </div>
@@ -140,33 +152,30 @@ export async function renderServicePage() {
   try {
     const data = await loadJSON('/data/testimonials.json');
     const list = data.testimonials || [];
-    const eventType = SLUG_TO_EVENT[slug] || service.eventType;
-    const filtered = eventType
-      ? list.filter((t) => t.eventType === eventType)
+    const serviceEventType = SLUG_TO_EVENT[slug] || service.eventType;
+    const filtered = serviceEventType
+      ? list.filter((t) => {
+          const types = Array.isArray(t.eventType) ? t.eventType : (t.eventType ? [t.eventType] : []);
+          return types.includes(serviceEventType);
+        })
       : list;
-    const toShow = filtered.slice(0, 6);
+    const toShow = (filtered.length ? filtered : list).slice(0, 3);
     const reviewsEl = document.getElementById('reviews');
     if (reviewsEl) {
       if (toShow.length) {
-        reviewsEl.innerHTML = `
-          <div class="container">
-            <h2>Reviews</h2>
-            <div class="testimonials-grid">
-              ${toShow.map((t) => `
-          <article class="testimonial-card">
-            <div class="testimonial-meta">
-              <span class="testimonial-name">${escapeHtml(t.name)}</span>
-              <span class="testimonial-stars" aria-label="${t.rating} van 5 sterren">${renderStars(t.rating)}</span>
-            </div>
+        const cardHtml = toShow.map((t) => {
+          const city = t.city || '';
+          const source = t.source || 'Google';
+          const footer = city ? `— ${escapeHtml(t.name)}, ${escapeHtml(city)} (${escapeHtml(source)})` : `— ${escapeHtml(t.name)} (${escapeHtml(source)})`;
+          return `<article class="testimonial-card">
+            <div class="testimonial-meta"><span class="testimonial-stars" aria-label="${t.rating} van 5 sterren" role="img">${renderStars(t.rating)}</span></div>
             <p class="testimonial-text">${escapeHtml(t.text)}</p>
-            ${t.date ? `<time datetime="${t.date}">${new Date(t.date + 'T12:00:00').toLocaleDateString('nl-NL', { year: 'numeric', month: 'short' })}</time>` : ''}
-          </article>
-              `).join('')}
-            </div>
-          </div>
-        `;
+            <footer class="testimonial-footer">${footer}</footer>
+          </article>`;
+        }).join('');
+        reviewsEl.innerHTML = `<div class="container"><h2>Reviews</h2><p><a href="/reviews.html">Alle reviews</a></p><div class="testimonials-grid">${cardHtml}</div></div>`;
       } else {
-        reviewsEl.innerHTML = '<div class="container"><h2>Reviews</h2><p>Nog geen reviews voor deze dienst. <a href="/reviews.html">Bekijk alle reviews</a>.</p></div>';
+        reviewsEl.innerHTML = '<div class="container"><h2>Reviews</h2><p><a href="/reviews.html">Bekijk alle reviews</a>.</p></div>';
       }
     }
   } catch (err) {
@@ -174,12 +183,12 @@ export async function renderServicePage() {
     if (reviewsEl) reviewsEl.innerHTML = '<div class="container"><h2>Reviews</h2><p><a href="/reviews.html">Bekijk reviews</a>.</p></div>';
   }
 
-  const ctaText = service.ctaText || 'Boek nu';
+  const ctaText = service.ctaText || 'Check beschikbaarheid';
   const ctaEl = document.getElementById('cta');
   if (ctaEl) {
     ctaEl.innerHTML = `
       <div class="container">
-        <p><a href="/contact.html" class="pricing-btn">${escapeHtml(ctaText)}</a></p>
+        <p><a href="/#contact" class="pricing-btn">${escapeHtml(ctaText)}</a></p>
         <p><a href="https://wa.me/31621888970?text=Hoi%20Tim!%20Ik%20wil%20graag%20een%20${encodeURIComponent(service.title)}%20boeken." target="_blank" rel="noopener">WhatsApp</a></p>
       </div>
     `;

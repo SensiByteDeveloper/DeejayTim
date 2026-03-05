@@ -32,18 +32,24 @@ export function getLocation(slug) {
 }
 
 /**
- * Filter testimonials by location and/or eventType.
+ * Filter testimonials by locationSlugs and/or eventType.
  * Call loadJSON('data/testimonials.json') first.
- * @param {{ location?: string, eventType?: string }} filters - Optional filters
+ * @param {{ locationSlug?: string, eventType?: string }} filters - Optional filters
  * @returns {Array} Filtered testimonials
  */
 export function filterTestimonials(filters = {}) {
   const data = _cache['data/testimonials.json'];
   const list = data?.testimonials ?? [];
-  if (!filters.location && !filters.eventType) return list;
+  if (!filters.locationSlug && !filters.eventType) return list;
   return list.filter((t) => {
-    if (filters.location && t.location !== filters.location) return false;
-    if (filters.eventType && t.eventType !== filters.eventType) return false;
+    if (filters.locationSlug) {
+      const slugs = t.locationSlugs || (t.location ? ['dj-' + t.location] : []);
+      if (!slugs.includes(filters.locationSlug)) return false;
+    }
+    if (filters.eventType) {
+      const types = Array.isArray(t.eventType) ? t.eventType : (t.eventType ? [t.eventType] : []);
+      if (!types.includes(filters.eventType)) return false;
+    }
     return true;
   });
 }
@@ -60,47 +66,40 @@ export function renderStars(rating) {
   return `<span class="testimonial-stars" aria-label="${n} van 5 sterren" role="img">${full}${empty}</span>`;
 }
 
-/** Location slug (from testimonials) to display name */
-const LOCATION_NAMES = {
-  dordrecht: 'Dordrecht',
-  rotterdam: 'Rotterdam',
-  zwijndrecht: 'Zwijndrecht',
-  'den-haag': 'Den Haag',
-  barendrecht: 'Barendrecht',
-};
+/**
+ * Render a single review card. Format: ★★★★★, text, — Name, City (Google)
+ */
+function renderReviewCard(t) {
+  const city = t.city || '';
+  const source = t.source || 'Google';
+  const footer = city ? `— ${escapeHtml(t.name)}, ${escapeHtml(city)} (${escapeHtml(source)})` : `— ${escapeHtml(t.name)} (${escapeHtml(source)})`;
+  return `<article class="testimonial-card">
+    <div class="testimonial-meta">
+      <span class="testimonial-stars" aria-label="${t.rating} van 5 sterren" role="img">${renderStars(t.rating)}</span>
+    </div>
+    <p class="testimonial-text">${escapeHtml(t.text)}</p>
+    <footer class="testimonial-footer">${footer}</footer>
+  </article>`;
+}
 
 /**
  * Render testimonials list as HTML string.
  * @param {Array} list - Array of testimonial objects
  * @param {number} [limit] - Max number to render
- * @param {{ showCity?: boolean }} [opts] - Options: showCity to display city instead of eventType
+ * @param {{ shuffle?: boolean }} [opts] - shuffle: pick random items
  * @returns {string} HTML string
  */
 export function renderTestimonials(list, limit, opts = {}) {
-  const items = limit ? list.slice(0, limit) : list;
-  const showCity = !!opts.showCity;
-  return items
-    .map(
-      (t) => {
-        const city = showCity && t.location ? (LOCATION_NAMES[t.location] || t.location) : '';
-        const footerContent = showCity && city
-          ? `<span class="testimonial-location">${escapeHtml(city)}</span>`
-          : `<span class="testimonial-event">${escapeHtml(t.eventType)}</span>${t.date ? ` <time datetime="${t.date}">${formatDate(t.date)}</time>` : ''}`;
-        return `<article class="testimonial-card">
-          <div class="testimonial-meta">
-            <span class="testimonial-name">${escapeHtml(t.name)}</span>
-            <span class="testimonial-rating">${renderStars(t.rating)}</span>
-          </div>
-          <p class="testimonial-text">${escapeHtml(t.text)}</p>
-          <footer class="testimonial-footer">${footerContent}</footer>
-        </article>`;
-      }
-    )
-    .join('');
+  let items = list;
+  if (opts.shuffle && items.length > 1) {
+    items = [...items].sort(() => Math.random() - 0.5);
+  }
+  items = limit ? items.slice(0, limit) : items;
+  return items.map((t) => renderReviewCard(t)).join('');
 }
 
 /**
- * Init homepage testimonials: load and render into #homepage-testimonials if present.
+ * Init homepage testimonials: load and render 3 random reviews into #homepage-testimonials.
  */
 export async function initHomepageTestimonials() {
   const el = document.getElementById('homepage-testimonials');
@@ -110,13 +109,15 @@ export async function initHomepageTestimonials() {
     const list = data?.testimonials ?? [];
     el.setAttribute('aria-busy', 'false');
     el.innerHTML = list.length
-      ? renderTestimonials(list, 5, { showCity: true })
+      ? renderTestimonials(list, 3, { shuffle: true })
       : '<p class="testimonials-empty">Nog geen reviews.</p>';
   } catch (err) {
     el.setAttribute('aria-busy', 'false');
     el.innerHTML = '<p class="testimonials-error">Reviews konden niet worden geladen.</p>';
   }
 }
+
+export { renderReviewCard };
 
 if (typeof document !== 'undefined') {
   if (document.readyState === 'loading') {
