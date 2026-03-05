@@ -1256,6 +1256,12 @@ body.video-modal-open .music-player * {
   background: rgba(0, 229, 255, 0.05);
 }
 
+.snelle-links { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--glass-border); }
+.snelle-links h3 { font-size: 1rem; margin: 0 0 0.5rem; color: var(--text-dim); font-weight: 500; }
+.snelle-links p { margin: 0; font-size: var(--text-body-sm); }
+.snelle-links a { color: var(--neon-cyan); text-decoration: none; }
+.snelle-links a:hover { text-decoration: underline; }
+
 /* Section compact – less padding for SEO/link sections */
 .section-compact { padding: 2.5rem 1rem; }
 .section-compact .section-title { margin-bottom: 1rem; }

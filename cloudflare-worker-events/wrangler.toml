@@ -1,0 +1,11 @@
+name = "djtimer-events"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[[analytics_engine_datasets]]
+binding = "DJTIM_EVENTS"
+dataset = "DJTIM_EVENTS"
+
+# Deploy to custom domain: events.deejaytim.nl
+# 1. Add route in Cloudflare dashboard: *events.deejaytim.nl/*
+# 2. Or use workers.dev: https://djtimer-events.<your-subdomain>.workers.dev

@@ -107,7 +107,7 @@ export async function renderLocationPage() {
   setContent(document.getElementById('intro'), `
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Home</a> → <a href="/locaties/">Locaties</a> → DJ in ${escapeHtml(city)}
+        <a href="/">Home</a> → <a href="/werkgebied.html">Werkgebied</a> → <a href="/locaties/">Locaties</a> → DJ in ${escapeHtml(city)}
       </nav>
       <h1 id="page-title">${escapeHtml(h1Text)}</h1>
       <p>${escapeHtml(loc.shortIntro || `Professionele DJ in ${city} voor bruiloften, verjaardagen en bedrijfsfeesten.`)}</p>
@@ -202,13 +202,40 @@ export async function renderLocationPage() {
   const nearbyLocs = nearbySlugs
     .map((s) => locationsData?.locations?.find((l) => l.slug === s))
     .filter(Boolean);
+  const fallbackNearby = locationsData?.locations?.filter((l) => l.slug !== slug).slice(0, 8) || [];
+  const nearbyToShow = nearbyLocs.length ? nearbyLocs.slice(0, 8) : fallbackNearby;
 
   setContent(document.getElementById('nearby'), `
     <div class="container">
-      <h2>Andere locaties</h2>
+      <h2>Ook actief in de buurt</h2>
       <ul class="link-list">
-        ${nearbyLocs.slice(0, 8).map((l) => `<li><a href="/locaties/${l.slug}.html">DJ in ${escapeHtml(l.name)}</a></li>`).join('')}
+        ${nearbyToShow.map((l) => `<li><a href="/locaties/${l.slug}.html">DJ in ${escapeHtml(l.name)}</a></li>`).join('')}
       </ul>
+      <div class="snelle-links">
+        <h3>Snelle links</h3>
+        <p>
+          <a href="/dj-huren.html">DJ huren</a> ·
+          <a href="/reviews.html">Reviews</a> ·
+          <a href="/contact.html">Contact</a> ·
+          <a href="/diensten/bruiloft-dj.html">Bruiloft DJ</a> ·
+          <a href="/diensten/verjaardag-dj.html">Verjaardag DJ</a> ·
+          <a href="/diensten/bedrijfsfeest-dj.html">Bedrijfsfeest DJ</a>
+        </p>
+      </div>
     </div>
   `);
+
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://deejaytim.nl/' },
+      { '@type': 'ListItem', position: 2, name: 'Werkgebied', item: 'https://deejaytim.nl/werkgebied.html' },
+      { '@type': 'ListItem', position: 3, name: `DJ in ${city}`, item: `https://deejaytim.nl/locaties/${slug}.html` }
+    ]
+  };
+  const breadcrumbScript = document.createElement('script');
+  breadcrumbScript.type = 'application/ld+json';
+  breadcrumbScript.textContent = JSON.stringify(breadcrumbLd);
+  document.head.appendChild(breadcrumbScript);
 }

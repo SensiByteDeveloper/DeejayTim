@@ -76,12 +76,12 @@ function injectJsonLd(data) {
 function getInternalLinksHtml() {
   return `
     <nav class="blog-internal-links" aria-label="Gerelateerde pagina's">
-      <h3>Lees ook</h3>
+      <h3>Verder lezen</h3>
       <ul>
-        <li><a href="/diensten/bruiloft-dj.html">Bruiloft DJ</a></li>
-        <li><a href="/diensten/verjaardag-dj.html">Verjaardag DJ</a></li>
-        <li><a href="/locaties/dj-zwijndrecht.html">DJ Zwijndrecht</a></li>
         <li><a href="/dj-huren.html">DJ huren</a></li>
+        <li><a href="/werkgebied.html">Werkgebied</a></li>
+        <li><a href="/diensten/bruiloft-dj.html">Bruiloft DJ</a></li>
+        <li><a href="/locaties/dj-zwijndrecht.html">DJ Zwijndrecht</a></li>
       </ul>
       <div class="blog-cta-buttons">
         <a href="/contact.html" class="pricing-btn">Neem contact op</a>

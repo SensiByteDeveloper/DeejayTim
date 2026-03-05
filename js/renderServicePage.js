@@ -187,7 +187,7 @@ export async function renderServicePage() {
 
   const andereEl = document.getElementById('andere-diensten');
   if (andereEl) {
-    andereEl.innerHTML = `
+    let html = `
       <div class="container">
         <h3>Andere diensten</h3>
         <ul class="link-list">
@@ -195,7 +195,24 @@ export async function renderServicePage() {
       `<li><a href="/diensten/${s.slug}.html">${escapeHtml(s.title)}</a></li>`
     ).join('')}
         </ul>
-      </div>
     `;
+    const POPULAIRE_PLAATSEN = [
+      { slug: 'dj-zwijndrecht', name: 'Zwijndrecht' },
+      { slug: 'dj-dordrecht', name: 'Dordrecht' },
+      { slug: 'dj-barendrecht', name: 'Barendrecht' },
+      { slug: 'dj-ridderkerk', name: 'Ridderkerk' },
+      { slug: 'dj-rotterdam', name: 'Rotterdam' }
+    ];
+    if (['bruiloft-dj', 'verjaardag-dj', 'bedrijfsfeest-dj'].includes(slug)) {
+      html += `
+        <h2 style="margin-top: 2rem;">Populaire plaatsen in de regio</h2>
+        <ul class="link-list">
+          ${POPULAIRE_PLAATSEN.map((l) => `<li><a href="/locaties/${l.slug}.html">DJ in ${escapeHtml(l.name)}</a></li>`).join('')}
+        </ul>
+        <p><a href="/werkgebied.html">Bekijk mijn volledige werkgebied</a></p>
+      `;
+    }
+    html += '</div>';
+    andereEl.innerHTML = html;
   }
 }

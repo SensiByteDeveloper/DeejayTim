@@ -281,7 +281,9 @@ function initMusicPlayer() {
   };
 
   musicToggle?.addEventListener('click', () => {
-    window.deejayTimMusic?.setMuted(!audio.muted);
+    const willMute = !audio.muted;
+    window.deejayTimMusic?.setMuted(willMute);
+    window.track?.('music_mute_toggle', { muted: willMute });
   });
   window.addEventListener('langchange', () => {
     updateMusicToggleState();
@@ -331,6 +333,7 @@ function initMusicPlayer() {
     updateMuteAria();
     updateMusicToggleState();
     updatePlayState();
+    window.track?.('music_mute_toggle', { muted: audio.muted });
   });
 
   collapseBtn?.addEventListener('click', (e) => {
@@ -339,10 +342,12 @@ function initMusicPlayer() {
     player.classList.remove('playlist-open');
     trackTrigger?.setAttribute('aria-expanded', 'false');
     playlistEl?.setAttribute('aria-hidden', 'true');
+    window.track?.('music_minimize');
   });
   expandBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
     setCollapsed(false);
+    window.track?.('music_expand');
   });
 
   trackTrigger?.addEventListener('click', (e) => {
@@ -372,8 +377,10 @@ function initMusicPlayer() {
         const idx = indexInPlaylist(getCurrentTrack());
         if (idx >= 0) loadAndPlay(idx);
       });
+      window.track?.('music_play');
     } else {
       audio.pause();
+      window.track?.('music_pause');
     }
     playBtn?.classList.toggle('is-playing', willPlay);
     if (playBtn) playBtn.setAttribute('aria-label', willPlay ? (t('music.pauseAria') || 'Pauzeren') : (t('music.playAria') || 'Afspelen'));
