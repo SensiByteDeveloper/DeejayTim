@@ -111,14 +111,14 @@ export async function renderLocationPage() {
       </nav>
       <h1 id="page-title">${escapeHtml(h1Text)}</h1>
       <p>${escapeHtml(loc.shortIntro || `Professionele DJ in ${city} voor bruiloften, verjaardagen en bedrijfsfeesten.`)}</p>
-      <p>${escapeHtml(travelNote)} <a href="/dj-huren.html">Bekijk prijzen</a> · <a href="/reviews.html">Reviews</a> · <a href="/contact.html">Boek nu</a>.</p>
+      <p>${escapeHtml(travelNote)} <a href="/dj-huren.html">Bekijk prijzen</a> <span aria-hidden="true">·</span> <a href="/reviews.html">Reviews</a> <span aria-hidden="true">·</span> <a href="/contact.html" class="cta-button">Boek nu</a>.</p>
     </div>
   `);
 
   setContent(document.getElementById('events'), `
     <div class="container">
       <h2>Evenementen in ${escapeHtml(city)}</h2>
-      <ul>
+      <ul class="link-list">
         ${EVENTS.map((e) => `<li><a href="/diensten/${e.slug}.html">${escapeHtml(e.title)}</a></li>`).join('')}
       </ul>
     </div>
@@ -135,7 +135,7 @@ export async function renderLocationPage() {
     <div class="container">
       <h2>Diensten</h2>
       <p><a href="/dj-huren.html">DJ huren</a> – prijzen en pakketten.</p>
-      <ul>
+      <ul class="link-list">
         ${KEY_SERVICES.map((s) => `<li><a href="/diensten/${s.slug}.html">${escapeHtml(s.title)}</a></li>`).join('')}
       </ul>
     </div>
@@ -206,7 +206,7 @@ export async function renderLocationPage() {
   setContent(document.getElementById('nearby'), `
     <div class="container">
       <h2>Andere locaties</h2>
-      <ul>
+      <ul class="link-list">
         ${nearbyLocs.slice(0, 8).map((l) => `<li><a href="/locaties/${l.slug}.html">DJ in ${escapeHtml(l.name)}</a></li>`).join('')}
       </ul>
     </div>

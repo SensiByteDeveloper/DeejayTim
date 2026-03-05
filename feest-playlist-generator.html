@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Feest playlist generator | Gratis inspiratie voor DJ | Deejay Tim</title>
+  <meta name="description" content="Genereer een feestplaylist op maat. Kies eventtype, sfeer en leeftijd. Gratis tool voor bruiloft, verjaardag, schoolfeest en meer.">
+  <link rel="canonical" href="https://deejaytim.nl/feest-playlist-generator.html">
+  <meta property="og:title" content="Feest playlist generator | Deejay Tim">
+  <meta property="og:description" content="Genereer een feestplaylist op maat. Kies eventtype, sfeer en leeftijd. Gratis tool.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://deejaytim.nl/feest-playlist-generator.html">
+  <meta property="og:image" content="https://deejaytim.nl/media/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Feest playlist generator | Deejay Tim">
+  <meta name="twitter:description" content="Genereer een feestplaylist op maat. Gratis tool.">
+  <meta name="twitter:image" content="https://deejaytim.nl/media/og.jpg">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon-180.png" sizes="180x180">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=11">
+</head>
+<body>
+  <div data-include="/pages/partials/header.html"></div>
+  <main id="main-content">
+    <section class="section">
+      <div class="container">
+        <h1 class="section-title neon-cyan">Feest playlist generator</h1>
+        <p class="section-subtitle">Kies je event, sfeer en publiek – genereer een playlist op maat.</p>
+
+        <div class="playlist-form">
+          <div class="form-row">
+            <label for="eventType">Eventtype</label>
+            <select id="eventType">
+              <option value="bruiloft">Bruiloft</option>
+              <option value="verjaardag">Verjaardag</option>
+              <option value="bedrijfsfeest">Bedrijfsfeest</option>
+              <option value="schoolfeest">Schoolfeest</option>
+              <option value="buurtfeest">Buurtfeest</option>
+              <option value="slagingsfeest">Slagingsfeest</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="vibe">Sfeer</label>
+            <select id="vibe">
+              <option value="allround">Allround</option>
+              <option value="meezingers">Meezingers</option>
+              <option value="90s-00s">90s & 00s</option>
+              <option value="dance">Dance</option>
+              <option value="R&B-hiphop">R&B & Hiphop</option>
+              <option value="NL-feest">NL-feest</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="ageMix">Leeftijd mix</label>
+            <select id="ageMix">
+              <option value="jong">Jong</option>
+              <option value="gemixt">Gemixt</option>
+              <option value="volwassen">Volwassen</option>
+            </select>
+          </div>
+          <button type="button" class="pricing-btn" id="generateBtn">Genereer playlist</button>
+        </div>
+
+        <div id="playlistResult" class="playlist-result" hidden>
+          <h2 class="playlist-result-title">Jouw playlist</h2>
+          <div id="playlistOutput" class="playlist-output"></div>
+          <button type="button" class="pricing-btn" id="copyBtn">Kopieer playlist</button>
+
+          <div class="playlist-cta">
+            <p><strong>Zoek je een DJ voor jouw feest?</strong></p>
+            <p>
+              <a href="/contact.html" class="pricing-btn">Neem contact op</a>
+              <a href="/dj-huren.html" class="playlist-cta-link">DJ huren</a>
+            </p>
+            <p class="playlist-cta-services">
+              <a href="/diensten/bruiloft-dj.html">Bruiloft DJ</a> ·
+              <a href="/diensten/verjaardag-dj.html">Verjaardag DJ</a> ·
+              <a href="/diensten/schoolfeest-dj.html">Schoolfeest DJ</a> ·
+              <a href="/diensten/bedrijfsfeest-dj.html">Bedrijfsfeest DJ</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div data-include="/pages/partials/footer.html"></div>
+  <script src="/i18n/i18n.js?v=6"></script>
+  <script src="/script.js?v=11"></script>
+  <script type="module" src="/js/includePartials.js"></script>
+  <script type="module">
+    import { generatePlaylist, formatPlaylistText } from '/js/playlistGenerator.js';
+
+    const generateBtn = document.getElementById('generateBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const resultEl = document.getElementById('playlistResult');
+    const outputEl = document.getElementById('playlistOutput');
+
+    function renderPlaylist(playlist) {
+      const phases = [
+        { key: 'inloop', label: 'Inloop' },
+        { key: 'start', label: 'Feeststart' },
+        { key: 'piek', label: 'Piekmoment' },
+        { key: 'afsluiters', label: 'Afsluiters' }
+      ];
+      let html = '';
+      phases.forEach(({ key, label }) => {
+        const tracks = playlist[key] || [];
+        if (tracks.length) {
+          html += `<div class="playlist-phase"><h3>${label}</h3><ol>`;
+          tracks.forEach(t => { html += `<li>${t}</li>`; });
+          html += '</ol></div>';
+        }
+      });
+      return html;
+    }
+
+    generateBtn.addEventListener('click', () => {
+      const eventType = document.getElementById('eventType').value;
+      const vibe = document.getElementById('vibe').value;
+      const ageMix = document.getElementById('ageMix').value;
+
+      const playlist = generatePlaylist(eventType, vibe, ageMix);
+      outputEl.innerHTML = renderPlaylist(playlist);
+      outputEl.dataset.playlistText = formatPlaylistText(playlist);
+      resultEl.hidden = false;
+      resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      const text = outputEl.dataset.playlistText || '';
+      try {
+        await navigator.clipboard.writeText(text);
+        copyBtn.textContent = 'Gekopieerd!';
+        setTimeout(() => { copyBtn.textContent = 'Kopieer playlist'; }, 2000);
+      } catch {
+        copyBtn.textContent = 'Kopiëren mislukt';
+        setTimeout(() => { copyBtn.textContent = 'Kopieer playlist'; }, 2000);
+      }
+    });
+  </script>
+</body>
+</html>

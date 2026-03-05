@@ -190,7 +190,7 @@ export async function renderServicePage() {
     andereEl.innerHTML = `
       <div class="container">
         <h3>Andere diensten</h3>
-        <ul>
+        <ul class="link-list">
           ${CORE_SERVICES.filter((s) => s.slug !== slug).map((s) =>
       `<li><a href="/diensten/${s.slug}.html">${escapeHtml(s.title)}</a></li>`
     ).join('')}

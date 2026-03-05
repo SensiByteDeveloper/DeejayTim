@@ -127,21 +127,8 @@ function initMusicPlayer() {
   const expandBtn = document.getElementById('musicExpand');
   const progressEl = document.getElementById('musicProgress');
   const trackTrigger = document.getElementById('musicTrackTrigger');
-  const introOverlay = document.getElementById('musicIntroOverlay');
-  const pageContent = document.getElementById('page-content');
   const audio = document.getElementById('bgMusic');
 
-  // Tijdens intro: verberg rest van pagina voor screenreaders (VoiceOver focust alleen op keuze)
-  const setPageContentInert = (inert) => {
-    if (!pageContent) return;
-    if (inert) {
-      pageContent.setAttribute('aria-hidden', 'true');
-      pageContent.setAttribute('inert', '');
-    } else {
-      pageContent.removeAttribute('aria-hidden');
-      pageContent.removeAttribute('inert');
-    }
-  };
   const MUSIC_PREF_KEY = 'deejaytim-music';
   const getStoredMusicPref = () => {
     try { return localStorage.getItem(MUSIC_PREF_KEY); } catch (_) { return null; }
@@ -150,24 +137,14 @@ function initMusicPlayer() {
     try { if (v) localStorage.setItem(MUSIC_PREF_KEY, v); } catch (_) {}
   };
 
-  const radioWith = document.getElementById('musicChoiceWith');
-  const radioWithout = document.getElementById('musicChoiceWithout');
-  const submitBtn = document.getElementById('musicIntroSubmit');
-
-  // Pre-select op basis van opgeslagen keuze (default: zonder muziek)
+  // Apply stored music preference (no gate – direct entry). Default: no music.
   const savedPref = getStoredMusicPref();
-  if (savedPref === 'with' && radioWith) {
-    radioWith.checked = true;
-    radioWithout.checked = false;
+  if (savedPref !== 'with') {
+    document.body.classList.add('no-music');
   } else {
-    radioWithout.checked = true;
-    radioWith.checked = false;
+    player?.classList.remove('muted');
   }
 
-  if (document.body.classList.contains('intro-pending')) {
-    setPageContentInert(true);
-    requestAnimationFrame(() => (radioWith?.checked ? radioWith : radioWithout)?.focus());
-  }
   const trackDisplay = document.getElementById('musicTrackDisplay');
   const playlistEl = document.getElementById('musicPlaylist');
   const nextBtn = player?.querySelector('.music-next');
@@ -237,11 +214,18 @@ function initMusicPlayer() {
     audio.src = t.src;
     audio.load();
     if (progressEl) { progressEl.value = '0'; progressEl.style.setProperty('--progress', '0%'); }
-    if (!player.classList.contains('muted')) {
+    if (!player.classList.contains('muted') && !document.body.classList.contains('no-music')) {
       audio.play().catch(() => {});
     }
     updateUI();
     updateMediaSession();
+  };
+
+  /** Lazy load: fetch MP3 only on first user interaction (play/unmute) */
+  const ensureAudioLoaded = () => {
+    if (!audio.src) {
+      loadAndPlay(indexInPlaylist(playbackOrder[0]));
+    }
   };
 
   const playNext = () => {
@@ -264,41 +248,12 @@ function initMusicPlayer() {
     loadAndPlay(indexInPlaylist(prevTrack));
   };
 
-  let introDone = false;
-  const runIntroDone = () => {
-    if (introDone) return;
-    introDone = true;
-    setPageContentInert(false);
-    player?.classList.remove('draw-attention');
-    document.body.classList.remove('intro-pending');
-    document.body.classList.add('intro-done');
-    introOverlay?.classList.add('faded');
-    introOverlay?.setAttribute('aria-hidden', 'true');
-    updateMusicToggleState();
-    setTimeout(() => introOverlay?.remove(), 600);
-  };
-
   const setCollapsed = (collapsed) => {
     player.classList.toggle('state-collapsed', collapsed);
     player.classList.toggle('state-expanded', !collapsed);
     collapseBtn?.setAttribute('aria-expanded', !collapsed);
     expandBtn?.setAttribute('aria-expanded', collapsed);
     expandBtn?.toggleAttribute('hidden', !collapsed);
-  };
-
-  loadAndPlay(indexInPlaylist(playbackOrder[0]));
-
-  const startExperience = () => {
-    player.classList.remove('muted');
-    muteBtn?.setAttribute('aria-pressed', 'false');
-    audio.play().then(() => { updatePlayState(); }).catch(() => {});
-    runIntroDone();
-  };
-
-  const startExperienceWithoutMusic = () => {
-    document.body.classList.add('no-music');
-    audio.pause();
-    runIntroDone();
   };
 
   /* API voor "Achtergrondmuziek aan/uit" + nav-toggle */
@@ -327,6 +282,7 @@ function initMusicPlayer() {
         document.body.classList.remove('no-music');
         player?.classList.remove('muted');
         muteBtn?.setAttribute('aria-pressed', 'false');
+        ensureAudioLoaded();
         audio?.play().catch(() => {});
         updateMuteAria();
         updatePlayState();
@@ -346,21 +302,6 @@ function initMusicPlayer() {
     updateMusicToggleState();
     updatePlayState();
     updateMuteAria();
-  });
-
-  // Verder: start ervaring na expliciete klik (audio NOOIT automatisch)
-  const onSubmit = () => {
-    const withMusic = radioWith?.checked;
-    setStoredMusicPref(withMusic ? 'with' : 'without');
-    if (withMusic) startExperience();
-    else startExperienceWithoutMusic();
-  };
-  submitBtn?.addEventListener('click', onSubmit);
-  submitBtn?.addEventListener('keydown', (e) => {
-    if ((e.key === 'Enter' || e.key === ' ') && !submitBtn.disabled) {
-      e.preventDefault();
-      onSubmit();
-    }
   });
 
   const updatePlayState = () => {
@@ -406,6 +347,7 @@ function initMusicPlayer() {
     if (player.classList.contains('muted')) {
       audio.pause();
     } else {
+      ensureAudioLoaded();
       audio.play().then(() => updatePlayState()).catch(() => {
         const idx = indexInPlaylist(getCurrentTrack());
         if (idx >= 0) loadAndPlay(idx);
@@ -449,8 +391,8 @@ function initMusicPlayer() {
     if (player.classList.contains('muted')) return;
     const willPlay = audio.paused;
     if (willPlay) {
+      ensureAudioLoaded();
       audio.play().then(() => updatePlayState()).catch(() => {
-        /* Herstel: herlaad huidige track bij gefaalde play (bv. na tab-suspend) */
         const idx = indexInPlaylist(getCurrentTrack());
         if (idx >= 0) loadAndPlay(idx);
       });

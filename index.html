@@ -23,43 +23,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=11">
 </head>
-<body class="intro-pending">
-  <!-- Intro overlay: WCAG 2.2.
-       fieldset+legend (1.3.1), aria-describedby (3.3.2), Name/Role/Value (4.1.2).
-       Default: zonder muziek. Verder altijd enabled. Audio pas na expliciete klik.
-       State: selected=bg+border+dot | focus-visible=outline (toetsenbord) | hover=subtiel. -->
-  <div class="music-intro-overlay" id="musicIntroOverlay" aria-hidden="false" role="dialog" aria-modal="true" aria-labelledby="musicIntroHeading" aria-describedby="musicIntroInstruction">
-    <div class="music-intro-cta">
-      <!-- Taal: zichtbaar op intro zodat niet-Nederlandstaligen direct kunnen schakelen -->
-      <div class="music-intro-lang lang-toggle" role="group" aria-label="Taal wijzigen" data-i18n-aria="lang.toggleAria">
-        <span class="music-intro-lang-label" data-i18n="music.introLangLabel">Taal:</span>
-        <button type="button" class="lang-btn music-intro-lang-btn" data-lang="nl" aria-pressed="true" data-i18n="lang.nl">Nederlands</button>
-        <button type="button" class="lang-btn music-intro-lang-btn" data-lang="en" aria-pressed="false" data-i18n="lang.en">English</button>
-      </div>
-
-      <h2 id="musicIntroHeading" class="music-intro-heading" data-i18n="music.introHeading">Welkom</h2>
-      <p id="musicIntroInstruction" class="music-intro-instruction" data-i18n="music.introInstruction">Kies hoe je de website wilt bezoeken.</p>
-
-      <fieldset class="music-intro-fieldset" aria-describedby="musicIntroInstruction">
-        <legend class="music-intro-legend" id="musicIntroLegendText" data-i18n="music.introLegend">Achtergrondmuziek</legend>
-        <div class="music-intro-radios">
-          <label class="music-intro-radio-option">
-            <input type="radio" name="musicChoice" value="with" id="musicChoiceWith">
-            <span class="music-intro-radio-box" aria-hidden="true"></span>
-            <span class="music-intro-radio-label" data-i18n="music.optionWith">Bezoek website met achtergrondmuziek</span>
-          </label>
-          <label class="music-intro-radio-option">
-            <input type="radio" name="musicChoice" value="without" id="musicChoiceWithout" checked>
-            <span class="music-intro-radio-box" aria-hidden="true"></span>
-            <span class="music-intro-radio-label" data-i18n="music.optionWithout">Bezoek website zonder achtergrondmuziek</span>
-          </label>
-        </div>
-      </fieldset>
-
-      <button type="button" class="music-intro-submit" id="musicIntroSubmit" data-i18n="music.submit">Verder</button>
-    </div>
-  </div>
-
+<body class="intro-done">
   <div id="page-content">
   <!-- Animated background -->
   <div class="bg-grid"></div>
@@ -420,7 +384,7 @@
     <div class="video-carousel-dots" role="tablist" aria-label="Video's"></div>
   </div>
 
-  <audio id="bgMusic" preload="auto"></audio>
+  <audio id="bgMusic" preload="none"></audio>
   </div><!-- /#page-content -->
 
   <script type="application/json" id="i18n-nl">{"page":{"title":"Deejay Tim | DJ voor jouw evenement"},"nav":{"ariaLabel":"Hoofdnavigatie","intro":"Intro","diensten":"Diensten","handsUp":"Hands Up!","contact":"Contact","instagram":"Instagram","instagramAria":"Instagram (opent in nieuw tabblad)"},"hero":{"tagline":"De perfecte soundtrack voor elk moment","cta":"Boek nu","instagramAria":"Instagram @deejaytimr (opent in nieuw tabblad)"},"intro":{"title":"De ervaring","p1":"Zoek je de perfecte DJ voor jouw evenement? Deejay Tim levert professionele muziek voor feesten, bruiloften en bedrijfsevenementen.","p2prefix":"Mijn missie: ","highlight":"de menigte laten dansen","p2suffix":" en iedereen een onvergetelijke avond bezorgen. Breed repertoire, voor elk moment de juiste sfeer.","cta":"Laten we er samen een mooi feest van maken!"},"diensten":{"title":"Diensten & prijzen","subtitle":"Prijzen zijn excl. BTW, incl. 4 uur DJ en incl. reiskosten tot 30km vanuit 3332 SN. Extra km: €0,25. Extra uur: €100.","allIn":{"title":"All-in","subtitle":"Complete DJ set + DJ","badge":"Populair","features":["DJ-set (Pioneer XDJ-RX3)","DJ Booth","Lichtset","Rookmachine","Speakerset","Microfoon"],"audience":"Goed voor tot ±100 personen","note":"Extra materiaal (bijv. extra speakers of licht) kan optioneel worden ingehuurd. Dit regelen we in overleg.","price":"€500","cta":"Boek All-in"},"justDj":{"title":"Just DJ","subtitle":"Enkel Deejay Tim","features":["Heb je al een complete DJ- en geluidsset?","Ik verzorg de muziek op maat","USB-sticks en headset mee","Draai enkel digitaal"],"price":"€250","cta":"Boek Just DJ"},"handsUp":{"title":"Hands Up!","tagline":"Interactieve DJ ervaring","ariaPreview":"Bekijk Hands Up! app","clickHint":"Klik om de app te bekijken","p1":"Live interactie via de Hands Up! app: song requests, stemmen op de volgende track en meebepalen wat er gedraaid wordt. Jullie sturen, ik draai.","p2":"Perfect voor bruiloften, feesten en events waar iedereen meebeslist.","modalTitle":"Hands Up! in actie","screenParty":"Hands Up! welkom – Verzoeknummers aanvragen, Loterij, Support","screenRequests":"Hands Up! verzoeknummers wachtrij"},"contact":{"title":"Let's talk!","subtitle":"Feestje bouwen?","whatsapp":"WhatsApp","whatsappAria":"Contacteer Deejay Tim via WhatsApp","form":{"name":"Naam *","phone":"Telefoonnummer *","email":"E-mail *","message":"Wat kunt u al delen over uw feestje? *","submit":"Verstuur","errorEmail":"Voer een geldig e-mailadres in (bijv. naam@domein.nl)","errorPhone":"Voer een geldig telefoonnummer in (bijv. 06 12345678 of +31 6 12345678)"},"success":"Bedankt! We nemen zo snel mogelijk contact op."},"music":{"introLangLabel":"Taal:","introHeading":"Welkom","introInstruction":"Kies hoe je de website wilt bezoeken.","introLegend":"Muziek","optionWith":"Bezoek website met muziek","optionWithout":"Bezoek website zonder muziek","submit":"Verder","label":"Deejay Tim","track":"Let's Go DJ Tim","muteAria":"Muziek dempen","unmuteAria":"Muziek aanzetten","toggleAria":"Muziekspeler uitklappen of inklappen","toggleOnAria":"Muziek aan","toggleOffAria":"Muziek uit","toggleOnTitle":"Muziek inschakelen","toggleOffTitle":"Muziek uitschakelen","playlistAria":"Nummeroverzicht","prevAria":"Vorige","playAria":"Afspelen","pauseAria":"Pauzeren","nextAria":"Volgende"},"video":{"clickHint":"♪ Klik voor geluid"},"whatsapp":{"status":"Online","welcome":"Hoi! 👋 Waar kan ik je mee helpen?","cta":"Chat op WhatsApp"},"lang":{"toggleAria":"Taal wijzigen","nl":"Nederlands","en":"Engels","current":"Huidige taal: {lang}"}}</script>

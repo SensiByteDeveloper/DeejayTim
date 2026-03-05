@@ -64,227 +64,9 @@ body.intro-done:not(.no-music) {
   border: 0;
 }
 
-/* Intro overlay – zwart scherm, waarschuwing + CTA, music player verborgen */
-.music-intro-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  background: var(--bg-darker);
-  transition: opacity 0.5s ease;
-}
-
-.music-intro-overlay.faded {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Music player verborgen tijdens intro – verschijnt na klik */
-body.intro-pending .music-player {
-  visibility: hidden;
-}
-
 /* Music player verborgen wanneer gebruiker kiest voor zonder muziek */
 body.no-music .music-player {
   display: none !important;
-}
-
-.music-intro-cta {
-  position: absolute;
-  left: 50%;
-  top: 35%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 1;
-  max-width: 420px;
-  width: 90%;
-}
-
-/* Taalwissel op intro – zichtbaar voor niet-Nederlandstaligen */
-.music-intro-lang {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.music-intro-lang-label {
-  font-size: var(--text-caption);
-  color: var(--text-dim);
-  margin-right: 0.25rem;
-}
-
-.music-intro-lang .lang-btn {
-  font-family: var(--font-body);
-  font-size: var(--text-caption);
-  padding: 0.3rem 0.6rem;
-  background: transparent;
-  color: var(--text-dim);
-  border: 1px solid var(--glass-border);
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.music-intro-lang .lang-btn[aria-pressed="true"] {
-  color: var(--neon-cyan);
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 12px rgba(0, 229, 255, 0.3);
-}
-
-.music-intro-heading {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-bright);
-  margin: 0 0 0.5rem;
-}
-
-.music-intro-instruction {
-  font-family: var(--font-body);
-  font-size: var(--text-body-sm);
-  color: var(--text-dim);
-  margin: 0 0 1.25rem;
-}
-
-/* Fieldset + legend – radiogroup 1.3.1, instructie via aria-describedby 3.3.2 */
-.music-intro-fieldset {
-  border: none;
-  margin: 0 0 1.5rem;
-  padding: 0;
-  text-align: left;
-}
-
-.music-intro-legend {
-  font-family: var(--font-body);
-  font-size: var(--text-caption);
-  color: var(--text-dim);
-  margin-bottom: 0.5rem;
-  padding: 0;
-}
-
-.music-intro-radios {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-/* State styling: Selected ≠ Focus-visible ≠ Hover (WCAG 2.4.7, 2.1.1)
-   - Selected: subtiele bg-fill + border (niet alleen kleur: ook radio-dot gevuld)
-   - Focus-visible: outline/ring alleen bij toetsenbord – nooit verward met selected
-   - Hover: subtiel, anders dan focus en selected */
-.music-intro-radio-option {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  width: 100%;
-  min-height: 56px;
-  padding: 0.875rem 1.25rem;
-  background: transparent;
-  border: 2px solid var(--glass-border);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, outline 0.15s;
-}
-
-/* Hover: subtiele achtergrond, geen border-change (anders dan selected) */
-.music-intro-radio-option:hover {
-  background: rgba(255, 255, 255, 0.04);
-}
-
-/* Selected: duidelijke visuele feedback (bg + border + dot) – WCAG 1.4.1 */
-.music-intro-radio-option:has(input:checked) {
-  background: rgba(0, 229, 255, 0.06);
-  border-color: rgba(0, 229, 255, 0.5);
-}
-
-/* Focus-visible: alleen bij toetsenbord – outline ≠ selected styling */
-.music-intro-radio-option:has(input:focus-visible) {
-  outline: 2px solid var(--neon-cyan);
-  outline-offset: 2px;
-}
-
-.music-intro-radio-option input[type="radio"]:focus {
-  outline: none;
-}
-
-/* Visuele indicator geselecteerd – niet alleen kleur (WCAG 1.4.1) */
-.music-intro-radio-box {
-  flex-shrink: 0;
-  width: 22px;
-  height: 22px;
-  border: 2px solid var(--glass-border);
-  border-radius: 50%;
-  background: transparent;
-  position: relative;
-}
-
-.music-intro-radio-option:has(input:checked) .music-intro-radio-box {
-  border-color: var(--neon-cyan);
-}
-
-.music-intro-radio-option:has(input:checked) .music-intro-radio-box::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 10px;
-  height: 10px;
-  background: var(--neon-cyan);
-  border-radius: 50%;
-}
-
-.music-intro-radio-label {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  color: var(--text-bright);
-  text-align: left;
-}
-
-.music-intro-radio-option input[type="radio"] {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
-
-/* Primaire actieknop –zelfde breedte als kaarten voor visuele hiërarchie */
-.music-intro-submit {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 700;
-  width: 100%;
-  padding: 0.875rem 1.25rem;
-  background: linear-gradient(135deg, var(--neon-cyan) 0%, rgba(0, 229, 255, 0.8) 100%);
-  color: var(--bg-darker);
-  border: 2px solid rgba(0, 229, 255, 0.5);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: box-shadow 0.3s, transform 0.2s;
-}
-
-.music-intro-submit:hover:not(:disabled),
-.music-intro-submit:focus-visible:not(:disabled) {
-  box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
-  transform: scale(1.02);
-}
-
-.music-intro-submit:focus {
-  outline: none;
-}
-
-.music-intro-submit:focus-visible {
-  outline: 2px solid var(--neon-cyan);
-  outline-offset: 2px;
-}
-
-.music-intro-submit:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
 }
 
 /* Animated background grid */
@@ -391,6 +173,39 @@ body.no-music .music-player {
   color: var(--neon-cyan);
   text-shadow: 0 0 8px var(--neon-cyan);
 }
+
+/* Nav dropdown – Feest submenu */
+.nav-dropdown { position: relative; }
+.nav-dropdown-trigger { display: block; }
+.nav-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin: 0;
+  padding: 0.5rem 0;
+  list-style: none;
+  background: rgba(6, 6, 11, 0.95);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  min-width: 180px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+  z-index: 100;
+}
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.nav-dropdown-menu a {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-size: var(--text-body-sm);
+}
+.nav-dropdown-menu a:hover { background: rgba(255, 255, 255, 0.05); }
 
 /* Hero actions: CTA + Instagram, gestapeld en gecentreerd */
 .hero-actions {
@@ -1191,6 +1006,43 @@ body.video-modal-open .music-player * {
 
 .container { max-width: 1100px; margin: 0 auto; }
 
+/* Content links – high contrast, neon theme */
+#main-content a,
+.container a,
+.prose-page a,
+.blog-post-body a,
+.page-footer a {
+  color: var(--neon-cyan);
+  text-decoration: none;
+}
+#main-content a:hover,
+.container a:hover,
+.prose-page a:hover,
+.blog-post-body a:hover,
+.page-footer a:hover {
+  text-decoration: underline;
+}
+#main-content a.hero-cta:hover,
+#main-content a.contact-whatsapp:hover,
+#main-content a.pricing-btn:hover,
+#main-content a.cta-button:hover {
+  text-decoration: none;
+}
+#main-content a:focus-visible,
+.container a:focus-visible,
+.prose-page a:focus-visible,
+.blog-post-body a:focus-visible,
+.page-footer a:focus-visible {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 2px;
+}
+#main-content a:visited,
+.container a:visited,
+.prose-page a:visited,
+.blog-post-body a:visited {
+  color: rgba(0, 229, 255, 0.9);
+}
+
 .section-title {
   font-family: 'Orbitron', sans-serif;
   font-size: 2.2rem;
@@ -1356,6 +1208,57 @@ body.video-modal-open .music-player * {
   background: linear-gradient(135deg, #ff6db5 0%, var(--neon-magenta) 50%, #b81a5c 100%);
   color: #0a0a0f;
   box-shadow: 0 0 30px rgba(255, 45, 146, 0.4);
+}
+
+/* CTA button – inline, for "Boek nu" etc. */
+.cta-button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid rgba(0, 229, 255, 0.5);
+  color: var(--neon-cyan);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.cta-button:hover,
+.cta-button:focus-visible {
+  background: rgba(0, 229, 255, 0.15);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+  text-decoration: none;
+}
+.cta-button:focus { outline: none; }
+.cta-button:focus-visible { outline: 2px solid var(--neon-cyan); outline-offset: 2px; }
+
+.cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1.5rem 0 0; }
+.cta-row span[aria-hidden="true"] { color: var(--text-dim); }
+
+/* Link list – services, locations, menu-style */
+.link-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+.link-list li {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--glass-border);
+}
+.link-list li:last-child { border-bottom: none; }
+.link-list a {
+  display: block;
+  padding: 0.75rem 0;
+  color: var(--neon-cyan);
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s;
+}
+.link-list a:hover {
+  color: var(--text-bright);
+  text-decoration: none;
+  background: rgba(0, 229, 255, 0.05);
 }
 
 /* Hands Up */
@@ -2135,6 +2038,19 @@ body.video-modal-open .music-player * {
   .nav.menu-open .nav-toggle span:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
   }
+  .nav-dropdown-menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    margin-top: 0.25rem;
+    margin-left: 1rem;
+    padding: 0.25rem 0;
+    border: none;
+    background: transparent;
+    min-width: auto;
+  }
+  .nav-dropdown-menu a { padding: 0.4rem 0; }
   .nav-links > li {
     border-radius: 8px;
   }
@@ -2196,6 +2112,83 @@ body.video-modal-open .music-player * {
 .breadcrumb { font-size: var(--text-caption); color: var(--text-dim); margin-bottom: 1rem; }
 .breadcrumb a { color: var(--neon-cyan); text-decoration: none; }
 .breadcrumb a:hover { text-decoration: underline; }
+
+/* Prose page – long-form content */
+.prose-page { max-width: 800px; }
+.prose-page .intro-lead { font-size: var(--text-body-lg); color: var(--text-dim); margin-bottom: 2rem; line-height: 1.7; }
+.prose-page h2 { font-family: var(--font-display); font-size: 1.35rem; margin: 2.5rem 0 1rem; color: var(--text-bright); }
+.prose-page h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--text-bright); }
+.prose-page p { margin: 0 0 1rem; color: var(--text-dim); line-height: 1.7; }
+.prose-page ul { margin: 0 0 1rem; padding-left: 1.5rem; color: var(--text-dim); }
+.prose-page li { margin-bottom: 0.35rem; }
+.prose-page a { color: var(--neon-cyan); text-decoration: none; }
+.prose-page a:hover { text-decoration: underline; }
+.cta-block { padding: 1.25rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 8px; margin: 2rem 0; }
+.cta-block p { margin: 0; }
+.cta-block-top { margin-top: 0; }
+.faq-list { margin-top: 1rem; }
+
+/* Playlist generator */
+.playlist-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+}
+.playlist-form .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.playlist-form label { font-size: var(--text-caption); color: var(--text-dim); }
+.playlist-form select {
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-darker);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  color: var(--text-bright);
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  min-width: 160px;
+}
+.playlist-form select:focus { outline: none; border-color: var(--neon-cyan); }
+.playlist-result { margin-top: 2rem; }
+.playlist-result-title { font-family: var(--font-display); font-size: 1.25rem; margin: 0 0 1rem; color: var(--text-bright); }
+.playlist-output {
+  padding: 1.5rem;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.playlist-phase { margin-bottom: 1.5rem; }
+.playlist-phase:last-child { margin-bottom: 0; }
+.playlist-phase h3 { font-size: 1rem; margin: 0 0 0.5rem; color: var(--neon-cyan); }
+.playlist-phase ol { margin: 0; padding-left: 1.25rem; color: var(--text-dim); }
+.playlist-phase li { margin-bottom: 0.25rem; }
+.playlist-cta {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  text-align: center;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+}
+.playlist-cta p { margin: 0 0 0.5rem; }
+.playlist-cta p:last-child { margin-bottom: 0; }
+.playlist-cta .pricing-btn { margin-right: 0.5rem; }
+.playlist-cta-link { color: var(--neon-cyan); text-decoration: none; }
+.playlist-cta-link:hover { text-decoration: underline; }
+.playlist-cta-services { font-size: var(--text-body-sm); }
+.playlist-cta-services a { color: var(--neon-cyan); text-decoration: none; }
+.playlist-cta-services a:hover { text-decoration: underline; }
 
 /* ===== Blog ===== */
 .blog-list { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
