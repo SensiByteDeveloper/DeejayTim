@@ -48,7 +48,7 @@ body {
   color: var(--text-bright);
   overflow-x: hidden;
 }
-body.intro-done:not(.no-music) {
+body.intro-done {
   padding-bottom: calc(var(--music-player-height) + env(safe-area-inset-bottom, 0px));
 }
 
@@ -62,11 +62,6 @@ body.intro-done:not(.no-music) {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-/* Music player verborgen wanneer gebruiker kiest voor zonder muziek */
-body.no-music .music-player {
-  display: none !important;
 }
 
 /* Animated background grid */
