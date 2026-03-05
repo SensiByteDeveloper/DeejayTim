@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Blog | Deejay Tim</title>
-  <meta name="description" content="Blog van Deejay Tim. Tips over muziek afspreken met je DJ, populaire nummers voor bruiloften en verjaardagen, en meer.">
-  <link rel="canonical" href="https://deejaytim.nl/blog/index.html">
+  <meta name="description" content="Blog van Deejay Tim.">
+  <meta property="og:title" content="Blog | Deejay Tim">
+  <meta property="og:description" content="Blog van Deejay Tim.">
+  <meta property="og:url" content="https://deejaytim.nl/blog/post.html">
+  <link rel="canonical" href="https://deejaytim.nl/blog/post.html">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon-180.png" sizes="180x180">
@@ -19,9 +22,7 @@
   <main id="main-content">
     <section class="section">
       <div class="container">
-        <h1 class="section-title neon-cyan">Blog</h1>
-        <p class="section-subtitle">Tips, verhalen en inspiratie voor jouw feest</p>
-        <div data-blog-index>
+        <div data-blog-post>
           <p>Laden…</p>
         </div>
       </div>
@@ -32,9 +33,9 @@
   <script src="/script.js?v=11"></script>
   <script type="module" src="/js/includePartials.js"></script>
   <script type="module">
-    import { renderBlogIndex } from '/js/renderBlogIndex.js';
-    document.addEventListener('DOMContentLoaded', renderBlogIndex);
-    document.addEventListener('partialsloaded', renderBlogIndex);
+    import { renderBlogPost } from '/js/renderBlogPost.js';
+    document.addEventListener('DOMContentLoaded', renderBlogPost);
+    document.addEventListener('partialsloaded', renderBlogPost);
   </script>
 </body>
 </html>
