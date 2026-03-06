@@ -29,59 +29,62 @@
   <main id="main-content">
     <section class="section">
       <div class="container">
-        <h1 class="section-title neon-cyan">Feest playlist generator</h1>
-        <p class="section-subtitle">Kies je event, sfeer en publiek – genereer een playlist op maat.</p>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-i18n="pages.breadcrumb.home">Home</a> → <a href="/inspiratie/" data-i18n="nav.inspiratie">Inspiratie</a> → <span data-i18n="nav.playlistGenerator">Playlist generator</span></nav>
+        <h1 class="section-title neon-cyan" data-i18n="pages.inspiratie.playlistTitle">Feest playlist generator</h1>
+        <p class="section-subtitle" data-i18n="pages.inspiratie.playlistSubtitle">Kies je event, sfeer en publiek – genereer een playlist op maat.</p>
 
         <div class="playlist-form">
           <div class="form-row">
-            <label for="eventType">Eventtype</label>
+            <label for="eventType" data-i18n="pages.inspiratie.playlistEventTypeLabel">Eventtype</label>
             <select id="eventType">
-              <option value="bruiloft">Bruiloft</option>
-              <option value="verjaardag">Verjaardag</option>
-              <option value="bedrijfsfeest">Bedrijfsfeest</option>
-              <option value="schoolfeest">Schoolfeest</option>
-              <option value="buurtfeest">Buurtfeest</option>
-              <option value="slagingsfeest">Slagingsfeest</option>
+              <option value="bruiloft" data-i18n="pages.inspiratie.playlistEventBruiloft">Bruiloft</option>
+              <option value="verjaardag" data-i18n="pages.inspiratie.playlistEventVerjaardag">Verjaardag</option>
+              <option value="bedrijfsfeest" data-i18n="pages.inspiratie.playlistEventBedrijfsfeest">Bedrijfsfeest</option>
+              <option value="schoolfeest" data-i18n="pages.inspiratie.playlistEventSchoolfeest">Schoolfeest</option>
+              <option value="buurtfeest" data-i18n="pages.inspiratie.playlistEventBuurtfeest">Buurtfeest</option>
+              <option value="slagingsfeest" data-i18n="pages.inspiratie.playlistEventSlagingsfeest">Slagingsfeest</option>
             </select>
           </div>
           <div class="form-row">
-            <label for="vibe">Sfeer</label>
+            <label for="vibe" data-i18n="pages.inspiratie.playlistVibeLabel">Sfeer</label>
             <select id="vibe">
-              <option value="allround">Allround</option>
-              <option value="meezingers">Meezingers</option>
-              <option value="90s-00s">90s & 00s</option>
-              <option value="dance">Dance</option>
-              <option value="R&B-hiphop">R&B & Hiphop</option>
-              <option value="NL-feest">NL-feest</option>
+              <option value="allround" data-i18n="pages.inspiratie.playlistVibeAllround">Allround</option>
+              <option value="meezingers" data-i18n="pages.inspiratie.playlistVibeMeezingers">Meezingers</option>
+              <option value="90s-00s" data-i18n="pages.inspiratie.playlistVibe90s00s">90s & 00s</option>
+              <option value="dance" data-i18n="pages.inspiratie.playlistVibeDance">Dance</option>
+              <option value="R&B-hiphop" data-i18n="pages.inspiratie.playlistVibeRnBHiphop">R&B & Hiphop</option>
+              <option value="NL-feest" data-i18n="pages.inspiratie.playlistVibeNLfeest">NL-feest</option>
             </select>
           </div>
           <div class="form-row">
-            <label for="ageMix">Leeftijd mix</label>
+            <label for="ageMix" data-i18n="pages.inspiratie.playlistAgeMixLabel">Leeftijd mix</label>
             <select id="ageMix">
-              <option value="jong">Jong</option>
-              <option value="gemixt">Gemixt</option>
-              <option value="volwassen">Volwassen</option>
+              <option value="jong" data-i18n="pages.inspiratie.playlistAgeJong">Jong</option>
+              <option value="gemixt" data-i18n="pages.inspiratie.playlistAgeGemixt">Gemixt</option>
+              <option value="volwassen" data-i18n="pages.inspiratie.playlistAgeVolwassen">Volwassen</option>
             </select>
           </div>
-          <button type="button" class="pricing-btn" id="generateBtn">Genereer playlist</button>
+          <button type="button" class="pricing-btn" id="generateBtn" data-i18n="pages.inspiratie.playlistGenerate">Genereer playlist</button>
         </div>
 
         <div id="playlistResult" class="playlist-result" hidden>
-          <h2 class="playlist-result-title">Jouw playlist</h2>
+          <h2 class="playlist-result-title" data-i18n="pages.inspiratie.playlistResult">Jouw playlist</h2>
           <div id="playlistOutput" class="playlist-output"></div>
-          <button type="button" class="pricing-btn" id="copyBtn">Kopieer playlist</button>
+          <button type="button" class="pricing-btn" id="copyBtn" data-i18n="pages.inspiratie.playlistCopy">Kopieer playlist</button>
 
           <div class="playlist-cta">
-            <p><strong>Zoek je een DJ voor jouw feest?</strong></p>
+            <p><strong data-i18n="pages.inspiratie.playlistCtaTitle">Zoek je een DJ voor jouw feest?</strong></p>
             <p>
-              <a href="/#contact" class="pricing-btn">Check beschikbaarheid</a>
+              <a href="/contact.html" class="pricing-btn">Check beschikbaarheid</a>
               <a href="/dj-huren.html" class="playlist-cta-link">DJ huren</a>
             </p>
             <p class="playlist-cta-services">
               <a href="/diensten/bruiloft-dj.html">Bruiloft DJ</a> ·
               <a href="/diensten/verjaardag-dj.html">Verjaardag DJ</a> ·
+              <a href="/diensten/bedrijfsfeest-dj.html">Bedrijfsfeest DJ</a> ·
               <a href="/diensten/schoolfeest-dj.html">Schoolfeest DJ</a> ·
-              <a href="/diensten/bedrijfsfeest-dj.html">Bedrijfsfeest DJ</a>
+              <a href="/diensten/buurtfeest-dj.html">Buurtfeest DJ</a> ·
+              <a href="/diensten/slagingsfeest-dj.html">Slagingsfeest DJ</a>
             </p>
           </div>
         </div>
@@ -102,25 +105,26 @@
     const outputEl = document.getElementById('playlistOutput');
 
     function renderPlaylist(playlist) {
+      const t = (k) => window.i18n?.t?.(k) ?? k;
       const phases = [
-        { key: 'inloop', label: 'Inloop' },
-        { key: 'start', label: 'Feeststart' },
-        { key: 'piek', label: 'Piekmoment' },
-        { key: 'afsluiters', label: 'Afsluiters' }
+        { key: 'inloop', label: t('pages.inspiratie.playlistPhaseInloop') },
+        { key: 'start', label: t('pages.inspiratie.playlistPhaseStart') },
+        { key: 'piek', label: t('pages.inspiratie.playlistPhasePiek') },
+        { key: 'afsluiters', label: t('pages.inspiratie.playlistPhaseAfsluiters') }
       ];
       let html = '';
       phases.forEach(({ key, label }) => {
         const tracks = playlist[key] || [];
         if (tracks.length) {
           html += `<div class="playlist-phase"><h3>${label}</h3><ol>`;
-          tracks.forEach(t => { html += `<li>${t}</li>`; });
+          tracks.forEach(track => { html += `<li>${track}</li>`; });
           html += '</ol></div>';
         }
       });
       return html;
     }
 
-    generateBtn.addEventListener('click', () => {
+    function doGenerate() {
       const eventType = document.getElementById('eventType').value;
       const vibe = document.getElementById('vibe').value;
       const ageMix = document.getElementById('ageMix').value;
@@ -130,19 +134,32 @@
       const playlist = generatePlaylist(eventType, vibe, ageMix);
       outputEl.innerHTML = renderPlaylist(playlist);
       outputEl.dataset.playlistText = formatPlaylistText(playlist);
+      outputEl.dataset.playlistJson = JSON.stringify(playlist);
       resultEl.hidden = false;
       resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    generateBtn.addEventListener('click', doGenerate);
+
+    window.addEventListener('langchange', () => {
+      const json = outputEl.dataset.playlistJson;
+      if (json) {
+        try {
+          const playlist = JSON.parse(json);
+          outputEl.innerHTML = renderPlaylist(playlist);
+        } catch (_) {}
+      }
     });
 
     copyBtn.addEventListener('click', async () => {
       const text = outputEl.dataset.playlistText || '';
       try {
         await navigator.clipboard.writeText(text);
-        copyBtn.textContent = 'Gekopieerd!';
-        setTimeout(() => { copyBtn.textContent = 'Kopieer playlist'; }, 2000);
+        copyBtn.textContent = window.i18n?.t?.('pages.inspiratie.playlistCopied') || 'Gekopieerd!';
+        setTimeout(() => { copyBtn.textContent = window.i18n?.t?.('pages.inspiratie.playlistCopy') || 'Kopieer playlist'; }, 2000);
       } catch {
-        copyBtn.textContent = 'Kopiëren mislukt';
-        setTimeout(() => { copyBtn.textContent = 'Kopieer playlist'; }, 2000);
+        copyBtn.textContent = window.i18n?.t?.('pages.inspiratie.playlistCopyFail') || 'Kopiëren mislukt';
+        setTimeout(() => { copyBtn.textContent = window.i18n?.t?.('pages.inspiratie.playlistCopy') || 'Kopieer playlist'; }, 2000);
       }
     });
   </script>

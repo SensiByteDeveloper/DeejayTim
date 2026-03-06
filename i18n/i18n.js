@@ -64,6 +64,12 @@
       if (val != null) el.textContent = val;
     });
 
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html');
+      const val = get(dict[currentLang], key);
+      if (val != null) el.innerHTML = val;
+    });
+
     document.querySelectorAll('[data-i18n-aria]').forEach(el => {
       const key = el.getAttribute('data-i18n-aria');
       const val = get(dict[currentLang], key);
@@ -115,7 +121,7 @@
     });
   }
 
-  window.i18n = { t, setLang, get currentLang() { return currentLang; } };
+  window.i18n = { t, setLang, apply, get currentLang() { return currentLang; } };
 
   function runInit() {
     (async function init() {
@@ -134,4 +140,11 @@
   } else {
     runInit();
   }
+
+  document.addEventListener('headerloaded', function () {
+    if (window.i18n?.apply) window.i18n.apply();
+  });
+  document.addEventListener('partialsloaded', function () {
+    if (window.i18n?.apply) window.i18n.apply();
+  });
 })();

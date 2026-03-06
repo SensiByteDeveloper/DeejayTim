@@ -66,18 +66,31 @@ export function renderStars(rating) {
   return `<span class="testimonial-stars" aria-label="${n} van 5 sterren" role="img">${full}${empty}</span>`;
 }
 
+function getLang() {
+  return (typeof window !== 'undefined' && window.i18n?.currentLang) || 'nl';
+}
+
+function pickLang(obj, lang) {
+  if (obj == null) return '';
+  if (typeof obj === 'string') return obj;
+  return obj[lang] ?? obj.nl ?? obj.en ?? '';
+}
+
 /**
  * Render a single review card. Format: ★★★★★, text, — Name, City (Google)
  */
-function renderReviewCard(t) {
+function renderReviewCard(t, lang) {
+  const l = lang ?? getLang();
   const city = t.city || '';
   const source = t.source || 'Google';
+  const text = escapeHtml(pickLang(t.text, l));
+  const starsAria = l === 'en' ? `${t.rating} out of 5 stars` : `${t.rating} van 5 sterren`;
   const footer = city ? `— ${escapeHtml(t.name)}, ${escapeHtml(city)} (${escapeHtml(source)})` : `— ${escapeHtml(t.name)} (${escapeHtml(source)})`;
   return `<article class="testimonial-card">
     <div class="testimonial-meta">
-      <span class="testimonial-stars" aria-label="${t.rating} van 5 sterren" role="img">${renderStars(t.rating)}</span>
+      <span class="testimonial-stars" aria-label="${starsAria}" role="img">${renderStars(t.rating)}</span>
     </div>
-    <p class="testimonial-text">${escapeHtml(t.text)}</p>
+    <p class="testimonial-text">${text}</p>
     <footer class="testimonial-footer">${footer}</footer>
   </article>`;
 }
@@ -90,12 +103,13 @@ function renderReviewCard(t) {
  * @returns {string} HTML string
  */
 export function renderTestimonials(list, limit, opts = {}) {
+  const lang = getLang();
   let items = list;
   if (opts.shuffle && items.length > 1) {
     items = [...items].sort(() => Math.random() - 0.5);
   }
   items = limit ? items.slice(0, limit) : items;
-  return items.map((t) => renderReviewCard(t)).join('');
+  return items.map((t) => renderReviewCard(t, lang)).join('');
 }
 
 /**
@@ -104,16 +118,19 @@ export function renderTestimonials(list, limit, opts = {}) {
 export async function initHomepageTestimonials() {
   const el = document.getElementById('homepage-testimonials');
   if (!el) return;
+  const lang = getLang();
+  const emptyMsg = lang === 'en' ? 'No reviews yet.' : 'Nog geen reviews.';
+  const errorMsg = lang === 'en' ? 'Reviews could not be loaded.' : 'Reviews konden niet worden geladen.';
   try {
     const data = await loadJSON('data/testimonials.json');
     const list = data?.testimonials ?? [];
     el.setAttribute('aria-busy', 'false');
     el.innerHTML = list.length
       ? renderTestimonials(list, 3, { shuffle: true })
-      : '<p class="testimonials-empty">Nog geen reviews.</p>';
+      : `<p class="testimonials-empty">${emptyMsg}</p>`;
   } catch (err) {
     el.setAttribute('aria-busy', 'false');
-    el.innerHTML = '<p class="testimonials-error">Reviews konden niet worden geladen.</p>';
+    el.innerHTML = `<p class="testimonials-error">${errorMsg}</p>`;
   }
 }
 
@@ -125,6 +142,9 @@ if (typeof document !== 'undefined') {
   } else {
     initHomepageTestimonials();
   }
+}
+if (typeof window !== 'undefined') {
+  window.addEventListener('langchange', initHomepageTestimonials);
 }
 
 function escapeHtml(str) {

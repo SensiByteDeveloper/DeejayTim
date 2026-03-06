@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta http-equiv="refresh" content="0;url=/#contact">
   <title>Contact | Deejay Tim</title>
-  <meta name="description" content="Neem contact op met Deejay Tim voor een DJ-booking. WhatsApp, e-mail of telefoon.">
+  <meta name="description" content="Neem contact op met Deejay Tim voor een DJ-booking. WhatsApp, e-mail of het contactformulier.">
   <link rel="canonical" href="https://deejaytim.nl/contact.html">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" href="/favicon.png">
@@ -19,10 +18,69 @@
 <body>
   <header id="site-header"></header>
   <main id="main-content">
-    <section class="section">
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+    <section class="section contact" id="contact">
       <div class="container">
-        <h1>Contact</h1>
-        <p> placeholder </p>
+        <h1 data-i18n="pages.home.contactTitle">Contact</h1>
+        <p class="contact-subtitle" data-i18n="contact.subtitle">Feestje bouwen?</p>
+        <p class="contact-trust" data-i18n="contact.trust">⚡ Binnen 24 uur reactie • 💬 Vrijblijvende aanvraag • ✅ Geen boekingsverplichting</p>
+        <div class="contact-review-snippet">
+          <p class="contact-review-stars">⭐⭐⭐⭐⭐</p>
+          <p class="contact-review-quote" data-i18n="pages.contact.reviewQuote">"De dansvloer stond de hele avond vol."</p>
+          <p class="contact-review-author" data-i18n="pages.contact.reviewAuthor">– Niels</p>
+          <p class="contact-review-link">
+            <a href="/reviews.html" data-i18n="pages.contact.reviewReadMore">Lees meer reviews</a>
+            <span aria-hidden="true">·</span>
+            <a href="#" class="google-reviews-link" target="_blank" rel="noopener" data-i18n="pages.contact.viewGoogleReviews">Bekijk Google reviews</a>
+          </p>
+        </div>
+        <div class="contact-actions">
+          <a href="https://wa.me/31621888970?text=Hoi%20Tim!%20Ik%20heb%20een%20vraag%20over%20een%20DJ-booking%20voor%20mijn%20feest." target="_blank" rel="noopener" class="contact-whatsapp" aria-label="Contacteer Deejay Tim via WhatsApp" data-i18n-aria="contact.whatsappAria">
+            <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.865 9.865 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span data-i18n="contact.whatsapp">WhatsApp</span>
+          </a>
+        </div>
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/mojnrpkk" method="POST" novalidate>
+          <div class="form-group">
+            <input type="text" id="name" name="name" required placeholder=" ">
+            <label for="name" data-i18n="contact.form.name">Naam *</label>
+          </div>
+          <div class="form-group">
+            <input type="tel" id="phone" name="phone" required placeholder=" ">
+            <label for="phone" data-i18n="contact.form.phone">Telefoonnummer *</label>
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" name="email" required placeholder=" ">
+            <label for="email" data-i18n="contact.form.email">E-mail *</label>
+          </div>
+          <div class="form-group form-group-select">
+            <label for="event_type" data-i18n="contact.form.eventType">Voor wat voor feest zoekt u een DJ? *</label>
+            <select id="event_type" name="event_type" required>
+              <option value="" disabled selected data-i18n="contact.form.eventTypePlaceholder">— Kies een optie —</option>
+              <option value="bruiloft" data-i18n="contact.form.eventTypeBruiloft">Bruiloft</option>
+              <option value="verjaardag" data-i18n="contact.form.eventTypeVerjaardag">Verjaardag</option>
+              <option value="bedrijfsfeest" data-i18n="contact.form.eventTypeBedrijfsfeest">Bedrijfsfeest</option>
+              <option value="schoolfeest" data-i18n="contact.form.eventTypeSchoolfeest">Schoolfeest</option>
+              <option value="anders" data-i18n="contact.form.eventTypeAnders">Anders</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="text" id="event_date" name="event_date" placeholder=" ">
+            <label for="event_date" data-i18n="contact.form.eventDate">Wanneer is het feest? (optioneel)</label>
+          </div>
+          <div class="form-group form-group-message">
+            <label for="message" data-i18n="contact.form.message">Wat kunt u al delen over uw feestje? *</label>
+            <textarea id="message" name="message" rows="4" required placeholder=" "></textarea>
+          </div>
+          <button type="submit" class="form-submit" data-i18n="contact.form.submit">Verstuur</button>
+        </form>
+        <div class="contact-info">
+          <a href="tel:0621888970" class="contact-link">06 21 888 970</a>
+          <a href="mailto:contact@deejaytim.nl" class="contact-link">contact@deejaytim.nl</a>
+          <p>3332 SN Zwijndrecht, Nederland</p>
+        </div>
+        <p class="contact-faq-link"><span data-i18n="pages.home.contactFaqHint">Nog vragen? Bekijk de</span> <a href="/prijzen.html#faq" data-i18n="pages.home.contactFaqLink">veelgestelde vragen</a><span data-i18n="pages.home.contactFaqOr"> of </span><a href="/prijzen.html" data-i18n="pages.home.contactPrijzenLink">prijzen</a>.</p>
       </div>
     </section>
   </main>

@@ -1,6 +1,14 @@
 // ===== DEEJAY TIM - Interactie & Muziek =====
 
+// Google reviews URL – directe link naar Google Business Profile
+const GOOGLE_REVIEWS_URL = 'https://share.google/Ogn2xmPrBQb6ZqaAt';
+
+function initGoogleReviewsLinks() {
+  document.querySelectorAll('.google-reviews-link').forEach((a) => { a.href = GOOGLE_REVIEWS_URL; });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  initGoogleReviewsLinks();
   initNav();
   initMusicPlayer();
   initSmoothScroll();
@@ -11,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHandsUpModal();
   initWhatsAppWidget();
   window.addEventListener('resize', initVideoRandomPositions);
-  document.addEventListener('partialsloaded', initNav);
+  document.addEventListener('partialsloaded', () => { initNav(); initGoogleReviewsLinks(); });
   document.addEventListener('headerloaded', initNav);
 });
 
@@ -611,26 +619,26 @@ function showFormSuccess(form) {
   }
 }
 
-// Posities voor video's – max 20% overlap, alle 7 zichtbaar
+// Posities voor video's – beperkte overlap, alle zichtbaar
 function initVideoRandomPositions() {
   if (window.innerWidth < 1600) return;
 
-  // Video ~533px hoog. Secties min 1000px → max ~12% overlap. Kleine marge (1rem) voor lucht.
+  // Video ~533px hoog. Secties 1000px → ruimte voor max ~15% overlap. Meer marge tussen top/bottom.
   const positions = {
     hero: [
       { top: '25%', rotate: 10 }
     ],
     intro: [
-      { top: '1rem', rotate: -8 },
-      { bottom: '1rem', rotate: 12 }
+      { top: '0', rotate: -6 },
+      { bottom: '0', rotate: 8 }
     ],
     diensten: [
-      { top: '1rem', rotate: -10 },
-      { bottom: '1rem', rotate: 8 }
+      { top: '0', rotate: -6 },
+      { bottom: '0', rotate: 8 }
     ],
     'hands-up': [
-      { top: '1rem', rotate: 6 },
-      { bottom: '1rem', rotate: -12 }
+      { top: '0', rotate: 6 },
+      { bottom: '0', rotate: -8 }
     ]
   };
 
@@ -677,6 +685,10 @@ function initHandsUpModal() {
   trigger.addEventListener('click', open);
   trigger.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+  });
+  document.getElementById('handsUpCtaLink')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    open();
   });
   closeBtn?.addEventListener('click', close);
   modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
@@ -917,6 +929,12 @@ function initVideoPreviews() {
       return;
     }
   });
+
+  // Vanaf inspiratie: /#video opent direct de videocarousel
+  if (window.location.hash === '#video') {
+    openVideo(0);
+    history.replaceState(null, '', window.location.pathname);
+  }
 }
 
 // Visible class voor scroll-animaties

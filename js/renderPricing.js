@@ -3,6 +3,26 @@
 
 let _pricing = null;
 
+function getLang() {
+  return (typeof window !== 'undefined' && window.i18n?.currentLang) || 'nl';
+}
+
+function pickLang(obj, lang) {
+  if (obj == null) return '';
+  if (typeof obj === 'string') return obj;
+  return obj[lang] ?? obj.nl ?? obj.en ?? '';
+}
+
+function pickLangArr(arr, lang) {
+  if (!Array.isArray(arr)) return arr;
+  const o = arr;
+  if (typeof o[0] === 'object' && o[0] && (o[0].nl != null || o[0].en != null)) {
+    return o.map((item) => pickLang(item, lang));
+  }
+  if (typeof o === 'object' && (o.nl || o.en)) return o[lang] ?? o.nl ?? o.en ?? [];
+  return o;
+}
+
 async function loadPricing() {
   if (_pricing) return _pricing;
   try {
@@ -23,31 +43,37 @@ function formatPrice(p) {
 
 function renderPriceElement(el, pricing) {
   if (!pricing) return;
+  const lang = getLang();
   const key = el.getAttribute('data-price');
   const format = el.getAttribute('data-price-format') || 'amount';
+  const fromLabel = lang === 'en' ? 'From ' : 'Vanaf ';
   if (key === 'justDj') {
     const j = pricing.justDj;
+    const note = pickLang(j?.note, lang);
     if (format === 'full') {
-      el.textContent = `Vanaf ${formatPrice(j.from)} (${j.hoursIncluded} uur, ${j.note})`;
+      const hoursLabel = lang === 'en' ? ' hours' : ' uur';
+      el.textContent = `${fromLabel}${formatPrice(j?.from)} (${j?.hoursIncluded || 4}${hoursLabel}, ${note})`;
     } else {
-      el.textContent = formatPrice(j.from);
+      el.textContent = formatPrice(j?.from);
     }
   } else if (key === 'justDjFrom') {
     const j = pricing.justDj;
-    el.textContent = `Vanaf ${formatPrice(j.from)}`;
+    el.textContent = `${fromLabel}${formatPrice(j?.from)}`;
   } else if (key === 'allIn') {
     const a = pricing.allIn;
+    const note = pickLang(a?.note, lang);
     if (format === 'full') {
-      el.textContent = `Vanaf ${formatPrice(a.from)} (${a.hoursIncluded} uur ${a.note})`;
+      const hoursLabel = lang === 'en' ? ' hours' : ' uur';
+      el.textContent = `${fromLabel}${formatPrice(a?.from)} (${a?.hoursIncluded || 4}${hoursLabel} ${note})`;
     } else {
-      el.textContent = formatPrice(a.from);
+      el.textContent = formatPrice(a?.from);
     }
   } else if (key === 'allInFrom') {
     const a = pricing.allIn;
-    el.textContent = `Vanaf ${formatPrice(a.from)}`;
+    el.textContent = `${fromLabel}${formatPrice(a?.from)}`;
   } else if (key === 'weddingFrom') {
     const w = pricing.wedding;
-    if (w) el.textContent = `Vanaf ${formatPrice(w.from)}`;
+    if (w) el.textContent = `${fromLabel}${formatPrice(w.from)}`;
   } else if (key === 'wedding') {
     const w = pricing.wedding;
     if (w) el.textContent = formatPrice(w.from);
@@ -65,28 +91,35 @@ function renderRangeElement(el, pricing) {
 
 function renderSubtitleElement(el, pricing) {
   if (!pricing) return;
+  const lang = getLang();
   const km = pricing.extraKm;
   const hour = pricing.extraHour;
-  el.textContent = `Prijzen zijn excl. BTW, incl. 4 uur DJ en incl. reiskosten tot 30km vanuit 3332 SN. Extra km: ${formatPrice(km)}. Extra uur: ${formatPrice(hour)}.`;
+  const tpl = pickLang(pricing.subtitle, lang) || (lang === 'en' ? 'Prices excl. VAT, incl. 4 hours DJ and incl. travel up to 30km from 3332 SN. Extra km: {km}. Extra hour: {hour}.' : 'Prijzen zijn excl. BTW, incl. 4 uur DJ en incl. reiskosten tot 30km vanuit 3332 SN. Extra km: {km}. Extra uur: {hour}.');
+  el.textContent = tpl.replace('{km}', formatPrice(km)).replace('{hour}', formatPrice(hour));
 }
 
 function renderExtrasList(el, pricing) {
-  if (!pricing?.extras?.length) return;
-  el.innerHTML = pricing.extras.map((item) => `<li>${item}</li>`).join('');
+  if (!pricing) return;
+  const lang = getLang();
+  const extras = Array.isArray(pricing.extras) ? pricing.extras : (pricing.extras?.[lang] ?? pricing.extras?.nl ?? []);
+  if (!extras?.length) return;
+  el.innerHTML = extras.map((item) => `<li>${typeof item === 'string' ? item : pickLang(item, lang)}</li>`).join('');
 }
 
 function updatePricingMetaAndSchema(pricing) {
   if (!pricing) return;
   const j = pricing.justDj?.from;
   const a = pricing.allIn?.from;
+  const w = pricing.wedding?.from;
   const r = pricing.typicalRange;
   const fp = formatPrice;
   const priceText = r ? `De meeste feesten vallen tussen ${fp(r.from)} en ${fp(r.to)}. ` : '';
-  const justAllText = (j != null && a != null) ? `Just DJ vanaf ${fp(j)}, All-in vanaf ${fp(a)}.` : '';
-
+  const justAllText = (j != null && a != null) ? `Just DJ vanaf ${fp(j)}, All-in DJ Show vanaf ${fp(a)}${w != null ? `, Bruiloft DJ vanaf ${fp(w)}` : ''}.` : '';
   const meta = document.querySelector('meta[name="description"][data-price-meta]');
   if (meta && j != null && a != null) {
-    meta.setAttribute('content', `Prijzen DJ Tim: Just DJ vanaf ${fp(j)}, All-in vanaf ${fp(a)}. 4 uur incl. Reiskosten tot 30 km inbegrepen. Regio Zwijndrecht en Rotterdam.`);
+    const parts = [`Just DJ vanaf ${fp(j)}`, `All-in DJ Show vanaf ${fp(a)}`];
+    if (w != null) parts.push(`Bruiloft DJ vanaf ${fp(w)}`);
+    meta.setAttribute('content', `Prijzen DJ Tim: ${parts.join(', ')}. 4 uur incl. Reiskosten tot 30 km. Regio Zwijndrecht en Rotterdam.`);
   }
 
   const faqScript = document.querySelector('script[type="application/ld+json"][data-faq-pricing]');
@@ -140,4 +173,5 @@ if (typeof document !== 'undefined') {
     run();
   }
   document.addEventListener('partialsloaded', run);
+  window.addEventListener('langchange', run);
 }

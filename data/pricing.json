@@ -3,78 +3,73 @@
   "packages": [
     {
       "id": "justDj",
-      "title": "Just DJ",
-      "subtitle": "Enkel Deejay Tim",
+      "title": { "nl": "Just DJ", "en": "Just DJ" },
+      "subtitle": { "nl": "Alleen DJ zonder apparatuur.", "en": "DJ only, no equipment." },
       "from": 250,
       "hoursIncluded": 4,
-      "note": "locatie met installatie",
-      "bullets": [
-        "Heb je al een complete DJ- en geluidsset?",
-        "Ik verzorg de muziek op maat",
-        "USB-sticks en headset mee",
-        "Draai enkel digitaal"
-      ]
+      "note": { "nl": "locatie met eigen geluidsinstallatie", "en": "venue with own sound system" },
+      "bullets": {
+        "nl": ["Alleen Deejay Tim", "Voor locaties met eigen geluidsinstallatie", "Ik verzorg de muziek en het draaien", "Verzoeknummers mogelijk", "Ideaal voor cafés, clubs of events met techniek"],
+        "en": ["Deejay Tim only", "For venues with own sound system", "I provide music and mixing", "Song requests possible", "Ideal for cafés, clubs or events with equipment"]
+      },
+      "extraNote": { "nl": "Geluid, verlichting en DJ booth zijn niet inbegrepen.", "en": "Sound, lighting and DJ booth not included." }
     },
     {
       "id": "allIn",
-      "title": "All-in",
-      "subtitle": "Complete DJ set + DJ",
+      "title": { "nl": "All-in DJ Show", "en": "All-in DJ Show" },
+      "subtitle": { "nl": "Complete DJ show voor de meeste feesten.", "en": "Complete DJ show for most parties." },
       "from": 500,
       "hoursIncluded": 4,
-      "note": "incl. geluid en verlichting",
-      "badge": "Populair",
-      "bullets": [
-        "DJ-set (Pioneer XDJ-RX3)",
-        "DJ Booth",
-        "Lichtset",
-        "Rookmachine",
-        "Speakerset",
-        "Microfoon"
-      ],
-      "audience": "Goed voor tot ±100 personen"
+      "note": { "nl": "incl. geluid en verlichting", "en": "incl. sound and lighting" },
+      "badge": { "nl": "Populair", "en": "Popular" },
+      "bullets": {
+        "nl": ["Professionele DJ set (Pioneer XDJ-RX3)", "Speakerset", "DJ booth", "Dansvloer verlichting", "Microfoon voor aankondigingen", "Verzoeknummers mogelijk"],
+        "en": ["Professional DJ set (Pioneer XDJ-RX3)", "Speaker set", "DJ booth", "Dance floor lighting", "Microphone for announcements", "Song requests possible"]
+      },
+      "audience": { "nl": "Geschikt voor verjaardagen, bedrijfsfeesten, schoolfeesten, buurtfeesten en slagingsfeesten.", "en": "Suitable for birthdays, corporate events, school parties, street parties and graduation parties." }
     },
     {
       "id": "wedding",
-      "title": "Bruiloft DJ",
-      "subtitle": "Premium bruiloft",
+      "title": { "nl": "Bruiloft DJ", "en": "Wedding DJ" },
+      "subtitle": { "nl": "All-in + extra voorbereiding en begeleiding voor jullie bruiloft.", "en": "All-in + extra preparation and guidance for your wedding." },
       "from": 750,
       "hoursIncluded": 4,
-      "note": "incl. geluid en verlichting",
-      "bullets": [
-        "persoonlijk voorgesprek",
-        "openingsdans begeleiding",
-        "professionele DJ show",
-        "geluidsinstallatie + licht",
-        "verzoeknummers",
-        "muziek afgestemd op jullie wensen"
-      ],
-      "optionalNote": "Tarief afhankelijk van tijden & locatie"
+      "note": { "nl": "incl. geluid en verlichting", "en": "incl. sound and lighting" },
+      "bullets": {
+        "nl": ["Persoonlijk voorgesprek", "Begeleiding van de openingsdans", "Afstemming met ceremoniemeester", "Afstemming over speciale momenten", "Muziek afgestemd op jullie wensen"],
+        "en": ["Personal consultation", "First dance guidance", "Coordination with master of ceremonies", "Coordination of special moments", "Music tailored to your wishes"]
+      },
+      "optionalNote": { "nl": "Extra persoonlijke afstemming voor jullie bruiloft.", "en": "Extra personal coordination for your wedding." }
     }
   ],
   "justDj": {
     "from": 250,
     "hoursIncluded": 4,
-    "note": "locatie met installatie"
+    "note": { "nl": "locatie met eigen geluidsinstallatie", "en": "venue with own sound system" }
   },
   "allIn": {
     "from": 500,
     "hoursIncluded": 4,
-    "note": "incl. geluid en verlichting"
+    "note": { "nl": "incl. geluid en verlichting", "en": "incl. sound and lighting" }
   },
   "wedding": {
     "from": 750,
     "hoursIncluded": 4,
-    "note": "incl. geluid en verlichting"
+    "note": { "nl": "incl. geluid en verlichting", "en": "incl. sound and lighting" }
   },
   "typicalRange": {
     "from": 500,
-    "to": 1000
+    "to": 1000,
+    "text": { "nl": "De meeste feesten vallen tussen {from} en {to}.", "en": "Most parties fall between {from} and {to}." }
   },
   "extraKm": 0.25,
   "extraHour": 100,
-  "extras": [
-    "verlichte dansvloer",
-    "extra verlichting",
-    "grotere geluidsinstallatie"
-  ]
+  "subtitle": {
+    "nl": "Prijzen zijn excl. BTW, incl. 4 uur DJ en incl. reiskosten tot 30km vanuit 3332 SN. Extra km: {km}. Extra uur: {hour}.",
+    "en": "Prices excl. VAT, incl. 4 hours DJ and incl. travel up to 30km from 3332 SN. Extra km: {km}. Extra hour: {hour}."
+  },
+  "extras": {
+    "nl": ["verlichte dansvloer", "extra verlichting", "grotere geluidsinstallatie"],
+    "en": ["lit dance floor", "extra lighting", "larger sound system"]
+  }
 }

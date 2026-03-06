@@ -1,73 +1,73 @@
 [
   {
     "slug": "checklist-dj-boeken",
-    "title": "Checklist: dit moet je regelen als je een DJ boekt",
+    "title": { "nl": "Checklist: dit moet je regelen als je een DJ boekt", "en": "Checklist: what to arrange when booking a DJ" },
     "date": "2025-02-03",
-    "excerpt": "Locatie, geluid, muziekvoorkeuren en tijdschema. Alles wat je moet regelen bij het boeken van een DJ voor je feest.",
+    "excerpt": { "nl": "Locatie, geluid, muziekvoorkeuren en tijdschema. Alles wat je moet regelen bij het boeken van een DJ voor je feest.", "en": "Venue, sound, music preferences and schedule. Everything you need to arrange when booking a DJ for your party." },
     "coverImage": null,
     "tags": ["checklist", "dj huren", "voorbereiding"]
   },
   {
     "slug": "wat-maakt-een-goede-dj-voor-een-bedrijfsfeest",
-    "title": "Wat maakt een goede DJ voor een bedrijfsfeest?",
-    "date": "2024-11-20",
-    "excerpt": "Verschillende leeftijden, sfeer opbouwen, geluid en presentatie. Welke muziek werkt voor iedereen op een bedrijfsfeest?",
+    "title": { "nl": "Wat maakt een goede DJ voor een bedrijfsfeest?", "en": "What makes a good DJ for a corporate event?" },
+    "date": "2024-12-19",
+    "excerpt": { "nl": "Verschillende leeftijden, sfeer opbouwen, geluid en presentatie. Welke muziek werkt voor iedereen op een bedrijfsfeest?", "en": "Different ages, building atmosphere, sound and presentation. What music works for everyone at a corporate event?" },
     "coverImage": null,
     "tags": ["bedrijfsfeest", "dj", "muziek"]
   },
   {
     "slug": "hoe-zorg-je-voor-een-volle-dansvloer",
-    "title": "Hoe zorg je voor een volle dansvloer op je feest?",
+    "title": { "nl": "Hoe zorg je voor een volle dansvloer op je feest?", "en": "How do you get a full dance floor at your party?" },
     "date": "2024-11-14",
-    "excerpt": "Muziek opbouwen, verzoeknummers en verschillende stijlen combineren. Waarom een ervaren DJ essentieel is.",
+    "excerpt": { "nl": "Muziek opbouwen, verzoeknummers en verschillende stijlen combineren. Waarom een ervaren DJ essentieel is.", "en": "Building up music, song requests and combining different styles. Why an experienced DJ is essential." },
     "coverImage": null,
     "tags": ["dansvloer", "muziek", "feest"]
   },
   {
     "slug": "dj-huren-voor-een-verjaardag",
-    "title": "DJ huren voor een verjaardag: waar moet je op letten?",
-    "date": "2024-10-18",
-    "excerpt": "Apparatuur, muziekstijl, verzoeknummers en draaitijden. Alles wat je moet weten bij het boeken van een verjaardag DJ.",
+    "title": { "nl": "DJ huren voor een verjaardag: waar moet je op letten?", "en": "Hiring a DJ for a birthday: what to look out for?" },
+    "date": "2024-10-05",
+    "excerpt": { "nl": "Apparatuur, muziekstijl, verzoeknummers en draaitijden. Alles wat je moet weten bij het boeken van een verjaardag DJ.", "en": "Equipment, music style, song requests and set times. Everything you need to know when booking a birthday DJ." },
     "coverImage": null,
     "tags": ["verjaardag", "dj huren", "tips"]
   },
   {
     "slug": "de-perfecte-muziek-voor-een-bruiloft",
-    "title": "De perfecte muziek voor een bruiloft: tips van een DJ",
+    "title": { "nl": "De perfecte muziek voor een bruiloft: tips van een DJ", "en": "The perfect music for a wedding: tips from a DJ" },
     "date": "2024-08-28",
-    "excerpt": "Muziek voor de openingsdans, verschillende leeftijden en verzoeknummers. Hoe een bruiloft DJ de dansvloer vol houdt.",
+    "excerpt": { "nl": "Muziek voor de openingsdans, verschillende leeftijden en verzoeknummers. Hoe een bruiloft DJ de dansvloer vol houdt.", "en": "Music for the first dance, different ages and song requests. How a wedding DJ keeps the dance floor full." },
     "coverImage": null,
     "tags": ["bruiloft", "muziek", "tips"]
   },
   {
     "slug": "wat-kost-een-dj-voor-een-feest",
-    "title": "Wat kost een DJ voor een feest?",
+    "title": { "nl": "Wat kost een DJ voor een feest?", "en": "How much does a DJ cost for a party?" },
     "date": "2024-09-15",
-    "excerpt": "Gemiddelde DJ kosten in Nederland, waar de prijs van afhangt en het verschil tussen DJ met en zonder apparatuur.",
+    "excerpt": { "nl": "Gemiddelde DJ kosten in Nederland, waar de prijs van afhangt en het verschil tussen DJ met en zonder apparatuur.", "en": "Average DJ costs in the Netherlands, what the price depends on and the difference between a DJ with and without equipment." },
     "coverImage": null,
     "tags": ["prijzen", "dj kosten", "feest"]
   },
   {
     "slug": "populaire-nummers-bruiloft-verjaardag",
-    "title": "Populaire nummers voor bruiloften en verjaardagen (met tips per moment)",
+    "title": { "nl": "Populaire nummers voor bruiloften en verjaardagen (met tips per moment)", "en": "Popular songs for weddings and birthdays (with tips per moment)" },
     "date": "2024-05-08",
-    "excerpt": "Inspiratie voor inloop, feeststart, piekmomenten en afsluiters. Plus tips om jouw playlist DJ-proof te maken.",
+    "excerpt": { "nl": "Inspiratie voor inloop, feeststart, piekmomenten en afsluiters. Plus tips om jouw playlist DJ-proof te maken.", "en": "Inspiration for arrival, party start, peak moments and closers. Plus tips to make your playlist DJ-proof." },
     "coverImage": null,
     "tags": ["bruiloft", "verjaardag", "playlist", "muziek"]
   },
   {
     "slug": "herkenbaar-vs-mixen",
-    "title": "Herkenbare muziek vs. goed mixen: wat werkt het beste op een feest?",
+    "title": { "nl": "Herkenbare muziek vs. goed mixen: wat werkt het beste op een feest?", "en": "Recognisable music vs. good mixing: what works best at a party?" },
     "date": "2024-03-15",
-    "excerpt": "Moet een DJ vooral herkenbare hits draaien of technisch strak mixen? Dit is wat écht werkt op bruiloften, verjaardagen en bedrijfsfeesten.",
+    "excerpt": { "nl": "Moet een DJ vooral herkenbare hits draaien of technisch strak mixen? Dit is wat écht werkt op bruiloften, verjaardagen en bedrijfsfeesten.", "en": "Should a DJ mainly play recognisable hits or mix technically tight? This is what really works at weddings, birthdays and corporate events." },
     "coverImage": null,
     "tags": ["mixen", "hits", "bruiloft", "verjaardag"]
   },
   {
     "slug": "muziek-afspreken-met-dj",
-    "title": "Muziek afspreken met je DJ: zo bereid je het gesprek voor",
+    "title": { "nl": "Muziek afspreken met je DJ: zo bereid je het gesprek voor", "en": "Agreeing on music with your DJ: how to prepare for the conversation" },
     "date": "2024-01-22",
-    "excerpt": "Met deze checklist spreek je vooraf perfect af welke muziek je wél en juist niet wilt. Inclusief voorbeelden en do's & don'ts.",
+    "excerpt": { "nl": "Met deze checklist spreek je vooraf perfect af welke muziek je wél en juist niet wilt. Inclusief voorbeelden en do's & don'ts.", "en": "With this checklist you agree in advance exactly which music you do and don't want. Including examples and do's & don'ts." },
     "coverImage": null,
     "tags": ["muziekgesprek", "checklist", "bruiloft", "verjaardag"]
   }

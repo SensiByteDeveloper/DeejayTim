@@ -1,5 +1,6 @@
 /* ===== DEEJAY TIM - Unified site header ===== */
 /* Renders consistent navigation across ALL pages */
+/* Primary: Home, DJ huren, Prijzen, Diensten (dropdown) | Secondary: Werkgebied, Inspiratie (dropdown), Reviews, Blog, Contact */
 
 (function () {
   const HEADER_HTML = `
@@ -15,15 +16,36 @@
   </button>
   <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
   <ul class="nav-links" id="nav-menu">
-    <li><a href="/#intro" class="nav-link" data-nav="intro" data-i18n="nav.intro">Intro</a></li>
-    <li><a href="/#diensten" class="nav-link" data-nav="diensten" data-i18n="nav.diensten">Diensten</a></li>
-    <li><a href="/#hands-up" class="nav-link" data-nav="hands-up" data-i18n="nav.handsUp">Hands Up!</a></li>
-    <li><a href="/#contact" class="nav-link" data-nav="contact" data-i18n="nav.contact">Contact</a></li>
+    <!-- Primary: commercial pages -->
+    <li><a href="/" class="nav-link" data-nav="home" data-i18n="nav.home">Home</a></li>
+    <li><a href="/dj-huren.html" class="nav-link" data-nav="dj-huren" data-i18n="nav.djHuren">DJ huren</a></li>
+    <li><a href="/prijzen.html" class="nav-link" data-nav="prijzen" data-i18n="nav.prijzen">Prijzen</a></li>
+    <li class="nav-dropdown" data-nav="diensten">
+      <a href="/diensten/" class="nav-link nav-dropdown-trigger" data-nav="diensten" data-i18n="nav.diensten" aria-haspopup="true" aria-expanded="false" id="nav-diensten-trigger">Diensten</a>
+      <ul class="nav-dropdown-menu" aria-labelledby="nav-diensten-trigger" role="menu">
+        <li role="none"><a href="/diensten/bruiloft-dj.html" role="menuitem" data-i18n="nav.bruiloftDj">Bruiloft DJ</a></li>
+        <li role="none"><a href="/diensten/verjaardag-dj.html" role="menuitem" data-i18n="nav.verjaardagDj">Verjaardag DJ</a></li>
+        <li role="none"><a href="/diensten/bedrijfsfeest-dj.html" role="menuitem" data-i18n="nav.bedrijfsfeestDj">Bedrijfsfeest DJ</a></li>
+        <li role="none"><a href="/diensten/schoolfeest-dj.html" role="menuitem" data-i18n="nav.schoolfeestDj">Schoolfeest DJ</a></li>
+        <li role="none"><a href="/diensten/buurtfeest-dj.html" role="menuitem" data-i18n="nav.buurtfeestDj">Buurtfeest DJ</a></li>
+        <li role="none"><a href="/diensten/slagingsfeest-dj.html" role="menuitem" data-i18n="nav.slagingsfeestDj">Slagingsfeest DJ</a></li>
+      </ul>
+    </li>
     <li class="nav-divider" aria-hidden="true"></li>
-    <li><a href="/dj-huren.html" class="nav-link" data-nav="dj-huren">DJ huren</a></li>
-    <li><a href="/prijzen.html" class="nav-link" data-nav="prijzen">Prijzen</a></li>
-    <li><a href="/blog/index.html" class="nav-link" data-nav="blog">Blog</a></li>
-    <li><a href="/feest-muziek-inspiratie.html" class="nav-link" data-nav="muziek">Muziek inspiratie</a></li>
+    <!-- Secondary: informative pages -->
+    <li><a href="/werkgebied.html" class="nav-link" data-nav="werkgebied" data-i18n="nav.werkgebied">Werkgebied</a></li>
+    <li class="nav-dropdown" data-nav="inspiratie">
+      <a href="/inspiratie/" class="nav-link nav-dropdown-trigger" data-nav="inspiratie" data-i18n="nav.inspiratie" aria-haspopup="true" aria-expanded="false" id="nav-inspiratie-trigger">Inspiratie</a>
+      <ul class="nav-dropdown-menu" aria-labelledby="nav-inspiratie-trigger" role="menu">
+        <li role="none"><a href="/feest-muziek-inspiratie.html" role="menuitem" data-i18n="nav.feestMuziekInspiratie">Feest muziek inspiratie</a></li>
+        <li role="none"><a href="/feest-playlist-generator.html" role="menuitem" data-i18n="nav.playlistGenerator">Playlist generator</a></li>
+        <li role="none"><a href="/fotos-feesten.html" role="menuitem" data-i18n="nav.fotosFeesten">Foto's feesten</a></li>
+        <li role="none"><a href="/dj-set-up.html" role="menuitem" data-i18n="nav.djSetup">DJ set-up</a></li>
+      </ul>
+    </li>
+    <li><a href="/reviews.html" class="nav-link" data-nav="reviews" data-i18n="nav.reviews">Reviews</a></li>
+    <li><a href="/blog/index.html" class="nav-link" data-nav="blog" data-i18n="nav.blog">Blog</a></li>
+    <li><a href="/contact.html" class="nav-link" data-nav="contact" data-i18n="nav.contact">Contact</a></li>
     <li class="nav-music-wrap">
       <button type="button" class="nav-music-toggle" id="navMusicToggle" aria-pressed="false" aria-label="Muziek aan" aria-describedby="navMusicToggleDesc" title="Muziek inschakelen">
         <span class="nav-music-icon nav-music-icon-off" aria-hidden="true">
@@ -47,22 +69,61 @@
 
   function setActiveState() {
     const path = (typeof location !== 'undefined' && location.pathname) ? location.pathname : '';
-    const hash = (typeof location !== 'undefined' && location.hash) ? location.hash.slice(1) : '';
     const links = document.querySelectorAll('.nav-link[data-nav]');
+    const dropdowns = document.querySelectorAll('.nav-dropdown[data-nav]');
+
     links.forEach((a) => {
       const nav = a.getAttribute('data-nav');
       a.classList.remove('nav-active');
-      if (hash && (hash === 'intro' || hash === 'diensten' || hash === 'hands-up' || hash === 'contact')) {
-        if (nav === hash) a.classList.add('nav-active');
+      if (path === '/' || path === '/index.html') {
+        if (nav === 'home') a.classList.add('nav-active');
       } else if (path === '/dj-huren.html' || path.endsWith('/dj-huren.html')) {
         if (nav === 'dj-huren') a.classList.add('nav-active');
       } else if (path === '/prijzen.html') {
         if (nav === 'prijzen') a.classList.add('nav-active');
+      } else if (path.startsWith('/diensten/')) {
+        if (nav === 'diensten') a.classList.add('nav-active');
+      } else if (path === '/werkgebied.html') {
+        if (nav === 'werkgebied') a.classList.add('nav-active');
+      } else if (path === '/inspiratie/' || path.startsWith('/inspiratie/') || path === '/feest-muziek-inspiratie.html' || path === '/feest-playlist-generator.html' || path === '/fotos-feesten.html' || path === '/dj-set-up.html') {
+        if (nav === 'inspiratie') a.classList.add('nav-active');
+      } else if (path === '/reviews.html') {
+        if (nav === 'reviews') a.classList.add('nav-active');
       } else if (path === '/blog/index.html' || path.startsWith('/blog/')) {
         if (nav === 'blog') a.classList.add('nav-active');
-      } else if (path === '/feest-muziek-inspiratie.html' || path === '/feest-playlist-generator.html') {
-        if (nav === 'muziek') a.classList.add('nav-active');
+      } else if (path === '/contact.html') {
+        if (nav === 'contact') a.classList.add('nav-active');
       }
+    });
+
+    dropdowns.forEach((dd) => {
+      const trigger = dd.querySelector('.nav-dropdown-trigger');
+      if (trigger) trigger.setAttribute('aria-expanded', dd.querySelector('.nav-link.nav-active') ? 'true' : 'false');
+    });
+  }
+
+  function initDropdowns() {
+    document.querySelectorAll('.nav-dropdown').forEach((dd) => {
+      const trigger = dd.querySelector('.nav-dropdown-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', (e) => {
+        if (window.matchMedia('(max-width: 768px)').matches) {
+          e.preventDefault();
+          const expanded = trigger.getAttribute('aria-expanded') === 'true';
+          trigger.setAttribute('aria-expanded', !expanded);
+          dd.classList.toggle('dropdown-open', !expanded);
+        }
+      });
+      trigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          if (window.matchMedia('(max-width: 768px)').matches) {
+            e.preventDefault();
+            const expanded = trigger.getAttribute('aria-expanded') === 'true';
+            trigger.setAttribute('aria-expanded', !expanded);
+            dd.classList.toggle('dropdown-open', !expanded);
+          }
+        }
+      });
     });
   }
 
@@ -71,8 +132,12 @@
     if (el) {
       el.innerHTML = HEADER_HTML;
       setActiveState();
+      initDropdowns();
       window.addEventListener('hashchange', setActiveState);
       document.dispatchEvent(new CustomEvent('headerloaded'));
+      if (window.i18n?.setLang) {
+        window.i18n.apply?.();
+      }
     }
   }
 

@@ -2,10 +2,13 @@
   "testimonials": [
     {
       "id": "rev-jelle-van-velzen",
-      "name": "Jelle van Velzen",
+      "name": "Jelle",
       "city": "Hendrik-Ido-Ambacht",
       "rating": 5,
-      "text": "Great DJ! Good feeling for what is needed to get the party going!",
+      "text": {
+        "nl": "Geweldige DJ! Goed gevoel voor wat er nodig is om het feest op gang te krijgen!",
+        "en": "Great DJ! Good feeling for what is needed to get the party going!"
+      },
       "source": "Google",
       "date": "2025-01-01",
       "eventType": ["feest"],
@@ -13,10 +16,13 @@
     },
     {
       "id": "rev-niels-hout",
-      "name": "Niels Hout",
-      "city": "Heemskerk",
+      "name": "Niels",
+      "city": "Beverwijk",
       "rating": 5,
-      "text": "Deejay Tim heeft ons een onvergetelijke feestavond verzorgd. Door een juiste voorbereiding en overleg is de avond uitgepakt zoals wij het van te voren hadden bedacht. Tim is een echte aanrader voor wie een leuk feest wil.",
+      "text": {
+        "nl": "Deejay Tim heeft ons een onvergetelijke feestavond verzorgd. Door een juiste voorbereiding en overleg is de avond uitgepakt zoals wij het van te voren hadden bedacht. Tim is een echte aanrader voor wie een leuk feest wil.",
+        "en": "Deejay Tim gave us an unforgettable party evening. Thanks to proper preparation and consultation, the evening turned out exactly as we had imagined. Tim is a real recommendation for anyone who wants a great party."
+      },
       "source": "Google",
       "date": "2024-03-01",
       "eventType": ["feest"],
@@ -24,10 +30,13 @@
     },
     {
       "id": "rev-arno-van-der-pol",
-      "name": "Arno van der Pol",
+      "name": "Arno",
       "city": "Hendrik-Ido-Ambacht",
       "rating": 5,
-      "text": "Tim mooi buurtfeest gehad je was geweldig. Je betrok ook heel leuk de kinderen erbij. Top avond bedankt!",
+      "text": {
+        "nl": "Tim mooi buurtfeest gehad je was geweldig. Je betrok ook heel leuk de kinderen erbij. Top avond bedankt!",
+        "en": "Tim, we had a great neighbourhood party, you were amazing. You also involved the kids in a really fun way. Top evening, thanks!"
+      },
       "source": "Google",
       "date": "2025-01-01",
       "eventType": ["buurtfeest"],
@@ -35,10 +44,13 @@
     },
     {
       "id": "rev-rappardhoeve",
-      "name": "Van Rappardhoeve",
+      "name": "Theo",
       "city": "Den Haag",
       "rating": 5,
-      "text": "DJ Tim heeft het 75 jarig bestaan van onze hondenvereniging (VDH kringgroep De Randstad) een muzikale ondersteuning gegeven. De muziek was perfect afgestemd op het aanwezige publiek en veranderde wanneer dat kon. De voetjes gingen van de vloer! De dagen erna hebben wij als bestuur niets dan goede recensies gekregen van onze leden en genodigden. Ik raad iedereen aan om DJ Tim bij je feest uit te nodigen.",
+      "text": {
+        "nl": "DJ Tim heeft het 75 jarig bestaan van onze hondenvereniging (VDH kringgroep De Randstad) een muzikale ondersteuning gegeven. De muziek was perfect afgestemd op het aanwezige publiek en veranderde wanneer dat kon. De voetjes gingen van de vloer! De dagen erna hebben wij als bestuur niets dan goede recensies gekregen van onze leden en genodigden. Ik raad iedereen aan om DJ Tim bij je feest uit te nodigen.",
+        "en": "DJ Tim provided musical support for the 75th anniversary of our dog association (VDH kringgroep De Randstad). The music was perfectly tailored to the audience and changed when possible. Feet were off the floor! In the days that followed we as the board received nothing but positive reviews from our members and guests. I recommend everyone to invite DJ Tim to your party."
+      },
       "source": "Google",
       "date": "2024-02-01",
       "eventType": ["vereniging", "feest"],
@@ -46,10 +58,13 @@
     },
     {
       "id": "rev-caleb-repkes",
-      "name": "Caleb Repkes",
-      "city": "Rotterdam",
+      "name": "Caleb",
+      "city": "Heemskerk",
       "rating": 5,
-      "text": "DJ Tim is een echte partymeister! Vooraf super goed overleg gehad over de sfeer en muziek stijlen die we wilden op ons feestje. Op het feestje zelf is het altijd een beetje aanvoelen waar het publiek die avond zin in heeft. En dat doet Tim geweldig. We zijn compleet ontzorgd op muziek gebied en de gasten hebben zich top vermaakt. We hebben mensen zien dansen die we nooit zien dansen.",
+      "text": {
+        "nl": "DJ Tim is een echte partymeister! Vooraf super goed overleg gehad over de sfeer en muziek stijlen die we wilden op ons feestje. Op het feestje zelf is het altijd een beetje aanvoelen waar het publiek die avond zin in heeft. En dat doet Tim geweldig. We zijn compleet ontzorgd op muziek gebied en de gasten hebben zich top vermaakt. We hebben mensen zien dansen die we nooit zien dansen.",
+        "en": "DJ Tim is a real party master! We had great consultation beforehand about the vibe and music styles we wanted at our party. At the party itself it's always a bit of sensing what the audience feels like that evening. And Tim does that brilliantly. We were completely taken care of on the music front and the guests had a great time. We saw people dancing who we never see dancing."
+      },
       "source": "Google",
       "date": "2024-02-01",
       "eventType": ["feest"],

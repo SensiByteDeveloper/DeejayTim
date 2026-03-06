@@ -38,35 +38,35 @@
     "review": [
       {
         "@type": "Review",
-        "author": { "@type": "Person", "name": "Jelle van Velzen" },
+        "author": { "@type": "Person", "name": "Jelle" },
         "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
         "reviewBody": "Great DJ! Good feeling for what is needed to get the party going!",
         "datePublished": "2025-01-01"
       },
       {
         "@type": "Review",
-        "author": { "@type": "Person", "name": "Niels Hout" },
+        "author": { "@type": "Person", "name": "Niels" },
         "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
         "reviewBody": "Deejay Tim heeft ons een onvergetelijke feestavond verzorgd. Door een juiste voorbereiding en overleg is de avond uitgepakt zoals wij het van te voren hadden bedacht. Tim is een echte aanrader voor wie een leuk feest wil.",
         "datePublished": "2024-03-01"
       },
       {
         "@type": "Review",
-        "author": { "@type": "Person", "name": "Arno van der Pol" },
+        "author": { "@type": "Person", "name": "Arno" },
         "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
         "reviewBody": "Tim mooi buurtfeest gehad je was geweldig. Je betrok ook heel leuk de kinderen erbij. Top avond bedankt!",
         "datePublished": "2025-01-01"
       },
       {
         "@type": "Review",
-        "author": { "@type": "Person", "name": "Van Rappardhoeve" },
+        "author": { "@type": "Person", "name": "Theo" },
         "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
         "reviewBody": "DJ Tim heeft het 75 jarig bestaan van onze hondenvereniging (VDH kringgroep De Randstad) een muzikale ondersteuning gegeven. De muziek was perfect afgestemd op het aanwezige publiek en veranderde wanneer dat kon. De voetjes gingen van de vloer! De dagen erna hebben wij als bestuur niets dan goede recensies gekregen van onze leden en genodigden. Ik raad iedereen aan om DJ Tim bij je feest uit te nodigen.",
         "datePublished": "2024-02-01"
       },
       {
         "@type": "Review",
-        "author": { "@type": "Person", "name": "Caleb Repkes" },
+        "author": { "@type": "Person", "name": "Caleb" },
         "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
         "reviewBody": "DJ Tim is een echte partymeister! Vooraf super goed overleg gehad over de sfeer en muziek stijlen die we wilden op ons feestje. Op het feestje zelf is het altijd een beetje aanvoelen waar het publiek die avond zin in heeft. En dat doet Tim geweldig. We zijn compleet ontzorgd op muziek gebied en de gasten hebben zich top vermaakt. We hebben mensen zien dansen die we nooit zien dansen.",
         "datePublished": "2024-02-01"
@@ -82,10 +82,15 @@
     <div class="bg-glow"></div>
     <section class="section" id="reviews">
       <div class="container">
-        <h1>Reviews</h1>
-        <p>Echte Google reviews van klanten. <a href="/#contact">Neem contact op</a> voor jouw feest.</p>
+        <h1 data-i18n="pages.reviews.title">Reviews</h1>
+        <p><span data-i18n="pages.reviews.intro">Echte Google reviews van klanten.</span> <a href="/contact.html" data-i18n="pages.reviews.contactLink">Neem contact op</a><span data-i18n="pages.reviews.contactSuffix"> voor jouw feest.</span></p>
+        <div class="reviews-google-verify">
+          <p class="reviews-trust-line" data-i18n="pages.reviews.googleVerifyLine">⭐ Beoordeeld met 5.0/5 op Google</p>
+          <p class="reviews-trust-sub" data-i18n="pages.reviews.googleVerifySub">Lees ook de onafhankelijke reviews op Google.</p>
+          <p><a href="#" class="google-reviews-link google-reviews-link-cta" target="_blank" rel="noopener" data-i18n="pages.reviews.viewAllGoogleReviews">Bekijk alle Google reviews</a></p>
+        </div>
         <div class="testimonials-grid" id="reviews-container" aria-busy="true">
-          <p class="testimonials-loading">Reviews laden…</p>
+          <p class="testimonials-loading" data-i18n="pages.reviews.loading">Reviews laden…</p>
         </div>
       </div>
     </section>
