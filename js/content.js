@@ -145,6 +145,7 @@ if (typeof document !== 'undefined') {
 }
 if (typeof window !== 'undefined') {
   window.addEventListener('langchange', initHomepageTestimonials);
+  document.addEventListener('partialsloaded', initHomepageTestimonials);
 }
 
 function escapeHtml(str) {

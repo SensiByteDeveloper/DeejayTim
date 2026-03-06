@@ -134,6 +134,7 @@
       setActiveState();
       initDropdowns();
       window.addEventListener('hashchange', setActiveState);
+      document.addEventListener('pjax:navigate', setActiveState);
       document.dispatchEvent(new CustomEvent('headerloaded'));
       if (window.i18n?.setLang) {
         window.i18n.apply?.();

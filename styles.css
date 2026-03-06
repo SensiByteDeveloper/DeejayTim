@@ -11,6 +11,8 @@
   --neon-magenta: #ff2d92;
   --neon-yellow: #ffe566;
   --accent-gold: #d4af37;
+  --link-color: var(--neon-cyan); /* Neon-cyan – past bij palette, underline = klikbaar */
+  --link-underline: rgba(0, 229, 255, 0.5);
   --text-dim: rgba(255, 255, 255, 0.75);
   --text-bright: #fafafa;
   --glass: rgba(255, 255, 255, 0.03);
@@ -1019,27 +1021,46 @@ body.video-modal-open .music-player * {
 
 .container { max-width: 1100px; margin: 0 auto; }
 
-/* Content links – high contrast, neon theme */
+/* Content links – neon-cyan + underline = duidelijk klikbaar, harmonie met neon-thema */
 #main-content a,
 .container a,
 .prose-page a,
 .blog-post-body a,
 .page-footer a {
-  color: var(--neon-cyan);
-  text-decoration: none;
+  color: var(--link-color);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--link-underline);
+  transition: color 0.2s, text-shadow 0.2s, text-decoration-color 0.2s;
 }
 #main-content a:hover,
 .container a:hover,
 .prose-page a:hover,
 .blog-post-body a:hover,
 .page-footer a:hover {
-  text-decoration: underline;
+  text-decoration-color: var(--neon-cyan);
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
+}
+#main-content a.hero-cta,
+#main-content a.contact-whatsapp,
+#main-content a.pricing-btn,
+#main-content a.cta-button,
+.container a.hero-cta,
+.container a.contact-whatsapp,
+.container a.pricing-btn,
+.container a.cta-button {
+  text-decoration: none;
 }
 #main-content a.hero-cta:hover,
 #main-content a.contact-whatsapp:hover,
 #main-content a.pricing-btn:hover,
-#main-content a.cta-button:hover {
+#main-content a.cta-button:hover,
+.container a.hero-cta:hover,
+.container a.contact-whatsapp:hover,
+.container a.pricing-btn:hover,
+.container a.cta-button:hover {
   text-decoration: none;
+  text-shadow: none;
 }
 #main-content a:focus-visible,
 .container a:focus-visible,
@@ -1052,8 +1073,10 @@ body.video-modal-open .music-player * {
 #main-content a:visited,
 .container a:visited,
 .prose-page a:visited,
-.blog-post-body a:visited {
+.blog-post-body a:visited,
+.page-footer a:visited {
   color: rgba(0, 229, 255, 0.9);
+  text-decoration-color: rgba(0, 229, 255, 0.4);
 }
 #main-content a.contact-whatsapp,
 #main-content a.contact-whatsapp:visited,
@@ -1089,6 +1112,7 @@ body.video-modal-open .music-player * {
 .section-title + .section-subtitle,
 .section-title + .hands-up-tagline,
 .section-title + .contact-subtitle { margin-top: 0; }
+.section-title.section-title-left { text-align: left; }
 
 .contact-subtitle {
   font-size: var(--text-body);
@@ -1112,6 +1136,10 @@ body.video-modal-open .music-player * {
   text-align: center;
   color: var(--text-dim);
   margin-bottom: 3rem;
+}
+.werkgebied-subtitle {
+  margin-bottom: 1rem;
+  font-size: var(--text-body-sm);
 }
 
 /* Intro */
@@ -1208,7 +1236,7 @@ body.video-modal-open .music-player * {
 }
 .pricing-card-featured .pricing-features li::before { color: var(--neon-magenta); }
 
-.pricing-audience { font-size: var(--text-body-sm); color: var(--text-dim); margin: 0 0 0.35rem; min-height: 2.5rem; }
+.pricing-audience { font-size: var(--text-body-sm); color: var(--text-dim); font-style: italic; margin: 0 0 0.35rem; min-height: 2.5rem; }
 .pricing-note { font-size: var(--text-body-sm); color: var(--text-dim); font-style: italic; margin: 0 0 0.5rem; min-height: 2.5rem; }
 .pricing-note-below { margin-top: 0.75rem; margin-bottom: 0; order: 10; }
 .pricing-amount {
@@ -1297,6 +1325,7 @@ body.video-modal-open .music-player * {
 .pricing-faq-link a:hover {
   color: var(--neon-cyan);
   border-bottom-color: var(--neon-cyan);
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
 }
 .pricing-tariff-note {
   margin-top: 0.5rem;
@@ -1384,21 +1413,21 @@ body.video-modal-open .music-player * {
 .link-list a {
   display: block;
   padding: 0.75rem 0;
-  color: var(--neon-cyan);
-  text-decoration: none;
-  transition: color 0.2s, background 0.2s;
+  color: var(--link-color);
+  transition: color 0.2s, background 0.2s, text-shadow 0.2s, text-decoration-color 0.2s;
 }
 .link-list a:hover {
   color: var(--text-bright);
-  text-decoration: none;
   background: rgba(0, 229, 255, 0.05);
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
+  text-decoration-color: var(--neon-cyan);
 }
 
 .snelle-links { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--glass-border); }
 .snelle-links h3 { font-size: 1rem; margin: 0 0 0.5rem; color: var(--text-dim); font-weight: 500; }
 .snelle-links p { margin: 0; font-size: var(--text-body-sm); }
-.snelle-links a { color: var(--neon-cyan); text-decoration: none; }
-.snelle-links a:hover { text-decoration: underline; }
+.snelle-links a { color: var(--link-color); }
+.snelle-links a:hover { text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
 
 /* Section compact – less padding for SEO/link sections */
 .section-compact { padding: 2.5rem 1rem; }
@@ -1415,8 +1444,8 @@ main[data-service] .container > p + ol { margin-top: 0.5rem; }
 main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem; line-height: 1.6; }
 main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem; line-height: 1.6; }
 .section-links { margin-top: 1rem; margin-bottom: 1rem; font-size: var(--text-body-sm); color: var(--text-dim); }
-.section-links a { color: var(--neon-cyan); text-decoration: none; }
-.section-links a:hover { text-decoration: underline; }
+.section-links a { color: var(--link-color); }
+.section-links a:hover { text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
 .section-compact .section-title { margin-bottom: 1rem; }
 
 /* Service links grid – homepage "DJ voor elk type feest" */
@@ -1495,12 +1524,11 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
   justify-content: center;
 }
 .region-links a {
-  color: var(--neon-cyan);
-  text-decoration: none;
+  color: var(--link-color);
   font-weight: 500;
-  transition: color 0.2s;
+  transition: color 0.2s, text-shadow 0.2s, text-decoration-color 0.2s;
 }
-.region-links a:hover { color: var(--text-bright); text-decoration: underline; }
+.region-links a:hover { color: var(--text-bright); text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
 
 /* Reviews preview – homepage */
 .testimonials-preview { min-height: 120px; }
@@ -1516,13 +1544,13 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
 .reviews-trust-sub { margin: 0.15rem 0 0; font-size: var(--text-caption); color: var(--text-dim); }
 .google-reviews-link-wrap { margin: 0.5rem 0 0; }
 .google-reviews-link {
-  color: var(--neon-cyan);
+  color: var(--link-color);
   text-decoration: none;
   font-size: var(--text-body-sm);
 }
 .google-reviews-link:hover { text-decoration: underline; }
 .google-reviews-link-subtle { color: var(--text-dim); font-size: var(--text-caption); }
-.google-reviews-link-subtle:hover { color: var(--neon-cyan); }
+.google-reviews-link-subtle:hover { color: var(--neon-cyan); text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); }
 .google-reviews-link-cta {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -1534,9 +1562,9 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
 }
 .google-reviews-link-cta:hover { background: rgba(0, 229, 255, 0.2); border-color: var(--neon-cyan); }
 
-/* Contact review snippet */
+/* Contact review snippet – 1 review, gecentreerd */
 .contact-review-snippet {
-  margin: 1.5rem 0;
+  margin: 1.5rem auto;
   padding: 1rem 1.25rem;
   background: rgba(255, 255, 255, 0.03);
   border-radius: 12px;
@@ -1547,8 +1575,8 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
 .contact-review-quote { margin: 0.25rem 0; font-style: italic; color: var(--text-bright); font-size: var(--text-body-sm); }
 .contact-review-author { margin: 0.25rem 0; font-size: var(--text-caption); color: var(--text-dim); }
 .contact-review-link { margin: 0.75rem 0 0; font-size: var(--text-caption); }
-.contact-review-link a { color: var(--neon-cyan); text-decoration: none; }
-.contact-review-link a:hover { text-decoration: underline; }
+.contact-review-link a { color: var(--link-color); }
+.contact-review-link a:hover { text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
 .contact-review-link span { margin: 0 0.5rem; color: var(--text-dim); }
 
 /* Pricing review proof */
@@ -1563,8 +1591,8 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
 .pricing-review-proof p:first-child { margin-top: 0; }
 .pricing-review-quote { font-style: italic; color: var(--text-bright); font-size: var(--text-body-sm); }
 .pricing-review-links { margin-top: 0.75rem; font-size: var(--text-caption); }
-.pricing-review-links a { color: var(--neon-cyan); text-decoration: none; }
-.pricing-review-links a:hover { text-decoration: underline; }
+.pricing-review-links a { color: var(--link-color); }
+.pricing-review-links a:hover { text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
 .pricing-review-links span { margin: 0 0.5rem; color: var(--text-dim); }
 
 /* Reviews page Google verify block */
@@ -1584,8 +1612,7 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
   color: var(--text-dim);
 }
 .dj-huren-links a {
-  color: var(--neon-cyan);
-  text-decoration: none;
+  color: var(--link-color);
 }
 .dj-huren-links a:hover { text-decoration: underline; }
 .dj-huren-faq-link {
@@ -1602,13 +1629,14 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
 .dj-huren-faq-link a:hover {
   color: var(--neon-cyan);
   border-bottom-color: var(--neon-cyan);
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
 }
 
 /* SEO text block */
 .seo-text { padding: 2rem 1rem; }
 .container-narrow { max-width: 680px; }
 .seo-text p { margin: 0; color: var(--text-dim); font-size: var(--text-body-sm); line-height: 1.7; }
-.seo-text a { color: var(--neon-cyan); text-decoration: none; }
+.seo-text a { color: var(--link-color); text-decoration: none; }
 .seo-text a:hover { text-decoration: underline; }
 
 /* Hands Up */
@@ -1882,12 +1910,11 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
 /* WCAG 4.5:1 contrast op donkere achtergrond */
 .contact-link {
   display: inline-block;
-  color: #7df9ff;
-  text-decoration: none;
+  color: var(--link-color);
   margin: 0 1rem 0.5rem;
-  transition: text-shadow 0.3s, color 0.2s;
+  transition: text-shadow 0.3s, color 0.2s, text-decoration-color 0.2s;
 }
-.contact-link:hover { color: #99fbff; text-shadow: 0 0 10px rgba(0, 229, 255, 0.6); }
+.contact-link:hover { text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
 
 /* Sticky Player Bar – compacte balk onderaan, inklapbaar */
 .music-player {
@@ -2513,8 +2540,8 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
   line-height: 1.8;
 }
 .footer-col ul.footer-links li { margin: 0; }
-.footer-col ul.footer-links a { color: var(--neon-cyan); text-decoration: none; }
-.footer-col ul.footer-links a:hover { text-decoration: underline; }
+.footer-col ul.footer-links a { color: var(--link-color); }
+.footer-col ul.footer-links a:hover { text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
 .footer-bottom {
   text-align: center;
   padding-top: 1.5rem;
@@ -2523,8 +2550,8 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
 .footer-name { font-family: var(--font-display); font-weight: 700; margin: 0 0 0.25rem; color: var(--text-bright); }
 .footer-region { margin: 0 0 0.5rem; }
 .footer-social { margin: 0; }
-.footer-social a { color: var(--neon-cyan); text-decoration: none; }
-.footer-social a:hover { text-decoration: underline; }
+.footer-social a { color: var(--link-color); }
+.footer-social a:hover { text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
 
 /* Service pages – testimonials, FAQ */
 .testimonials-grid {
@@ -2620,6 +2647,77 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
 }
 .service-cards-inspiratie .service-card-pink .service-card-title { color: var(--neon-pink); }
 
+/* Inspiratie page – centered, wider layout (same as blog) */
+.section-inspiratie .container-inspiratie {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.section-inspiratie .container-inspiratie > p {
+  text-align: center;
+}
+.section-inspiratie .service-cards-inspiratie {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-inspiratie .service-cards-inspiratie .service-card:nth-child(odd),
+.section-inspiratie .service-cards-inspiratie .service-card:nth-child(even) {
+  margin-left: 0;
+  margin-right: 0;
+}
+.section-inspiratie .service-card {
+  text-align: left;
+}
+.section-inspiratie .cta-row {
+  justify-content: center;
+}
+
+/* Blog page – centered, wider layout */
+.section-blog .container-blog {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.section-blog .container-blog > p {
+  text-align: center;
+}
+.section-blog .service-cards-inspiratie.service-cards-blog {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-blog .service-cards-inspiratie.service-cards-blog .service-card:nth-child(odd),
+.section-blog .service-cards-inspiratie.service-cards-blog .service-card:nth-child(even) {
+  margin-left: 0;
+  margin-right: 0;
+}
+.section-blog .service-card-blog {
+  text-align: left;
+}
+.section-blog .cta-row {
+  justify-content: center;
+}
+
+/* Blog cards in inspiratie style */
+.service-card-blog .service-card-blog-date {
+  font-size: var(--text-caption);
+  color: var(--text-dim);
+  margin-bottom: 0.5rem;
+  order: -1;
+}
+.service-card-blog .service-card-desc { margin-bottom: 0.75rem; flex-grow: 1; }
+.service-card-blog .service-card-blog-link {
+  font-size: var(--text-body-sm);
+  margin-top: auto;
+}
+.service-cards-inspiratie .service-card-cyan .service-card-blog-link { color: var(--neon-cyan); }
+.service-cards-inspiratie .service-card-magenta .service-card-blog-link { color: var(--neon-magenta); }
+.service-cards-inspiratie .service-card-yellow .service-card-blog-link { color: var(--neon-yellow); }
+.service-cards-inspiratie .service-card-pink .service-card-blog-link { color: var(--neon-pink); }
+
 .service-card {
   display: flex;
   flex-direction: column;
@@ -2645,10 +2743,91 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
 }
 .service-card-small:not(:hover) { color: var(--text-dim); }
 
+/* Diensten index – gecentreerd en kleurrijk */
+.section-diensten-index .container {
+  text-align: center;
+}
+.section-diensten-index .container > p,
+.section-diensten-index .section-links,
+.section-diensten-index .section-diensten-intro {
+  text-align: center;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-diensten-index .service-cards-main {
+  justify-content: center;
+  gap: 1.25rem;
+}
+.section-diensten-index .service-cards-grid {
+  justify-content: center;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-diensten-index .cta-row {
+  justify-content: center;
+}
+
+/* Populaire diensten – kleurrijke kaarten (zelfde stijl als inspiratie) */
+.section-diensten-index .service-card-cyan {
+  border-left: 4px solid var(--neon-cyan);
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, var(--glass) 100%);
+}
+.section-diensten-index .service-card-cyan:hover {
+  border-left-color: var(--neon-cyan);
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.35);
+}
+.section-diensten-index .service-card-cyan .service-card-title { color: var(--neon-cyan); }
+.section-diensten-index .service-card-magenta {
+  border-left: 4px solid var(--neon-magenta);
+  background: linear-gradient(135deg, rgba(255, 45, 146, 0.08) 0%, var(--glass) 100%);
+}
+.section-diensten-index .service-card-magenta:hover {
+  border-left-color: var(--neon-magenta);
+  box-shadow: 0 0 25px rgba(255, 45, 146, 0.35);
+}
+.section-diensten-index .service-card-magenta .service-card-title { color: var(--neon-magenta); }
+.section-diensten-index .service-card-yellow {
+  border-left: 4px solid var(--neon-yellow);
+  background: linear-gradient(135deg, rgba(255, 229, 102, 0.08) 0%, var(--glass) 100%);
+}
+.section-diensten-index .service-card-yellow:hover {
+  border-left-color: var(--neon-yellow);
+  box-shadow: 0 0 25px rgba(255, 229, 102, 0.35);
+}
+.section-diensten-index .service-card-yellow .service-card-title { color: var(--neon-yellow); }
+
+/* Meer feesttypes – afwisselende accentkleuren */
+.section-diensten-index .service-cards-feesttypes .service-card-small:nth-child(3n+1) {
+  border-color: rgba(0, 229, 255, 0.4);
+  color: var(--neon-cyan);
+}
+.section-diensten-index .service-cards-feesttypes .service-card-small:nth-child(3n+1):hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+}
+.section-diensten-index .service-cards-feesttypes .service-card-small:nth-child(3n+2) {
+  border-color: rgba(255, 45, 146, 0.4);
+  color: var(--neon-magenta);
+}
+.section-diensten-index .service-cards-feesttypes .service-card-small:nth-child(3n+2):hover {
+  border-color: var(--neon-magenta);
+  box-shadow: 0 0 20px rgba(255, 45, 146, 0.3);
+}
+.section-diensten-index .service-cards-feesttypes .service-card-small:nth-child(3n+3) {
+  border-color: rgba(255, 229, 102, 0.4);
+  color: var(--neon-yellow);
+}
+.section-diensten-index .service-cards-feesttypes .service-card-small:nth-child(3n+3):hover {
+  border-color: var(--neon-yellow);
+  box-shadow: 0 0 20px rgba(255, 229, 102, 0.3);
+}
+
 /* Breadcrumb */
 .breadcrumb { font-size: var(--text-caption); color: var(--text-dim); margin-bottom: 1rem; position: relative; z-index: 1; }
-.breadcrumb a { color: var(--neon-cyan); text-decoration: none; }
-.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb a { color: var(--link-color); }
+.breadcrumb a:hover { text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
 
 /* Prose page – long-form content */
 .prose-page { max-width: 800px; }
@@ -2658,8 +2837,8 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
 .prose-page p { margin: 0 0 1rem; color: var(--text-dim); line-height: 1.7; }
 .prose-page ul { margin: 0 0 1rem; padding-left: 1.5rem; color: var(--text-dim); }
 .prose-page li { margin-bottom: 0.35rem; }
-.prose-page a { color: var(--neon-cyan); text-decoration: none; }
-.prose-page a:hover { text-decoration: underline; }
+.prose-page a { color: var(--link-color); }
+.prose-page a:hover { text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
 .cta-block { padding: 1.25rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 8px; margin: 2rem 0; }
 .cta-block p { margin: 0; }
 .cta-block-top { margin-top: 0; }
@@ -2721,11 +2900,11 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
 .playlist-cta p { margin: 0 0 0.5rem; }
 .playlist-cta p:last-child { margin-bottom: 0; }
 .playlist-cta .pricing-btn { margin-right: 0.5rem; }
-.playlist-cta-link { color: var(--neon-cyan); text-decoration: none; }
-.playlist-cta-link:hover { text-decoration: underline; }
+.playlist-cta-link { color: var(--link-color); }
+.playlist-cta-link:hover { text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
 .playlist-cta-services { font-size: var(--text-body-sm); }
-.playlist-cta-services a { color: var(--neon-cyan); text-decoration: none; }
-.playlist-cta-services a:hover { text-decoration: underline; }
+.playlist-cta-services a { color: var(--link-color); }
+.playlist-cta-services a:hover { text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
 
 /* DJ set-up – luxe galerij */
 .dj-setup-lead { font-size: var(--text-body-lg); color: var(--text-dim); margin-bottom: 0; line-height: 1.7; }
@@ -2992,10 +3171,10 @@ body.fotos-lightbox-open { overflow: hidden; }
   margin: 0 0 0.5rem;
 }
 .blog-card-title a { color: var(--text-bright); text-decoration: none; }
-.blog-card-title a:hover { color: var(--neon-cyan); text-decoration: underline; }
+.blog-card-title a:hover { color: var(--link-color); text-decoration: underline; }
 .blog-card-excerpt { margin: 0 0 1rem; color: var(--text-dim); font-size: var(--text-body-sm); line-height: 1.6; }
 .blog-card-link {
-  color: var(--neon-cyan);
+  color: var(--link-color);
   text-decoration: none;
   font-weight: 500;
 }
@@ -3011,13 +3190,13 @@ body.fotos-lightbox-open { overflow: hidden; }
 }
 .blog-cta h3 { font-family: var(--font-display); font-size: 1.1rem; margin: 0 0 1rem; color: var(--text-bright); }
 .blog-cta p { margin: 0; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: center; }
-.blog-cta-link { color: var(--neon-cyan); text-decoration: none; }
-.blog-cta-link:hover { text-decoration: underline; }
+.blog-cta-link { color: var(--link-color); }
+.blog-cta-link:hover { text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
 
 /* Blog post */
 .blog-back { margin-bottom: 1rem; }
-.blog-back a { color: var(--text-dim); text-decoration: none; font-size: var(--text-body-sm); }
-.blog-back a:hover { color: var(--neon-cyan); text-decoration: underline; }
+.blog-back a { color: var(--text-dim); font-size: var(--text-body-sm); }
+.blog-back a:hover { color: var(--link-color); text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
 .blog-post-header { margin-bottom: 2rem; }
 .blog-post-title { font-family: var(--font-display); font-size: 1.75rem; margin: 0 0 0.5rem; color: var(--text-bright); }
 .blog-post-date { font-size: var(--text-caption); color: var(--text-dim); }
@@ -3038,7 +3217,7 @@ body.fotos-lightbox-open { overflow: hidden; }
 .blog-post-body.prose p { margin: 0 0 1rem; }
 .blog-post-body.prose ul, .blog-post-body.prose ol { margin: 0 0 1rem; padding-left: 1.5rem; }
 .blog-post-body.prose li { margin-bottom: 0.35rem; }
-.blog-post-body.prose a { color: var(--neon-cyan); text-decoration: none; }
+.blog-post-body.prose a { color: var(--link-color); text-decoration: none; }
 .blog-post-body.prose a:hover { text-decoration: underline; }
 
 .blog-internal-links {
@@ -3055,8 +3234,8 @@ body.fotos-lightbox-open { overflow: hidden; }
   flex-wrap: wrap;
   gap: 0.5rem 1.5rem;
 }
-.blog-internal-links li a { color: var(--neon-cyan); text-decoration: none; }
-.blog-internal-links li a:hover { text-decoration: underline; }
+.blog-internal-links li a { color: var(--link-color); }
+.blog-internal-links li a:hover { text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
 .blog-cta-buttons { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
-.blog-whatsapp-link { color: var(--neon-cyan); text-decoration: none; }
-.blog-whatsapp-link:hover { text-decoration: underline; }
+.blog-whatsapp-link { color: var(--link-color); }
+.blog-whatsapp-link:hover { text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }

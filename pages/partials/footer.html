@@ -1,3 +1,57 @@
+<!-- Video modal – carousel voor sfeervideo's (nodig op alle pagina's voor /#video link) -->
+<div class="video-modal" id="videoModal">
+  <button class="video-modal-close" aria-label="Sluiten">×</button>
+  <div class="video-modal-backdrop"></div>
+  <button class="video-carousel-prev" aria-label="Vorige video">‹</button>
+  <button class="video-carousel-next" aria-label="Volgende video">›</button>
+  <div class="video-modal-content">
+    <div class="video-modal-phone">
+      <div class="video-modal-screen">
+        <video id="videoModalPlayer" controls playsinline>
+          <source src="" type="video/mp4">
+        </video>
+      </div>
+      <img src="/media/Apple iPhone 13 Pro — Gold — Shadow.png" alt="" class="video-modal-frame">
+    </div>
+  </div>
+  <div class="video-carousel-dots" role="tablist" aria-label="Video's"></div>
+</div>
+
+<!-- Muziekspeler – sitebreed -->
+<div class="music-player state-expanded" id="musicPlayer">
+  <div class="music-player-progress-wrap">
+    <input type="range" class="music-player-progress" id="musicProgress" min="0" max="100" value="0" step="0.1" aria-label="Tijdlijn – klik of sleep om vooruit te spoelen">
+  </div>
+  <div class="music-player-bar" id="musicPlayerBar">
+    <button class="music-player-collapse" id="musicCollapse" aria-label="Speler minimaliseren" aria-expanded="true" aria-controls="musicPlayerContent" title="Minimaliseren">−</button>
+    <div class="music-player-info" id="musicPlayerContent">
+      <div class="music-player-thumb">
+        <span class="music-vinyl" aria-hidden="true">◉</span>
+      </div>
+      <button class="music-track-trigger" id="musicTrackTrigger" aria-expanded="false" aria-controls="musicPlaylist" data-i18n-aria="music.playlistAria">
+        <span class="music-label" data-i18n="music.label">Deejay Tim</span>
+        <span class="music-track" id="musicTrackDisplay">Let's Go DJ Tim</span>
+      </button>
+    </div>
+    <div class="music-player-controls">
+      <button class="music-mute" id="musicMute" aria-label="Muziek dempen" aria-pressed="false">
+        <span class="music-mute-icon music-muted" aria-hidden="true">🔇</span>
+        <span class="music-mute-icon" aria-hidden="true">🔊</span>
+      </button>
+      <button class="music-play music-icon-btn-primary" id="musicPlay" aria-label="Afspelen">
+        <svg class="music-btn-icon music-icon-play" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <svg class="music-btn-icon music-icon-pause" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+      </button>
+      <button class="music-next music-icon-btn-primary" data-i18n-aria="music.nextAria" aria-label="Volgende">
+        <svg class="music-btn-icon" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><polygon points="13 19 22 12 13 5 13 19"/><polygon points="2 19 11 12 2 5 2 19"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="music-playlist" id="musicPlaylist" role="listbox" aria-label="Nummeroverzicht" data-i18n-aria="music.playlistAria" aria-hidden="true"></div>
+  <button class="music-player-mini" id="musicExpand" aria-label="Speler uitklappen" aria-expanded="false" hidden>♪</button>
+</div>
+<!-- Audio wordt door script.js vroeg in body geplaatst voor soepele restore -->
+
 <footer class="page-footer">
   <div class="container">
     <div class="footer-grid">

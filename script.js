@@ -1,5 +1,13 @@
 // ===== DEEJAY TIM - Interactie & Muziek =====
 
+/* Pjax: laad eerst zodat navigatie geen volledige reload doet – muziek blijft spelen */
+(function () {
+  const s = document.createElement('script');
+  s.src = '/js/pjax.js';
+  s.async = false;
+  document.head.appendChild(s);
+})();
+
 // Google reviews URL – directe link naar Google Business Profile
 const GOOGLE_REVIEWS_URL = 'https://share.google/Ogn2xmPrBQb6ZqaAt';
 
@@ -19,7 +27,23 @@ document.addEventListener('DOMContentLoaded', () => {
   initHandsUpModal();
   initWhatsAppWidget();
   window.addEventListener('resize', initVideoRandomPositions);
-  document.addEventListener('partialsloaded', () => { initNav(); initGoogleReviewsLinks(); });
+  document.addEventListener('partialsloaded', (e) => {
+    initNav();
+    initGoogleReviewsLinks();
+    if (!e.detail?.fromPjax) {
+      initMusicPlayer();
+      initVideoPreviews();
+      initVideoRandomPositions();
+    }
+    if (e.detail?.fromPjax) {
+      initSmoothScroll();
+      initScrollEffects();
+      initVideoPreviews();
+      initVideoRandomPositions();
+      initForm();
+      initHandsUpModal();
+    }
+  });
   document.addEventListener('headerloaded', initNav);
 });
 
@@ -105,19 +129,64 @@ function initNav() {
   });
 }
 
-// Music Player – multi-track, shuffle
+// Music Player – multi-track, shuffle, state persists across page navigations
+const MUSIC_STATE_KEY = 'deejaytim-music-state';
+
 const MUSIC_TRACKS = [
-  { src: "media/DJ Tim - Let's Go DJ Tim.mp3", title: "Let's Go DJ Tim" },
-  { src: "media/DJ Tim - Bounce Control.mp3", title: "Bounce Control" },
-  { src: "media/DJ Tim - Faz Assim.mp3", title: "Faz Assim" },
-  { src: "media/DJ Tim - Waistline Spin.mp3", title: "Waistline Spin" },
-  { src: "media/DJ Tim - Under The Same Rhythm.mp3", title: "Under The Same Rhythm" },
-  { src: "media/DJ Tim - Fiesta Fusion.mp3", title: "Fiesta Fusion" },
-  { src: "media/DJ Tim - Súbelo.mp3", title: "Súbelo" },
-  { src: "media/DJ Tim - Bachata en la Noche.mp3", title: "Bachata en la Noche" },
-  { src: "media/DJ Tim - Baila Conmigo.mp3", title: "Baila Conmigo" }
+  { src: "/media/DJ Tim - Let's Go DJ Tim.mp3", title: "Let's Go DJ Tim" },
+  { src: "/media/DJ Tim - Bounce Control.mp3", title: "Bounce Control" },
+  { src: "/media/DJ Tim - Faz Assim.mp3", title: "Faz Assim" },
+  { src: "/media/DJ Tim - Waistline Spin.mp3", title: "Waistline Spin" },
+  { src: "/media/DJ Tim - Under The Same Rhythm.mp3", title: "Under The Same Rhythm" },
+  { src: "/media/DJ Tim - Fiesta Fusion.mp3", title: "Fiesta Fusion" },
+  { src: "/media/DJ Tim - Súbelo.mp3", title: "Súbelo" },
+  { src: "/media/DJ Tim - Bachata en la Noche.mp3", title: "Bachata en la Noche" },
+  { src: "/media/DJ Tim - Baila Conmigo.mp3", title: "Baila Conmigo" }
 ];
 const PLAYLIST_ORDER = [...MUSIC_TRACKS];
+
+/* Audio direct beschikbaar + vroege restore – geen wachten op footer */
+const RESTORED_FLAG = 'deejaytim-music-restored';
+(function () {
+  if (!document.body) return;
+  let audio = document.getElementById('bgMusic');
+  if (!audio) {
+    audio = document.createElement('audio');
+    audio.id = 'bgMusic';
+    audio.preload = 'none';
+    document.body.appendChild(audio);
+  }
+  try {
+    const raw = sessionStorage.getItem(MUSIC_STATE_KEY);
+    if (!raw) return;
+    const s = JSON.parse(raw);
+    if (!s || s.muted || !s.isPlaying) return;
+    const indices = s.playbackOrderIndices || [];
+    const idx = s.currentIndexInOrder ?? 0;
+    const trackIdx = indices[idx];
+    if (typeof trackIdx !== 'number' || trackIdx < 0 || trackIdx >= PLAYLIST_ORDER.length) return;
+    const track = PLAYLIST_ORDER[trackIdx];
+    if (!track?.src) return;
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = track.src;
+    document.head.appendChild(link);
+    audio.src = track.src;
+    audio.load();
+    const seekAndPlay = () => {
+      audio.currentTime = Math.min(s.currentTime ?? 0, audio.duration || 0);
+      audio.play().catch(() => {});
+      audio.removeEventListener('canplay', seekAndPlay);
+      sessionStorage.setItem(RESTORED_FLAG, '1');
+    };
+    audio.addEventListener('canplay', seekAndPlay);
+    if (audio.readyState >= 2) seekAndPlay();
+    const fl = document.createElement('link');
+    fl.rel = 'prefetch';
+    fl.href = '/pages/partials/footer.html';
+    document.head.appendChild(fl);
+  } catch (_) {}
+})();
 
 function shuffleArray(arr) {
   const a = [...arr];
@@ -136,7 +205,13 @@ function initMusicPlayer() {
   const expandBtn = document.getElementById('musicExpand');
   const progressEl = document.getElementById('musicProgress');
   const trackTrigger = document.getElementById('musicTrackTrigger');
-  const audio = document.getElementById('bgMusic');
+  let audio = document.getElementById('bgMusic');
+  if (!audio && document.body) {
+    audio = document.createElement('audio');
+    audio.id = 'bgMusic';
+    audio.preload = 'none';
+    document.body.appendChild(audio);
+  }
 
   // Migrate old "no-music" preference: clear it so player always shows
   const MUSIC_PREF_KEY = 'deejaytim-music';
@@ -155,6 +230,7 @@ function initMusicPlayer() {
   player?.classList.remove('muted');
 
   let userSeeking = false;
+  let restoredFromState = false;
   let progressBarProgrammatic = false; /* Voorkom dat updateProgress → input → seek 0 */
   let playbackOrder = shuffleArray(MUSIC_TRACKS);
   let currentIndex = 0;
@@ -224,6 +300,34 @@ function initMusicPlayer() {
     if (!audio.muted) {
       audio.play().catch(() => {});
     }
+  };
+
+  /** Herstel muziek na paginanavigatie – skip als al vroeg hersteld */
+  const tryRestoreState = () => {
+    try {
+      if (sessionStorage.getItem(RESTORED_FLAG)) return;
+      const raw = sessionStorage.getItem(MUSIC_STATE_KEY);
+      if (!raw) return;
+      const saved = JSON.parse(raw);
+      if (!saved || typeof saved.trackIndex !== 'number' || typeof saved.playbackOrderIndices !== 'object') return;
+      if (saved.muted || !saved.isPlaying) return;
+      playbackOrder = (saved.playbackOrderIndices || [])
+        .map((i) => PLAYLIST_ORDER[i])
+        .filter(Boolean);
+      if (!playbackOrder.length) playbackOrder = [...MUSIC_TRACKS];
+      currentIndex = Math.min(saved.currentIndexInOrder ?? 0, playbackOrder.length - 1);
+      const displayIndex = indexInPlaylist(playbackOrder[currentIndex]);
+      if (displayIndex < 0) return;
+      loadTrack(displayIndex);
+      restoredFromState = true;
+      const seekAndPlay = () => {
+        audio.currentTime = Math.min(saved.currentTime ?? 0, audio.duration || 0);
+        if (!audio.muted) audio.play().catch(() => {});
+        audio.removeEventListener('canplay', seekAndPlay);
+      };
+      audio.addEventListener('canplay', seekAndPlay);
+      if (audio.readyState >= 2) seekAndPlay();
+    } catch (_) {}
   };
 
   /** Lazy load: fetch MP3 only on first Play click. Does NOT play. */
@@ -320,18 +424,26 @@ function initMusicPlayer() {
     playNext();
   });
 
-  /* Herstel na tab-inactiviteit: probeer te hervatten wanneer gebruiker terugkeert */
-  const tryResumeIfShouldPlay = () => {
-    if (document.hidden) return;
-    if (audio.muted) return;
-    if (audio.paused && audio.src) {
+  /* Herstel na tab-inactiviteit: alleen hervatten als muziek speelde toen gebruiker wegging */
+  let wasPlayingWhenHidden = false;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      wasPlayingWhenHidden = !audio.paused;
+    } else {
+      if (!audio.muted && wasPlayingWhenHidden && audio.paused && audio.src) {
+        audio.play().then(() => updatePlayState()).catch(() => {});
+      }
+    }
+  });
+  window.addEventListener('focus', () => {
+    if (!document.hidden && !audio.muted && wasPlayingWhenHidden && audio.paused && audio.src) {
       audio.play().then(() => updatePlayState()).catch(() => {});
     }
-  };
-  document.addEventListener('visibilitychange', tryResumeIfShouldPlay);
-  window.addEventListener('focus', tryResumeIfShouldPlay);
+  });
   window.addEventListener('pageshow', (e) => {
-    if (e.persisted) tryResumeIfShouldPlay(); /* Herstel na bfcache */
+    if (e.persisted && !document.hidden && !audio.muted && wasPlayingWhenHidden && audio.paused && audio.src) {
+      audio.play().then(() => updatePlayState()).catch(() => {});
+    }
   });
 
   muteBtn?.addEventListener('click', (e) => {
@@ -438,11 +550,51 @@ function initMusicPlayer() {
   updateMediaSession();
   setupMediaSessionHandlers();
 
-  player?.classList.add('draw-attention');
-  const stopAttention = () => player?.classList.remove('draw-attention');
-  setTimeout(stopAttention, 6200);
-  collapseBtn?.addEventListener('click', stopAttention);
-  document.addEventListener('scroll', stopAttention, { once: true });
+  /* Herstel na paginanavigatie */
+  tryRestoreState();
+
+  /* Prefetch bij link-hover – track + footer in cache voor soepele navigatie */
+  let prefetchDone = false;
+  const prefetchForNavigation = () => {
+    if (prefetchDone || audio.muted || audio.paused) return;
+    const src = getCurrentTrack()?.src;
+    if (src) {
+      prefetchDone = true;
+      fetch(src).catch(() => {});
+      fetch('/pages/partials/footer.html').catch(() => {});
+    }
+  };
+  document.addEventListener('mouseover', (e) => {
+    const a = e.target?.closest('a[href^="/"]');
+    if (a && !a.href.includes('#')) prefetchForNavigation();
+  }, { passive: true });
+
+  /* Opslaan bij navigatie – muziek gaat door tenzij mute of pauze */
+  const saveMusicState = () => {
+    try {
+      sessionStorage.removeItem(RESTORED_FLAG);
+      const trackIndex = indexInPlaylist(getCurrentTrack());
+      const playbackOrderIndices = playbackOrder.map((t) => indexInPlaylist(t));
+      sessionStorage.setItem(MUSIC_STATE_KEY, JSON.stringify({
+        trackIndex,
+        playbackOrderIndices,
+        currentIndexInOrder: currentIndex,
+        currentTime: audio.currentTime,
+        isPlaying: !audio.paused,
+        muted: audio.muted
+      }));
+    } catch (_) {}
+  };
+  window.addEventListener('pagehide', saveMusicState);
+  window.addEventListener('beforeunload', saveMusicState);
+
+  if (!restoredFromState) {
+    player?.classList.add('draw-attention');
+    const stopAttention = () => player?.classList.remove('draw-attention');
+    setTimeout(stopAttention, 6200);
+    collapseBtn?.addEventListener('click', stopAttention);
+    document.addEventListener('scroll', stopAttention, { once: true });
+  }
 }
 
 // Smooth scroll
@@ -828,6 +980,7 @@ function initVideoPreviews() {
   };
 
   let videoIndex = 0;
+  let wasMusicPlayingBeforeVideo = false;
 
   const goToVideo = (idx) => {
     const videos = getVideoList();
@@ -846,6 +999,11 @@ function initVideoPreviews() {
   const openVideo = (srcOrIndex) => {
     const videos = getVideoList();
     if (videos.length === 0) return;
+    /* Video float klik = we zijn op home → geen return bij sluiten */
+    const path = (location.pathname || '/').replace(/\/$/, '') || '/';
+    if (path === '' || path === '/index.html') {
+      try { sessionStorage.removeItem(VIDEO_RETURN_KEY); } catch (_) {}
+    }
     const idx = typeof srcOrIndex === 'number'
       ? srcOrIndex
       : Math.max(0, videos.indexOf(srcOrIndex));
@@ -868,10 +1026,13 @@ function initVideoPreviews() {
     document.body.classList.add('video-modal-open');
     document.body.style.overflow = 'hidden';
     document.querySelectorAll('.video-float video').forEach(v => v.pause());
+    wasMusicPlayingBeforeVideo = bgMusic && !bgMusic.muted && !bgMusic.paused;
     if (bgMusic && !bgMusic.muted) {
       bgMusic.pause();
     }
   };
+
+  const VIDEO_RETURN_KEY = 'deejaytim-video-return';
 
   const closeVideo = () => {
     modal.classList.remove('open');
@@ -880,9 +1041,20 @@ function initVideoPreviews() {
     document.querySelectorAll('.video-float video').forEach(v => v.play().catch(() => {}));
     modalPlayer.src = '';
     document.body.style.overflow = '';
-    if (bgMusic && !bgMusic.muted) {
+    if (bgMusic && !bgMusic.muted && wasMusicPlayingBeforeVideo) {
       bgMusic.play().catch(() => {});
     }
+    try {
+      const returnUrl = sessionStorage.getItem(VIDEO_RETURN_KEY);
+      if (returnUrl) {
+        sessionStorage.removeItem(VIDEO_RETURN_KEY);
+        if (window.pjaxNavigate) {
+          window.pjaxNavigate(returnUrl);
+        } else {
+          location.href = returnUrl;
+        }
+      }
+    } catch (_) {}
   };
 
   // Start muted video previews

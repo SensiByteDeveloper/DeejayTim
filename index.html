@@ -369,39 +369,7 @@
   </div>
   -->
 
-  <!-- Sticky Player Bar – compacte balk onderaan, inklapbaar naar icoon -->
-  <div class="music-player state-expanded" id="musicPlayer">
-    <div class="music-player-progress-wrap">
-      <input type="range" class="music-player-progress" id="musicProgress" min="0" max="100" value="0" step="0.1" aria-label="Tijdlijn – klik of sleep om vooruit te spoelen">
-    </div>
-    <div class="music-player-bar" id="musicPlayerBar">
-      <button class="music-player-collapse" id="musicCollapse" aria-label="Speler minimaliseren" aria-expanded="true" aria-controls="musicPlayerContent" title="Minimaliseren">−</button>
-      <div class="music-player-info" id="musicPlayerContent">
-        <div class="music-player-thumb">
-          <span class="music-vinyl" aria-hidden="true">◉</span>
-        </div>
-        <button class="music-track-trigger" id="musicTrackTrigger" aria-expanded="false" aria-controls="musicPlaylist" data-i18n-aria="music.playlistAria">
-          <span class="music-label" data-i18n="music.label">Deejay Tim</span>
-          <span class="music-track" id="musicTrackDisplay">Let's Go DJ Tim</span>
-        </button>
-      </div>
-      <div class="music-player-controls">
-        <button class="music-mute" id="musicMute" aria-label="Muziek dempen" aria-pressed="false">
-          <span class="music-mute-icon music-muted" aria-hidden="true">🔇</span>
-          <span class="music-mute-icon" aria-hidden="true">🔊</span>
-        </button>
-        <button class="music-play music-icon-btn-primary" id="musicPlay" aria-label="Afspelen">
-          <svg class="music-btn-icon music-icon-play" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          <svg class="music-btn-icon music-icon-pause" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-        </button>
-        <button class="music-next music-icon-btn-primary" data-i18n-aria="music.nextAria" aria-label="Volgende">
-          <svg class="music-btn-icon" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><polygon points="13 19 22 12 13 5 13 19"/><polygon points="2 19 11 12 2 5 2 19"/></svg>
-        </button>
-      </div>
-    </div>
-    <div class="music-playlist" id="musicPlaylist" role="listbox" aria-label="Nummeroverzicht" data-i18n-aria="music.playlistAria" aria-hidden="true"></div>
-    <button class="music-player-mini" id="musicExpand" aria-label="Speler uitklappen" aria-expanded="false" hidden>♪</button>
-  </div>
+  <div data-include="/pages/partials/footer.html"></div>
 
   <!-- Hands Up! – full-page overlay met iPhone mockups -->
   <div class="handsup-overlay" id="handsupModal">
@@ -442,26 +410,6 @@
     <div class="handsup-carousel-dots" role="tablist" aria-label="App-schermen"></div>
   </div>
 
-  <!-- Video modal: carousel zoals Hands Up – pijlen, dots, swipen -->
-  <div class="video-modal" id="videoModal">
-    <button class="video-modal-close" aria-label="Sluiten">×</button>
-    <div class="video-modal-backdrop"></div>
-    <button class="video-carousel-prev" aria-label="Vorige video">‹</button>
-    <button class="video-carousel-next" aria-label="Volgende video">›</button>
-    <div class="video-modal-content">
-      <div class="video-modal-phone">
-        <div class="video-modal-screen">
-          <video id="videoModalPlayer" controls playsinline>
-            <source src="" type="video/mp4">
-          </video>
-        </div>
-        <img src="media/Apple iPhone 13 Pro — Gold — Shadow.png" alt="" class="video-modal-frame">
-      </div>
-    </div>
-    <div class="video-carousel-dots" role="tablist" aria-label="Video's"></div>
-  </div>
-
-  <audio id="bgMusic" preload="none"></audio>
   </div><!-- /#page-content -->
 
   <script type="application/json" id="i18n-nl">{"page":{"title":"Deejay Tim | DJ voor jouw evenement"},"nav":{"ariaLabel":"Hoofdnavigatie","intro":"Intro","diensten":"Diensten","handsUp":"Hands Up!","contact":"Contact","instagram":"Instagram","instagramAria":"Instagram (opent in nieuw tabblad)"},"hero":{"tagline":"De perfecte soundtrack voor elk moment","cta":"Boek nu","instagramAria":"Instagram @deejaytimr (opent in nieuw tabblad)"},"intro":{"title":"De ervaring","p1":"Zoek je de perfecte DJ voor jouw evenement? Deejay Tim levert professionele muziek voor feesten, bruiloften en bedrijfsevenementen.","p2prefix":"Mijn missie: ","highlight":"de menigte laten dansen","p2suffix":" en iedereen een onvergetelijke avond bezorgen. Breed repertoire, voor elk moment de juiste sfeer.","cta":"Laten we er samen een mooi feest van maken!"},"diensten":{"title":"Diensten & prijzen","subtitle":"Prijzen zijn excl. BTW, incl. 4 uur DJ en incl. reiskosten tot 30km vanuit 3332 SN. Extra km: €0,25. Extra uur: €100.","allIn":{"title":"All-in","subtitle":"Complete DJ set + DJ","badge":"Populair","features":["DJ-set (Pioneer XDJ-RX3)","DJ Booth","Lichtset","Rookmachine","Speakerset","Microfoon"],"audience":"Goed voor tot ±100 personen","note":"Extra materiaal (bijv. extra speakers of licht) kan optioneel worden ingehuurd. Dit regelen we in overleg.","price":"€500","cta":"Boek All-in"},"justDj":{"title":"Just DJ","subtitle":"Enkel Deejay Tim","features":["Heb je al een complete DJ- en geluidsset?","Ik verzorg de muziek op maat","USB-sticks en headset mee","Draai enkel digitaal"],"price":"€250","cta":"Boek Just DJ"},"handsUp":{"title":"Hands Up!","tagline":"Interactieve DJ ervaring","ariaPreview":"Bekijk Hands Up! app","clickHint":"Klik om de app te bekijken","p1":"Live interactie via de Hands Up! app: song requests, stemmen op de volgende track en meebepalen wat er gedraaid wordt. Jullie sturen, ik draai.","p2":"Perfect voor bruiloften, feesten en events waar iedereen meebeslist.","modalTitle":"Hands Up! in actie","screenParty":"Hands Up! welkom – Verzoeknummers aanvragen, Loterij, Support","screenRequests":"Hands Up! verzoeknummers wachtrij"},"contact":{"title":"Let's talk!","subtitle":"Feestje bouwen?","whatsapp":"WhatsApp","whatsappAria":"Contacteer Deejay Tim via WhatsApp","form":{"name":"Naam *","phone":"Telefoonnummer *","email":"E-mail *","message":"Wat kunt u al delen over uw feestje? *","submit":"Verstuur","errorEmail":"Voer een geldig e-mailadres in (bijv. naam@domein.nl)","errorPhone":"Voer een geldig telefoonnummer in (bijv. 06 12345678 of +31 6 12345678)"},"success":"Bedankt! We nemen zo snel mogelijk contact op."},"music":{"introLangLabel":"Taal:","introHeading":"Welkom","introInstruction":"Kies hoe je de website wilt bezoeken.","introLegend":"Muziek","optionWith":"Bezoek website met muziek","optionWithout":"Bezoek website zonder muziek","submit":"Verder","label":"Deejay Tim","track":"Let's Go DJ Tim","muteAria":"Muziek dempen","unmuteAria":"Muziek aanzetten","toggleAria":"Muziekspeler uitklappen of inklappen","toggleOnAria":"Muziek aan","toggleOffAria":"Muziek uit","toggleOnTitle":"Muziek inschakelen","toggleOffTitle":"Muziek uitschakelen","playlistAria":"Nummeroverzicht","prevAria":"Vorige","playAria":"Afspelen","pauseAria":"Pauzeren","nextAria":"Volgende"},"video":{"clickHint":"♪ Klik voor geluid"},"whatsapp":{"status":"Online","welcome":"Hoi! 👋 Waar kan ik je mee helpen?","cta":"Chat op WhatsApp"},"lang":{"toggleAria":"Taal wijzigen","nl":"Nederlands","en":"Engels","current":"Huidige taal: {lang}"}}</script>
@@ -470,6 +418,7 @@
   <script src="i18n/i18n.js?v=6"></script>
   <script src="script.js?v=11"></script>
   <script type="module" src="js/track.js"></script>
+  <script type="module" src="/js/includePartials.js"></script>
   <script type="module" src="js/renderPricing.js"></script>
   <script type="module" src="js/content.js"></script>
 </body>

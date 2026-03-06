@@ -300,7 +300,7 @@ export async function renderServicePage() {
     if (reviewsEl) reviewsEl.innerHTML = '<div class="container"><h2>Reviews</h2><p><a href="/reviews.html">Bekijk reviews</a>.</p></div>';
   }
 
-  const ctaText = service.ctaText || 'Check beschikbaarheid';
+  const ctaText = pickLang(service.ctaText, lang) || (lang === 'en' ? 'Check availability' : 'Check beschikbaarheid');
   const ctaEl = document.getElementById('cta');
   if (ctaEl) {
     ctaEl.innerHTML = `
@@ -349,4 +349,5 @@ export async function renderServicePage() {
 
 if (typeof document !== 'undefined') {
   window.addEventListener('langchange', renderServicePage);
+  document.addEventListener('partialsloaded', renderServicePage);
 }

@@ -321,4 +321,5 @@ export async function renderLocationPage() {
 
 if (typeof window !== 'undefined') {
   window.addEventListener('langchange', renderLocationPage);
+  document.addEventListener('partialsloaded', renderLocationPage);
 }

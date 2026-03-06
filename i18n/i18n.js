@@ -44,9 +44,13 @@
 
   function apply() {
     document.documentElement.lang = currentLang;
-    const title = get(dict[currentLang], 'page.title');
+    const path = typeof location !== 'undefined' ? location.pathname || '' : '';
+    const isInspiratie = /^\/inspiratie\/?$/.test(path) || path === '/inspiratie/index.html';
+    const titleKey = isInspiratie ? 'pages.inspiratieIndex.pageTitle' : 'page.title';
+    const descKey = isInspiratie ? 'pages.inspiratieIndex.pageDescription' : 'page.description';
+    const title = get(dict[currentLang], titleKey);
     if (title) document.title = title;
-    const desc = get(dict[currentLang], 'page.description');
+    const desc = get(dict[currentLang], descKey);
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc && desc) metaDesc.setAttribute('content', desc);
     const metaOgTitle = document.querySelector('meta[property="og:title"]');

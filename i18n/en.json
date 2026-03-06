@@ -174,6 +174,24 @@
       "playlistVoorbeelden": "Playlist examples",
       "playlistGenerator": "Playlist generator"
     },
+    "inspiratieIndex": {
+      "pageTitle": "Inspiration | Music, playlists and photos | Deejay Tim",
+      "pageDescription": "Music inspiration, playlist generator, party photos and DJ set-up. Tips for wedding, birthday and more.",
+      "title": "Inspiration",
+      "subtitle": "Music inspiration, playlists and tips for your party. Or view photos, videos and the DJ set-up.",
+      "videosTitle": "Videos",
+      "videosDesc": "View atmosphere footage of parties on the homepage – opens the video carousel directly",
+      "muziekTitle": "Party music inspiration",
+      "muziekDesc": "Curated playlists per moment: arrival, party start, peak and closers",
+      "playlistTitle": "Playlist generator",
+      "playlistDesc": "Generate a custom playlist for your event type and atmosphere",
+      "fotosTitle": "Party photos",
+      "fotosDesc": "Atmosphere photos from parties and events",
+      "djSetupTitle": "DJ set-up",
+      "djSetupDesc": "Professional equipment: Pioneer XDJ-RX3, lighting and sound",
+      "ctaDjHuren": "View DJ hire",
+      "ctaContact": "Get in touch"
+    },
     "blog": {
       "title": "Blog",
       "subtitle": "Tips, stories and inspiration for your party"
@@ -275,7 +293,8 @@
       "viewGoogleReviews": "View Google reviews"
     },
     "werkgebied": {
-      "title": "DJ Tim service area (region 3332 SN, ±30 km)",
+      "title": "DJ Tim service area",
+      "titleSub": "region 3332 SN, ±30 km",
       "intro": "From Zwijndrecht (3332 SN) I provide parties in the Drechtsteden, Rijnmond and surroundings. Whether you're looking for a",
       "introSuffix": " in Dordrecht, a",
       "introSuffix2": " in Barendrecht or a",
