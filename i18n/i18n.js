@@ -44,13 +44,34 @@
 
   function apply() {
     document.documentElement.lang = currentLang;
-    const title = get(dict[currentLang], 'page.title');
+    const path = typeof location !== 'undefined' ? location.pathname || '' : '';
+    const isInspiratie = /^\/inspiratie\/?$/.test(path) || path === '/inspiratie/index.html';
+    const titleKey = isInspiratie ? 'pages.inspiratieIndex.pageTitle' : 'page.title';
+    const descKey = isInspiratie ? 'pages.inspiratieIndex.pageDescription' : 'page.description';
+    const title = get(dict[currentLang], titleKey);
     if (title) document.title = title;
+    const desc = get(dict[currentLang], descKey);
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc && desc) metaDesc.setAttribute('content', desc);
+    const metaOgTitle = document.querySelector('meta[property="og:title"]');
+    if (metaOgTitle && title) metaOgTitle.setAttribute('content', title);
+    const metaOgDesc = document.querySelector('meta[property="og:description"]');
+    if (metaOgDesc && desc) metaOgDesc.setAttribute('content', desc);
+    const metaTwTitle = document.querySelector('meta[name="twitter:title"]');
+    if (metaTwTitle && title) metaTwTitle.setAttribute('content', title);
+    const metaTwDesc = document.querySelector('meta[name="twitter:description"]');
+    if (metaTwDesc && desc) metaTwDesc.setAttribute('content', desc);
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       const val = get(dict[currentLang], key);
       if (val != null) el.textContent = val;
+    });
+
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html');
+      const val = get(dict[currentLang], key);
+      if (val != null) el.innerHTML = val;
     });
 
     document.querySelectorAll('[data-i18n-aria]').forEach(el => {
@@ -104,7 +125,7 @@
     });
   }
 
-  window.i18n = { t, setLang, get currentLang() { return currentLang; } };
+  window.i18n = { t, setLang, apply, get currentLang() { return currentLang; } };
 
   function runInit() {
     (async function init() {
@@ -123,4 +144,11 @@
   } else {
     runInit();
   }
+
+  document.addEventListener('headerloaded', function () {
+    if (window.i18n?.apply) window.i18n.apply();
+  });
+  document.addEventListener('partialsloaded', function () {
+    if (window.i18n?.apply) window.i18n.apply();
+  });
 })();

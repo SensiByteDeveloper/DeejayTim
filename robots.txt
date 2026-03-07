@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://deejaytim.nl/sitemap.xml

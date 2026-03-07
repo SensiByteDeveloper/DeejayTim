@@ -1,6 +1,22 @@
 // ===== DEEJAY TIM - Interactie & Muziek =====
 
+/* Pjax: laad eerst zodat navigatie geen volledige reload doet – muziek blijft spelen */
+(function () {
+  const s = document.createElement('script');
+  s.src = '/js/pjax.js';
+  s.async = false;
+  document.head.appendChild(s);
+})();
+
+// Google reviews URL – directe link naar Google Business Profile
+const GOOGLE_REVIEWS_URL = 'https://share.google/Ogn2xmPrBQb6ZqaAt';
+
+function initGoogleReviewsLinks() {
+  document.querySelectorAll('.google-reviews-link').forEach((a) => { a.href = GOOGLE_REVIEWS_URL; });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  initGoogleReviewsLinks();
   initNav();
   initMusicPlayer();
   initSmoothScroll();
@@ -11,6 +27,24 @@ document.addEventListener('DOMContentLoaded', () => {
   initHandsUpModal();
   initWhatsAppWidget();
   window.addEventListener('resize', initVideoRandomPositions);
+  document.addEventListener('partialsloaded', (e) => {
+    initNav();
+    initGoogleReviewsLinks();
+    if (!e.detail?.fromPjax) {
+      initMusicPlayer();
+      initVideoPreviews();
+      initVideoRandomPositions();
+    }
+    if (e.detail?.fromPjax) {
+      initSmoothScroll();
+      initScrollEffects();
+      initVideoPreviews();
+      initVideoRandomPositions();
+      initForm();
+      initHandsUpModal();
+    }
+  });
+  document.addEventListener('headerloaded', initNav);
 });
 
 // WhatsApp Chat Widget – toggle popup
@@ -71,6 +105,7 @@ function initNav() {
   };
 
   window.addEventListener('scroll', () => {
+    if (!nav) return;
     if (window.scrollY > 50) nav.classList.add('scrolled');
     else nav.classList.remove('scrolled');
   });
@@ -94,19 +129,64 @@ function initNav() {
   });
 }
 
-// Music Player – multi-track, shuffle
+// Music Player – multi-track, shuffle, state persists across page navigations
+const MUSIC_STATE_KEY = 'deejaytim-music-state';
+
 const MUSIC_TRACKS = [
-  { src: "media/DJ Tim - Let's Go DJ Tim.mp3", title: "Let's Go DJ Tim" },
-  { src: "media/DJ Tim - Bounce Control.mp3", title: "Bounce Control" },
-  { src: "media/DJ Tim - Faz Assim.mp3", title: "Faz Assim" },
-  { src: "media/DJ Tim - Waistline Spin.mp3", title: "Waistline Spin" },
-  { src: "media/DJ Tim - Under The Same Rhythm.mp3", title: "Under The Same Rhythm" },
-  { src: "media/DJ Tim - Fiesta Fusion.mp3", title: "Fiesta Fusion" },
-  { src: "media/DJ Tim - Súbelo.mp3", title: "Súbelo" },
-  { src: "media/DJ Tim - Bachata en la Noche.mp3", title: "Bachata en la Noche" },
-  { src: "media/DJ Tim - Baila Conmigo.mp3", title: "Baila Conmigo" }
+  { src: "/media/DJ Tim - Let's Go DJ Tim.mp3", title: "Let's Go DJ Tim" },
+  { src: "/media/DJ Tim - Bounce Control.mp3", title: "Bounce Control" },
+  { src: "/media/DJ Tim - Faz Assim.mp3", title: "Faz Assim" },
+  { src: "/media/DJ Tim - Waistline Spin.mp3", title: "Waistline Spin" },
+  { src: "/media/DJ Tim - Under The Same Rhythm.mp3", title: "Under The Same Rhythm" },
+  { src: "/media/DJ Tim - Fiesta Fusion.mp3", title: "Fiesta Fusion" },
+  { src: "/media/DJ Tim - Súbelo.mp3", title: "Súbelo" },
+  { src: "/media/DJ Tim - Bachata en la Noche.mp3", title: "Bachata en la Noche" },
+  { src: "/media/DJ Tim - Baila Conmigo.mp3", title: "Baila Conmigo" }
 ];
 const PLAYLIST_ORDER = [...MUSIC_TRACKS];
+
+/* Audio direct beschikbaar + vroege restore – geen wachten op footer */
+const RESTORED_FLAG = 'deejaytim-music-restored';
+(function () {
+  if (!document.body) return;
+  let audio = document.getElementById('bgMusic');
+  if (!audio) {
+    audio = document.createElement('audio');
+    audio.id = 'bgMusic';
+    audio.preload = 'none';
+    document.body.appendChild(audio);
+  }
+  try {
+    const raw = sessionStorage.getItem(MUSIC_STATE_KEY);
+    if (!raw) return;
+    const s = JSON.parse(raw);
+    if (!s || s.muted || !s.isPlaying) return;
+    const indices = s.playbackOrderIndices || [];
+    const idx = s.currentIndexInOrder ?? 0;
+    const trackIdx = indices[idx];
+    if (typeof trackIdx !== 'number' || trackIdx < 0 || trackIdx >= PLAYLIST_ORDER.length) return;
+    const track = PLAYLIST_ORDER[trackIdx];
+    if (!track?.src) return;
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = track.src;
+    document.head.appendChild(link);
+    audio.src = track.src;
+    audio.load();
+    const seekAndPlay = () => {
+      audio.currentTime = Math.min(s.currentTime ?? 0, audio.duration || 0);
+      audio.play().catch(() => {});
+      audio.removeEventListener('canplay', seekAndPlay);
+      sessionStorage.setItem(RESTORED_FLAG, '1');
+    };
+    audio.addEventListener('canplay', seekAndPlay);
+    if (audio.readyState >= 2) seekAndPlay();
+    const fl = document.createElement('link');
+    fl.rel = 'prefetch';
+    fl.href = '/pages/partials/footer.html';
+    document.head.appendChild(fl);
+  } catch (_) {}
+})();
 
 function shuffleArray(arr) {
   const a = [...arr];
@@ -125,56 +205,32 @@ function initMusicPlayer() {
   const expandBtn = document.getElementById('musicExpand');
   const progressEl = document.getElementById('musicProgress');
   const trackTrigger = document.getElementById('musicTrackTrigger');
-  const introOverlay = document.getElementById('musicIntroOverlay');
-  const pageContent = document.getElementById('page-content');
-  const audio = document.getElementById('bgMusic');
+  let audio = document.getElementById('bgMusic');
+  if (!audio && document.body) {
+    audio = document.createElement('audio');
+    audio.id = 'bgMusic';
+    audio.preload = 'none';
+    document.body.appendChild(audio);
+  }
 
-  // Tijdens intro: verberg rest van pagina voor screenreaders (VoiceOver focust alleen op keuze)
-  const setPageContentInert = (inert) => {
-    if (!pageContent) return;
-    if (inert) {
-      pageContent.setAttribute('aria-hidden', 'true');
-      pageContent.setAttribute('inert', '');
-    } else {
-      pageContent.removeAttribute('aria-hidden');
-      pageContent.removeAttribute('inert');
-    }
-  };
+  // Migrate old "no-music" preference: clear it so player always shows
   const MUSIC_PREF_KEY = 'deejaytim-music';
-  const getStoredMusicPref = () => {
-    try { return localStorage.getItem(MUSIC_PREF_KEY); } catch (_) { return null; }
-  };
-  const setStoredMusicPref = (v) => {
-    try { if (v) localStorage.setItem(MUSIC_PREF_KEY, v); } catch (_) {}
-  };
+  try {
+    localStorage.removeItem(MUSIC_PREF_KEY);
+  } catch (_) {}
 
-  const radioWith = document.getElementById('musicChoiceWith');
-  const radioWithout = document.getElementById('musicChoiceWithout');
-  const submitBtn = document.getElementById('musicIntroSubmit');
-
-  // Pre-select op basis van opgeslagen keuze (default: zonder muziek)
-  const savedPref = getStoredMusicPref();
-  if (savedPref === 'with' && radioWith) {
-    radioWith.checked = true;
-    radioWithout.checked = false;
-  } else {
-    radioWithout.checked = true;
-    radioWith.checked = false;
-  }
-
-  if (document.body.classList.contains('intro-pending')) {
-    setPageContentInert(true);
-    requestAnimationFrame(() => (radioWith?.checked ? radioWith : radioWithout)?.focus());
-  }
   const trackDisplay = document.getElementById('musicTrackDisplay');
   const playlistEl = document.getElementById('musicPlaylist');
   const nextBtn = player?.querySelector('.music-next');
 
   if (!audio || !player) return;
 
-  player.classList.add('muted'); // Geen geluid tot expliciete user action (Verder met "met muziek")
+  // Default: not muted, paused, no autoplay. MP3 loads only on first Play click.
+  audio.muted = false;
+  player?.classList.remove('muted');
 
   let userSeeking = false;
+  let restoredFromState = false;
   let progressBarProgrammatic = false; /* Voorkom dat updateProgress → input → seek 0 */
   let playbackOrder = shuffleArray(MUSIC_TRACKS);
   let currentIndex = 0;
@@ -213,7 +269,7 @@ function initMusicPlayer() {
   const setupMediaSessionHandlers = () => {
     if (!('mediaSession' in navigator)) return;
     navigator.mediaSession.setActionHandler('play', () => {
-      if (!player?.classList.contains('muted')) audio?.play().catch(() => {});
+      if (!audio?.muted) audio?.play().catch(() => {});
     });
     navigator.mediaSession.setActionHandler('pause', () => audio?.pause());
     navigator.mediaSession.setActionHandler('nexttrack', () => playNext());
@@ -226,7 +282,7 @@ function initMusicPlayer() {
     });
   };
 
-  const loadAndPlay = (displayIndex) => {
+  const loadTrack = (displayIndex) => {
     if (displayIndex < 0 || displayIndex >= PLAYLIST_ORDER.length) return;
     userSeeking = false;
     const t = PLAYLIST_ORDER[displayIndex];
@@ -235,11 +291,50 @@ function initMusicPlayer() {
     audio.src = t.src;
     audio.load();
     if (progressEl) { progressEl.value = '0'; progressEl.style.setProperty('--progress', '0%'); }
-    if (!player.classList.contains('muted')) {
-      audio.play().catch(() => {});
-    }
     updateUI();
     updateMediaSession();
+  };
+
+  const loadAndPlay = (displayIndex) => {
+    loadTrack(displayIndex);
+    if (!audio.muted) {
+      audio.play().catch(() => {});
+    }
+  };
+
+  /** Herstel muziek na paginanavigatie – skip als al vroeg hersteld */
+  const tryRestoreState = () => {
+    try {
+      if (sessionStorage.getItem(RESTORED_FLAG)) return;
+      const raw = sessionStorage.getItem(MUSIC_STATE_KEY);
+      if (!raw) return;
+      const saved = JSON.parse(raw);
+      if (!saved || typeof saved.trackIndex !== 'number' || typeof saved.playbackOrderIndices !== 'object') return;
+      if (saved.muted || !saved.isPlaying) return;
+      playbackOrder = (saved.playbackOrderIndices || [])
+        .map((i) => PLAYLIST_ORDER[i])
+        .filter(Boolean);
+      if (!playbackOrder.length) playbackOrder = [...MUSIC_TRACKS];
+      currentIndex = Math.min(saved.currentIndexInOrder ?? 0, playbackOrder.length - 1);
+      const displayIndex = indexInPlaylist(playbackOrder[currentIndex]);
+      if (displayIndex < 0) return;
+      loadTrack(displayIndex);
+      restoredFromState = true;
+      const seekAndPlay = () => {
+        audio.currentTime = Math.min(saved.currentTime ?? 0, audio.duration || 0);
+        if (!audio.muted) audio.play().catch(() => {});
+        audio.removeEventListener('canplay', seekAndPlay);
+      };
+      audio.addEventListener('canplay', seekAndPlay);
+      if (audio.readyState >= 2) seekAndPlay();
+    } catch (_) {}
+  };
+
+  /** Lazy load: fetch MP3 only on first Play click. Does NOT play. */
+  const ensureAudioLoaded = () => {
+    if (!audio.src) {
+      loadTrack(indexInPlaylist(playbackOrder[0]));
+    }
   };
 
   const playNext = () => {
@@ -262,41 +357,12 @@ function initMusicPlayer() {
     loadAndPlay(indexInPlaylist(prevTrack));
   };
 
-  let introDone = false;
-  const runIntroDone = () => {
-    if (introDone) return;
-    introDone = true;
-    setPageContentInert(false);
-    player?.classList.remove('draw-attention');
-    document.body.classList.remove('intro-pending');
-    document.body.classList.add('intro-done');
-    introOverlay?.classList.add('faded');
-    introOverlay?.setAttribute('aria-hidden', 'true');
-    updateMusicToggleState();
-    setTimeout(() => introOverlay?.remove(), 600);
-  };
-
   const setCollapsed = (collapsed) => {
     player.classList.toggle('state-collapsed', collapsed);
     player.classList.toggle('state-expanded', !collapsed);
     collapseBtn?.setAttribute('aria-expanded', !collapsed);
     expandBtn?.setAttribute('aria-expanded', collapsed);
     expandBtn?.toggleAttribute('hidden', !collapsed);
-  };
-
-  loadAndPlay(indexInPlaylist(playbackOrder[0]));
-
-  const startExperience = () => {
-    player.classList.remove('muted');
-    muteBtn?.setAttribute('aria-pressed', 'false');
-    audio.play().then(() => { updatePlayState(); }).catch(() => {});
-    runIntroDone();
-  };
-
-  const startExperienceWithoutMusic = () => {
-    document.body.classList.add('no-music');
-    audio.pause();
-    runIntroDone();
   };
 
   /* API voor "Achtergrondmuziek aan/uit" + nav-toggle */
@@ -306,7 +372,7 @@ function initMusicPlayer() {
 
   const updateMusicToggleState = () => {
     if (!musicToggle || !musicToggleDesc) return;
-    const on = !document.body.classList.contains('no-music');
+    const on = !audio.muted;
     musicToggle.setAttribute('aria-pressed', String(on));
     musicToggle.setAttribute('aria-label', on ? t('music.toggleOffAria') : t('music.toggleOnAria'));
     musicToggle.setAttribute('title', on ? t('music.toggleOffTitle') : t('music.toggleOnTitle'));
@@ -318,47 +384,24 @@ function initMusicPlayer() {
   };
 
   window.deejayTimMusic = {
-    getPreference: () => getStoredMusicPref(),
-    setPreference: (withMusic) => {
-      setStoredMusicPref(withMusic ? 'with' : 'without');
-      if (withMusic) {
-        document.body.classList.remove('no-music');
-        player?.classList.remove('muted');
-        muteBtn?.setAttribute('aria-pressed', 'false');
-        audio?.play().catch(() => {});
-        updateMuteAria();
-        updatePlayState();
-      } else {
-        document.body.classList.add('no-music');
-        audio?.pause();
-      }
+    setMuted: (muted) => {
+      audio.muted = muted;
+      player?.classList.toggle('muted', muted);
+      muteBtn?.setAttribute('aria-pressed', String(muted));
+      updateMuteAria();
       updateMusicToggleState();
     }
   };
 
   musicToggle?.addEventListener('click', () => {
-    const on = musicToggle.getAttribute('aria-pressed') === 'true';
-    window.deejayTimMusic?.setPreference(!on);
+    const willMute = !audio.muted;
+    window.deejayTimMusic?.setMuted(willMute);
+    window.track?.('music_mute_toggle', { muted: willMute });
   });
   window.addEventListener('langchange', () => {
     updateMusicToggleState();
     updatePlayState();
     updateMuteAria();
-  });
-
-  // Verder: start ervaring na expliciete klik (audio NOOIT automatisch)
-  const onSubmit = () => {
-    const withMusic = radioWith?.checked;
-    setStoredMusicPref(withMusic ? 'with' : 'without');
-    if (withMusic) startExperience();
-    else startExperienceWithoutMusic();
-  };
-  submitBtn?.addEventListener('click', onSubmit);
-  submitBtn?.addEventListener('keydown', (e) => {
-    if ((e.key === 'Enter' || e.key === ' ') && !submitBtn.disabled) {
-      e.preventDefault();
-      onSubmit();
-    }
   });
 
   const updatePlayState = () => {
@@ -370,7 +413,7 @@ function initMusicPlayer() {
     }
   };
   const updateMuteAria = () => {
-    if (muteBtn) muteBtn.setAttribute('aria-label', player?.classList.contains('muted') ? (t('music.unmuteAria') || 'Muziek aanzetten') : (t('music.muteAria') || 'Muziek dempen'));
+    if (muteBtn) muteBtn.setAttribute('aria-label', audio.muted ? (t('music.unmuteAria') || 'Muziek aanzetten') : (t('music.muteAria') || 'Muziek dempen'));
   };
 
   audio.addEventListener('ended', playNext);
@@ -381,35 +424,37 @@ function initMusicPlayer() {
     playNext();
   });
 
-  /* Herstel na tab-inactiviteit: probeer te hervatten wanneer gebruiker terugkeert */
-  const tryResumeIfShouldPlay = () => {
-    if (document.hidden) return;
-    if (document.body.classList.contains('no-music')) return;
-    if (player?.classList.contains('muted')) return;
-    if (audio.paused && audio.src) {
+  /* Herstel na tab-inactiviteit: alleen hervatten als muziek speelde toen gebruiker wegging */
+  let wasPlayingWhenHidden = false;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      wasPlayingWhenHidden = !audio.paused;
+    } else {
+      if (!audio.muted && wasPlayingWhenHidden && audio.paused && audio.src) {
+        audio.play().then(() => updatePlayState()).catch(() => {});
+      }
+    }
+  });
+  window.addEventListener('focus', () => {
+    if (!document.hidden && !audio.muted && wasPlayingWhenHidden && audio.paused && audio.src) {
       audio.play().then(() => updatePlayState()).catch(() => {});
     }
-  };
-  document.addEventListener('visibilitychange', tryResumeIfShouldPlay);
-  window.addEventListener('focus', tryResumeIfShouldPlay);
+  });
   window.addEventListener('pageshow', (e) => {
-    if (e.persisted) tryResumeIfShouldPlay(); /* Herstel na bfcache */
+    if (e.persisted && !document.hidden && !audio.muted && wasPlayingWhenHidden && audio.paused && audio.src) {
+      audio.play().then(() => updatePlayState()).catch(() => {});
+    }
   });
 
   muteBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
-    player.classList.toggle('muted');
-    muteBtn?.setAttribute('aria-pressed', player.classList.contains('muted'));
+    audio.muted = !audio.muted;
+    player?.classList.toggle('muted', audio.muted);
+    muteBtn?.setAttribute('aria-pressed', String(audio.muted));
     updateMuteAria();
-    if (player.classList.contains('muted')) {
-      audio.pause();
-    } else {
-      audio.play().then(() => updatePlayState()).catch(() => {
-        const idx = indexInPlaylist(getCurrentTrack());
-        if (idx >= 0) loadAndPlay(idx);
-      });
-    }
+    updateMusicToggleState();
     updatePlayState();
+    window.track?.('music_mute_toggle', { muted: audio.muted });
   });
 
   collapseBtn?.addEventListener('click', (e) => {
@@ -418,10 +463,12 @@ function initMusicPlayer() {
     player.classList.remove('playlist-open');
     trackTrigger?.setAttribute('aria-expanded', 'false');
     playlistEl?.setAttribute('aria-hidden', 'true');
+    window.track?.('music_minimize');
   });
   expandBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
     setCollapsed(false);
+    window.track?.('music_expand');
   });
 
   trackTrigger?.addEventListener('click', (e) => {
@@ -444,16 +491,17 @@ function initMusicPlayer() {
 
   playBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (player.classList.contains('muted')) return;
     const willPlay = audio.paused;
     if (willPlay) {
+      ensureAudioLoaded();
       audio.play().then(() => updatePlayState()).catch(() => {
-        /* Herstel: herlaad huidige track bij gefaalde play (bv. na tab-suspend) */
         const idx = indexInPlaylist(getCurrentTrack());
         if (idx >= 0) loadAndPlay(idx);
       });
+      window.track?.('music_play');
     } else {
       audio.pause();
+      window.track?.('music_pause');
     }
     playBtn?.classList.toggle('is-playing', willPlay);
     if (playBtn) playBtn.setAttribute('aria-label', willPlay ? (t('music.pauseAria') || 'Pauzeren') : (t('music.playAria') || 'Afspelen'));
@@ -494,7 +542,7 @@ function initMusicPlayer() {
   });
 
   setCollapsed(false);
-  muteBtn?.setAttribute('aria-pressed', player.classList.contains('muted'));
+  muteBtn?.setAttribute('aria-pressed', String(audio.muted));
   updatePlayState();
   updateMuteAria();
   updateUI();
@@ -502,11 +550,51 @@ function initMusicPlayer() {
   updateMediaSession();
   setupMediaSessionHandlers();
 
-  player?.classList.add('draw-attention');
-  const stopAttention = () => player?.classList.remove('draw-attention');
-  setTimeout(stopAttention, 6200);
-  collapseBtn?.addEventListener('click', stopAttention);
-  document.addEventListener('scroll', stopAttention, { once: true });
+  /* Herstel na paginanavigatie */
+  tryRestoreState();
+
+  /* Prefetch bij link-hover – track + footer in cache voor soepele navigatie */
+  let prefetchDone = false;
+  const prefetchForNavigation = () => {
+    if (prefetchDone || audio.muted || audio.paused) return;
+    const src = getCurrentTrack()?.src;
+    if (src) {
+      prefetchDone = true;
+      fetch(src).catch(() => {});
+      fetch('/pages/partials/footer.html').catch(() => {});
+    }
+  };
+  document.addEventListener('mouseover', (e) => {
+    const a = e.target?.closest('a[href^="/"]');
+    if (a && !a.href.includes('#')) prefetchForNavigation();
+  }, { passive: true });
+
+  /* Opslaan bij navigatie – muziek gaat door tenzij mute of pauze */
+  const saveMusicState = () => {
+    try {
+      sessionStorage.removeItem(RESTORED_FLAG);
+      const trackIndex = indexInPlaylist(getCurrentTrack());
+      const playbackOrderIndices = playbackOrder.map((t) => indexInPlaylist(t));
+      sessionStorage.setItem(MUSIC_STATE_KEY, JSON.stringify({
+        trackIndex,
+        playbackOrderIndices,
+        currentIndexInOrder: currentIndex,
+        currentTime: audio.currentTime,
+        isPlaying: !audio.paused,
+        muted: audio.muted
+      }));
+    } catch (_) {}
+  };
+  window.addEventListener('pagehide', saveMusicState);
+  window.addEventListener('beforeunload', saveMusicState);
+
+  if (!restoredFromState) {
+    player?.classList.add('draw-attention');
+    const stopAttention = () => player?.classList.remove('draw-attention');
+    setTimeout(stopAttention, 6200);
+    collapseBtn?.addEventListener('click', stopAttention);
+    document.addEventListener('scroll', stopAttention, { once: true });
+  }
 }
 
 // Smooth scroll
@@ -683,26 +771,26 @@ function showFormSuccess(form) {
   }
 }
 
-// Posities voor video's – max 20% overlap, alle 7 zichtbaar
+// Posities voor video's – beperkte overlap, alle zichtbaar
 function initVideoRandomPositions() {
   if (window.innerWidth < 1600) return;
 
-  // Video ~533px hoog. Secties min 1000px → max ~12% overlap. Kleine marge (1rem) voor lucht.
+  // Video ~533px hoog. Secties 1000px → ruimte voor max ~15% overlap. Meer marge tussen top/bottom.
   const positions = {
     hero: [
       { top: '25%', rotate: 10 }
     ],
     intro: [
-      { top: '1rem', rotate: -8 },
-      { bottom: '1rem', rotate: 12 }
+      { top: '0', rotate: -6 },
+      { bottom: '0', rotate: 8 }
     ],
     diensten: [
-      { top: '1rem', rotate: -10 },
-      { bottom: '1rem', rotate: 8 }
+      { top: '0', rotate: -6 },
+      { bottom: '0', rotate: 8 }
     ],
     'hands-up': [
-      { top: '1rem', rotate: 6 },
-      { bottom: '1rem', rotate: -12 }
+      { top: '0', rotate: 6 },
+      { bottom: '0', rotate: -8 }
     ]
   };
 
@@ -749,6 +837,10 @@ function initHandsUpModal() {
   trigger.addEventListener('click', open);
   trigger.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+  });
+  document.getElementById('handsUpCtaLink')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    open();
   });
   closeBtn?.addEventListener('click', close);
   modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
@@ -888,6 +980,7 @@ function initVideoPreviews() {
   };
 
   let videoIndex = 0;
+  let wasMusicPlayingBeforeVideo = false;
 
   const goToVideo = (idx) => {
     const videos = getVideoList();
@@ -906,6 +999,11 @@ function initVideoPreviews() {
   const openVideo = (srcOrIndex) => {
     const videos = getVideoList();
     if (videos.length === 0) return;
+    /* Video float klik = we zijn op home → geen return bij sluiten */
+    const path = (location.pathname || '/').replace(/\/$/, '') || '/';
+    if (path === '' || path === '/index.html') {
+      try { sessionStorage.removeItem(VIDEO_RETURN_KEY); } catch (_) {}
+    }
     const idx = typeof srcOrIndex === 'number'
       ? srcOrIndex
       : Math.max(0, videos.indexOf(srcOrIndex));
@@ -928,10 +1026,13 @@ function initVideoPreviews() {
     document.body.classList.add('video-modal-open');
     document.body.style.overflow = 'hidden';
     document.querySelectorAll('.video-float video').forEach(v => v.pause());
-    if (bgMusic && !musicPlayer?.classList.contains('muted')) {
+    wasMusicPlayingBeforeVideo = bgMusic && !bgMusic.muted && !bgMusic.paused;
+    if (bgMusic && !bgMusic.muted) {
       bgMusic.pause();
     }
   };
+
+  const VIDEO_RETURN_KEY = 'deejaytim-video-return';
 
   const closeVideo = () => {
     modal.classList.remove('open');
@@ -940,9 +1041,20 @@ function initVideoPreviews() {
     document.querySelectorAll('.video-float video').forEach(v => v.play().catch(() => {}));
     modalPlayer.src = '';
     document.body.style.overflow = '';
-    if (bgMusic && !musicPlayer?.classList.contains('muted')) {
+    if (bgMusic && !bgMusic.muted && wasMusicPlayingBeforeVideo) {
       bgMusic.play().catch(() => {});
     }
+    try {
+      const returnUrl = sessionStorage.getItem(VIDEO_RETURN_KEY);
+      if (returnUrl) {
+        sessionStorage.removeItem(VIDEO_RETURN_KEY);
+        if (window.pjaxNavigate) {
+          window.pjaxNavigate(returnUrl);
+        } else {
+          location.href = returnUrl;
+        }
+      }
+    } catch (_) {}
   };
 
   // Start muted video previews
@@ -989,6 +1101,12 @@ function initVideoPreviews() {
       return;
     }
   });
+
+  // Vanaf inspiratie: /#video opent direct de videocarousel
+  if (window.location.hash === '#video') {
+    openVideo(0);
+    history.replaceState(null, '', window.location.pathname);
+  }
 }
 
 // Visible class voor scroll-animaties
