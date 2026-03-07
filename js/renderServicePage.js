@@ -114,12 +114,9 @@ export async function renderServicePage() {
   if (ogDesc) ogDesc.setAttribute('content', metaDesc);
 
   const VERJAARDAG_SLUGS = ['sweet-16-dj', 'dj-18-jaar', 'dj-20-jaar', 'dj-30-jaar', 'dj-40-jaar', 'dj-50-jaar'];
-  const MEER_FEESTTYPES = ['schoolfeest-dj', 'buurtfeest-dj', 'slagingsfeest-dj'];
   let breadcrumbHtml = `<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">${escapeHtml(t('pages.breadcrumb.home'))}</a> → <a href="/diensten/">${escapeHtml(t('pages.breadcrumb.diensten'))}</a>`;
   if (VERJAARDAG_SLUGS.includes(slug)) {
     breadcrumbHtml += ` → <a href="/diensten/verjaardag-dj.html">${escapeHtml(t('nav.verjaardagDj'))}</a>`;
-  } else if (MEER_FEESTTYPES.includes(slug)) {
-    breadcrumbHtml += ` → <a href="/diensten/">${lang === 'en' ? 'More party types' : 'Meer feesttypes'}</a>`;
   }
   breadcrumbHtml += ` → ${escapeHtml(serviceTitle)}</nav>`;
   /* Add BreadcrumbList structured data */
@@ -129,8 +126,6 @@ export async function renderServicePage() {
   ];
   if (VERJAARDAG_SLUGS.includes(slug)) {
     breadcrumbItems.push({ name: t('nav.verjaardagDj'), url: 'https://deejaytim.nl/diensten/verjaardag-dj.html' });
-  } else if (MEER_FEESTTYPES.includes(slug)) {
-    breadcrumbItems.push({ name: t('pages.breadcrumb.meerFeesttypes'), url: 'https://deejaytim.nl/diensten/' });
   }
   breadcrumbItems.push({ name: serviceTitle, url: `https://deejaytim.nl/diensten/${slug}.html` });
   const breadcrumbLd = {

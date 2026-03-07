@@ -10,7 +10,9 @@
     '/': ['/js/content.js', '/js/renderPricing.js'],
     '/index.html': ['/js/content.js', '/js/renderPricing.js'],
     '/prijzen.html': ['/js/renderPricing.js'],
-    '/blog/index.html': ['/js/renderBlogIndex.js']
+    '/blog/index.html': ['/js/renderBlogIndex.js'],
+    '/blog': ['/js/renderBlogIndex.js'],
+    '/blog/post.html': ['/js/renderBlogPost.js']
   };
 
   function getPath(url) {
