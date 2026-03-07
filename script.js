@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initWhatsAppWidget();
   window.addEventListener('resize', initVideoRandomPositions);
   document.addEventListener('partialsloaded', (e) => {
-    initNav();
     initGoogleReviewsLinks();
     if (!e.detail?.fromPjax) {
       initMusicPlayer();
