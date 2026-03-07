@@ -115,7 +115,7 @@
     }
   ],
   "defaultFaq": [
-    { "q": { "nl": "Hoe ver rijdt u?", "en": "How far do you travel?" }, "a": { "nl": "Reiskosten zijn inbegrepen tot 30 km vanuit Zwijndrecht (3332 SN). Daarbuiten reiskosten in overleg.", "en": "Travel costs included up to 30 km from Zwijndrecht (3332 SN). Beyond that by arrangement." } },
+    { "q": { "nl": "Hoe ver rijdt u?", "en": "How far do you travel?" }, "a": { "nl": "Reiskosten zijn inbegrepen tot 30 km vanuit Zwijndrecht (3332 SN). Daarbuiten reiskosten in overleg. Tim is bereid om best ver te rijden, maar dit is wel afhankelijk van de tijden – dat stemmen we gewoon af.", "en": "Travel costs included up to 30 km from Zwijndrecht (3332 SN). Beyond that by arrangement. Tim is willing to travel quite far, but it depends on the times – we'll coordinate." } },
     { "q": { "nl": "Welke apparatuur heeft u?", "en": "What equipment do you have?" }, "a": { "nl": "Pioneer XDJ-RX3, lichtset, geluid en rookmachine (optioneel – afhankelijk van de locatie). Sommige zalen staan rookmachines niet toe ivm rookmelders. Zie DJ set-up voor details.", "en": "Pioneer XDJ-RX3, lighting, sound and fog machine (optional – depends on the venue). Some halls don't allow fog machines due to smoke alarms. See DJ set-up for details." } },
     { "q": { "nl": "Kunnen gasten nummers aanvragen?", "en": "Can guests request songs?" }, "a": { "nl": "Ja, via de Hands Up! app. Gasten stemmen en vragen nummers aan.", "en": "Yes, via the Hands Up! app. Guests vote and request songs." } },
     { "q": { "nl": "Hoeveel kost een DJ?", "en": "How much does a DJ cost?" }, "a": { "nl": "Zie Prijzen voor actuele tarieven.", "en": "See Prices for current rates." } },

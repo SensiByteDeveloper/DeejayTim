@@ -230,7 +230,9 @@ export async function renderLocationPage() {
       return { ...item, q, aHtml: (lang === 'en' ? `From ${formatPrice(pricingData.justDj?.from)} (Just DJ) or ${formatPrice(pricingData.allIn?.from)} (All-in). ` : `Vanaf ${formatPrice(pricingData.justDj?.from)} (Just DJ) of ${formatPrice(pricingData.allIn?.from)} (All-in). `) + `<a href="/prijzen.html">${lang === 'en' ? 'Prices' : 'Prijzen'}</a> ${lang === 'en' ? 'for current rates.' : 'voor actuele tarieven.'}` };
     }
     if ((q === 'Hoe ver rijdt u?' || q === 'How far do you travel?') && pricingData?.extraKm != null) {
-      return { ...item, q, a: lang === 'en' ? `Travel costs included up to 30 km from Zwijndrecht (3332 SN). Beyond that ${formatPrice(pricingData.extraKm)} per extra km.` : `Reiskosten zijn inbegrepen tot 30 km vanuit Zwijndrecht (3332 SN). Daarbuiten ${formatPrice(pricingData.extraKm)} per extra km.` };
+      const extra = lang === 'en' ? `Travel costs included up to 30 km from Zwijndrecht (3332 SN). Beyond that ${formatPrice(pricingData.extraKm)} per extra km.` : `Reiskosten zijn inbegrepen tot 30 km vanuit Zwijndrecht (3332 SN). Daarbuiten ${formatPrice(pricingData.extraKm)} per extra km.`;
+      const suffix = lang === 'en' ? " Tim is willing to travel quite far, but it depends on the times – we'll coordinate." : " Tim is bereid om best ver te rijden, maar dit is wel afhankelijk van de tijden – dat stemmen we gewoon af.";
+      return { ...item, q, a: extra + suffix };
     }
     return { ...item, q, a };
   });
