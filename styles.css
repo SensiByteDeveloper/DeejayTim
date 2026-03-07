@@ -1110,6 +1110,29 @@ body.video-modal-open .music-player * {
 .container a.cta-button:visited {
   color: #fff;
 }
+/* Hover: donkere tekst op lichte achtergrond (override :visited) */
+#main-content a.pricing-btn:hover,
+#main-content a.pricing-btn:focus-visible,
+#main-content a.pricing-btn:active,
+.container a.pricing-btn:hover,
+.container a.pricing-btn:focus-visible,
+.container a.pricing-btn:active {
+  color: #0a0a0f;
+}
+#main-content a.hero-cta:hover,
+#main-content a.hero-cta:focus-visible,
+#main-content a.hero-cta:active,
+.container a.hero-cta:hover,
+.container a.hero-cta:focus-visible,
+.container a.hero-cta:active {
+  color: #0a0a0f;
+}
+#main-content a.cta-button:hover,
+#main-content a.cta-button:focus-visible,
+.container a.cta-button:hover,
+.container a.cta-button:focus-visible {
+  color: #0a0a0f;
+}
 
 .section-title {
   font-family: 'Orbitron', sans-serif;

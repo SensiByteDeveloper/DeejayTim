@@ -69,6 +69,20 @@
       "date": "2024-02-01",
       "eventType": ["feest"],
       "locationSlugs": ["dj-rotterdam"]
+    },
+    {
+      "id": "rev-tim-de-vlieger",
+      "name": "Tim",
+      "city": "Spijkenisse",
+      "rating": 5,
+      "text": {
+        "nl": "Geweldige avond gehad met DJ Tim die de hele avond muziek op onze bruiloft verzorgde. Zeer gevarieerd en met oog op onze vooraf doorgesproken wensen. Zeker een aanrader!!",
+        "en": "Had a great evening with DJ Tim who provided music for our wedding all evening. Very varied and with an eye on our previously discussed wishes. Definitely recommended!!"
+      },
+      "source": "Google",
+      "date": "2026-03-05",
+      "eventType": ["bruiloft"],
+      "locationSlugs": ["dj-spijkenisse"]
     }
   ]
 }
