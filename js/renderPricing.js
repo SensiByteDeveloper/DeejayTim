@@ -111,10 +111,7 @@ function updatePricingMetaAndSchema(pricing) {
   const j = pricing.justDj?.from;
   const a = pricing.allIn?.from;
   const w = pricing.wedding?.from;
-  const r = pricing.typicalRange;
   const fp = formatPrice;
-  const priceText = r ? `De meeste feesten vallen tussen ${fp(r.from)} en ${fp(r.to)}. ` : '';
-  const justAllText = (j != null && a != null) ? `Just DJ vanaf ${fp(j)}, All-in DJ Show vanaf ${fp(a)}${w != null ? `, Bruiloft DJ vanaf ${fp(w)}` : ''}.` : '';
   const meta = document.querySelector('meta[name="description"][data-price-meta]');
   if (meta && j != null && a != null) {
     const parts = [`Just DJ vanaf ${fp(j)}`, `All-in DJ Show vanaf ${fp(a)}`];
@@ -122,17 +119,7 @@ function updatePricingMetaAndSchema(pricing) {
     meta.setAttribute('content', `Prijzen DJ Tim: ${parts.join(', ')}. 4 uur incl. Reiskosten tot 30 km. Regio Zwijndrecht en Rotterdam.`);
   }
 
-  const faqScript = document.querySelector('script[type="application/ld+json"][data-faq-pricing]');
-  if (faqScript && (j != null || a != null || r)) {
-    try {
-      const faq = JSON.parse(faqScript.textContent);
-      const q = faq.mainEntity?.find((e) => e['@type'] === 'Question' && e.name && e.name.includes('Wat kost een DJ gemiddeld'));
-      if (q?.acceptedAnswer) {
-        q.acceptedAnswer.text = priceText + justAllText;
-        faqScript.textContent = JSON.stringify(faq);
-      }
-    } catch (_) {}
-  }
+  /* FAQ "Wat kost een DJ gemiddeld?" heeft nu statische, genuanceerde tekst in prijzen.html – niet overschrijven */
 
   const werkgebiedFaq = document.querySelector('script[type="application/ld+json"][data-faq-werkgebied]');
   if (werkgebiedFaq && j != null && a != null) {
