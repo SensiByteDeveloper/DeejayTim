@@ -560,6 +560,16 @@ main:not(:has(> .hero)) {
   overflow: visible;
 }
 
+/* Scroll-offset voor hash-navigatie – "Let's talk!" zichtbaar onder vaste header */
+#contact,
+#intro,
+#diensten,
+#hands-up,
+#regions,
+#reviews-preview {
+  scroll-margin-top: 5rem;
+}
+
 /* Min-height voor video's – voldoende ruimte om overlap te beperken */
 @media (min-width: 1600px) {
   .intro, .diensten, .hands-up { min-height: 1000px; }

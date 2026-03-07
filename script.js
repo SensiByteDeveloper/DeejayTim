@@ -20,6 +20,21 @@ document.addEventListener('DOMContentLoaded', () => {
   initNav();
   initMusicPlayer();
   initSmoothScroll();
+  if (location.hash) {
+    const hash = location.hash;
+    const scrollAfterLoad = () => {
+      scrollToHash(hash);
+      const testimonials = document.getElementById('homepage-testimonials');
+      if (testimonials?.getAttribute('aria-busy') === 'true') {
+        const obs = new MutationObserver(() => {
+          obs.disconnect();
+          scrollToHash(hash);
+        });
+        obs.observe(testimonials, { attributes: true, attributeFilter: ['aria-busy'] });
+      }
+    };
+    requestAnimationFrame(() => requestAnimationFrame(scrollAfterLoad));
+  }
   initScrollEffects();
   initForm();
   initVideoPreviews();
@@ -44,6 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   document.addEventListener('headerloaded', initNav);
+  window.addEventListener('hashchange', () => {
+    if (location.hash) scrollToHash(location.hash);
+  });
 });
 
 // WhatsApp Chat Widget – toggle popup
@@ -596,17 +614,48 @@ function initMusicPlayer() {
   }
 }
 
-// Smooth scroll
+// Smooth scroll – ook voor /#contact etc. (zelfde pagina met hash)
+const SCROLL_OFFSET = 80; // ruimte voor vaste header
+
+function scrollToHash(hash) {
+  if (!hash || hash === '#') return;
+  const el = document.querySelector(hash);
+  if (!el) return;
+  const nav = document.querySelector('.nav');
+  const offset = nav ? nav.offsetHeight : SCROLL_OFFSET;
+  const top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       const target = document.querySelector(this.getAttribute('href'));
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        scrollToHash(this.getAttribute('href'));
       }
     });
   });
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href*="#"]');
+    if (!a) return;
+    try {
+      const url = new URL(a.href, location.origin);
+      if (url.origin !== location.origin) return;
+      if (url.pathname !== location.pathname && url.pathname !== '/' && url.pathname + '/' !== location.pathname) return;
+      const hash = url.hash;
+      if (!hash || hash === '#') return;
+      const el = document.querySelector(hash);
+      if (!el) return;
+      const samePage = url.pathname === location.pathname || (url.pathname === '/' && (!location.pathname || location.pathname === '/'));
+      if (samePage) {
+        e.preventDefault();
+        scrollToHash(hash);
+        history.replaceState(null, '', url.pathname + hash);
+      }
+    } catch (_) {}
+  }, true);
 }
 
 // Scroll-animaties
