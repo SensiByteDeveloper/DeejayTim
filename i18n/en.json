@@ -319,7 +319,8 @@
       "faqTitle": "Frequently asked questions about the service area"
     },
     "inspiratie": {
-      "muziekTitle": "Party music inspiration (for wedding, birthday, school party and more)",
+      "muziekTitle": "Party music inspiration",
+      "muziekSubtitle": "for wedding, birthday, school party and more",
       "muziekIntro1": "The right music at the right moment makes the difference between a pleasant evening and an unforgettable party. Whether you're looking for a <a href=\"/diensten/bruiloft-dj.html\">wedding DJ</a> in <a href=\"/locaties/dj-zwijndrecht.html\">Zwijndrecht</a>, a <a href=\"/diensten/verjaardag-dj.html\">birthday DJ</a> in <a href=\"/locaties/dj-dordrecht.html\">Dordrecht</a>, or a <a href=\"/diensten/schoolfeest-dj.html\">school party DJ</a> – this guide helps you with concrete songs and tips per moment.",
       "muziekIntro2": "In this article you'll find curated playlists per type of party and per phase of the evening: arrival, party start, peak moment and closers. Plus tips to keep the dance floor full and an FAQ with frequently asked questions. Use the <a href=\"/feest-playlist-generator.html\">playlist generator</a> for a quick custom suggestion.",
       "muziekCtaTop": "<strong>Looking for a DJ for your party?</strong> <a href=\"/dj-huren.html\">View DJ hire</a> or <a href=\"/contact.html\">get in touch</a>.",

@@ -1,8 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#06060b"/>
-  <!-- DJ mixer - 3 vertical faders in neon red, verticaal gecentreerd in blok -->
-  <rect x="6" y="9" width="20" height="14" rx="2" fill="none" stroke="#ff1744" stroke-width="1.5"/>
-  <rect x="10" y="13" width="3" height="6" rx="1" fill="#ff1744"/>
-  <rect x="14.5" y="14" width="3" height="8" rx="1" fill="#ff1744"/>
-  <rect x="19" y="12" width="3" height="10" rx="1" fill="#ff1744"/>
+  <defs>
+    <linearGradient id="redGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff1744"/>
+      <stop offset="100%" style="stop-color:#d50000"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="0.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="32" height="32" rx="6" fill="#0a0a0f"/>
+  <rect x="1" y="1" width="30" height="30" rx="5" fill="none" stroke="url(#redGlow)" stroke-width="1.5" filter="url(#glow)"/>
+  <!-- Equalizer bars -->
+  <rect x="8" y="14" width="3" height="6" rx="1" fill="#ff1744"/>
+  <rect x="12.5" y="12" width="3" height="8" rx="1" fill="#ff1744"/>
+  <rect x="17" y="10" width="3" height="10" rx="1" fill="#ff1744"/>
+  <rect x="21.5" y="13" width="3" height="7" rx="1" fill="#ff1744"/>
 </svg>

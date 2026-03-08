@@ -103,28 +103,7 @@
   }
 
   function initDropdowns() {
-    document.querySelectorAll('.nav-dropdown').forEach((dd) => {
-      const trigger = dd.querySelector('.nav-dropdown-trigger');
-      if (!trigger) return;
-      trigger.addEventListener('click', (e) => {
-        if (window.matchMedia('(max-width: 768px)').matches) {
-          e.preventDefault();
-          const expanded = trigger.getAttribute('aria-expanded') === 'true';
-          trigger.setAttribute('aria-expanded', !expanded);
-          dd.classList.toggle('dropdown-open', !expanded);
-        }
-      });
-      trigger.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          if (window.matchMedia('(max-width: 768px)').matches) {
-            e.preventDefault();
-            const expanded = trigger.getAttribute('aria-expanded') === 'true';
-            trigger.setAttribute('aria-expanded', !expanded);
-            dd.classList.toggle('dropdown-open', !expanded);
-          }
-        }
-      });
-    });
+    /* Op mobiel: geen submenu – Diensten en Inspiratie zijn gewoon links. Submenu verborgen via CSS. */
   }
 
   function render() {
