@@ -617,13 +617,14 @@ main:not(:has(> .hero)) {
   justify-content: center;
   line-height: 1;
 }
-/* Music player verborgen bij Hands Up zoom én video modal – video op voorgrond */
+/* Music player verborgen bij Hands Up zoom, video modal én nav menu – volledig zichtbaar menu */
 body.handsup-zoom-open .music-player,
-body.video-modal-open .music-player {
+body.video-modal-open .music-player,
+body.nav-menu-open .music-player {
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
-  transition: none !important;
+  transition: opacity 0.25s ease, visibility 0.25s;
 }
 
 /* Kleine video-preview blokken verbergen – voorkomen dat ze door modal heen schijnen */
@@ -635,6 +636,9 @@ body.video-modal-open .video-float {
 body.handsup-zoom-open .music-player *,
 body.video-modal-open .music-player * {
   transition: none !important;
+}
+body.nav-menu-open .music-player * {
+  transition: opacity 0.25s ease, visibility 0.25s;
 }
 
 /* Hands Up! full-page overlay – voelt als nieuwe pagina */
@@ -1991,12 +1995,13 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
 }
 .contact-link:hover { text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
 
-/* Sticky Player Bar – compacte balk onderaan, inklapbaar */
+/* Sticky Player Bar – compacte balk onderaan, inklapbaar; zo laag mogelijk (ook als browserbalk verdwijnt bij scroll) */
 .music-player {
   position: fixed;
-  bottom: env(safe-area-inset-bottom, 0);
+  bottom: 0;
   left: 0;
   right: 0;
+  padding-bottom: env(safe-area-inset-bottom, 0);
   z-index: 10000;
   display: flex;
   flex-direction: column;
@@ -2504,7 +2509,7 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
   /* Tijdelijk uit – WhatsApp widget */
   /* .nav.menu-open ~ .whatsapp-widget { visibility: hidden; opacity: 0; pointer-events: none; transition: opacity 0.25s ease, visibility 0.25s; } */
 
-  /* Menu – boven muziekspeler, smaller, strakker */
+  /* Menu – boven muziekspeler, smaller, strakker; scrollbaar op kleine schermen (bv. iPhone SE) */
   .nav-links {
     position: fixed;
     top: 0;
@@ -2513,6 +2518,8 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
     max-width: 280px;
     height: 100vh;
     height: 100dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     z-index: 10002;
     background: linear-gradient(180deg, rgba(8, 8, 14, 0.98) 0%, rgba(4, 4, 8, 0.99) 100%);
     backdrop-filter: blur(24px);

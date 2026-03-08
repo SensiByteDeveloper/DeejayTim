@@ -110,6 +110,7 @@ function initNav() {
     nav?.classList.remove('menu-open');
     toggle?.setAttribute('aria-expanded', 'false');
     backdrop?.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('nav-menu-open');
     document.body.style.overflow = '';
   };
 
@@ -118,6 +119,7 @@ function initNav() {
     nav?.classList.add('menu-open');
     toggle?.setAttribute('aria-expanded', 'true');
     backdrop?.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('nav-menu-open');
     document.body.style.overflow = 'hidden';
   };
 
@@ -132,6 +134,7 @@ function initNav() {
     nav?.classList.toggle('menu-open', open);
     toggle?.setAttribute('aria-expanded', open ? 'true' : 'false');
     backdrop?.setAttribute('aria-hidden', open ? 'false' : 'true');
+    document.body.classList.toggle('nav-menu-open', open);
     document.body.style.overflow = open ? 'hidden' : '';
   });
 
