@@ -3003,11 +3003,27 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212, 175, 55, 0.08);
 }
+/* Grote hero: lasers / lichtshow – prominent bovenaan */
+.dj-setup-hero-spotlight {
+  margin-bottom: 2rem;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 23, 68, 0.12), 0 0 48px rgba(255, 23, 68, 0.06);
+}
 .dj-setup-img-hero {
   display: block;
   width: 100%;
   height: auto;
   vertical-align: middle;
+}
+.dj-setup-hero-spotlight .dj-setup-img-hero {
+  max-height: min(72vh, 640px);
+  object-fit: cover;
+  object-position: center 40%;
+}
+@media (max-width: 700px) {
+  .dj-setup-hero-spotlight .dj-setup-img-hero {
+    max-height: min(58vh, 420px);
+    object-position: center center;
+  }
 }
 .dj-setup-grid {
   display: grid;
@@ -3015,8 +3031,12 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
   gap: 1.5rem;
   align-items: stretch;
 }
+.dj-setup-grid-span-full {
+  grid-column: 1 / -1;
+}
 @media (max-width: 700px) {
   .dj-setup-grid { grid-template-columns: 1fr; }
+  .dj-setup-grid-span-full { grid-column: auto; }
 }
 .dj-setup-grid-item {
   border-radius: 12px;
