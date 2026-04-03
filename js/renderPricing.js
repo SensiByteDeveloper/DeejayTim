@@ -99,15 +99,19 @@ function renderRangeElement(el, pricing) {
 function renderSubtitleElement(el, pricing) {
   if (!pricing) return;
   const lang = getLang();
-  const km = pricing.extraKm;
   const hour = pricing.extraHour;
+  const km = pricing.extraKm;
   const ex50 = pickLang(pricing.travelExample50km, lang) || '€14';
   const tpl =
     pickLang(pricing.subtitle, lang) ||
     (lang === 'en'
-      ? 'Private rates; no VAT. All packages: 4 hours DJ included, including 30 km travel from 3332 SN; beyond that {km} per km driven (50 km away: {ex50} extra travel on top of the price). Extra hour {hour}.'
-      : 'Particuliere tarieven, geen BTW. Alle pakketten: 4 uur DJ inbegrepen, inclusief 30 km reiskosten vanaf 3332 SN; daarboven {km} per gereden km (bij 50 km afstand: {ex50} extra reiskosten op de prijs). Extra uur {hour}.');
-  el.textContent = tpl.replace('{km}', formatKmRate(km, lang)).replace('{hour}', formatPrice(hour)).replace('{ex50}', ex50);
+      ? 'Private rates; no VAT. All packages: 4 hours DJ included, including 30 km travel from 3332 SN; beyond that €0.35 per extra km driven (50 km away: €14 extra travel on top of the price). Extra hour {hour}.'
+      : 'Particuliere tarieven, geen BTW. Alle pakketten: 4 uur DJ inbegrepen, inclusief 30 km reiskosten vanaf 3332 SN; daarboven €0,35 per extra gereden km (bij 50 km afstand: €14 extra reiskosten op de prijs). Extra uur {hour}.');
+  let text = tpl;
+  if (text.includes('{hour}')) text = text.replaceAll('{hour}', formatPrice(hour));
+  if (text.includes('{km}')) text = text.replaceAll('{km}', formatKmRate(Number(km) || 0.35, lang));
+  if (text.includes('{ex50}')) text = text.replaceAll('{ex50}', ex50);
+  el.textContent = text;
 }
 
 function renderExtrasList(el, pricing) {

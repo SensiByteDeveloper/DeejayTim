@@ -63,7 +63,7 @@
   },
   "diensten": {
     "title": "Diensten & prijzen",
-    "subtitle": "Particuliere tarieven, geen BTW. Alle pakketten: 4 uur DJ inbegrepen, inclusief 30 km reiskosten vanaf 3332 SN; daarboven €0,35 per gereden km (bij 50 km afstand: €14 extra reiskosten op de prijs). Extra uur €100.",
+    "subtitle": "Particuliere tarieven, geen BTW. Alle pakketten: 4 uur DJ inbegrepen, inclusief 30 km reiskosten vanaf 3332 SN; daarboven €0,35 per extra gereden km (bij 50 km afstand: €14 extra reiskosten op de prijs). Extra uur €100.",
     "cta": "Check beschikbaarheid",
     "allIn": {
       "title": "All-in",
@@ -223,9 +223,9 @@
     },
     "locations": {
       "h1Suffix": "Bruiloften, Verjaardagen & Bedrijfsfeesten",
-      "travelCostsIncluded": "Reiskosten zijn inbegrepen tot 30 km vanuit Zwijndrecht (3332 SN). Daarboven reken ik €0,35 per gereden km; bij een locatie op 50 km afstand komt er dan €14 bij op de prijs voor extra reiskosten. Tot ongeveer 50 km rijd ik sowieso voor feesten in deze regio. Neem contact op voor de mogelijkheden.",
+      "travelCostsIncluded": "Reiskosten zijn inbegrepen tot 30 km vanuit Zwijndrecht (3332 SN). Daarboven reken ik €0,35 per extra gereden km; bij een locatie op 50 km afstand komt er dan €14 bij op de prijs voor extra reiskosten. Tot ongeveer 50 km rijd ik sowieso voor feesten in deze regio. Neem contact op voor de mogelijkheden.",
       "travelCostsOutside": "Deze locatie valt buiten mijn gebruikelijke straal van ±50 km. Reiskosten in overleg. Neem contact op voor de mogelijkheden.",
-      "faqTravelDistanceAnswer": "Reiskosten zijn inbegrepen tot 30 km vanuit Zwijndrecht (3332 SN). Daarboven reken ik €0,35 per gereden kilometer; bij een locatie op 50 km afstand komt er dan €14 bij op de prijs voor extra reiskosten. Tot ongeveer 50 km rijd ik sowieso voor feesten. Verder dan 50 km is in overleg. Neem contact op voor de mogelijkheden.",
+      "faqTravelDistanceAnswer": "Reiskosten zijn inbegrepen tot 30 km vanuit Zwijndrecht (3332 SN). Daarboven reken ik €0,35 per extra gereden kilometer; bij een locatie op 50 km afstand komt er dan €14 bij op de prijs voor extra reiskosten. Tot ongeveer 50 km rijd ik sowieso voor feesten. Verder dan 50 km is in overleg. Neem contact op voor de mogelijkheden.",
       "viewPrices": "Bekijk prijzen",
       "checkAvailability": "Check beschikbaarheid",
       "noData": "Geen gegevens beschikbaar",
@@ -276,7 +276,7 @@
       "noteAllIn": "Complete DJ show voor de meeste feesten.",
       "noteWedding": "All-in + extra voorbereiding en begeleiding voor jullie bruiloft.",
       "audience": "Geschikt voor verjaardagen, bedrijfsfeesten, schoolfeesten, buurtfeesten en slagingsfeesten.",
-      "packagesNote": "Alle pakketten: 4 uur DJ inbegrepen, inclusief 30 km reiskosten vanaf 3332 SN; daarboven €0,35 per gereden km (bij 50 km afstand: €14 extra reiskosten op de prijs). Extra uur €100.",
+      "packagesNote": "Alle pakketten: 4 uur DJ inbegrepen, inclusief 30 km reiskosten vanaf 3332 SN; daarboven €0,35 per extra gereden km (bij 50 km afstand: €14 extra reiskosten op de prijs). Extra uur €100.",
       "extraNoteWedding": "Extra persoonlijke afstemming voor jullie bruiloft.",
       "friction": "⚡ Binnen 24 uur reactie • 💬 Vrijblijvende aanvraag • ✅ Geen boekingsverplichting",
       "tariffNote": "Tarief afhankelijk van tijden & locatie",

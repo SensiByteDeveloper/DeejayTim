@@ -66,8 +66,8 @@
   "extraHour": 100,
   "travelExample50km": { "nl": "€14", "en": "€14" },
   "subtitle": {
-    "nl": "Particuliere tarieven, geen BTW. Alle pakketten: 4 uur DJ inbegrepen, inclusief 30 km reiskosten vanaf 3332 SN; daarboven {km} per gereden km (bij 50 km afstand: {ex50} extra reiskosten op de prijs). Extra uur {hour}.",
-    "en": "Private rates; no VAT. All packages: 4 hours DJ included, including 30 km travel from 3332 SN; beyond that {km} per km driven (50 km away: {ex50} extra travel on top of the price). Extra hour {hour}."
+    "nl": "Particuliere tarieven, geen BTW. Alle pakketten: 4 uur DJ inbegrepen, inclusief 30 km reiskosten vanaf 3332 SN; daarboven €0,35 per extra gereden km (bij 50 km afstand: €14 extra reiskosten op de prijs). Extra uur {hour}.",
+    "en": "Private rates; no VAT. All packages: 4 hours DJ included, including 30 km travel from 3332 SN; beyond that €0.35 per extra km driven (50 km away: €14 extra travel on top of the price). Extra hour {hour}."
   },
   "extras": {
     "nl": ["verlichte dansvloer", "extra verlichting", "grotere geluidsinstallatie"],

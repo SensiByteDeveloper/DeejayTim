@@ -63,7 +63,7 @@
   },
   "diensten": {
     "title": "Services & pricing",
-    "subtitle": "Private rates; no VAT. All packages: 4 hours DJ included, including 30 km travel from 3332 SN; beyond that €0.35 per km driven (50 km away: €14 extra travel on top of the price). Extra hour €100.",
+    "subtitle": "Private rates; no VAT. All packages: 4 hours DJ included, including 30 km travel from 3332 SN; beyond that €0.35 per extra km driven (50 km away: €14 extra travel on top of the price). Extra hour €100.",
     "cta": "Check availability",
     "allIn": {
       "title": "All-in",
@@ -223,9 +223,9 @@
     },
     "locations": {
       "h1Suffix": "Weddings, Birthdays & Corporate events",
-      "travelCostsIncluded": "Travel costs are included up to 30 km from Zwijndrecht (3332 SN). Beyond that I charge €0.35 per km driven; for a venue 50 km away, €14 is added to the price for extra travel. I generally travel up to about 50 km for parties in this area. Get in touch to discuss options.",
+      "travelCostsIncluded": "Travel costs are included up to 30 km from Zwijndrecht (3332 SN). Beyond that I charge €0.35 per extra km driven; for a venue 50 km away, €14 is added to the price for extra travel. I generally travel up to about 50 km for parties in this area. Get in touch to discuss options.",
       "travelCostsOutside": "This location is outside my usual ±50 km radius. Travel costs by arrangement. Get in touch to discuss options.",
-      "faqTravelDistanceAnswer": "Travel costs are included up to 30 km from Zwijndrecht (3332 SN). Beyond that I charge €0.35 per km driven; for a venue 50 km away, €14 is added to the price for extra travel. I generally travel up to about 50 km for parties. Beyond 50 km is by arrangement. Get in touch to discuss options.",
+      "faqTravelDistanceAnswer": "Travel costs are included up to 30 km from Zwijndrecht (3332 SN). Beyond that I charge €0.35 per extra km driven; for a venue 50 km away, €14 is added to the price for extra travel. I generally travel up to about 50 km for parties. Beyond 50 km is by arrangement. Get in touch to discuss options.",
       "viewPrices": "View prices",
       "checkAvailability": "Check availability",
       "noData": "No data available",
@@ -276,7 +276,7 @@
       "noteAllIn": "Complete DJ show for most parties.",
       "noteWedding": "All-in + extra preparation and guidance for your wedding.",
       "audience": "Suitable for birthdays, corporate events, school parties, street parties and graduation parties.",
-      "packagesNote": "All packages: 4 hours DJ included, including 30 km travel from 3332 SN; beyond that €0.35 per km driven (50 km away: €14 extra travel on top of the price). Extra hour €100.",
+      "packagesNote": "All packages: 4 hours DJ included, including 30 km travel from 3332 SN; beyond that €0.35 per extra km driven (50 km away: €14 extra travel on top of the price). Extra hour €100.",
       "extraNoteWedding": "Extra personal coordination for your wedding.",
       "friction": "⚡ Response within 24 hours • 💬 Non-binding request • ✅ No booking obligation",
       "tariffNote": "Rate depends on times & location",
