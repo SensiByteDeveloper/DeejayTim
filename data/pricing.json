@@ -62,11 +62,12 @@
     "to": 1000,
     "text": { "nl": "De meeste feesten vallen tussen {from} en {to}.", "en": "Most parties fall between {from} and {to}." }
   },
-  "extraKm": 0.25,
+  "extraKm": 0.35,
   "extraHour": 100,
+  "travelExample50km": { "nl": "€14", "en": "€14" },
   "subtitle": {
-    "nl": "Prijzen zijn excl. BTW, incl. 4 uur DJ en incl. reiskosten tot 30km vanuit 3332 SN. Extra km: {km}. Extra uur: {hour}.",
-    "en": "Prices excl. VAT, incl. 4 hours DJ and incl. travel up to 30km from 3332 SN. Extra km: {km}. Extra hour: {hour}."
+    "nl": "Particuliere tarieven, geen BTW. Alle pakketten: 4 uur DJ inbegrepen, inclusief 30 km reiskosten vanaf 3332 SN; daarboven {km} per gereden km (bij 50 km afstand: {ex50} extra reiskosten op de prijs). Extra uur {hour}.",
+    "en": "Private rates; no VAT. All packages: 4 hours DJ included, including 30 km travel from 3332 SN; beyond that {km} per km driven (50 km away: {ex50} extra travel on top of the price). Extra hour {hour}."
   },
   "extras": {
     "nl": ["verlichte dansvloer", "extra verlichting", "grotere geluidsinstallatie"],

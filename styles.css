@@ -50,8 +50,9 @@ body {
   color: var(--text-bright);
   overflow-x: hidden;
 }
+/* Ruimte voor vaste speler zit op .page-footer (alle pagina’s); homepage hoeft geen dubbele body-padding */
 body.intro-done {
-  padding-bottom: calc(var(--music-player-height) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: 0;
 }
 
 .sr-only {
@@ -102,6 +103,14 @@ main:not(:has(> .hero)) {
 .neon-magenta { color: var(--neon-magenta); text-shadow: 0 0 10px var(--neon-magenta), 0 0 20px var(--neon-magenta); }
 .neon-yellow { color: var(--neon-yellow); text-shadow: 0 0 10px var(--neon-yellow), 0 0 20px var(--neon-yellow); }
 .neon-highlight { color: var(--neon-cyan); }
+
+/* Hoofdtitels subpagina’s: rood + gloed (homepage hero: h1.hero-title blijft eigen stijl) */
+main#main-content h1:not(.hero-title) {
+  color: var(--neon-red);
+  text-shadow:
+    0 0 12px var(--neon-red),
+    0 0 28px rgba(255, 23, 68, 0.45);
+}
 
 .neon-link {
   color: var(--neon-pink);
@@ -162,23 +171,32 @@ main:not(:has(> .hero)) {
 }
 
 .nav-links a {
-  color: var(--text-dim);
+  color: rgba(255, 255, 255, 0.95);
   text-decoration: none;
   font-weight: 500;
   letter-spacing: 0.1em;
   transition: all 0.3s;
+  text-shadow: none;
 }
 .nav-links a:focus { outline: none; }
-.nav-links a:focus-visible { outline: 2px solid var(--neon-cyan); outline-offset: 2px; }
+.nav-links a:focus-visible { outline: 2px solid var(--neon-red); outline-offset: 2px; }
 
 .nav-links a:hover {
-  color: var(--neon-cyan);
-  text-shadow: 0 0 8px var(--neon-cyan);
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
 }
 .nav-link.nav-active {
-  color: var(--neon-cyan);
+  color: var(--neon-red);
   font-weight: 600;
-  text-shadow: 0 0 8px var(--neon-cyan);
+  text-shadow:
+    0 0 10px rgba(255, 23, 68, 0.65),
+    0 0 24px rgba(255, 23, 68, 0.35);
+}
+.nav-links .nav-link.nav-active:hover {
+  color: var(--neon-red);
+  text-shadow:
+    0 0 10px rgba(255, 23, 68, 0.65),
+    0 0 24px rgba(255, 23, 68, 0.35);
 }
 .nav-divider {
   width: 1px;
@@ -219,19 +237,48 @@ main:not(:has(> .hero)) {
   display: block;
   padding: 0.5rem 1rem;
   font-size: var(--text-body-sm);
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: none;
 }
-.nav-dropdown-menu a:hover { background: rgba(255, 255, 255, 0.05); }
+.nav-dropdown-menu a:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
+}
 
-/* Hero actions: CTA + Instagram, gestapeld en gecentreerd */
+/* Hero actions: primaire CTA prominent, Instagram secundair */
 .hero-actions {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-  margin-top: 2rem;
+  align-items: stretch;
+  gap: 1rem;
+  margin-top: 1.75rem;
+  width: 100%;
+}
+.hero-actions .hero-cta {
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+}
+.hero-actions .hero-instagram {
+  justify-content: center;
 }
 @media (min-width: 768px) {
-  .hero-actions { align-items: flex-start; }
+  .hero-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    margin-top: 2rem;
+  }
+  .hero-actions .hero-cta {
+    width: auto;
+    max-width: none;
+    flex-shrink: 0;
+  }
+  .hero-actions .hero-instagram {
+    justify-content: flex-start;
+  }
 }
 
 /* Hero Instagram link – Sensibyte-stijl met gradient */
@@ -368,43 +415,147 @@ main:not(:has(> .hero)) {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Hero */
+/* Hero – split layout; transparante achtergrond zodat .bg-grid + .bg-glow (zoals andere pagina’s) zichtbaar zijn */
 .hero {
+  --hero-pad-x: clamp(1.25rem, 4vw, 2.75rem);
+  --hero-pad-top: clamp(5.75rem, 12vw, 7rem);
+  --hero-pad-bottom: clamp(1.75rem, 5vw, 3rem);
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: var(--hero-pad-top) var(--hero-pad-x) var(--hero-pad-bottom);
   position: relative;
   z-index: 1;
+  overflow: hidden;
+  background: transparent;
 }
 
 .hero-content {
   position: relative;
+  z-index: 1;
   width: 100%;
-  max-width: 1000px;
-  animation: fadeInUp 1s ease-out;
+  max-width: 72rem;
+  margin-inline: auto;
+  animation: fadeInUp 0.85s ease-out;
 }
 
 .hero-intro {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
+  gap: clamp(1.75rem, 5vw, 2.75rem);
+  width: 100%;
+}
+
+/* Mobiel: titel → tagline → foto → CTA (+ Instagram); desktop: tekst+CTA links, foto rechts */
+.hero-intro > .hero-actions {
+  margin-top: 0;
+  max-width: 32rem;
+  margin-inline: auto;
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .hero-intro {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    grid-template-rows: auto auto;
+    align-items: start;
+    column-gap: clamp(2rem, 4vw, 3.5rem);
+    row-gap: clamp(1.25rem, 3vw, 1.75rem);
+  }
+  .hero-text {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
+  }
+  .hero-intro > .hero-actions {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+    justify-self: start;
+    margin-inline: 0;
+    max-width: min(32rem, 42vw);
+  }
+  .hero-photo-wrap {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    align-self: center;
+  }
 }
 
 .hero-text {
   text-align: center;
+  width: 100%;
+  max-width: 32rem;
+  margin-inline: auto;
+  padding: 0;
 }
 
-@media (min-width: 768px) {
-  .hero-text { text-align: left; }
+@media (min-width: 900px) {
+  .hero-text {
+    text-align: left;
+    margin-inline: 0;
+    justify-self: start;
+    max-width: min(32rem, 42vw);
+  }
+}
+
+.hero-photo-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 22rem;
+  margin-inline: auto;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 28px 60px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  aspect-ratio: 3 / 4;
+  max-height: min(78vh, 640px);
+}
+
+/* Afbeelding vult altijd het hele vak (intrinsic size trekt niet meer krimpen) */
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Iets naar links: hand beter in beeld, glas/bier rechtsonder weg uit kader */
+  object-position: 36% 24%;
+}
+
+@media (max-width: 899px) {
+  .hero-photo-wrap {
+    aspect-ratio: auto;
+    width: 100%;
+    max-width: 24rem;
+    height: clamp(260px, 48vh, 400px);
+    max-height: none;
+  }
+  .hero-photo {
+    object-position: 38% 20%;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero-photo-wrap {
+    max-width: none;
+    margin-inline: 0;
+    justify-self: end;
+    width: 100%;
+    max-height: min(78vh, 640px);
+  }
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -413,42 +564,52 @@ main:not(:has(> .hero)) {
 }
 
 .hero-title {
-  font-family: 'Orbitron', sans-serif;
-  font-size: clamp(3rem, 12vw, 8rem);
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2.65rem, 8vw, 4.75rem);
   font-weight: 900;
   margin: 0;
-  line-height: 1.1;
-  letter-spacing: 0.05em;
+  line-height: 1.05;
+  letter-spacing: 0.04em;
 }
 
 .hero-title-line {
   display: block;
 }
 
+/* Titel zoals productie: DEEJAY wit, TIM rood met neon-gloed */
 .hero-title-line:first-child {
   color: var(--text-bright);
-  text-shadow: 0 2px 40px rgba(0,0,0,0.5);
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.5);
 }
 
-.hero-title-line.neon-red {
+.hero-title-accent {
   color: var(--neon-red);
-  text-shadow: 0 0 30px rgba(255, 23, 68, 0.6), 0 0 60px rgba(255, 23, 68, 0.3);
-  animation: neonPulse 2.5s ease-in-out infinite;
-}
-
-@keyframes neonPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.85; }
+  text-shadow:
+    0 0 30px rgba(255, 23, 68, 0.6),
+    0 0 60px rgba(255, 23, 68, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 .hero-tagline {
   font-family: var(--font-accent);
-  font-size: var(--text-body-lg);
-  font-weight: 300;
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-weight: 400;
   font-style: italic;
   color: var(--text-dim);
-  margin: 1.5rem 0 2.5rem;
-  letter-spacing: 0.25em;
+  text-align: center;
+  margin: 1.1rem auto 0;
+  letter-spacing: 0.05em;
+  line-height: 1.5;
+  max-width: 26rem;
+}
+
+@media (min-width: 900px) {
+  .hero-tagline {
+    color: rgba(250, 250, 250, 0.88);
+    max-width: none;
+    text-align: left;
+    margin: 1.1rem 0 0;
+  }
 }
 
 .hero-cta:focus { outline: none; }
@@ -506,6 +667,11 @@ main:not(:has(> .hero)) {
   box-shadow: 0 0 50px rgba(0, 229, 255, 0.3);
   transform: scale(1.03) rotate(var(--video-rotate, 0deg));
 }
+@media (min-width: 1600px) {
+  #intro .video-float-intro-4860:hover {
+    transform: translateY(-50%) scale(1.03) rotate(var(--video-rotate, 0deg));
+  }
+}
 .video-float:focus { outline: none; }
 .video-float:focus-visible { outline: 2px solid var(--neon-cyan); outline-offset: 2px; }
 .video-float video {
@@ -538,7 +704,7 @@ main:not(:has(> .hero)) {
 }
 
 /* Posities worden random door JS ingesteld */
-.video-float-1 { /* hero - fallback */ }
+.video-float-1 { /* legacy class – niet meer in hero */ }
 .video-float-2 { /* intro - fallback */ }
 .video-float-3 { /* diensten - fallback */ }
 .video-float-4 { /* hands-up - fallback */ }
@@ -548,8 +714,7 @@ main:not(:has(> .hero)) {
 
 @media (min-width: 1600px) {
   /* Ruime marge voor video’s: voorkomt overlap bij zoom en houdt tekst leesbaar */
-  .hero-content { padding-right: 420px; }
-  .intro { padding-left: 420px; }
+  .intro { padding-left: 420px; padding-right: 420px; }
   .diensten { padding-right: 420px; }
   .hands-up { padding-right: 420px; }
   .contact { padding-left: 420px; padding-right: 420px; position: relative; overflow: visible; }
@@ -1179,15 +1344,16 @@ body.nav-menu-open .music-player * {
   font-size: var(--text-body-sm);
 }
 
-/* Intro */
+/* Intro – iets smallere kolom (minder overlap met video’s op smalle schermen), gecentreerd */
 .intro-text {
   font-family: var(--font-body);
   font-size: var(--text-body);
   font-weight: 500;
   line-height: var(--line-body);
   letter-spacing: 0.02em;
-  max-width: 680px;
+  max-width: min(38rem, 100%);
   margin: 0 auto;
+  text-align: center;
 }
 .intro-text p { margin-bottom: 1.5rem; }
 .intro-cta-text {
@@ -1370,6 +1536,15 @@ body.nav-menu-open .music-player * {
   color: var(--text-dim);
   text-align: center;
   font-style: italic;
+}
+
+.pricing-packages-note {
+  margin: 0 auto 1rem;
+  max-width: 52rem;
+  text-align: center;
+  font-size: var(--text-body-sm);
+  color: var(--text-dim);
+  line-height: 1.65;
 }
 
 /* Pricing blocks – prijzen.html */
@@ -2414,10 +2589,7 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
   .intro, .diensten, .hands-up, .contact { padding-left: 0; padding-right: 0; }
   .intro, .diensten, .hands-up { min-height: 0 !important; }
 
-  /* Hero video verbergen op mobiel (staat in contact) */
-  .hero-video-preview { display: none !important; }
-
-  /* Video-row: vast 2-koloms grid, gelijke max-width voor consistente afstand tussen alle videos */
+  /* Video-row: grid; derde video (IMG_4860) op eigen rij gecentreerd */
   .video-row {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr);
@@ -2426,6 +2598,10 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
     margin: 1rem auto;
     max-width: min(1100px, calc(100% - 2rem));
     box-sizing: border-box;
+  }
+  /* Max. 2 video’s per blok: onderste (3e) intro-video niet tonen */
+  .video-row-intro .video-float-intro-4860 {
+    display: none !important;
   }
 
   .video-row .video-float {
@@ -2577,13 +2753,15 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
   .section { padding: 4rem 1rem; }
   .pricing-cards { grid-template-columns: 1fr; }
   .hands-up-content { flex-direction: column; }
-  .hero-intro { flex-direction: column; }
-  .hero-photo { width: 180px; height: 180px; }
+  /* Geen .hero-photo fixed size – die brak object-fit/cover in de hero (klein plaatje in groot vak) */
 }
 
-/* Page footer – subpages */
+/* Page footer – onderaan extra ruimte zodat tekst boven de vaste muziekspeler blijft (ook zonder body.intro-done) */
 .page-footer {
   padding: 2.5rem 1rem;
+  padding-bottom: calc(
+    2.5rem + var(--music-player-height) + env(safe-area-inset-bottom, 0px) + 0.5rem
+  );
   color: var(--text-dim);
   font-size: var(--text-body-sm);
   border-top: 1px solid var(--glass-border);
@@ -2640,7 +2818,12 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
 .testimonial-card .testimonial-meta { margin-bottom: 0.5rem; }
 .testimonial-card .testimonial-name { font-weight: 600; color: var(--text-bright); }
 .testimonial-card .testimonial-stars { color: var(--neon-yellow); }
-.testimonial-card .testimonial-text { margin: 0; color: var(--text-dim); font-size: var(--text-body-sm); }
+.testimonial-card .testimonial-text {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: var(--text-body-sm);
+  white-space: pre-line;
+}
 .testimonial-card .testimonial-footer { margin-top: 0.75rem; font-size: var(--text-caption); color: var(--text-dim); }
 .testimonial-card time { font-size: var(--text-caption); color: var(--text-dim); }
 .faq-item { margin-bottom: 1rem; border: 1px solid var(--glass-border); border-radius: 8px; overflow: hidden; }
@@ -2818,6 +3001,12 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
 .section-diensten-index .container {
   text-align: center;
 }
+.section-diensten-index .container > h1.section-title {
+  margin-bottom: 1.75rem;
+}
+.section-diensten-index .container > h1 + p {
+  margin-bottom: 1.25rem;
+}
 .section-diensten-index .container > p,
 .section-diensten-index .section-links,
 .section-diensten-index .section-diensten-intro {
@@ -2826,9 +3015,20 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
   margin-left: auto;
   margin-right: auto;
 }
+.section-diensten-index .section-links {
+  margin-bottom: 3rem;
+}
+.section-diensten-index .container > h2.section-title {
+  margin-bottom: 1.5rem;
+}
+.section-diensten-index .container > h2.section-title ~ h2.section-title {
+  margin-top: 3rem;
+}
 .section-diensten-index .service-cards-main {
   justify-content: center;
-  gap: 1.25rem;
+  gap: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 2.75rem;
 }
 .section-diensten-index .service-cards-grid {
   justify-content: center;
@@ -2836,16 +3036,22 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
   margin-left: auto;
   margin-right: auto;
 }
+.section-diensten-index .section-diensten-intro {
+  margin-bottom: 1.5rem;
+}
 .section-diensten-index .service-cards-feesttypes {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.25rem;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 2.5rem;
 }
 .section-diensten-index .cta-row {
   justify-content: center;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
 }
 
 /* Populaire diensten – kleurrijke kaarten (zelfde stijl als inspiratie) */

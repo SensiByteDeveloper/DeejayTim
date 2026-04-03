@@ -41,6 +41,13 @@ function formatPrice(p) {
   return `€${Number(p).toLocaleString('nl-NL', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
 }
 
+/** Per-km surcharge (e.g. €0,35 / €0.35) — not whole euros */
+function formatKmRate(n, lang) {
+  if (n == null) return '—';
+  const loc = lang === 'en' ? 'en-GB' : 'nl-NL';
+  return `€${Number(n).toLocaleString(loc, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
 function renderPriceElement(el, pricing) {
   if (!pricing) return;
   const lang = getLang();
@@ -94,8 +101,13 @@ function renderSubtitleElement(el, pricing) {
   const lang = getLang();
   const km = pricing.extraKm;
   const hour = pricing.extraHour;
-  const tpl = pickLang(pricing.subtitle, lang) || (lang === 'en' ? 'Prices excl. VAT, incl. 4 hours DJ and incl. travel up to 30km from 3332 SN. Extra km: {km}. Extra hour: {hour}.' : 'Prijzen zijn excl. BTW, incl. 4 uur DJ en incl. reiskosten tot 30km vanuit 3332 SN. Extra km: {km}. Extra uur: {hour}.');
-  el.textContent = tpl.replace('{km}', formatPrice(km)).replace('{hour}', formatPrice(hour));
+  const ex50 = pickLang(pricing.travelExample50km, lang) || '€14';
+  const tpl =
+    pickLang(pricing.subtitle, lang) ||
+    (lang === 'en'
+      ? 'Private rates; no VAT. All packages: 4 hours DJ included, including 30 km travel from 3332 SN; beyond that {km} per km driven (50 km away: {ex50} extra travel on top of the price). Extra hour {hour}.'
+      : 'Particuliere tarieven, geen BTW. Alle pakketten: 4 uur DJ inbegrepen, inclusief 30 km reiskosten vanaf 3332 SN; daarboven {km} per gereden km (bij 50 km afstand: {ex50} extra reiskosten op de prijs). Extra uur {hour}.');
+  el.textContent = tpl.replace('{km}', formatKmRate(km, lang)).replace('{hour}', formatPrice(hour)).replace('{ex50}', ex50);
 }
 
 function renderExtrasList(el, pricing) {
@@ -116,7 +128,7 @@ function updatePricingMetaAndSchema(pricing) {
   if (meta && j != null && a != null) {
     const parts = [`Just DJ vanaf ${fp(j)}`, `All-in DJ Show vanaf ${fp(a)}`];
     if (w != null) parts.push(`Bruiloft DJ vanaf ${fp(w)}`);
-    meta.setAttribute('content', `Prijzen DJ Tim: ${parts.join(', ')}. 4 uur incl. Reiskosten tot 30 km. Regio Zwijndrecht en Rotterdam.`);
+    meta.setAttribute('content', `Prijzen DJ Tim: ${parts.join(', ')}. Alle pakketten: 4 uur DJ, 30 km reis inbegrepen vanaf 3332 SN; extra uur en km volgens tarief. Regio Zwijndrecht en Rotterdam.`);
   }
 
   /* FAQ "Wat kost een DJ gemiddeld?" heeft nu statische, genuanceerde tekst in prijzen.html – niet overschrijven */

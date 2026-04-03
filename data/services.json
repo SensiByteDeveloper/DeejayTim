@@ -93,8 +93,8 @@
         "en": ["Professional DJ set (Pioneer XDJ-RX3) – digital, reliable and suitable for any venue type", "Speaker system tailored to your venue and guest count – up to around 100 people standard", "DJ booth and dance floor lighting – professional look, no hassle", "Microphone for announcements, speeches and guiding moments", "Fog machine optional – depends on the venue (some halls don't allow it due to smoke alarms)", "Lighting tailored to your situation: at weddings I coordinate with the photographer – lasers are often discouraged due to risk of lens damage"]
       },
       "werkwijzeSteps": {
-        "nl": ["Kennismaking en voorgesprek: we bespreken jullie wensen, programma en speciale momenten. Wat wil je wel en niet?", "Afstemming met ceremoniemeester of locatie over timing en aankondigingen – alles loopt soepel", "Op de dag: ik ben ruim op tijd voor opbouw en soundcheck. Van openingsdans tot laatste nummer – ik begeleid het hele feest"],
-        "en": ["Introduction and consultation: we discuss your wishes, programme and special moments. What do you want and what don't you?", "Coordination with master of ceremonies or venue on timing and announcements – everything runs smoothly", "On the day: I arrive well in time for setup and soundcheck. From first dance to last song – I guide the entire celebration"]
+        "nl": ["Kennismaking en voorgesprek: we bespreken jullie wensen, programma en speciale momenten. Wat wil je wel en niet?", "Afstemming met ceremoniemeester of locatie over timing en aankondigingen – alles loopt soepel", "Op de dag: ik ben graag minimaal een uur van tevoren aanwezig om rustig op te bouwen en te soundchecken. Van openingsdans tot laatste nummer – ik begeleid het hele feest"],
+        "en": ["Introduction and consultation: we discuss your wishes, programme and special moments. What do you want and what don't you?", "Coordination with master of ceremonies or venue on timing and announcements – everything runs smoothly", "On the day: I'm happy to be there at least an hour before the start to set up calmly and soundcheck. From first dance to last song – I guide the entire celebration"]
       },
       "faq": [
         { "q": { "nl": "Hoe ver van tevoren boeken?", "en": "How far in advance should I book?" }, "a": { "nl": "Bij voorkeur 2–6 maanden. Populaire data gaan snel.", "en": "Preferably 2–6 months. Popular dates go fast." } },
@@ -125,8 +125,8 @@
         "en": ["All-in: professional speaker system, DJ booth, dance floor lighting and microphone – all included", "Just DJ: DJ only – for venues with their own sound system. I connect and play.", "See the pricing page for the difference between Just DJ and All-in – we choose together what fits your venue"]
       },
       "werkwijzeSteps": {
-        "nl": ["Contact: we bespreken locatie, datum en welk pakket past. Heeft de locatie al geluid? Dan kan Just DJ volstaan.", "Muziek afstemmen: wat wil de jarige horen, wat absoluut niet? We stemmen vooraf af.", "Feest: ik ben ruim op tijd voor opbouw en soundcheck. Van eerste nummer tot laatste – ik draai tot het einde"],
-        "en": ["Contact: we discuss venue, date and which package fits. Does the venue already have sound? Then Just DJ may suffice.", "Music alignment: what does the birthday person want to hear, what definitely not? We agree in advance.", "Party: I arrive well in time for setup and soundcheck. From first song to last – I play until the end"]
+        "nl": ["Contact: we bespreken locatie, datum en welk pakket past. Heeft de locatie al geluid? Dan kan Just DJ volstaan.", "Muziek afstemmen: wat wil de jarige horen, wat absoluut niet? We stemmen vooraf af.", "Feest: ik ben graag minimaal een uur van tevoren aanwezig om rustig op te bouwen en te soundchecken. Van eerste nummer tot laatste – ik draai tot het einde"],
+        "en": ["Contact: we discuss venue, date and which package fits. Does the venue already have sound? Then Just DJ may suffice.", "Music alignment: what does the birthday person want to hear, what definitely not? We agree in advance.", "Party: I'm happy to be there at least an hour before the start to set up calmly and soundcheck. From first song to last – I play until the end"]
       },
       "faq": [
         { "q": { "nl": "Hoeveel kost een verjaardag DJ?", "en": "How much does a birthday DJ cost?" }, "aTemplate": "pricing" }

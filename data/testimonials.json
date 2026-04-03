@@ -83,6 +83,20 @@
       "date": "2026-03-05",
       "eventType": ["bruiloft"],
       "locationSlugs": ["dj-spijkenisse"]
+    },
+    {
+      "id": "rev-milou-van-der-graaf",
+      "name": "Milou van der Graaf",
+      "city": "",
+      "rating": 5,
+      "text": {
+        "nl": "23.05.2025 – de dag waarop Deejay Tim heeft bijgedragen aan de mooiste dag van ons leven! 💍🎉\n\nZonder hem was het nooit zo’n knalfeest geweest. Tim denkt echt met je mee, biedt persoonlijke ondersteuning en voor hem is niets te gek. Dankzij hem hebben we zelfs onze openingsdans kunnen laten mixen met heerlijke hardstyle – hoe gaaf is dat?! 🔥\n\nHij is van alle markten thuis: of je nu houdt van oldschool, funky vibes of juist stevige beats, hij voelt het publiek perfect aan en maakt er gegarandeerd een topfeest van.\n\nMet Deejay Tim op je feest weet je één ding zeker: het wordt een hit! 🙌\n\nDankjewel Tim, dat je onze dag onvergetelijk hebt gemaakt! ❤️",
+        "en": "23 May 2025 – the day Deejay Tim helped make the most beautiful day of our lives! 💍🎉\n\nWithout him it would never have been such an amazing party. Tim really thinks along with you, offers personal support and nothing is too much for him. Thanks to him we even got our first dance mixed with great hardstyle – how cool is that?! 🔥\n\nHe is comfortable with every style: whether you love old-school, funky vibes or heavier beats, he reads the crowd perfectly and guarantees a top party.\n\nWith Deejay Tim at your party one thing is certain: it’s going to be a hit! 🙌\n\nThank you Tim for making our day unforgettable! ❤️"
+      },
+      "source": "Google",
+      "date": "2025-05-23",
+      "eventType": ["bruiloft"],
+      "locationSlugs": ["dj-zwijndrecht"]
     }
   ]
 }

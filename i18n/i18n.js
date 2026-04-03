@@ -80,6 +80,12 @@
       if (val != null) el.setAttribute('aria-label', val);
     });
 
+    document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+      const key = el.getAttribute('data-i18n-alt');
+      const val = get(dict[currentLang], key);
+      if (val != null) el.setAttribute('alt', val);
+    });
+
     document.querySelectorAll('ul[data-i18n-list]').forEach(ul => {
       const key = ul.getAttribute('data-i18n-list');
       const arr = get(dict[currentLang], key);

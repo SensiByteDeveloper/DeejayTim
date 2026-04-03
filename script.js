@@ -828,12 +828,11 @@ function initVideoRandomPositions() {
 
   // Video ~533px hoog. Secties 1000px → ruimte voor max ~15% overlap. Meer marge tussen top/bottom.
   const positions = {
-    hero: [
-      { top: '25%', rotate: 10 }
-    ],
     intro: [
       { top: '0', rotate: -6 },
-      { bottom: '0', rotate: 8 }
+      { bottom: '0', rotate: 8 },
+      /* IMG_4860: rechts, verticaal gecentreerd t.o.v. de sectie (= tussen boven/onder linker video’s) */
+      { centerY: true, rotate: 5 }
     ],
     diensten: [
       { top: '0', rotate: -6 },
@@ -848,9 +847,14 @@ function initVideoRandomPositions() {
   document.querySelectorAll('.video-float').forEach((el) => {
     const zone = el.dataset.zone || 'right';
     let section, idx;
-    if (el.closest('.hero')) { section = 'hero'; idx = 0; }
-    else if (el.closest('#intro')) { section = 'intro'; idx = el.classList.contains('video-float-2') ? 0 : 1; }
-    else if (el.closest('#diensten')) { section = 'diensten'; idx = el.classList.contains('video-float-3') ? 0 : 1; }
+    if (el.closest('.hero')) return;
+    if (el.closest('#intro')) {
+      section = 'intro';
+      if (el.classList.contains('video-float-2')) idx = 0;
+      else if (el.classList.contains('video-float-5')) idx = 1;
+      else if (el.classList.contains('video-float-intro-4860')) idx = 2;
+      else idx = 1;
+    } else if (el.closest('#diensten')) { section = 'diensten'; idx = el.classList.contains('video-float-3') ? 0 : 1; }
     else if (el.closest('#hands-up')) { section = 'hands-up'; idx = el.classList.contains('video-float-4') ? 0 : 1; }
     else return;
 
@@ -859,9 +863,15 @@ function initVideoRandomPositions() {
 
     el.style.left = zone === 'left' ? '1.5rem' : '';
     el.style.right = zone === 'right' ? '1.5rem' : '';
-    el.style.top = p.top || '';
-    el.style.bottom = p.bottom || '';
-    el.style.transform = `rotate(${p.rotate}deg)`;
+    if (p.centerY) {
+      el.style.top = '50%';
+      el.style.bottom = 'auto';
+      el.style.transform = `translateY(-50%) rotate(${p.rotate}deg)`;
+    } else {
+      el.style.top = p.top || '';
+      el.style.bottom = p.bottom || '';
+      el.style.transform = `rotate(${p.rotate}deg)`;
+    }
     el.style.setProperty('--video-rotate', `${p.rotate}deg`);
   });
 }
