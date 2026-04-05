@@ -150,13 +150,18 @@ function updatePricingMetaAndSchema(pricing) {
   }
 }
 
-export async function renderPricing() {
+export async function renderPricing(retryAttempt = 0) {
   const pricing = await loadPricing();
   document.querySelectorAll('[data-price]').forEach((el) => renderPriceElement(el, pricing));
   document.querySelectorAll('[data-range]').forEach((el) => renderRangeElement(el, pricing));
   document.querySelectorAll('[data-price-subtitle]').forEach((el) => renderSubtitleElement(el, pricing));
   document.querySelectorAll('[data-extras]').forEach((el) => renderExtrasList(el, pricing));
   updatePricingMetaAndSchema(pricing);
+
+  /* Eén retry bij mislukte fetch (intermitterend netwerk / cache) */
+  if (!pricing && document.querySelector('[data-price]') && retryAttempt < 1) {
+    setTimeout(() => renderPricing(retryAttempt + 1).catch(() => {}), 400);
+  }
 }
 
 
@@ -169,12 +174,48 @@ export async function getPricingAsync() {
 }
 
 if (typeof document !== 'undefined') {
-  const run = () => renderPricing();
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', run);
-  } else {
-    run();
+  /**
+   * Prijzen pas vullen ná i18n/microtasks (queueMicrotask) en vóór paint (rAF),
+   * zodat homepage/PJAX niet lege [data-price]-spans tonen door volgorde-races.
+   */
+  function scheduleRenderPricing() {
+    const exec = () => {
+      renderPricing().catch(() => {});
+    };
+    const runAfterLayout = () => {
+      if (typeof requestAnimationFrame !== 'undefined') {
+        requestAnimationFrame(exec);
+      } else {
+        exec();
+      }
+    };
+    if (typeof queueMicrotask === 'function') {
+      queueMicrotask(runAfterLayout);
+    } else {
+      setTimeout(runAfterLayout, 0);
+    }
   }
-  document.addEventListener('partialsloaded', run);
-  window.addEventListener('langchange', run);
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', scheduleRenderPricing);
+  } else {
+    scheduleRenderPricing();
+  }
+  document.addEventListener('partialsloaded', scheduleRenderPricing);
+  document.addEventListener('pjax:navigate', () => {
+    const p = location.pathname || '';
+    const path = p.replace(/\/$/, '') || '/';
+    if (path === '/' || path === '/index.html' || /\/prijzen\.html$/.test(p)) {
+      scheduleRenderPricing();
+    }
+  });
+  window.addEventListener('langchange', scheduleRenderPricing);
+
+  /* Langchange kan al vuren vóór deze module geladen is (defer header → i18n.apply vóór modules). */
+  setTimeout(() => {
+    const priceSpans = document.querySelectorAll('[data-price]');
+    if (!priceSpans.length) return;
+    const empty = [...priceSpans].some((el) => !el.textContent?.trim());
+    if (empty) scheduleRenderPricing();
+  }, 300);
 }

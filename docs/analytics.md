@@ -65,9 +65,9 @@ The Worker writes to `DJTIM_EVENTS`:
 | `index1` | Event name (e.g. `click_whatsapp`, `music_play`) |
 | `blob1` | Event name |
 | `blob2` | Page path |
-| `blob3` | `eventType` (playlist generator) |
-| `blob4` | `vibe` (playlist generator) |
-| `blob5` | `ageMix` (playlist generator) |
+| `blob3` | (reserved / future use) |
+| `blob4` | (reserved) |
+| `blob5` | (reserved) |
 | `blob6` | `muted` (music_mute_toggle) |
 | `double1` | Always 1 (count) |
 
@@ -87,7 +87,6 @@ The Worker writes to `DJTIM_EVENTS`:
 | `music_mute_toggle` | Mute/unmute (data: `{ muted: true/false }`) |
 | `music_minimize` | Player bar collapse |
 | `music_expand` | Player bar expand |
-| `playlist_generator_used` | "Genereer playlist" click (data: `eventType`, `vibe`, `ageMix`) |
 
 ---
 
@@ -137,19 +136,6 @@ SELECT SUM(_sample_interval) AS play_count
 FROM DJTIM_EVENTS
 WHERE blob1 = 'music_play'
   AND timestamp > NOW() - INTERVAL '7' DAY
-```
-
-### Playlist generator usage by event type
-
-```sql
-SELECT
-  blob3 AS event_type,
-  SUM(_sample_interval) AS uses
-FROM DJTIM_EVENTS
-WHERE blob1 = 'playlist_generator_used'
-  AND timestamp > NOW() - INTERVAL '30' DAY
-GROUP BY blob3
-ORDER BY uses DESC
 ```
 
 ### Location vs service page opens (last 14 days)

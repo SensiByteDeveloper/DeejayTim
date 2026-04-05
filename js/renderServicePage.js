@@ -197,8 +197,8 @@ export async function renderServicePage() {
   const muziekFallback = lang === 'en' ? '<p>Wide repertoire, adaptable to your wishes.</p>' : '<p>Breed repertoire, aanpasbaar aan jouw wensen.</p>';
   const muziekHtml = muziek.length ? `<ul>${muziek.map((x) => `<li>${escapeHtml(typeof x === 'string' ? x : pickLang(x, lang))}</li>`).join('')}</ul>` : muziekFallback;
   const muziekLinks = lang === 'en'
-    ? '<p class="section-links">Looking for music inspiration? Check the <a href="/feest-muziek-inspiratie.html">party music inspiration</a> with playlist examples per moment, or use the <a href="/feest-playlist-generator.html">playlist generator</a> for a custom suggestion.</p>'
-    : '<p class="section-links">Zoek je muziekinspiratie? Bekijk de <a href="/feest-muziek-inspiratie.html">feest muziek inspiratie</a> met playlist-voorbeelden per moment, of gebruik de <a href="/feest-playlist-generator.html">playlist generator</a> voor een op maat gemaakte suggestie.</p>';
+    ? '<p class="section-links">Looking for music inspiration? Check the <a href="/feest-muziek-inspiratie.html">party music inspiration</a> with playlist examples per moment.</p>'
+    : '<p class="section-links">Zoek je muziekinspiratie? Bekijk de <a href="/feest-muziek-inspiratie.html">feest muziek inspiratie</a> met playlist-voorbeelden per moment.</p>';
   setContent(document.getElementById('muziek'), `
     <div class="container">
       <h2>${escapeHtml(muziekTitle)}</h2>

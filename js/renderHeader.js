@@ -38,7 +38,6 @@
       <a href="/inspiratie/" class="nav-link nav-dropdown-trigger" data-nav="inspiratie" data-i18n="nav.inspiratie" aria-haspopup="true" aria-expanded="false" id="nav-inspiratie-trigger">Inspiratie</a>
       <ul class="nav-dropdown-menu" aria-labelledby="nav-inspiratie-trigger" role="menu">
         <li role="none"><a href="/feest-muziek-inspiratie.html" role="menuitem" data-i18n="nav.feestMuziekInspiratie">Feest muziek inspiratie</a></li>
-        <li role="none"><a href="/feest-playlist-generator.html" role="menuitem" data-i18n="nav.playlistGenerator">Playlist generator</a></li>
         <li role="none"><a href="/fotos-feesten.html" role="menuitem" data-i18n="nav.fotosFeesten">Foto's feesten</a></li>
         <li role="none"><a href="/dj-set-up.html" role="menuitem" data-i18n="nav.djSetup">DJ set-up</a></li>
       </ul>
@@ -85,7 +84,7 @@
         if (nav === 'diensten') a.classList.add('nav-active');
       } else if (path === '/werkgebied.html') {
         if (nav === 'werkgebied') a.classList.add('nav-active');
-      } else if (path === '/inspiratie/' || path.startsWith('/inspiratie/') || path === '/feest-muziek-inspiratie.html' || path === '/feest-playlist-generator.html' || path === '/fotos-feesten.html' || path === '/dj-set-up.html') {
+      } else if (path === '/inspiratie/' || path.startsWith('/inspiratie/') || path === '/feest-muziek-inspiratie.html' || path === '/fotos-feesten.html' || path === '/dj-set-up.html') {
         if (nav === 'inspiratie') a.classList.add('nav-active');
       } else if (path === '/reviews.html') {
         if (nav === 'reviews') a.classList.add('nav-active');
@@ -115,9 +114,6 @@
       window.addEventListener('hashchange', setActiveState);
       document.addEventListener('pjax:navigate', setActiveState);
       document.dispatchEvent(new CustomEvent('headerloaded'));
-      if (window.i18n?.setLang) {
-        window.i18n.apply?.();
-      }
     }
   }
 

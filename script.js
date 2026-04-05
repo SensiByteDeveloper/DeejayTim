@@ -17,7 +17,6 @@ function initGoogleReviewsLinks() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initGoogleReviewsLinks();
-  initNav();
   initMusicPlayer();
   initSmoothScroll();
   if (location.hash) {
@@ -123,11 +122,18 @@ function initNav() {
     document.body.style.overflow = 'hidden';
   };
 
-  window.addEventListener('scroll', () => {
-    if (!nav) return;
-    if (window.scrollY > 50) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
-  });
+  let scrollTicking = false;
+  const onNavScroll = () => {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+      scrollTicking = false;
+      if (!nav) return;
+      if (window.scrollY > 50) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+  };
+  window.addEventListener('scroll', onNavScroll, { passive: true });
 
   toggle?.addEventListener('click', () => {
     const open = links?.classList.toggle('open');

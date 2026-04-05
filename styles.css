@@ -3136,68 +3136,6 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
 .cta-block-top { margin-top: 0; }
 .faq-list { margin-top: 1rem; }
 
-/* Playlist generator */
-.playlist-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: flex-end;
-  margin: 2rem 0;
-  padding: 1.5rem;
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  border-radius: 8px;
-}
-.playlist-form .form-row {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-.playlist-form label { font-size: var(--text-caption); color: var(--text-dim); }
-.playlist-form select {
-  padding: 0.5rem 0.75rem;
-  background: var(--bg-darker);
-  border: 1px solid var(--glass-border);
-  border-radius: 6px;
-  color: var(--text-bright);
-  font-family: var(--font-body);
-  font-size: var(--text-body-sm);
-  min-width: 160px;
-}
-.playlist-form select:focus { outline: none; border-color: var(--neon-cyan); }
-.playlist-result { margin-top: 2rem; }
-.playlist-result-title { font-family: var(--font-display); font-size: 1.25rem; margin: 0 0 1rem; color: var(--text-bright); }
-.playlist-output {
-  padding: 1.5rem;
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  max-height: 400px;
-  overflow-y: auto;
-}
-.playlist-phase { margin-bottom: 1.5rem; }
-.playlist-phase:last-child { margin-bottom: 0; }
-.playlist-phase h3 { font-size: 1rem; margin: 0 0 0.5rem; color: var(--neon-cyan); }
-.playlist-phase ol { margin: 0; padding-left: 1.25rem; color: var(--text-dim); }
-.playlist-phase li { margin-bottom: 0.25rem; }
-.playlist-cta {
-  margin-top: 2rem;
-  padding: 1.5rem;
-  text-align: center;
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  border-radius: 8px;
-}
-.playlist-cta p { margin: 0 0 0.5rem; }
-.playlist-cta p:last-child { margin-bottom: 0; }
-.playlist-cta .pricing-btn { margin-right: 0.5rem; }
-.playlist-cta-link { color: var(--link-color); }
-.playlist-cta-link:hover { text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
-.playlist-cta-services { font-size: var(--text-body-sm); }
-.playlist-cta-services a { color: var(--link-color); }
-.playlist-cta-services a:hover { text-shadow: 0 0 12px rgba(0, 229, 255, 0.6); text-decoration-color: var(--neon-cyan); }
-
 /* DJ set-up – luxe galerij */
 .dj-setup-lead { font-size: var(--text-body-lg); color: var(--text-dim); margin-bottom: 0; line-height: 1.7; }
 .container-wide { max-width: 1100px; margin-left: auto; margin-right: auto; padding: 0 1.5rem; }

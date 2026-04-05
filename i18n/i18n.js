@@ -42,7 +42,10 @@
     return v != null ? String(v) : (get(dict.nl, key) || key);
   }
 
-  function apply() {
+  /**
+   * @param {Element|Document|undefined} scopeRoot - If an Element, only update i18n nodes inside it (faster after PJAX). Title/meta/lang UI always update.
+   */
+  function apply(scopeRoot) {
     document.documentElement.lang = currentLang;
     const path = typeof location !== 'undefined' ? location.pathname || '' : '';
     const isInspiratie = /^\/inspiratie\/?$/.test(path) || path === '/inspiratie/index.html';
@@ -62,31 +65,34 @@
     const metaTwDesc = document.querySelector('meta[name="twitter:description"]');
     if (metaTwDesc && desc) metaTwDesc.setAttribute('content', desc);
 
-    document.querySelectorAll('[data-i18n]').forEach(el => {
+    const root =
+      scopeRoot && scopeRoot.nodeType === Node.ELEMENT_NODE ? scopeRoot : document;
+
+    root.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       const val = get(dict[currentLang], key);
       if (val != null) el.textContent = val;
     });
 
-    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    root.querySelectorAll('[data-i18n-html]').forEach(el => {
       const key = el.getAttribute('data-i18n-html');
       const val = get(dict[currentLang], key);
       if (val != null) el.innerHTML = val;
     });
 
-    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+    root.querySelectorAll('[data-i18n-aria]').forEach(el => {
       const key = el.getAttribute('data-i18n-aria');
       const val = get(dict[currentLang], key);
       if (val != null) el.setAttribute('aria-label', val);
     });
 
-    document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+    root.querySelectorAll('[data-i18n-alt]').forEach(el => {
       const key = el.getAttribute('data-i18n-alt');
       const val = get(dict[currentLang], key);
       if (val != null) el.setAttribute('alt', val);
     });
 
-    document.querySelectorAll('ul[data-i18n-list]').forEach(ul => {
+    root.querySelectorAll('ul[data-i18n-list]').forEach(ul => {
       const key = ul.getAttribute('data-i18n-list');
       const arr = get(dict[currentLang], key);
       if (Array.isArray(arr)) {
@@ -154,7 +160,13 @@
   document.addEventListener('headerloaded', function () {
     if (window.i18n?.apply) window.i18n.apply();
   });
-  document.addEventListener('partialsloaded', function () {
-    if (window.i18n?.apply) window.i18n.apply();
+  document.addEventListener('partialsloaded', function (e) {
+    if (!window.i18n?.apply) return;
+    if (e.detail?.fromPjax) {
+      const main = document.querySelector('#main-content');
+      window.i18n.apply(main || undefined);
+    } else {
+      window.i18n.apply();
+    }
   });
 })();

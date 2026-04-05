@@ -74,6 +74,13 @@
     return false;
   }
 
+  /** Lets the browser paint (e.g. :active on nav) before heavy DOM work — improves INP. */
+  function yieldToPaint() {
+    return new Promise((resolve) => {
+      requestAnimationFrame(() => requestAnimationFrame(resolve));
+    });
+  }
+
   async function loadPage(url) {
     const res = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
     if (!res.ok) throw new Error(res.status);
@@ -120,6 +127,8 @@
     try {
       const { mainHTML, mainAttrs, title, metaDesc } = await loadPage(url);
 
+      await yieldToPaint();
+
       main.innerHTML = mainHTML;
       ['data-service', 'data-location', 'class'].forEach((name) => main.removeAttribute(name));
       for (const [name, value] of Object.entries(mainAttrs)) {
@@ -143,7 +152,7 @@
       }
 
       document.dispatchEvent(new CustomEvent('pjax:navigate', { detail: { url, path } }));
-      if (window.i18n?.apply) window.i18n.apply();
+      /* i18n: partialsloaded runs scoped apply(#main-content) — avoid duplicate full-document apply */
       document.dispatchEvent(new CustomEvent('partialsloaded', { detail: { fromPjax: true } }));
     } catch (err) {
       location.href = url;
