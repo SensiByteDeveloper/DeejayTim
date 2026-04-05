@@ -721,6 +721,10 @@ main#main-content h1:not(.hero-title) {
   aspect-ratio: 9/16;
   object-fit: cover;
 }
+/* Tot lazy load geen netwerk: subtiele placeholder */
+.video-float:not([data-video-loaded]) video {
+  background: rgba(0, 0, 0, 0.4);
+}
 .video-hint {
   position: absolute;
   bottom: 0;

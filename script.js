@@ -1028,8 +1028,73 @@ function initHandsUpModal() {
   });
 }
 
+// Homepage video-floats: geen src in HTML — laden bij bijna in beeld (IntersectionObserver) of bij klik
+const VIDEO_LAZY_ROOT_MARGIN = '220px 0px';
+let lazyVideoFloatResizeBound = false;
+
+function loadVideoFloat(wrapper) {
+  if (!wrapper || wrapper.getAttribute('data-video-loaded') === '1') return;
+  const src = wrapper.getAttribute('data-video');
+  if (!src) return;
+  const video = wrapper.querySelector('video');
+  if (!video) return;
+  video.preload = 'auto';
+  video.src = src;
+  video.muted = true;
+  video.playsInline = true;
+  video.loop = true;
+  video.load();
+  wrapper.setAttribute('data-video-loaded', '1');
+  video.play().catch(() => {});
+}
+
+function setupLazyVideoFloats() {
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const el = entry.target;
+        if (getComputedStyle(el).display === 'none') continue;
+        loadVideoFloat(el);
+        io.unobserve(el);
+      }
+    },
+    { root: null, rootMargin: VIDEO_LAZY_ROOT_MARGIN, threshold: 0.01 }
+  );
+
+  document.querySelectorAll('.video-float[data-video]').forEach((el) => {
+    if (el.dataset.lazyObserve === '1') return;
+    if (getComputedStyle(el).display === 'none') return;
+    el.dataset.lazyObserve = '1';
+    io.observe(el);
+  });
+
+  if (lazyVideoFloatResizeBound) return;
+  lazyVideoFloatResizeBound = true;
+  let resizeT;
+  window.addEventListener(
+    'resize',
+    () => {
+      clearTimeout(resizeT);
+      resizeT = setTimeout(() => {
+        const margin = 240;
+        const vh = window.innerHeight;
+        document.querySelectorAll('.video-float[data-video]').forEach((el) => {
+          if (el.getAttribute('data-video-loaded') === '1') return;
+          if (getComputedStyle(el).display === 'none') return;
+          const rect = el.getBoundingClientRect();
+          if (rect.bottom < -margin || rect.top > vh + margin) return;
+          loadVideoFloat(el);
+        });
+      }, 200);
+    },
+    { passive: true }
+  );
+}
+
 // Video previews: muted afspelen, klik opent modal met carousel (zoals Hands Up)
 function initVideoPreviews() {
+  setupLazyVideoFloats();
   const modal = document.getElementById('videoModal');
   const modalPlayer = document.getElementById('videoModalPlayer');
   const modalClose = modal?.querySelector('.video-modal-close');
@@ -1128,22 +1193,18 @@ function initVideoPreviews() {
     } catch (_) {}
   };
 
-  // Start muted video previews
-  document.querySelectorAll('.video-float video').forEach(video => {
-    video.muted = true;
-    video.playsInline = true;
-    video.loop = true;
-    video.play().catch(() => {});
-  });
-
   document.querySelectorAll('.video-float[data-video]').forEach(el => {
+    if (el.dataset.videoPreviewBound === '1') return;
+    el.dataset.videoPreviewBound = '1';
     el.addEventListener('click', () => {
+      loadVideoFloat(el);
       const src = el.getAttribute('data-video');
       if (src) openVideo(src);
     });
     el.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
+        loadVideoFloat(el);
         const src = el.getAttribute('data-video');
         if (src) openVideo(src);
       }
