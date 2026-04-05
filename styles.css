@@ -315,8 +315,48 @@ main#main-content h1:not(.hero-title) {
   background-clip: text;
 }
 
+/* Instagram + muziek naast elkaar (desktop + mobiel drawer) */
+.nav-tools-wrap { display: flex; align-items: center; margin-right: 0.5rem; }
+.nav-tools-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav-instagram-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.35rem;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, filter 0.2s;
+  box-sizing: border-box;
+}
+.nav-instagram-btn .nav-instagram-icon {
+  display: block;
+  filter: drop-shadow(0 0 2px rgba(255, 45, 146, 0.55)) drop-shadow(0 0 5px rgba(188, 19, 254, 0.35));
+  transition: filter 0.2s ease;
+}
+.nav-instagram-btn:hover {
+  background: rgba(244, 95, 144, 0.08);
+  border-color: rgba(244, 95, 144, 0.45);
+}
+.nav-instagram-btn:hover .nav-instagram-icon {
+  filter: drop-shadow(0 0 3px rgba(255, 45, 146, 0.75)) drop-shadow(0 0 8px rgba(188, 19, 254, 0.5)) drop-shadow(0 0 12px rgba(255, 107, 53, 0.35));
+}
+.nav-instagram-btn:focus { outline: none; }
+.nav-instagram-btn:focus-visible {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 2px;
+}
+
 /* Music toggle – compact, WCAG 2.2 (1.4.2, 4.1.2) */
-.nav-music-wrap { display: flex; align-items: center; margin-right: 0.5rem; }
 .nav-music-toggle {
   display: flex;
   align-items: center;
@@ -330,6 +370,7 @@ main#main-content h1:not(.hero-title) {
   color: var(--text-dim);
   cursor: pointer;
   transition: color 0.2s, background 0.2s, border-color 0.2s;
+  box-sizing: border-box;
 }
 .nav-music-toggle:hover {
   color: var(--neon-cyan);
@@ -2739,16 +2780,58 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
     width: 100%;
     height: 0;
   }
-  .nav-links .nav-music-wrap { margin-top: 0.75rem; margin-right: 0; }
-  /* Taaltoggle bovenaan op mobiel */
+  /* NL/EN en IG/volume: zelfde horizontale middenas (volle breedte + flex center) */
+  .nav-links .nav-tools-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    margin-top: 0.75rem;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .nav-links .nav-tools-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .nav-links .nav-instagram-btn,
+  .nav-links .nav-music-toggle {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    flex: 0 0 48px;
+    padding: 0.4rem;
+  }
+  /* Taaltoggle bovenaan op mobiel – zelfde centering als tool-rij */
   .nav-links .nav-lang-wrap {
     order: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    width: 100%;
     margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
     margin-bottom: 1.5rem;
     padding-top: 0;
     padding-bottom: 1.25rem;
     border-top: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    box-sizing: border-box;
+  }
+  .nav-links .nav-lang-wrap .lang-toggle {
+    margin-left: 0;
+    margin-right: 0;
+    flex-shrink: 0;
   }
   .section { padding: 4rem 1rem; }
   .pricing-cards { grid-template-columns: 1fr; }

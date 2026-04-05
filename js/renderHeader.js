@@ -45,16 +45,36 @@
     <li><a href="/reviews.html" class="nav-link" data-nav="reviews" data-i18n="nav.reviews">Reviews</a></li>
     <li><a href="/blog/index.html" class="nav-link" data-nav="blog" data-i18n="nav.blog">Blog</a></li>
     <li><a href="/contact.html" class="nav-link" data-nav="contact" data-i18n="nav.contact">Contact</a></li>
-    <li class="nav-music-wrap">
-      <button type="button" class="nav-music-toggle" id="navMusicToggle" aria-pressed="false" aria-label="Muziek aan" aria-describedby="navMusicToggleDesc" title="Muziek inschakelen">
-        <span class="nav-music-icon nav-music-icon-off" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-        </span>
-        <span class="nav-music-icon nav-music-icon-on" aria-hidden="true" hidden>
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-        </span>
-        <span id="navMusicToggleDesc" class="sr-only">Muziek inschakelen</span>
-      </button>
+    <li class="nav-tools-wrap">
+      <div class="nav-tools-inner">
+        <a href="https://www.instagram.com/deejaytimr/" target="_blank" rel="noopener noreferrer" class="nav-instagram-btn" data-i18n-aria="nav.instagramAria" title="Instagram">
+          <svg class="nav-instagram-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <defs>
+              <linearGradient id="navInstagramNeonGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#bc13fe"/>
+                <stop offset="32%" stop-color="#ff2d92"/>
+                <stop offset="66%" stop-color="#ff6b35"/>
+                <stop offset="100%" stop-color="#fff01f"/>
+              </linearGradient>
+            </defs>
+            <g fill="none" stroke="url(#navInstagramNeonGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </g>
+          </svg>
+          <span class="sr-only" data-i18n="nav.instagram">Instagram</span>
+        </a>
+        <button type="button" class="nav-music-toggle" id="navMusicToggle" aria-pressed="false" aria-label="Muziek aan" aria-describedby="navMusicToggleDesc" title="Muziek inschakelen">
+          <span class="nav-music-icon nav-music-icon-off" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+          </span>
+          <span class="nav-music-icon nav-music-icon-on" aria-hidden="true" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          </span>
+          <span id="navMusicToggleDesc" class="sr-only">Muziek inschakelen</span>
+        </button>
+      </div>
     </li>
     <li class="nav-lang-wrap">
       <div class="lang-toggle" role="group" aria-label="Taal wijzigen" data-i18n-aria="lang.toggleAria">

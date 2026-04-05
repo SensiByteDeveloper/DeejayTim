@@ -16,6 +16,7 @@ function initGoogleReviewsLinks() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initNav();
   initGoogleReviewsLinks();
   initMusicPlayer();
   initSmoothScroll();
@@ -57,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
       initHandsUpModal();
     }
   });
-  document.addEventListener('headerloaded', initNav);
   window.addEventListener('hashchange', () => {
     if (location.hash) scrollToHash(location.hash);
   });
@@ -97,10 +97,12 @@ function initWhatsAppWidget() {
   });
 }
 
-// Navigation
+// Navigation – headerloaded wordt getriggerd vóór DOMContentLoaded; listener staat daarom buiten DOMContentLoaded
 function initNav() {
   const nav = document.querySelector('.nav');
   const toggle = document.querySelector('.nav-toggle');
+  if (!nav || !toggle || nav.dataset.navInit === '1') return;
+  nav.dataset.navInit = '1';
   const links = document.querySelector('.nav-links');
   const backdrop = document.getElementById('navBackdrop');
 
@@ -154,6 +156,8 @@ function initNav() {
     if (e.key === 'Escape' && links?.classList.contains('open')) closeMenu();
   });
 }
+
+document.addEventListener('headerloaded', initNav);
 
 // Music Player – multi-track, shuffle, state persists across page navigations
 const MUSIC_STATE_KEY = 'deejaytim-music-state';
