@@ -97,6 +97,34 @@
       "date": "2025-05-23",
       "eventType": ["bruiloft"],
       "locationSlugs": ["dj-zwijndrecht"]
+    },
+    {
+      "id": "rev-remco-de-graaf",
+      "name": "Remco",
+      "city": "Den Haag",
+      "rating": 5,
+      "text": {
+        "nl": "Tim was top! Goede mix van muziek en alle ruimte voor verzoeknummers. Voelde de sfeer goed aan en heeft er een mooie avond van gemaakt.",
+        "en": "Tim was great! Good mix of music and plenty of room for song requests. He read the vibe well and made it a lovely evening."
+      },
+      "source": "Google",
+      "date": "2026-06-18",
+      "eventType": ["feest"],
+      "locationSlugs": ["dj-den-haag"]
+    },
+    {
+      "id": "rev-patrick-gommers",
+      "name": "Patrick",
+      "city": "Rijsoord",
+      "rating": 5,
+      "text": {
+        "nl": "Wat een fantastisch feest hebben we gehad dankzij DJ Tim! Hij bracht vanaf het eerste moment een onwijs goede sfeer mee naar de verjaardag van mijn vader.\n\nDe muziek was waanzinnig en er werd geweldig ingespeeld op enkele verzoeknummers. Daarnaast maakten de disco lampen, rookmachines en bellenblaasmachines de beleving helemaal compleet. Het was echt een topavond.\n\nTim, ontzettend bedankt!",
+        "en": "What an amazing party we had thanks to DJ Tim! From the very first moment he brought an incredible vibe to my father's birthday.\n\nThe music was fantastic and he played brilliantly along with several song requests. The disco lights, smoke machines and bubble machines made the experience complete. It was truly a top evening.\n\nTim, thank you so much!"
+      },
+      "source": "Google",
+      "date": "2026-07-09",
+      "eventType": ["verjaardag"],
+      "locationSlugs": ["dj-ridderkerk"]
     }
   ]
 }

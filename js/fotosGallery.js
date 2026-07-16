@@ -15,6 +15,7 @@
   }
 
   function src(filename) {
+    if (filename.startsWith('/')) return filename;
     return BASE + encodeURIComponent(filename);
   }
 
