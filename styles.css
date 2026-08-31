@@ -22,18 +22,23 @@
   --font-display: 'Orbitron', sans-serif;
   --font-accent: 'Cormorant Garamond', serif;
   --text-body: 1.125rem;
-  --text-body-sm: 0.95rem;
-  --text-body-lg: 1.25rem;
-  --text-caption: 0.8rem;
-  --text-micro: 0.7rem;
-  --line-body: 1.75;
-  /* Shared CTA metrics */
-  --cta-pad-y: 0.75rem;
-  --cta-pad-x: 1.4rem;
-  --cta-min-height: 2.85rem;
-  --cta-radius: 4px;
-  --cta-font-size: 0.95rem;
-  --cta-letter-spacing: 0.08em;
+  --text-body-sm: 0.9375rem;
+  --text-body-lg: 1.2rem;
+  --text-caption: 0.8125rem;
+  --text-micro: 0.75rem;
+  --line-body: 1.65;
+  --text-section: clamp(1.4rem, 4.2vw, 2rem);
+  --letter-display: 0.1em;
+  --letter-heading: 0.03em;
+  /* Shared CTA metrics – compact, zelfde formaat overal */
+  --cta-pad-y: 0.5rem;
+  --cta-pad-x: 1.2rem;
+  --cta-min-height: 2.75rem;
+  --cta-min-width: 14.25rem;
+  --cta-max-width: 18rem;
+  --cta-radius: 6px;
+  --cta-font-size: 0.9375rem;
+  --cta-letter-spacing: 0.03em;
   --cta-font-weight: 700;
 }
 
@@ -314,8 +319,10 @@ main#main-content h1:not(.hero-title):not(.hero-headline) {
 }
 .hero-actions .hero-cta {
   text-align: center;
-  width: 100%;
-  max-width: 100%;
+  width: auto;
+  min-width: var(--cta-min-width);
+  max-width: min(var(--cta-max-width), 100%);
+  margin-inline: auto;
 }
 .hero-actions .hero-instagram {
   justify-content: center;
@@ -330,7 +337,8 @@ main#main-content h1:not(.hero-title):not(.hero-headline) {
   }
   .hero-actions .hero-cta {
     width: auto;
-    max-width: none;
+    max-width: min(var(--cta-max-width), 100%);
+    margin-inline: 0;
     flex-shrink: 0;
   }
   .hero-actions .hero-instagram {
@@ -650,8 +658,8 @@ main#main-content h1:not(.hero-title):not(.hero-headline) {
 
   .hero-actions .hero-cta {
     width: auto;
-    min-width: 15.25rem;
-    max-width: 19.5rem;
+    min-width: var(--cta-min-width);
+    max-width: min(var(--cta-max-width), 100%);
   }
 
   .hero-instagram {
@@ -767,7 +775,7 @@ main#main-content h1:not(.hero-title):not(.hero-headline) {
   justify-content: center;
   width: auto;
   min-height: var(--cta-min-height);
-  padding: var(--cta-pad-y) 1.75rem;
+  padding: var(--cta-pad-y) var(--cta-pad-x);
   background: var(--neon-red);
   border: 2px solid var(--neon-red-glow);
   border-radius: var(--cta-radius);
@@ -1552,12 +1560,13 @@ body.nav-menu-open .music-player * {
 }
 
 .section-title {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 2.2rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: var(--text-section);
   font-weight: 700;
   text-align: center;
-  margin-bottom: 1rem;
-  letter-spacing: 0.3em;
+  margin-bottom: 0.85rem;
+  letter-spacing: var(--letter-display);
+  line-height: 1.25;
 }
 .section-title + .section-subtitle,
 .section-title + .hands-up-tagline,
@@ -1618,19 +1627,24 @@ body.nav-menu-open .music-player * {
 .intro-direct-title {
   font-family: var(--font-accent);
   font-style: italic;
-  font-size: var(--text-body-lg);
+  font-size: clamp(1.2rem, 2.6vw, 1.45rem);
   font-weight: 500;
-  color: var(--text-bright);
-  margin-bottom: 0.4rem;
+  color: rgba(250, 250, 250, 0.92);
+  margin-bottom: 0.35rem;
+  line-height: 1.35;
 }
 .intro-direct-title + p {
   color: var(--text-dim);
 }
-.intro-cta-text {
-  font-size: var(--text-body-lg);
-  font-weight: 600;
+.intro-cta-text,
+.packages-cta-title {
+  font-family: var(--font-body), sans-serif;
+  font-size: clamp(1.12rem, 2.4vw, 1.3rem);
+  font-weight: 700;
+  font-style: normal;
   color: var(--text-bright);
-  letter-spacing: 0.08em;
+  letter-spacing: var(--letter-heading);
+  line-height: 1.35;
 }
 
 /* Pricing cards */
@@ -1783,13 +1797,8 @@ body.nav-menu-open .music-player * {
   text-align: center;
 }
 .packages-cta-title {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  margin: 0 auto 0.3rem;
+  margin: 0 auto 0.35rem;
   max-width: 36rem;
-  color: #fff;
 }
 .packages-cta-text {
   margin: 0 auto 0.85rem;
@@ -1806,7 +1815,8 @@ body.nav-menu-open .music-player * {
   align-items: center;
   justify-content: center;
   width: auto;
-  max-width: 100%;
+  min-width: var(--cta-min-width);
+  max-width: min(var(--cta-max-width), 100%);
   min-height: var(--cta-min-height);
   padding: var(--cta-pad-y) var(--cta-pad-x);
   font-family: var(--font-body), sans-serif;
@@ -1910,14 +1920,8 @@ body.nav-menu-open .music-player * {
   .packages-cta {
     margin-top: 1.15rem;
   }
-  .packages-cta-title {
-    font-size: 1.1rem;
-  }
   .packages-cta-text {
     margin-bottom: 0.7rem;
-  }
-  .packages-cta-btn {
-    padding: var(--cta-pad-y) var(--cta-pad-x);
   }
   .packages-cta-direct {
     margin-top: 0.45rem;
@@ -2051,14 +2055,15 @@ body.nav-menu-open .music-player * {
 @media (max-width: 700px) {
   .cta-row-buttons {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
   }
   .cta-row-buttons .cta-button,
   .cta-row-buttons .cta-button-secondary,
   .cta-row-buttons .pricing-btn,
   .cta-row-buttons .contact-whatsapp {
-    width: 100%;
-    max-width: 22rem;
+    width: auto;
+    min-width: var(--cta-min-width);
+    max-width: min(var(--cta-max-width), 100%);
     margin-inline: auto;
   }
 }
@@ -2126,9 +2131,9 @@ body.nav-menu-open .music-player * {
 #faq .section-title,
 #faq h2 {
   font-family: var(--font-display), sans-serif;
-  font-size: clamp(1.35rem, 2.8vw, 1.75rem);
+  font-size: var(--text-section);
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--letter-display);
   color: var(--text-bright);
   text-align: center;
   margin: 0 0 1.25rem;
@@ -4218,10 +4223,10 @@ body.fotos-lightbox-open { overflow: hidden; }
 
 .hero-region {
   font-family: var(--font-body), sans-serif;
-  font-size: clamp(0.78rem, 1.6vw, 0.88rem);
+  font-size: clamp(0.8125rem, 1.7vw, 0.9rem);
   font-weight: 500;
   letter-spacing: 0.04em;
-  color: rgba(250, 250, 250, 0.45);
+  color: rgba(250, 250, 250, 0.58);
   text-align: center;
   margin: 0.55rem auto 0;
   line-height: 1.4;
@@ -4242,7 +4247,7 @@ body.fotos-lightbox-open { overflow: hidden; }
 
   .hero-headline {
     margin-top: 0.85rem;
-    font-size: clamp(1.12rem, 4.1vw, 1.28rem);
+    font-size: clamp(1.18rem, 4.2vw, 1.32rem);
     line-height: 1.32;
   }
 
@@ -4261,10 +4266,11 @@ body.fotos-lightbox-open { overflow: hidden; }
 .intro-brandline {
   font-family: var(--font-accent);
   font-style: italic;
-  font-size: clamp(1.05rem, 2vw, 1.3rem);
-  color: rgba(250, 250, 250, 0.7);
+  font-size: clamp(1.12rem, 2.2vw, 1.35rem);
+  color: rgba(250, 250, 250, 0.82);
   text-align: center;
-  margin: -0.35rem 0 1.5rem;
+  margin: -0.15rem 0 1.35rem;
+  line-height: 1.4;
 }
 
 .package-compare {
