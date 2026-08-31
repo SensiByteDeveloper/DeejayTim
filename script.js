@@ -113,6 +113,7 @@ function initNav() {
     backdrop?.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('nav-menu-open');
     document.body.style.overflow = '';
+    updateHomeNavReveal();
   };
 
   const openMenu = () => {
@@ -122,9 +123,54 @@ function initNav() {
     backdrop?.setAttribute('aria-hidden', 'false');
     document.body.classList.add('nav-menu-open');
     document.body.style.overflow = 'hidden';
+    updateHomeNavReveal();
   };
 
   let scrollTicking = false;
+  const HOME_NAV_SHOW_AT = 80;
+  const HOME_NAV_HIDE_AT = 20;
+  const homeNavMobileMq = window.matchMedia('(max-width: 768px)');
+  let homeNavRevealed = false;
+
+  const isHomePath = (path) => {
+    const raw = path != null ? path : (location.pathname || '/');
+    const p = String(raw).replace(/\/index\.html$/i, '').replace(/\/$/, '') || '/';
+    return p === '/';
+  };
+
+  const updateHomeNavReveal = () => {
+    const home = isHomePath();
+    document.body.classList.toggle('page-home', home);
+    if (!nav) return;
+
+    const mobile = homeNavMobileMq.matches;
+    if (!home || !mobile) {
+      homeNavRevealed = false;
+      nav.classList.remove('nav-revealed');
+      nav.removeAttribute('inert');
+      if (nav.getAttribute('aria-hidden') === 'true') nav.removeAttribute('aria-hidden');
+      return;
+    }
+
+    const y = window.scrollY || 0;
+    if (nav.classList.contains('menu-open')) {
+      homeNavRevealed = true;
+    } else if (!homeNavRevealed && y >= HOME_NAV_SHOW_AT) {
+      homeNavRevealed = true;
+    } else if (homeNavRevealed && y <= HOME_NAV_HIDE_AT) {
+      homeNavRevealed = false;
+    }
+
+    nav.classList.toggle('nav-revealed', homeNavRevealed);
+    if (homeNavRevealed) {
+      nav.removeAttribute('inert');
+      nav.removeAttribute('aria-hidden');
+    } else {
+      nav.setAttribute('inert', '');
+      nav.setAttribute('aria-hidden', 'true');
+    }
+  };
+
   const onNavScroll = () => {
     if (scrollTicking) return;
     scrollTicking = true;
@@ -133,9 +179,26 @@ function initNav() {
       if (!nav) return;
       if (window.scrollY > 50) nav.classList.add('scrolled');
       else nav.classList.remove('scrolled');
+      updateHomeNavReveal();
     });
   };
   window.addEventListener('scroll', onNavScroll, { passive: true });
+  window.addEventListener('resize', onNavScroll, { passive: true });
+  if (homeNavMobileMq.addEventListener) {
+    homeNavMobileMq.addEventListener('change', updateHomeNavReveal);
+  } else if (homeNavMobileMq.addListener) {
+    homeNavMobileMq.addListener(updateHomeNavReveal);
+  }
+  document.addEventListener('pjax:navigate', (e) => {
+    const path = e?.detail?.path;
+    if (path != null) {
+      const normalized = String(path).replace(/\/index\.html$/i, '').replace(/\/$/, '') || '/';
+      document.body.classList.toggle('page-home', normalized === '/');
+    }
+    homeNavRevealed = false;
+    updateHomeNavReveal();
+  });
+  updateHomeNavReveal();
 
   toggle?.addEventListener('click', () => {
     const open = links?.classList.toggle('open');
@@ -144,6 +207,7 @@ function initNav() {
     backdrop?.setAttribute('aria-hidden', open ? 'false' : 'true');
     document.body.classList.toggle('nav-menu-open', open);
     document.body.style.overflow = open ? 'hidden' : '';
+    updateHomeNavReveal();
   });
 
   backdrop?.addEventListener('click', closeMenu);

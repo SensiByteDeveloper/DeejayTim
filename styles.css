@@ -167,6 +167,38 @@ main#main-content h1:not(.hero-title):not(.hero-headline) {
   border-bottom: 1px solid var(--glass-border);
 }
 
+/* Homepage mobiel: header overlay, initieel verborgen (geen layout shift). */
+@media (max-width: 768px) {
+  body.page-home .nav {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      visibility 0s linear 0.2s,
+      background 0.3s;
+  }
+  body.page-home .nav.nav-revealed,
+  body.page-home .nav.menu-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      visibility 0s,
+      background 0.3s;
+  }
+
+  /* Header is overlay: ademruimte onder de statusbalk, geen nav-hoogte */
+  body.page-home .hero {
+    --hero-pad-top: calc(1.65rem + env(safe-area-inset-top, 0px));
+  }
+}
+
 .nav-logo {
   display: inline-flex;
   align-items: center;
@@ -516,7 +548,7 @@ main#main-content h1:not(.hero-title):not(.hero-headline) {
   width: 100%;
 }
 
-/* Mobiel: woordmerk + boodschap + CTA boven de foto; desktop: tekst+CTA links, foto rechts */
+/* Mobiel: tekst + foto + CTA in bronvolgorde; desktop: tekst+CTA links, foto rechts */
 .hero-intro > .hero-actions {
   margin-top: 0;
   max-width: 32rem;
@@ -596,16 +628,63 @@ main#main-content h1:not(.hero-title):not(.hero-headline) {
   object-position: 36% 24%;
 }
 
+/* Mobiele hero: tekst + foto, daarna CTA/Instagram. Desktop (900px+) blijft split layout. */
 @media (max-width: 899px) {
+  .hero {
+    --hero-pad-top: max(4.35rem, calc(3.15rem + env(safe-area-inset-top, 0px)));
+    --hero-pad-bottom: 1.5rem;
+    min-height: 0;
+    align-items: flex-start;
+    overflow: visible;
+  }
+
+  .hero-intro {
+    gap: 1.4rem 0;
+    align-items: stretch;
+  }
+
+  .hero-actions {
+    gap: 0.85rem;
+    align-items: center;
+  }
+
+  .hero-actions .hero-cta {
+    width: auto;
+    min-width: 15.25rem;
+    max-width: 19.5rem;
+  }
+
+  .hero-instagram {
+    gap: 0.4rem;
+  }
+
+  .hero-instagram-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .hero-instagram-handle {
+    font-size: 0.88rem;
+  }
+
   .hero-photo-wrap {
     aspect-ratio: auto;
     width: 100%;
-    max-width: 24rem;
-    height: clamp(220px, 38vh, 340px);
+    max-width: none;
+    height: clamp(188px, 26svh, 240px);
     max-height: none;
   }
+
+  /* Landscape bron: gezicht + setup in een brede crop; iets naar links i.v.m. glas rechts */
   .hero-photo {
-    object-position: 38% 20%;
+    object-position: 40% 35%;
+  }
+}
+
+/* iPhone SE / korte viewports: foto iets lager zodat Instagram niet tegen de speler plakt */
+@media (max-width: 400px) and (max-height: 720px) {
+  .hero-photo-wrap {
+    height: clamp(158px, 23.5svh, 176px);
   }
 }
 
@@ -3824,7 +3903,13 @@ main[data-service] .section-intro { color: var(--text-dim); margin-bottom: 1rem;
   vertical-align: middle;
 }
 .dj-setup-grid-item-wide .dj-setup-img { min-height: 280px; }
-.dj-setup-grid-item:not(.dj-setup-grid-item-wide) .dj-setup-img { min-height: 280px; aspect-ratio: 4/3; }
+.dj-setup-grid-item:not(.dj-setup-grid-item-wide):not(.dj-setup-grid-span-full) .dj-setup-img { min-height: 280px; aspect-ratio: 4/3; }
+.dj-setup-grid-item.dj-setup-grid-span-full .dj-setup-img {
+  height: min(56vh, 520px);
+  min-height: 220px;
+  object-fit: cover;
+  object-position: center 42%;
+}
 .dj-setup-equipment {
   list-style: none;
   padding: 0;
@@ -4145,6 +4230,31 @@ body.fotos-lightbox-open { overflow: hidden; }
   .hero-region {
     text-align: left;
     margin: 0.6rem 0 0;
+  }
+}
+
+@media (max-width: 899px) {
+  .hero-title {
+    font-size: clamp(2.2rem, 10.5vw, 2.55rem);
+    line-height: 1.06;
+    letter-spacing: 0.03em;
+  }
+
+  .hero-headline {
+    margin-top: 0.85rem;
+    font-size: clamp(1.12rem, 4.1vw, 1.28rem);
+    line-height: 1.32;
+  }
+
+  .hero-lead {
+    margin: 0.6rem auto 0;
+    font-size: clamp(0.98rem, 3.4vw, 1.08rem);
+    line-height: 1.4;
+  }
+
+  .hero-region {
+    margin: 0.55rem auto 0;
+    line-height: 1.4;
   }
 }
 
