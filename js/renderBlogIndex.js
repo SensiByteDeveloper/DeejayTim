@@ -1,6 +1,8 @@
 /* ===== DEEJAY TIM - Blog index renderer ===== */
 /* Loads /blog/index.json and renders post list sorted by date desc */
 
+import { loadPricing, interpolatePrices } from './pricing.js?v=4';
+
 function getLang() {
   return (typeof window !== 'undefined' && window.i18n?.currentLang) || 'nl';
 }
@@ -42,12 +44,14 @@ export async function renderBlogIndex() {
   const lang = getLang();
   const readMore = lang === 'en' ? 'Read more →' : 'Lees meer →';
   const ctaDj = lang === 'en' ? 'View DJ hire' : 'Bekijk DJ huren';
-  const ctaContact = lang === 'en' ? 'Get in touch' : 'Neem contact op';
-  const errorMsg = lang === 'en' ? 'Blog posts could not be loaded. <a href="/dj-huren.html">View DJ hire</a> or <a href="/contact.html">get in touch</a>.' : 'De blogberichten konden niet worden geladen. <a href="/dj-huren.html">Bekijk DJ huren</a> of <a href="/contact.html">neem contact op</a>.';
+  const ctaContact = lang === 'en' ? 'Send me a message' : 'Stuur me een berichtje';
+  const errorMsg = lang === 'en' ? 'Blog posts could not be loaded. <a href="/dj-huren.html">View DJ hire</a> or <a href="/contact.html">send me a message</a>.' : 'De blogberichten konden niet worden geladen. <a href="/dj-huren.html">Bekijk DJ huren</a> of <a href="/contact.html">stuur me een berichtje</a>.';
 
   try {
     const posts = await loadJSON('/blog/index.json');
     if (!Array.isArray(posts)) throw new Error('Invalid index format');
+    const pricing = await loadPricing();
+    const ip = (s) => interpolatePrices(s, pricing, lang);
 
     const ACCENT_COLORS = ['cyan', 'magenta', 'yellow', 'pink'];
     const sorted = [...posts].sort((a, b) => {
@@ -60,7 +64,7 @@ export async function renderBlogIndex() {
       const slug = escapeHtml(post.slug || '');
       const title = escapeHtml(pickLang(post.title, lang));
       const date = formatDate(post.date, lang);
-      const excerpt = escapeHtml(pickLang(post.excerpt, lang));
+      const excerpt = escapeHtml(ip(pickLang(post.excerpt, lang)));
       const url = `/blog/post.html?slug=${encodeURIComponent(post.slug)}`;
       const accent = ACCENT_COLORS[i % ACCENT_COLORS.length];
 
@@ -75,7 +79,7 @@ export async function renderBlogIndex() {
     }).join('');
 
     const ctaHtml = `
-      <p class="cta-row"><a href="/dj-huren.html">${escapeHtml(ctaDj)}</a> <span aria-hidden="true">·</span> <a href="/contact.html" class="cta-button">${escapeHtml(ctaContact)}</a></p>
+      <p class="cta-row cta-row-buttons"><a href="/contact.html" class="cta-button">${escapeHtml(ctaContact)}</a> <a href="/dj-huren.html" class="cta-button-secondary">${escapeHtml(ctaDj)}</a></p>
     `;
 
     container.innerHTML = `

@@ -1,6 +1,9 @@
 /* ===== DEEJAY TIM - Data-driven content layer ===== */
 /* Vanilla JS, no dependencies. Use with <script type="module"> */
 
+import { applySiteFeatures } from './siteFeatures.js';
+applySiteFeatures();
+
 const _cache = Object.create(null);
 
 /**
@@ -12,7 +15,7 @@ export async function loadJSON(path) {
   if (_cache[path]) return _cache[path];
   const base = typeof location !== 'undefined' ? new URL('.', location.href).href : '';
   const url = path.startsWith('/') ? path : (base + path.replace(/^\//, ''));
-  const res = await fetch(url);
+  const res = await fetch(url, { cache: 'no-store' });
   if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
   const data = await res.json();
   _cache[path] = data;

@@ -1,6 +1,20 @@
 {
   "testimonials": [
     {
+      "id": "rev-wendy-den-haag",
+      "name": "Wendy",
+      "city": "Den Haag",
+      "rating": 5,
+      "text": {
+        "nl": "Deze man wil je op je feest !! Op onze mooiste dag wist Tim met een superfijne vibe de dansvloer vol te krijgen, te houden, te laten feesten en genieten!",
+        "en": "This is the man you want at your party!! On our most beautiful day Tim got the dance floor full with a great vibe, kept it that way, and let everyone party and enjoy!"
+      },
+      "source": "Google",
+      "date": "2026-08-08",
+      "eventType": ["bruiloft"],
+      "locationSlugs": ["dj-den-haag"]
+    },
+    {
       "id": "rev-jelle-van-velzen",
       "name": "Jelle",
       "city": "Hendrik-Ido-Ambacht",

@@ -1,6 +1,8 @@
 /* ===== DEEJAY TIM - Blog post renderer ===== */
 /* Reads slug from ?slug=... and loads /blog/posts/{slug}.json */
 
+import { loadPricing, interpolatePrices, getPricing } from './pricing.js?v=4';
+
 const BASE_URL = 'https://deejaytim.nl';
 
 function getLang() {
@@ -67,8 +69,8 @@ const JSON_LD_ID = 'blog-post-jsonld';
 function injectJsonLd(data, lang) {
   const existing = document.getElementById(JSON_LD_ID);
   if (existing) existing.remove();
-  const title = pickLang(data.title, lang);
-  const description = pickLang(data.description, lang);
+  const title = interpolatePrices(pickLang(data.title, lang), getPricing(), lang);
+  const description = interpolatePrices(pickLang(data.description, lang), getPricing(), lang);
   const script = document.createElement('script');
   script.id = JSON_LD_ID;
   script.type = 'application/ld+json';
@@ -91,25 +93,39 @@ function injectJsonLd(data, lang) {
   document.head.appendChild(script);
 }
 
-function getInternalLinksHtml(lang) {
+function getInternalLinksHtml(lang, slug) {
   const furtherReading = lang === 'en' ? 'Further reading' : 'Verder lezen';
-  const djHuren = lang === 'en' ? 'Hire DJ' : 'DJ huren';
-  const werkgebied = lang === 'en' ? 'Service area' : 'Werkgebied';
-  const bruiloftDj = lang === 'en' ? 'Wedding DJ' : 'Bruiloft DJ';
-  const checkAvail = lang === 'en' ? 'Check availability' : 'Check beschikbaarheid';
+  const checkAvail = lang === 'en' ? 'Send me a message' : 'Stuur me een berichtje';
   const waText = lang === 'en' ? 'Hi%20Tim!%20I%20have%20a%20question%20about%20a%20DJ%20booking.' : 'Hoi%20Tim!%20Ik%20heb%20een%20vraag%20over%20een%20DJ-booking.';
+  const isWedding = /bruiloft|wedding/i.test(slug || '');
+  const isBirthday = /verjaardag|birthday/i.test(slug || '');
+  const links = isWedding
+    ? [
+        { href: '/diensten/bruiloft-dj.html', label: lang === 'en' ? 'Wedding DJ' : 'Bruiloft DJ' },
+        { href: '/prijzen.html', label: lang === 'en' ? 'Prices' : 'Prijzen' },
+        { href: '/contact.html', label: checkAvail }
+      ]
+    : isBirthday
+      ? [
+          { href: '/diensten/verjaardag-dj.html', label: lang === 'en' ? 'Birthday DJ' : 'Verjaardag DJ' },
+          { href: '/prijzen.html', label: lang === 'en' ? 'Prices' : 'Prijzen' },
+          { href: '/contact.html', label: checkAvail }
+        ]
+      : [
+          { href: '/prijzen.html', label: lang === 'en' ? 'Prices' : 'Prijzen' },
+          { href: '/diensten/bruiloft-dj.html', label: lang === 'en' ? 'Wedding DJ' : 'Bruiloft DJ' },
+          { href: '/diensten/verjaardag-dj.html', label: lang === 'en' ? 'Birthday DJ' : 'Verjaardag DJ' },
+          { href: '/contact.html', label: checkAvail }
+        ];
   return `
     <nav class="blog-internal-links" aria-label="${lang === 'en' ? 'Related pages' : 'Gerelateerde pagina\'s'}">
       <h3>${escapeHtml(furtherReading)}</h3>
       <ul>
-        <li><a href="/dj-huren.html">${escapeHtml(djHuren)}</a></li>
-        <li><a href="/werkgebied.html">${escapeHtml(werkgebied)}</a></li>
-        <li><a href="/diensten/bruiloft-dj.html">${escapeHtml(bruiloftDj)}</a></li>
-        <li><a href="/locaties/dj-zwijndrecht.html">DJ Zwijndrecht</a></li>
+        ${links.map((l) => `<li><a href="${l.href}">${escapeHtml(l.label)}</a></li>`).join('')}
       </ul>
       <div class="blog-cta-buttons">
-        <a href="/contact.html" class="pricing-btn">${escapeHtml(checkAvail)}</a>
-        <a href="https://wa.me/31621888970?text=${waText}" target="_blank" rel="noopener" class="blog-whatsapp-link">WhatsApp</a>
+        <a href="/contact.html" class="cta-button">${escapeHtml(checkAvail)}</a>
+        <a href="https://wa.me/31621888970?text=${waText}" target="_blank" rel="noopener" class="contact-whatsapp">WhatsApp</a>
       </div>
     </nav>
   `;
@@ -122,7 +138,7 @@ export async function renderBlogPost() {
   const lang = getLang();
   const backToBlog = lang === 'en' ? '← Back to blog' : '← Terug naar blog';
   const noArticle = lang === 'en' ? 'No article selected. <a href="/blog/index.html">Back to blog</a>.' : 'Geen artikel geselecteerd. <a href="/blog/index.html">Terug naar het blog</a>.';
-  const loadError = lang === 'en' ? 'This article could not be loaded. <a href="/blog/index.html">Back to blog</a> or <a href="/contact.html">get in touch</a>.' : 'Dit artikel kon niet worden geladen. <a href="/blog/index.html">Terug naar het blog</a> of <a href="/contact.html">neem contact op</a>.';
+  const loadError = lang === 'en' ? 'This article could not be loaded. <a href="/blog/index.html">Back to blog</a> or <a href="/contact.html">send me a message</a>.' : 'Dit artikel kon niet worden geladen. <a href="/blog/index.html">Terug naar het blog</a> of <a href="/contact.html">stuur me een berichtje</a>.';
 
   const slug = getSlugFromUrl();
   if (!slug) {
@@ -132,9 +148,11 @@ export async function renderBlogPost() {
 
   try {
     const post = await loadJSON(`/blog/posts/${encodeURIComponent(slug)}.json`);
+    const pricing = await loadPricing();
+    const ip = (s) => interpolatePrices(s, pricing, lang);
 
-    const title = pickLang(post.title, lang);
-    const description = pickLang(post.description, lang);
+    const title = ip(pickLang(post.title, lang));
+    const description = ip(pickLang(post.description, lang));
 
     document.title = `${escapeHtml(title)} | Deejay Tim`;
     setMeta('description', description || title);
@@ -153,7 +171,7 @@ export async function renderBlogPost() {
       ? `<img src="${escapeHtml(post.coverImage)}" alt="" class="blog-post-cover">`
       : '';
 
-    const bodyHtml = pickLang(post.bodyHtml, lang) || '';
+    const bodyHtml = ip(pickLang(post.bodyHtml, lang) || '');
 
     container.innerHTML = `
       <article class="blog-post">
@@ -164,7 +182,11 @@ export async function renderBlogPost() {
           ${coverHtml}
         </header>
         <div class="blog-post-body prose">${bodyHtml}</div>
-        ${getInternalLinksHtml(lang)}
+        ${getInternalLinksHtml(lang, slug)}
+        <aside class="preferred-source" aria-label="${lang === 'en' ? 'Preferred source in Google' : 'Voorkeursbron in Google'}">
+          <p>${lang === 'en' ? 'Enjoy these tips? Add Deejay Tim as a preferred source in Google.' : 'Lees je mijn tips graag? Voeg Deejay Tim toe als voorkeursbron in Google.'}</p>
+          <div google-add-preferred-source-btn data-theme="dark" data-lang="${lang}"></div>
+        </aside>
       </article>
     `;
   } catch (err) {

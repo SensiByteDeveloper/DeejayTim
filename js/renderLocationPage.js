@@ -1,6 +1,9 @@
 /* ===== DEEJAY TIM - Location page renderer ===== */
 /* Data-driven content injection for /locaties/*.html pages */
 
+import { injectFaqJsonLd } from '/js/renderFaq.js';
+import { loadPricing, interpolatePrices, interpolateDeep, formatEuro } from './pricing.js?v=4';
+
 function getLang() {
   return (typeof window !== 'undefined' && window.i18n?.currentLang) || 'nl';
 }
@@ -95,13 +98,22 @@ export async function renderLocationPage() {
   }
 
   const lang = getLang();
+  let pricingData = null;
+  try {
+    pricingData = await loadPricing();
+  } catch (_) {}
+  if (pricingData && locationsData) {
+    locationsData = interpolateDeep(locationsData, pricingData, lang);
+    loc = locationsData.locations?.find((l) => l.slug === slug) || loc;
+  }
+  const ip = (s) => interpolatePrices(s, pricingData, lang);
   const city = loc.name || slug.replace(/^dj-/, '').replace(/-/g, ' ');
   const title = lang === 'en'
     ? `DJ in ${city} | Wedding, Birthday & Corporate - Deejay Tim`
     : `DJ in ${city} | Bruiloft, Verjaardag & Bedrijfsfeest - Deejay Tim`;
   const desc = lang === 'en'
-    ? `DJ in ${city} – professional music for weddings, birthdays and corporate events. Zwijndrecht and ${loc.province} area. Book now!`
-    : `DJ in ${city} – professionele muziek voor bruiloften, verjaardagen en bedrijfsfeesten. Regio Zwijndrecht en ${loc.province}. Boek nu!`;
+    ? `DJ in ${city} – professional music for weddings, birthdays and corporate events. Zwijndrecht and ${loc.province} area. Send me a message.`
+    : `DJ in ${city} – professionele muziek voor bruiloften, verjaardagen en bedrijfsfeesten. Regio Zwijndrecht en ${loc.province}. Stuur me een berichtje.`;
 
   document.title = title;
   const metaDesc = document.querySelector('meta[name="description"]');
@@ -128,14 +140,18 @@ export async function renderLocationPage() {
       <h1 id="page-title">${escapeHtml(h1Text)}</h1>
       <p>${escapeHtml(pickLang(loc.shortIntro, lang) || (lang === 'en' ? `Professional DJ in ${city} for weddings, birthdays and corporate events.` : `Professionele DJ in ${city} voor bruiloften, verjaardagen en bedrijfsfeesten.`))}</p>
       <p>${escapeHtml(travelNote)}</p>
-      <p class="cta-row"><a href="/prijzen.html">${escapeHtml(t('pages.locations.viewPrices'))}</a> <span aria-hidden="true">·</span> <a href="/reviews.html">Reviews</a></p>
-      <p class="location-cta"><a href="/contact.html" class="cta-button">${escapeHtml(t('pages.locations.checkAvailability'))}</a></p>
+      <p class="cta-row cta-row-buttons">
+        <a href="/contact.html" class="cta-button">${escapeHtml(t('pages.locations.checkAvailability'))}</a>
+        <a href="/prijzen.html" class="cta-button-secondary">${escapeHtml(t('pages.locations.viewPrices'))}</a>
+      </p>
     </div>
   `);
 
   const eventsTitle = lang === 'en' ? `Events in ${city}` : `Evenementen in ${city}`;
   const whyTitle = lang === 'en' ? `Why DJ Tim in ${city}` : `Waarom DJ Tim in ${city}`;
-  const whyText = lang === 'en' ? `Experienced DJ with complete set-up. Hands Up! app for song requests. From Zwijndrecht I work throughout ${loc.province} and surroundings.` : `Ervaren DJ met complete set-up. Hands Up! app voor song requests. Vanuit Zwijndrecht werk ik in heel ${escapeHtml(loc.province)} en omstreken.`;
+  const whyText = lang === 'en'
+    ? `I play from Zwijndrecht across ${loc.province}. You choose DJ Only or All-in. Song requests are welcome if they fit the vibe; I keep the flow. See prices for current rates.`
+    : `Vanuit Zwijndrecht draai ik in ${escapeHtml(loc.province)}. Je kiest DJ Only of All-in. Verzoeknummers zijn welkom als ze bij de sfeer passen; ik bewaak de flow. Zie prijzen voor actuele tarieven.`;
   const dienstenTitle = lang === 'en' ? 'Services' : 'Diensten';
   const prijzenEnPakketten = lang === 'en' ? ' and packages.' : ' en pakketten.';
   const EVENTS_LANG = lang === 'en' ? [
@@ -218,20 +234,14 @@ export async function renderLocationPage() {
 
   const faq = loc.faq || locationsData?.defaultFaq || [];
   let faqItems = faq.length ? faq : (locationsData?.defaultFaq || []);
-  let pricingData = null;
-  try {
-    const prRes = await fetch('/data/pricing.json');
-    if (prRes.ok) pricingData = await prRes.json();
-  } catch (_) {}
-  const formatPrice = (p) => p != null ? `€${Number(p).toLocaleString('nl-NL', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}` : '—';
   faqItems = faqItems.map((item) => {
-    const q = pickLang(item.q, lang);
-    const a = pickLang(item.a, lang);
+    const q = ip(pickLang(item.q, lang));
+    const a = ip(pickLang(item.a, lang));
     if ((q === 'Hoeveel kost een DJ?' || q === 'How much does a DJ cost?') && pricingData) {
-      return { ...item, q, aHtml: (lang === 'en' ? `From ${formatPrice(pricingData.justDj?.from)} (Just DJ) or ${formatPrice(pricingData.allIn?.from)} (All-in). ` : `Vanaf ${formatPrice(pricingData.justDj?.from)} (Just DJ) of ${formatPrice(pricingData.allIn?.from)} (All-in). `) + `<a href="/prijzen.html">${lang === 'en' ? 'Prices' : 'Prijzen'}</a> ${lang === 'en' ? 'for current rates.' : 'voor actuele tarieven.'}` };
+      return { ...item, q, aHtml: (lang === 'en' ? `From ${formatEuro(pricingData.justDj?.from)} (DJ Only) or ${formatEuro(pricingData.allIn?.from)} (All-in). Wedding from ${formatEuro(pricingData.wedding?.from)}. ` : `Vanaf ${formatEuro(pricingData.justDj?.from)} (DJ Only) of ${formatEuro(pricingData.allIn?.from)} (All-in). Bruiloft vanaf ${formatEuro(pricingData.wedding?.from)}. `) + `<a href="/prijzen.html">${lang === 'en' ? 'Prices' : 'Prijzen'}</a> ${lang === 'en' ? 'for current rates.' : 'voor actuele tarieven.'}` };
     }
     if (q === 'Hoe ver rijdt u?' || q === 'How far do you travel?') {
-      return { ...item, q, a: t('pages.locations.faqTravelDistanceAnswer') };
+      return { ...item, q, a: ip(t('pages.locations.faqTravelDistanceAnswer')) };
     }
     return { ...item, q, a };
   });
@@ -248,14 +258,15 @@ export async function renderLocationPage() {
       `).join('') : faqFallback}
     </div>
   `);
-
-  const waText = lang === 'en' ? 'Hi%20Tim!%20I%27m%20looking%20for%20a%20DJ%20for%20' : 'Hoi%20Tim!%20Ik%20zoek%20een%20DJ%20voor%20';
-  setContent(document.getElementById('cta'), `
-    <div class="container">
-      <p><a href="/contact.html" class="pricing-btn">${escapeHtml(t('pages.locations.checkAvailability'))}</a></p>
-      <p><a href="https://wa.me/31621888970?text=${waText}${encodeURIComponent(city)}." target="_blank" rel="noopener">WhatsApp</a></p>
-    </div>
-  `);
+  injectFaqJsonLd(
+    faqItems
+      .map((item) => ({
+        q: item.q,
+        a: item.a || (item.aHtml ? String(item.aHtml).replace(/<[^>]+>/g, '') : '')
+      }))
+      .filter((item) => item.q && item.a),
+    'data-location-faq'
+  );
 
   const nearbySlugs = loc.nearbySlugs || OTHER_LOCATIONS.filter((s) => s !== slug).slice(0, 6);
   const nearbyLocs = nearbySlugs

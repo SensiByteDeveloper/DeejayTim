@@ -1,7 +1,13 @@
 /* ===== DEEJAY TIM - Central pricing renderer ===== */
 /* Fetches /data/pricing.json and replaces [data-price] and [data-range] elements */
 
-let _pricing = null;
+import {
+  loadPricing,
+  getPricing as getCachedPricing,
+  formatEuro,
+  interpolatePrices,
+  applyPricePlaceholders
+} from './pricing.js?v=4';
 
 function getLang() {
   return (typeof window !== 'undefined' && window.i18n?.currentLang) || 'nl';
@@ -23,29 +29,8 @@ function pickLangArr(arr, lang) {
   return o;
 }
 
-async function loadPricing() {
-  if (_pricing) return _pricing;
-  try {
-    const res = await fetch('/data/pricing.json');
-    if (!res.ok) throw new Error('Failed to load pricing');
-    _pricing = await res.json();
-    return _pricing;
-  } catch (err) {
-    console.warn('[renderPricing] Failed to load pricing.json:', err);
-    return null;
-  }
-}
-
 function formatPrice(p) {
-  if (p == null) return '—';
-  return `€${Number(p).toLocaleString('nl-NL', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
-}
-
-/** Per-km surcharge (e.g. €0,35 / €0.35) — not whole euros */
-function formatKmRate(n, lang) {
-  if (n == null) return '—';
-  const loc = lang === 'en' ? 'en-GB' : 'nl-NL';
-  return `€${Number(n).toLocaleString(loc, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  return formatEuro(p);
 }
 
 function renderPriceElement(el, pricing) {
@@ -84,6 +69,10 @@ function renderPriceElement(el, pricing) {
   } else if (key === 'wedding') {
     const w = pricing.wedding;
     if (w) el.textContent = formatPrice(w.from);
+  } else if (key === 'extraHour') {
+    el.textContent = formatPrice(pricing.extraHour);
+  } else if (key === 'extraHourFrom') {
+    el.textContent = `${fromLabel}${formatPrice(pricing.extraHour)}`;
   }
 }
 
@@ -99,19 +88,14 @@ function renderRangeElement(el, pricing) {
 function renderSubtitleElement(el, pricing) {
   if (!pricing) return;
   const lang = getLang();
-  const hour = pricing.extraHour;
-  const km = pricing.extraKm;
-  const ex50 = pickLang(pricing.travelExample50km, lang) || '€14';
   const tpl =
     pickLang(pricing.subtitle, lang) ||
     (lang === 'en'
-      ? 'Private rates; no VAT. All packages: 4 hours DJ included, including 30 km travel from 3332 SN; beyond that €0.35 per extra km driven (50 km away: €14 extra travel on top of the price). Extra hour {hour}.'
-      : 'Particuliere tarieven, geen BTW. Alle pakketten: 4 uur DJ inbegrepen, inclusief 30 km reiskosten vanaf 3332 SN; daarboven €0,35 per extra gereden km (bij 50 km afstand: €14 extra reiskosten op de prijs). Extra uur {hour}.');
-  let text = tpl;
-  if (text.includes('{hour}')) text = text.replaceAll('{hour}', formatPrice(hour));
-  if (text.includes('{km}')) text = text.replaceAll('{km}', formatKmRate(Number(km) || 0.35, lang));
-  if (text.includes('{ex50}')) text = text.replaceAll('{ex50}', ex50);
-  el.textContent = text;
+      ? 'Private rates; no VAT. All packages: {hours} hours DJ included, including {travelKm} km travel from {postcode}; beyond that {kmRate} per extra km driven. Extra hour {extraHour}.'
+      : 'Particuliere tarieven, geen btw. Alle pakketten: {hours} uur DJ inbegrepen, inclusief {travelKm} km reiskosten vanaf {postcode}; daarboven {kmRate} per extra gereden km. Extra uur {extraHour}.');
+  const next = interpolatePrices(tpl, pricing, lang);
+  if (/\{(hours|travelKm|postcode|kmRate|travel50|extraHour|justDj|allIn|wedding)\}/.test(next)) return;
+  el.textContent = next;
 }
 
 function renderExtrasList(el, pricing) {
@@ -122,41 +106,134 @@ function renderExtrasList(el, pricing) {
   el.innerHTML = extras.map((item) => `<li>${typeof item === 'string' ? item : pickLang(item, lang)}</li>`).join('');
 }
 
+function fillPackageCard(card, pkg, lang) {
+  if (!card || !pkg) return;
+  const titleEl = card.querySelector('[data-package-title], .pricing-title, h2, h3');
+  if (titleEl && !titleEl.hasAttribute('data-i18n')) {
+    titleEl.textContent = pickLang(pkg.title, lang);
+  } else if (titleEl && titleEl.hasAttribute('data-package-title')) {
+    titleEl.textContent = pickLang(pkg.title, lang);
+  }
+  const subtitleEl = card.querySelector('[data-package-subtitle], .pricing-subtitle, .pricing-block-note');
+  if (subtitleEl) subtitleEl.textContent = pickLang(pkg.subtitle, lang);
+  const bulletsEl = card.querySelector('[data-package-bullets], .pricing-features, .pricing-block-includes');
+  const bullets = pickLangArr(pkg.bullets, lang);
+  if (bulletsEl && bullets.length) {
+    bulletsEl.innerHTML = bullets.map((item) => `<li>${item}</li>`).join('');
+  }
+  const extraEl = card.querySelector('[data-package-extra], .pricing-note, .pricing-block-extra');
+  if (extraEl) extraEl.remove();
+  const audienceEl = card.querySelector('[data-package-audience], .pricing-audience, .pricing-block-audience');
+  if (audienceEl) audienceEl.remove();
+  const chooseEl = card.querySelector('[data-package-choose]');
+  if (chooseEl) chooseEl.remove();
+  const badgeEl = card.querySelector('.card-badge');
+  if (badgeEl && pkg.badge) badgeEl.textContent = pickLang(pkg.badge, lang);
+}
+
+function renderPackageCards(pricing) {
+  if (!pricing?.packages) return;
+  const lang = getLang();
+  document.querySelectorAll('[data-package]').forEach((card) => {
+    const id = card.getAttribute('data-package');
+    const pkg = pricing.packages.find((p) => p.id === id);
+    fillPackageCard(card, pkg, lang);
+  });
+}
+
+function setMetaContent(selector, content) {
+  const el = document.querySelector(selector);
+  if (el && content) el.setAttribute('content', content);
+}
+
 function updatePricingMetaAndSchema(pricing) {
   if (!pricing) return;
+  const lang = getLang();
   const j = pricing.justDj?.from;
   const a = pricing.allIn?.from;
   const w = pricing.wedding?.from;
   const fp = formatPrice;
+  const hours = pricing.justDj?.hoursIncluded || 4;
+  const hour = fp(pricing.extraHour);
+  const km = pricing.travelIncludedKm ?? 30;
+  const postcode = pricing.travelBasePostcode || '3332 SN';
+
   const meta = document.querySelector('meta[name="description"][data-price-meta]');
   if (meta && j != null && a != null) {
-    const parts = [`Just DJ vanaf ${fp(j)}`, `All-in DJ Show vanaf ${fp(a)}`];
-    if (w != null) parts.push(`Bruiloft DJ vanaf ${fp(w)}`);
-    meta.setAttribute('content', `Prijzen DJ Tim: ${parts.join(', ')}. Alle pakketten: 4 uur DJ, 30 km reis inbegrepen vanaf 3332 SN; extra uur en km volgens tarief. Regio Zwijndrecht en Rotterdam.`);
+    const parts = [`DJ Only vanaf ${fp(j)}`, `All-in vanaf ${fp(a)}`];
+    if (w != null) parts.push(`bruiloft vanaf ${fp(w)}`);
+    meta.setAttribute('content', `Prijzen DJ Tim: ${parts.join(', ')}. Alle pakketten ${hours} uur, extra uur ${hour}. Reiskosten tot ${km} km inbegrepen vanaf ${postcode}. Regio Zwijndrecht, Drechtsteden en Rijnmond.`);
   }
 
-  /* FAQ "Wat kost een DJ gemiddeld?" heeft nu statische, genuanceerde tekst in prijzen.html – niet overschrijven */
+  const path = (typeof location !== 'undefined' ? location.pathname : '') || '';
+  if (/\/prijzen\.html$/.test(path) && j != null && a != null && w != null) {
+    const title = `Prijzen DJ Tim | DJ Only ${fp(j)} · All-in ${fp(a)} · Bruiloft ${fp(w)}`;
+    document.title = title;
+    setMetaContent('meta[property="og:title"]', title);
+    setMetaContent('meta[name="twitter:title"]', title);
+    const ogDesc = `Duidelijke vanafprijzen: DJ Only ${fp(j)}, All-in ${fp(a)}, bruiloft ${fp(w)}. ${hours} uur inbegrepen, extra uur ${hour}.`;
+    setMetaContent('meta[property="og:description"]', ogDesc);
+    setMetaContent('meta[name="twitter:description"]', ogDesc);
+  }
+
+  const homeDesc = document.querySelector('meta[name="description"]:not([data-price-meta])');
+  if (homeDesc && (path === '/' || path === '/index.html' || path === '') && j != null && a != null && w != null) {
+    const interpolated = interpolatePrices(homeDesc.getAttribute('content') || '', pricing, lang);
+    if (interpolated) homeDesc.setAttribute('content', interpolated);
+  }
+
+  document.querySelectorAll('script[type="application/ld+json"]').forEach((el) => {
+    try {
+      const data = JSON.parse(el.textContent);
+      if (data && data['@type'] === 'LocalBusiness' && j != null && w != null) {
+        data.priceRange = `${fp(j)}-${fp(w)}`;
+        el.textContent = JSON.stringify(data, null, 2);
+      }
+    } catch (_) {}
+  });
 
   const werkgebiedFaq = document.querySelector('script[type="application/ld+json"][data-faq-werkgebied]');
   if (werkgebiedFaq && j != null && a != null) {
     try {
       const faq = JSON.parse(werkgebiedFaq.textContent);
-      const q = faq.mainEntity?.find((e) => e['@type'] === 'Question' && e.name && e.name.includes('Hoeveel kost'));
-      if (q?.acceptedAnswer) {
-        q.acceptedAnswer.text = `Vanaf ${fp(j)} (Just DJ) of ${fp(a)} (All-in, incl. set-up). Zie prijzen voor actuele tarieven.`;
-        werkgebiedFaq.textContent = JSON.stringify(faq);
+      const costQ = faq.mainEntity?.find((e) => e['@type'] === 'Question' && e.name && e.name.includes('Hoeveel kost'));
+      if (costQ?.acceptedAnswer) {
+        costQ.acceptedAnswer.text = `Vanaf ${fp(j)} (DJ Only), ${fp(a)} (All-in) of ${fp(w)} (bruiloft). Alle pakketten ${hours} uur. Zie prijzen voor actuele tarieven.`;
       }
+      const travelQ = faq.mainEntity?.find((e) => e['@type'] === 'Question' && e.name && e.name.includes('Hoe ver rijdt'));
+      if (travelQ?.acceptedAnswer) {
+        travelQ.acceptedAnswer.text = interpolatePrices(
+          'Reiskosten zijn inbegrepen tot {travelKm} km vanuit Zwijndrecht ({postcode}). Daarboven reken ik {kmRate} per extra gereden kilometer; bij een locatie op 50 km afstand komt er dan {travel50} bij op de prijs voor extra reiskosten. Tot ongeveer 50 km rijd ik sowieso voor feesten. Verder dan 50 km is in overleg. Neem contact op voor de mogelijkheden.',
+          pricing,
+          'nl'
+        );
+      }
+      const placesQ = faq.mainEntity?.find((e) => e['@type'] === 'Question' && e.name && e.name.includes('Welke plaatsen'));
+      if (placesQ?.acceptedAnswer) {
+        placesQ.acceptedAnswer.text = interpolatePrices(
+          'Kerngebied: Drechtsteden en Rijnmond. Tot ±50 km ook Den Haag, Gouda, Woerden en Waalwijk. Reiskosten inbegrepen tot {travelKm} km; tot 50 km rijd ik sowieso, verder in overleg.',
+          pricing,
+          'nl'
+        );
+      }
+      werkgebiedFaq.textContent = JSON.stringify(faq);
     } catch (_) {}
   }
 }
 
 export async function renderPricing(retryAttempt = 0) {
   const pricing = await loadPricing();
+  const lang = getLang();
+  if (pricing && typeof window !== 'undefined' && window.i18n?.apply) {
+    window.i18n.apply(undefined, { silent: true });
+  }
   document.querySelectorAll('[data-price]').forEach((el) => renderPriceElement(el, pricing));
   document.querySelectorAll('[data-range]').forEach((el) => renderRangeElement(el, pricing));
   document.querySelectorAll('[data-price-subtitle]').forEach((el) => renderSubtitleElement(el, pricing));
   document.querySelectorAll('[data-extras]').forEach((el) => renderExtrasList(el, pricing));
+  renderPackageCards(pricing);
   updatePricingMetaAndSchema(pricing);
+  applyPricePlaceholders(document, pricing, lang);
 
   /* Eén retry bij mislukte fetch (intermitterend netwerk / cache) */
   if (!pricing && document.querySelector('[data-price]') && retryAttempt < 1) {
@@ -166,7 +243,7 @@ export async function renderPricing(retryAttempt = 0) {
 
 
 export function getPricing() {
-  return _pricing;
+  return getCachedPricing();
 }
 
 export async function getPricingAsync() {
@@ -203,11 +280,7 @@ if (typeof document !== 'undefined') {
   }
   document.addEventListener('partialsloaded', scheduleRenderPricing);
   document.addEventListener('pjax:navigate', () => {
-    const p = location.pathname || '';
-    const path = p.replace(/\/$/, '') || '/';
-    if (path === '/' || path === '/index.html' || /\/prijzen\.html$/.test(p)) {
-      scheduleRenderPricing();
-    }
+    scheduleRenderPricing();
   });
   window.addEventListener('langchange', scheduleRenderPricing);
 

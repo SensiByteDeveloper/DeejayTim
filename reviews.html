@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=33">
+  <link rel="stylesheet" href="/styles.css?v=54">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -30,11 +30,18 @@
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5.0",
-      "reviewCount": "7",
+      "reviewCount": "10",
       "bestRating": "5",
       "worstRating": "1"
     },
     "review": [
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Wendy" },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
+        "reviewBody": "Deze man wil je op je feest !! Op onze mooiste dag wist Tim met een superfijne vibe de dansvloer vol te krijgen, te houden, te laten feesten en genieten!",
+        "datePublished": "2026-08-08"
+      },
       {
         "@type": "Review",
         "author": { "@type": "Person", "name": "Jelle" },
@@ -96,7 +103,7 @@
     <section class="section" id="reviews">
       <div class="container">
         <h1 class="section-title neon-cyan" data-i18n="pages.reviews.title">Reviews</h1>
-        <p><span data-i18n="pages.reviews.intro">Echte Google reviews van klanten.</span> <a href="/contact.html" data-i18n="pages.reviews.contactLink">Neem contact op</a><span data-i18n="pages.reviews.contactSuffix"> voor jouw feest.</span></p>
+        <p><span data-i18n="pages.reviews.intro">Echte Google reviews van klanten.</span> <a href="/contact.html" data-i18n="pages.reviews.contactLink">Stuur me een berichtje</a><span data-i18n="pages.reviews.contactSuffix"> voor jouw feest.</span></p>
         <div class="reviews-google-verify">
           <p class="reviews-trust-line" data-i18n="pages.reviews.googleVerifyLine">⭐ Beoordeeld met 5.0/5 op Google</p>
           <p class="reviews-trust-sub" data-i18n="pages.reviews.googleVerifySub">Lees ook de onafhankelijke reviews op Google.</p>
@@ -110,10 +117,10 @@
   </main>
   <div data-include="/pages/partials/footer.html"></div>
   <script src="/js/renderHeader.js?v=3" defer></script>
-  <script src="/i18n/i18n.js?v=6"></script>
+  <script src="/i18n/i18n.js?v=9"></script>
   <script src="/script.js?v=11"></script>
   <script type="module" src="/js/includePartials.js"></script>
-  <script type="module" src="/js/renderReviewsPage.js"></script>
+  <script type="module" src="/js/renderReviewsPage.js?v=2"></script>
 <!-- Cloudflare Web Analytics -->
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
 data-cf-beacon='{"token": "3d390cd4bb534d218a4757d01a5d88a6"}'></script>

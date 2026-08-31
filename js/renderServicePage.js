@@ -1,6 +1,9 @@
 /* ===== DEEJAY TIM - Service page renderer ===== */
 /* Data-driven content injection for /diensten/*.html pages */
 
+import { handsUpEnabled, mentionsHandsUp } from './siteFeatures.js';
+import { loadPricing, interpolateDeep, formatEuro } from './pricing.js?v=4';
+
 const BASE = typeof location !== 'undefined' ? new URL('.', location.href).href : '';
 
 function getLang() {
@@ -25,6 +28,13 @@ function pickLangArr(arr, lang) {
   }
   if (typeof arr === 'object' && (arr.nl || arr.en)) return arr[lang] ?? arr.nl ?? arr.en ?? [];
   return Array.isArray(arr) ? arr : [];
+}
+
+function pickVisibleList(arr, lang) {
+  return pickLangArr(arr, lang).filter((item) => {
+    const text = typeof item === 'string' ? item : pickLang(item, lang);
+    return handsUpEnabled() || !mentionsHandsUp(text);
+  });
 }
 
 /** Map service slug → testimonial eventType(s) to match */
@@ -98,6 +108,12 @@ export async function renderServicePage() {
   }
 
   const lang = getLang();
+  let pricingData = null;
+  try {
+    pricingData = await loadPricing();
+  } catch (_) {}
+  if (pricingData) service = interpolateDeep(service, pricingData, lang);
+
   const serviceTitle = pickLang(service.title, lang);
   const metaTitle = pickLang(service.metaTitle, lang) || `${serviceTitle} | Deejay Tim`;
   const metaDesc = pickLang(service.metaDescription, lang) || (lang === 'en' ? `DJ for ${serviceTitle}. Professional music. Zwijndrecht and Rotterdam area.` : `DJ voor ${serviceTitle}. Professionele muziek. Regio Zwijndrecht en Rotterdam.`);
@@ -148,21 +164,47 @@ export async function renderServicePage() {
 
   const h1Text = pickLang(service.h1, lang) || serviceTitle;
   const intro = pickLang(service.intro, lang);
-  const introLinks = lang === 'en' ? 'View <a href="/prijzen.html">Prices</a> or read <a href="/reviews.html">reviews</a> from other customers.' : 'Bekijk <a href="/prijzen.html">Prijzen</a> of lees <a href="/reviews.html">reviews</a> van andere klanten.';
+  const introExtra = pickLang(service.introExtra, lang);
+  const introLinks = lang === 'en'
+    ? 'View <a href="/prijzen.html">prices</a>, read <a href="/reviews.html">reviews</a> or <a href="/contact.html">send me a message</a>.'
+    : 'Bekijk <a href="/prijzen.html">prijzen</a>, lees <a href="/reviews.html">reviews</a> of <a href="/contact.html">stuur me een berichtje</a>.';
   setContent(document.getElementById('intro'), `
     <div class="container">
       ${breadcrumbHtml}
       <h1>${escapeHtml(h1Text)}</h1>
       <p>${escapeHtml(intro)}</p>
+      ${introExtra ? `<p>${escapeHtml(introExtra)}</p>` : ''}
       <p>${introLinks}</p>
     </div>
   `);
 
+  const directTitle = pickLang(service.directContact?.title, lang);
+  const directBody = pickLang(service.directContact?.body, lang);
+  const introEl = document.getElementById('intro');
+  let directEl = document.getElementById('direct-contact');
+  if (directTitle && directBody) {
+    if (!directEl && introEl) {
+      directEl = document.createElement('section');
+      directEl.id = 'direct-contact';
+      directEl.className = 'section section-compact direct-contact';
+      introEl.insertAdjacentElement('afterend', directEl);
+    }
+    if (directEl) {
+      setContent(directEl, `
+        <div class="container">
+          <h2>${escapeHtml(directTitle)}</h2>
+          <p>${escapeHtml(directBody)}</p>
+        </div>
+      `);
+    }
+  } else if (directEl) {
+    directEl.hidden = true;
+  }
+
   if (slug === 'verjaardag-dj') {
     const verjaardagTypes = [
       { slug: 'sweet-16-dj', title: 'Sweet 16 DJ' },
-      { slug: 'dj-18-jaar', title: lang === 'en' ? 'DJ 18 years' : 'DJ 18 jaar' },
-      { slug: 'dj-20-jaar', title: lang === 'en' ? 'DJ 20 years' : 'DJ 20 jaar' },
+      { slug: 'dj-18-jaar', title: lang === 'en' ? 'DJ 18 to 21' : 'DJ 18 tot 21 jaar' },
       { slug: 'dj-30-jaar', title: lang === 'en' ? 'DJ 30 years' : 'DJ 30 jaar' },
       { slug: 'dj-40-jaar', title: lang === 'en' ? 'DJ 40 years' : 'DJ 40 jaar' },
       { slug: 'dj-50-jaar', title: lang === 'en' ? 'DJ 50 years' : 'DJ 50 jaar' }
@@ -181,7 +223,7 @@ export async function renderServicePage() {
     }
   }
 
-  const watJeKrijgt = pickLangArr(service.watJeKrijgt, lang);
+  const watJeKrijgt = pickVisibleList(service.watJeKrijgt, lang);
   const watJeKrijgtTitle = lang === 'en' ? 'What you get' : 'Wat je krijgt';
   const watJeKrijgtFallback = lang === 'en' ? '<p>We\'ll determine together what you need.</p>' : '<p>In overleg bepalen we wat je nodig hebt.</p>';
   setContent(document.getElementById('wat-je-krijgt'), `
@@ -191,26 +233,38 @@ export async function renderServicePage() {
     </div>
   `);
 
-  const muziek = pickLangArr(service.muziek, lang);
-  const muziekIntro = pickLang(service.muziekIntro, lang);
+  const muziek = pickVisibleList(service.muziek, lang);
+  const muziekIntroRaw = pickLang(service.muziekIntro, lang);
+  const muziekIntroParts = Array.isArray(muziekIntroRaw)
+    ? muziekIntroRaw.filter(Boolean)
+    : (muziekIntroRaw ? [muziekIntroRaw] : []);
   const muziekTitle = lang === 'en' ? 'Music' : 'Muziek';
   const muziekFallback = lang === 'en' ? '<p>Wide repertoire, adaptable to your wishes.</p>' : '<p>Breed repertoire, aanpasbaar aan jouw wensen.</p>';
   const muziekHtml = muziek.length ? `<ul>${muziek.map((x) => `<li>${escapeHtml(typeof x === 'string' ? x : pickLang(x, lang))}</li>`).join('')}</ul>` : muziekFallback;
   const muziekLinks = lang === 'en'
-    ? '<p class="section-links">Looking for music inspiration? Check the <a href="/feest-muziek-inspiratie.html">party music inspiration</a> with playlist examples per moment.</p>'
-    : '<p class="section-links">Zoek je muziekinspiratie? Bekijk de <a href="/feest-muziek-inspiratie.html">feest muziek inspiratie</a> met playlist-voorbeelden per moment.</p>';
+    ? '<p class="section-links">Looking for more inspiration? See the <a href="/feest-muziek-inspiratie.html">party music examples</a> — style ideas, not a fixed playlist.</p>'
+    : '<p class="section-links">Meer inspiratie? Bekijk de <a href="/feest-muziek-inspiratie.html">feest muziek voorbeelden</a> — ter illustratie, geen vaste playlist.</p>';
+  const examples = pickLangArr(service.musicExamples, lang);
+  const examplesIntro = pickLang(service.musicExamplesIntro, lang)
+    || (lang === 'en'
+      ? 'Examples of artists and styles that can fit this kind of party. Not a set list: we discuss wishes beforehand and I read the dance floor.'
+      : 'Voorbeelden van artiesten en stijlen die bij dit type feest kunnen passen. Geen vaste setlist: we bespreken wensen vooraf en ik speel in op de dansvloer.');
+  const examplesHtml = examples.length
+    ? `<p class="section-intro">${escapeHtml(examplesIntro)}</p><ul class="music-examples">${examples.map((x) => `<li>${escapeHtml(typeof x === 'string' ? x : pickLang(x, lang))}</li>`).join('')}</ul>`
+    : '';
   setContent(document.getElementById('muziek'), `
     <div class="container">
       <h2>${escapeHtml(muziekTitle)}</h2>
-      ${muziekIntro ? `<p class="section-intro">${escapeHtml(muziekIntro)}</p>` : ''}
+      ${muziekIntroParts.map((p) => `<p class="section-intro">${escapeHtml(p)}</p>`).join('')}
       ${muziekHtml}
+      ${examplesHtml}
       ${muziekLinks}
     </div>
   `);
 
   const apparatuur = pickLangArr(service.apparatuur, lang);
-  const apparatuurTitle = lang === 'en' ? 'Equipment' : 'Apparatuur';
-  const apparatuurFallback = lang === 'en' ? '<p>Professional DJ set. See <a href="/dj-set-up.html">DJ set-up</a> for details.</p>' : '<p>Professionele DJ-set. Zie <a href="/dj-set-up.html">DJ set-up</a> voor details.</p>';
+  const apparatuurTitle = lang === 'en' ? 'Sound and lighting' : 'Geluid en licht';
+  const apparatuurFallback = lang === 'en' ? '<p>Complete standard setup available. See <a href="/prijzen.html">prices</a> for DJ Only vs All-in.</p>' : '<p>Complete standaard techniek mogelijk. Zie <a href="/prijzen.html">prijzen</a> voor het verschil tussen DJ Only en All-in.</p>';
   setContent(document.getElementById('apparatuur'), `
     <div class="container">
       <h2>${escapeHtml(apparatuurTitle)}</h2>
@@ -228,33 +282,58 @@ export async function renderServicePage() {
     </div>
   `);
 
-  let pricingData = null;
-  try {
-    const prRes = await fetch('/data/pricing.json');
-    if (prRes.ok) pricingData = await prRes.json();
-  } catch (_) {}
-  const formatPrice = (p) => p != null ? `€${Number(p).toLocaleString('nl-NL', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}` : '—';
-  const faq = service.faq || [];
-  const faqItems = faq.map((item) => {
-    const q = pickLang(item.q, lang);
-    const a = pickLang(item.a, lang);
-    if ((item.aTemplate === 'pricing' || /Hoeveel kost|How much/.test(q)) && pricingData) {
-      const aHtml = lang === 'en'
-        ? `From ${formatPrice(pricingData.justDj?.from)} (Just DJ) or ${formatPrice(pricingData.allIn?.from)} (All-in). See <a href="/prijzen.html">Prices</a>.`
-        : `Vanaf ${formatPrice(pricingData.justDj?.from)} (Just DJ) of ${formatPrice(pricingData.allIn?.from)} (All-in). Zie <a href="/prijzen.html">Prijzen</a>.`;
-      return { ...item, q, aHtml };
+  const extraSections = Array.isArray(service.extraSections) ? service.extraSections : [];
+  const werkwijzeEl = document.getElementById('werkwijze');
+  if (werkwijzeEl && extraSections.length) {
+    const extraHtml = extraSections.map((sec) => {
+      const tTitle = pickLang(sec.title, lang);
+      const tBody = pickLang(sec.body, lang);
+      if (!tTitle || !tBody) return '';
+      return `<h2>${escapeHtml(tTitle)}</h2><p>${escapeHtml(tBody)}</p>`;
+    }).join('');
+    if (extraHtml) {
+      const box = werkwijzeEl.querySelector('.container') || werkwijzeEl;
+      box.insertAdjacentHTML('beforeend', extraHtml);
     }
-    return { ...item, q, a };
-  });
+  }
+
+  if (pricingData && document.getElementById('wat-je-krijgt')) {
+    const isWedding = slug === 'bruiloft-dj';
+    const hour = formatEuro(pricingData.extraHour);
+    const hours = pricingData.justDj?.hoursIncluded || 4;
+    const priceStrip = isWedding
+      ? (lang === 'en'
+        ? `<p class="service-price-strip">Wedding DJ from ${formatEuro(pricingData.wedding?.from)} for ${hours} hours. Extra hour ${hour}. See <a href="/prijzen.html">prices</a>.</p>`
+        : `<p class="service-price-strip">Bruiloft DJ vanaf ${formatEuro(pricingData.wedding?.from)} voor ${hours} uur. Extra uur ${hour}. Zie <a href="/prijzen.html">prijzen</a>.</p>`)
+      : (lang === 'en'
+        ? `<p class="service-price-strip">DJ Only from ${formatEuro(pricingData.justDj?.from)} · All-in from ${formatEuro(pricingData.allIn?.from)} · ${hours} hours included · extra hour ${hour}. See <a href="/prijzen.html">prices</a>.</p>`
+        : `<p class="service-price-strip">DJ Only vanaf ${formatEuro(pricingData.justDj?.from)} · All-in vanaf ${formatEuro(pricingData.allIn?.from)} · ${hours} uur inbegrepen · extra uur ${hour}. Zie <a href="/prijzen.html">prijzen</a>.</p>`);
+    const wj = document.getElementById('wat-je-krijgt')?.querySelector('.container');
+    if (wj && !wj.querySelector('.service-price-strip')) wj.insertAdjacentHTML('beforeend', priceStrip);
+  }
+
+  let faqItems = [];
+  const faqPageKey = service.faqPage || (slug === 'bruiloft-dj' ? 'bruiloft' : slug === 'verjaardag-dj' ? 'verjaardag' : slug === 'bedrijfsfeest-dj' ? 'bedrijfsfeest' : slug === 'schoolfeest-dj' ? 'schoolfeest' : slug === 'buurtfeest-dj' ? 'buurtfeest' : slug === 'slagingsfeest-dj' ? 'slagingsfeest' : (VERJAARDAG_SLUGS.includes(slug) ? 'verjaardag' : ''));
+  try {
+    const { getFaqItems, loadFaq, injectFaqJsonLd } = await import('/js/renderFaq.js');
+    const faqData = await loadFaq();
+    faqItems = getFaqItems(faqData, faqPageKey, service.faq, lang, pricingData);
+    injectFaqJsonLd(faqItems, 'data-service-faq');
+  } catch (_) {
+    faqItems = (service.faq || []).map((item) => ({
+      q: pickLang(item.q, lang),
+      a: pickLang(item.a, lang)
+    }));
+  }
   const faqTitle = lang === 'en' ? 'Frequently asked questions' : 'Veelgestelde vragen';
-  const faqFallback = lang === 'en' ? '<p>No FAQ for this service. <a href="/veelgestelde-vragen.html">View general FAQ</a>.</p>' : '<p>Geen veelgestelde vragen voor deze dienst. <a href="/veelgestelde-vragen.html">Bekijk algemene FAQ</a>.</p>';
+  const faqFallback = lang === 'en' ? '<p>See the <a href="/veelgestelde-vragen.html">general FAQ</a>.</p>' : '<p>Bekijk de <a href="/veelgestelde-vragen.html">algemene FAQ</a>.</p>';
   setContent(document.getElementById('faq'), `
     <div class="container">
       <h2>${escapeHtml(faqTitle)}</h2>
       ${faqItems.length ? faqItems.map((item) => `
         <details class="faq-item">
           <summary>${escapeHtml(item.q)}</summary>
-          <p>${item.aHtml != null ? item.aHtml : escapeHtml(item.a || '')}</p>
+          <p>${escapeHtml(item.a || '')}</p>
         </details>
       `).join('') : faqFallback}
     </div>
@@ -295,13 +374,16 @@ export async function renderServicePage() {
     if (reviewsEl) reviewsEl.innerHTML = '<div class="container"><h2>Reviews</h2><p><a href="/reviews.html">Bekijk reviews</a>.</p></div>';
   }
 
-  const ctaText = pickLang(service.ctaText, lang) || (lang === 'en' ? 'Check availability' : 'Check beschikbaarheid');
+  const ctaText = pickLang(service.ctaText, lang) || (lang === 'en' ? 'Send me a message' : 'Stuur me een berichtje');
+  const secondaryCta = lang === 'en' ? 'View prices' : 'Bekijk prijzen';
   const ctaEl = document.getElementById('cta');
   if (ctaEl) {
     ctaEl.innerHTML = `
       <div class="container">
-        <p><a href="/contact.html" class="pricing-btn">${escapeHtml(ctaText)}</a></p>
-        <p><a href="https://wa.me/31621888970?text=Hoi%20Tim!%20Ik%20wil%20graag%20een%20${encodeURIComponent(serviceTitle)}%20boeken." target="_blank" rel="noopener" class="contact-whatsapp" aria-label="Contact via WhatsApp"><svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.865 9.865 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp</a></p>
+        <p class="cta-row cta-row-buttons">
+          <a href="/contact.html" class="cta-button">${escapeHtml(ctaText)}</a>
+          <a href="/prijzen.html" class="cta-button-secondary">${escapeHtml(secondaryCta)}</a>
+        </p>
       </div>
     `;
   }

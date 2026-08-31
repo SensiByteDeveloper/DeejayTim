@@ -1,42 +1,106 @@
 {
   "eventTypes": [
-    { "id": "bruiloft", "nl": "Bruiloft", "en": "Wedding" },
-    { "id": "verjaardag", "nl": "Verjaardag", "en": "Birthday" },
-    { "id": "bedrijfsfeest", "nl": "Bedrijfsfeest", "en": "Corporate event" },
-    { "id": "feest", "nl": "Feest", "en": "Party" },
-    { "id": "receptie", "nl": "Receptie", "en": "Reception" }
+    {
+      "id": "bruiloft",
+      "nl": "Bruiloft",
+      "en": "Wedding"
+    },
+    {
+      "id": "verjaardag",
+      "nl": "Verjaardag",
+      "en": "Birthday"
+    },
+    {
+      "id": "bedrijfsfeest",
+      "nl": "Bedrijfsfeest",
+      "en": "Corporate event"
+    },
+    {
+      "id": "feest",
+      "nl": "Feest",
+      "en": "Party"
+    },
+    {
+      "id": "receptie",
+      "nl": "Receptie",
+      "en": "Reception"
+    }
   ],
   "services": [
     {
       "id": "all-in",
       "slug": "all-in",
-      "title": { "nl": "All-in", "en": "All-in" },
-      "subtitle": { "nl": "Complete DJ set + DJ", "en": "Complete DJ set + DJ" },
-      "price": 500,
-      "badge": { "nl": "Populair", "en": "Popular" },
+      "title": {
+        "nl": "All-in DJ",
+        "en": "All-in DJ"
+      },
+      "subtitle": {
+        "nl": "DJ plus standaard techniek",
+        "en": "DJ plus standard setup"
+      },
+      "badge": {
+        "nl": "Meest gekozen",
+        "en": "Most chosen"
+      },
       "features": {
-        "nl": ["DJ-set (Pioneer XDJ-RX3)", "DJ Booth", "Lichtset", "Rookmachine", "Speakerset", "Microfoon"],
-        "en": ["DJ set (Pioneer XDJ-RX3)", "DJ Booth", "Lighting", "Fog machine", "Speaker set", "Microphone"]
+        "nl": [
+          "DJ Tim (4 uur)",
+          "Geluidsinstallatie",
+          "Dansvloerverlichting",
+          "DJ-booth",
+          "Microfoon"
+        ],
+        "en": [
+          "DJ Tim (4 hours)",
+          "Sound system",
+          "Dance floor lighting",
+          "DJ booth",
+          "Microphone"
+        ]
       },
-      "audience": { "nl": "Goed voor tot ±100 personen", "en": "Good for up to ±100 people" },
+      "audience": {
+        "nl": "Standaard tot circa 100 gasten",
+        "en": "Standard up to around 100 guests"
+      },
       "note": {
-        "nl": "Extra materiaal (bijv. extra speakers of licht) kan optioneel worden ingehuurd. Dit regelen we in overleg.",
-        "en": "Extra equipment (e.g. additional speakers or lights) can be hired optionally. We arrange this in consultation."
+        "nl": "Grotere of afwijkende producties in overleg.",
+        "en": "Larger or different productions by arrangement."
       },
-      "cta": { "nl": "Boek All-in", "en": "Book All-in" },
+      "cta": {
+        "nl": "Stuur me een berichtje",
+        "en": "Send me a message"
+      },
       "isBirthdayVariant": false
     },
     {
       "id": "just-dj",
       "slug": "just-dj",
-      "title": { "nl": "Just DJ", "en": "Just DJ" },
-      "subtitle": { "nl": "Enkel Deejay Tim", "en": "Deejay Tim only" },
-      "price": 250,
-      "features": {
-        "nl": ["Heb je al een complete DJ- en geluidsset?", "Ik verzorg de muziek op maat", "USB-sticks en headset mee", "Draai enkel digitaal"],
-        "en": ["Already have a complete DJ and sound set?", "I'll provide music to match", "USB sticks and headset included", "Digital only"]
+      "title": {
+        "nl": "DJ Only",
+        "en": "DJ Only"
       },
-      "cta": { "nl": "Boek Just DJ", "en": "Book Just DJ" },
+      "subtitle": {
+        "nl": "Alleen DJ Tim",
+        "en": "DJ Tim only"
+      },
+      "features": {
+        "nl": [
+          "DJ Tim komt draaien",
+          "Muziekvoorbereiding",
+          "Verzoeknummers mogelijk",
+          "Voor locaties met passende techniek"
+        ],
+        "en": [
+          "DJ Tim plays",
+          "Music preparation",
+          "Song requests possible",
+          "For venues with suitable equipment"
+        ]
+      },
+      "cta": {
+        "nl": "Stuur me een berichtje",
+        "en": "Send me a message"
+      },
       "isBirthdayVariant": false
     }
   ],
@@ -45,28 +109,56 @@
       "id": "all-in-birthday",
       "slug": "all-in-birthday",
       "parentService": "all-in",
-      "title": { "nl": "All-in Verjaardag", "en": "All-in Birthday" },
-      "subtitle": { "nl": "Complete set voor verjaardagsfeest", "en": "Complete set for birthday party" },
-      "price": 450,
-      "features": {
-        "nl": ["Zelfde als All-in", "Speciaal tarief voor verjaardagen"],
-        "en": ["Same as All-in", "Special rate for birthdays"]
+      "title": {
+        "nl": "All-in verjaardag",
+        "en": "All-in birthday"
       },
-      "cta": { "nl": "Boek Verjaardag", "en": "Book Birthday" },
+      "subtitle": {
+        "nl": "Zelfde All-in pakket",
+        "en": "Same All-in package"
+      },
+      "features": {
+        "nl": [
+          "Zelfde als All-in DJ",
+          "4 uur, extra uur {extraHour}"
+        ],
+        "en": [
+          "Same as All-in DJ",
+          "4 hours, extra hour {extraHour}"
+        ]
+      },
+      "cta": {
+        "nl": "Stuur me een berichtje",
+        "en": "Send me a message"
+      },
       "isBirthdayVariant": true
     },
     {
       "id": "just-dj-birthday",
       "slug": "just-dj-birthday",
       "parentService": "just-dj",
-      "title": { "nl": "Just DJ Verjaardag", "en": "Just DJ Birthday" },
-      "subtitle": { "nl": "Enkel DJ voor verjaardag", "en": "DJ only for birthday" },
-      "price": 225,
-      "features": {
-        "nl": ["Zelfde als Just DJ", "Speciaal tarief voor verjaardagen"],
-        "en": ["Same as Just DJ", "Special rate for birthdays"]
+      "title": {
+        "nl": "DJ Only verjaardag",
+        "en": "DJ Only birthday"
       },
-      "cta": { "nl": "Boek Verjaardag", "en": "Book Birthday" },
+      "subtitle": {
+        "nl": "Zelfde DJ Only pakket",
+        "en": "Same DJ Only package"
+      },
+      "features": {
+        "nl": [
+          "Zelfde als DJ Only",
+          "4 uur, extra uur {extraHour}"
+        ],
+        "en": [
+          "Same as DJ Only",
+          "4 hours, extra hour {extraHour}"
+        ]
+      },
+      "cta": {
+        "nl": "Stuur me een berichtje",
+        "en": "Send me a message"
+      },
       "isBirthdayVariant": true
     }
   ],
@@ -74,352 +166,1373 @@
     {
       "slug": "bruiloft-dj",
       "eventType": "bruiloft",
-      "title": { "nl": "Bruiloft DJ", "en": "Wedding DJ" },
-      "h1": { "nl": "DJ voor bruiloft", "en": "DJ for wedding" },
-      "metaTitle": { "nl": "Bruiloft DJ | Deejay Tim – Zwijndrecht & Rotterdam", "en": "Wedding DJ | Deejay Tim – Zwijndrecht & Rotterdam" },
-      "metaDescription": { "nl": "Bruiloft DJ voor jouw bruiloft. Professionele muziek, sfeer voor elk moment. Hands Up! app voor song requests.", "en": "Wedding DJ for your wedding. Professional music, atmosphere for every moment. Hands Up! app for song requests." },
-      "intro": { "nl": "DJ huren voor een bruiloft? Jullie bruiloft verdient een DJ die meedenkt. Het Bruiloft DJ pakket bevat alles van de All-in DJ show – geluid, licht, professionele set – plus persoonlijke voorbereiding: voorgesprek, begeleiding van de openingsdans en afstemming met ceremoniemeester of locatie. Speciaal voor bruidsparen die meer willen dan alleen muziek.", "en": "Looking to hire a DJ for your wedding? Your wedding deserves a DJ who thinks along with you. The Wedding DJ package includes everything from the All-in DJ show – sound, lighting, professional set – plus personal preparation: consultation, first dance guidance, and coordination with your master of ceremonies or venue. Perfect for couples who want more than just music." },
-      "watJeKrijgt": {
-        "nl": ["Alles van All-in: professionele DJ set, speakerset, booth, verlichting en microfoon – compleet ingericht voor jullie locatie", "Persoonlijk voorgesprek: we bespreken jullie wensen, programma en speciale momenten zodat alles klopt", "Begeleiding van de openingsdans: van jullie eerste dans tot de overgang naar het feestgedeelte – ik zorg voor een vloeiend moment", "Afstemming met ceremoniemeester of locatie over timing, aankondigingen en speciale momenten", "Hands Up! app: gasten kunnen verzoeknummers doen en stemmen – ik mix ze in op het juiste moment", "Muziek afgestemd op jullie smaak én die van de gasten – van oma tot kleinkind"],
-        "en": ["Everything from All-in: professional DJ set, speaker system, booth, lighting and microphone – fully set up for your venue", "Personal consultation: we discuss your wishes, programme and special moments so everything runs smoothly", "First dance guidance: from your first dance to the transition into the party – I ensure a seamless moment", "Coordination with master of ceremonies or venue on timing, announcements and special moments", "Hands Up! app: guests can request songs and vote – I mix them in at the right moment", "Music tailored to your taste and that of your guests – from grandma to grandchild"]
+      "faqPage": "bruiloft",
+      "title": {
+        "nl": "Bruiloft DJ",
+        "en": "Wedding DJ"
       },
-      "muziekIntro": { "nl": "De muziek op een bruiloft heeft een duidelijke opbouw: rustige achtergrond tijdens ontvangst en diner, en geleidelijk meer energie richting het feestgedeelte.", "en": "Wedding music has a clear build-up: relaxed background during reception and dinner, gradually building energy towards the party." },
+      "h1": {
+        "nl": "DJ voor bruiloft",
+        "en": "DJ for your wedding"
+      },
+      "metaTitle": {
+        "nl": "Bruiloft DJ | DJ voor trouwfeest vanaf {wedding} | Deejay Tim",
+        "en": "Wedding DJ | From {wedding} | Deejay Tim"
+      },
+      "metaDescription": {
+        "nl": "Bruiloft DJ in Zwijndrecht, Drechtsteden en Rijnmond. Voorbereiding, openingsdans, verzoeknummers en afstemming van bijzondere momenten. Vanaf {wedding} voor 4 uur.",
+        "en": "Wedding DJ in Zwijndrecht, Drechtsteden and Rijnmond. Preparation, first dance, song requests and planning of key moments. From {wedding} for 4 hours."
+      },
+      "intro": {
+        "nl": "Een goede bruiloft-DJ doet meer dan nummers aankondigen. Ik bereid jullie avond voor, stem momenten af en speel live in op wie er danst – van oma tot vriendengroep. Het Bruiloft DJ pakket is vanaf {wedding} voor 4 uur, inclusief licht en geluid.",
+        "en": "A good wedding DJ does more than announce tracks. I prepare your evening, plan key moments and read who is dancing – from grandparents to friends. The Wedding DJ package starts at {wedding} for 4 hours, including sound and lighting."
+      },
+      "introExtra": {
+        "nl": "Jullie muzieksmaak vormt de basis. Tijdens het feest kijk ik naar jullie gasten en bouw ik van daaruit verder.",
+        "en": "Your taste sets the base. During the party I watch your guests and build from there."
+      },
+      "directContact": {
+        "title": {
+          "nl": "Je boekt mij, dus ik kom zelf draaien",
+          "en": "You book me, so I play myself"
+        },
+        "body": {
+          "nl": "Van eerste contact tot feest heb je rechtstreeks contact met mij. Degene met wie je de afspraken maakt, staat straks ook achter de draaitafels.",
+          "en": "From first contact to the party, you deal with me directly. The person you make the arrangements with is also the one behind the decks."
+        }
+      },
+      "watJeKrijgt": {
+        "nl": [
+          "Persoonlijk voorgesprek over programma, sfeer en muziekwensen",
+          "Uitgebreidere voorbereiding",
+          "Afstemming van de openingsdans en bijzondere momenten",
+          "Overleg mogelijk met ceremoniemeester en/of locatie",
+          "Licht, geluid, DJ-booth en microfoon",
+          "Verzoeknummers tijdens het feest, als ze bij de sfeer passen"
+        ],
+        "en": [
+          "Personal consultation on programme, vibe and music wishes",
+          "More thorough preparation",
+          "Planning of the first dance and special moments",
+          "Coordination with the MC and/or venue if needed",
+          "Sound, lighting, DJ booth and microphone",
+          "Song requests during the party if they fit the vibe"
+        ]
+      },
+      "muziekIntro": {
+        "nl": [
+          "Op de meeste bruiloften komen verschillende generaties en muzieksmaken samen. Daarom draait zo’n avond vaak om herkenbare, dansbare muziek en een goede afwisseling tussen stijlen. Van disco, 80s en 90s tot 00s, Nederlandstalig, pop, dance, house, urban, Afro en Latin: ik kijk naar jullie wensen én naar wat er op de dansvloer werkt.",
+          "Hebben jullie juist een duidelijke muzikale voorkeur? Ook prima. Er is muzikaal veel mogelijk. Een avond met bijvoorbeeld veel Funky House, Deep House, Tech House of andere favoriete stijlen is net zo goed mogelijk. Of een combinatie: eerst breed en herkenbaar en later op de avond meer de diepte in. Jullie geven de richting aan, ik zorg voor de muzikale flow."
+        ],
+        "en": [
+          "At most weddings, different generations and music tastes come together. So the evening often turns on recognisable, danceable music and a good mix of styles. From disco, 80s and 90s to 00s, Dutch-language tracks, pop, dance, house, urban, Afro and Latin: I look at your wishes and at what works on the dance floor.",
+          "Do you have a clear musical preference? That’s fine too. There is a lot of musical room. An evening with plenty of Funky House, Deep House, Tech House or other favourite styles is just as possible. Or a combination: first broad and recognisable, later more depth. You set the direction; I take care of the musical flow."
+        ]
+      },
       "muziek": {
-        "nl": ["Van rustige achtergrond tijdens ontvangst en diner tot feest op de dansvloer – de sfeer volgt het programma", "Openingsdans: jullie nummer, jullie moment. Ik zorg voor een vloeiende overgang en kan het nummer inkorten of mixen indien gewenst", "Breed repertoire: van klassiekers tot huidige hits, voor alle generaties. Geen expliciete teksten.", "Do-not-play lijst: we stemmen vooraf af wat wel en niet mag – zo voorkom je verrassingen"],
-        "en": ["From relaxed background during reception and dinner to party on the dance floor – the atmosphere follows the programme", "First dance: your song, your moment. I ensure a smooth transition and can shorten or mix the song if desired", "Wide repertoire: from classics to current hits, for all generations. No explicit lyrics.", "Do-not-play list: we agree in advance what is and isn't allowed – no surprises"]
+        "nl": [
+          "Openingsdans: jullie nummer, netjes begeleid en eventueel ingekort",
+          "Favoriete nummers zijn welkom. Must-plays en do-not-plays bespreken we vooraf",
+          "Ik leg niet vooraf de volledige avond muzikaal vast",
+          "Verzoekjes zijn welkom. Als ik het nummer heb en het bij de avond past, probeer ik het op een geschikt moment te draaien"
+        ],
+        "en": [
+          "First dance: your song, guided properly and shortened if needed",
+          "Favourite tracks are welcome. We discuss must-plays and do-not-plays beforehand",
+          "I don’t lock the whole evening musically in advance",
+          "Requests are welcome. If I have the track and it fits the evening, I try to play it at a suitable moment"
+        ]
+      },
+      "musicExamplesIntro": {
+        "nl": "Een paar voorbeelden van herkenbare dansvloerplaten uit verschillende richtingen. Geen standaard bruiloftsplaylist, puur ter illustratie.",
+        "en": "A few examples of recognisable dance-floor records from different directions. Not a standard wedding playlist, purely illustrative."
+      },
+      "musicExamples": {
+        "nl": [
+          "Earth, Wind & Fire – September",
+          "ABBA – Gimme! Gimme! Gimme!",
+          "Whitney Houston – I Wanna Dance with Somebody",
+          "Bruno Mars – Marry You",
+          "Gala – Freed From Desire",
+          "Modjo – Lady (Hear Me Tonight)",
+          "Stromae – Alors on danse",
+          "Rema – Calm Down"
+        ],
+        "en": [
+          "Earth, Wind & Fire – September",
+          "ABBA – Gimme! Gimme! Gimme!",
+          "Whitney Houston – I Wanna Dance with Somebody",
+          "Bruno Mars – Marry You",
+          "Gala – Freed From Desire",
+          "Modjo – Lady (Hear Me Tonight)",
+          "Stromae – Alors on danse",
+          "Rema – Calm Down"
+        ]
       },
       "apparatuur": {
-        "nl": ["Professionele DJ set (Pioneer XDJ-RX3) – digitaal, betrouwbaar en geschikt voor elk type locatie", "Speakerset afgestemd op jullie locatie en aantal gasten – tot circa 100 personen standaard", "DJ booth en dansvloer verlichting – professionele uitstraling, geen gedoe", "Microfoon voor aankondigingen, toespraken en het begeleiden van momenten", "Rookmachine optioneel – afhankelijk van de locatie (sommige zalen staan dit niet toe ivm rookmelders)", "Verlichting afgestemd op jullie situatie: bij bruiloften stem ik af met de fotograaf – lasers worden vaak afgeraden ivm risico op lensbeschadiging"],
-        "en": ["Professional DJ set (Pioneer XDJ-RX3) – digital, reliable and suitable for any venue type", "Speaker system tailored to your venue and guest count – up to around 100 people standard", "DJ booth and dance floor lighting – professional look, no hassle", "Microphone for announcements, speeches and guiding moments", "Fog machine optional – depends on the venue (some halls don't allow it due to smoke alarms)", "Lighting tailored to your situation: at weddings I coordinate with the photographer – lasers are often discouraged due to risk of lens damage"]
+        "nl": [
+          "Complete standaard techniek: geluid, dansvloerverlichting, DJ-booth en microfoon",
+          "Geschikt tot circa 100 gasten; groter of een lastige zaal in overleg",
+          "Verlichting stem ik af op het moment – ook met een fotograaf als jullie dat willen",
+          "Je koopt een verzorgde oplossing, geen inventarislijst"
+        ],
+        "en": [
+          "Complete standard setup: sound, dance floor lighting, DJ booth and microphone",
+          "Suits around 100 guests; larger or an awkward room by arrangement",
+          "Lighting follows the moment – and a photographer if you want",
+          "You buy a complete solution, not an inventory list"
+        ]
       },
       "werkwijzeSteps": {
-        "nl": ["Kennismaking en voorgesprek: we bespreken jullie wensen, programma en speciale momenten. Wat wil je wel en niet?", "Afstemming met ceremoniemeester of locatie over timing en aankondigingen – alles loopt soepel", "Op de dag: ik ben graag minimaal een uur van tevoren aanwezig om rustig op te bouwen en te soundchecken. Van openingsdans tot laatste nummer – ik begeleid het hele feest"],
-        "en": ["Introduction and consultation: we discuss your wishes, programme and special moments. What do you want and what don't you?", "Coordination with master of ceremonies or venue on timing and announcements – everything runs smoothly", "On the day: I'm happy to be there at least an hour before the start to set up calmly and soundcheck. From first dance to last song – I guide the entire celebration"]
+        "nl": [
+          "Kennismaking en voorgesprek: programma, wensen, openingsdans en wat juist niet",
+          "Afstemming met ceremoniemeester of locatie over timing en aankondigingen",
+          "Op de dag: ik ben ruim op tijd, zodat alles klaarstaat. Verzorg ik de opbouw van licht en geluid, dan minimaal een uur eerder; staat de techniek al klaar, dan ongeveer 15 minuten voor aanvang. Daarna volg ik het feest, niet een vast script"
+        ],
+        "en": [
+          "Introduction and consultation: programme, wishes, first dance and what to skip",
+          "Coordination with the MC or venue on timing and announcements",
+          "On the day: I arrive in good time so everything is ready. If I handle the lighting and sound setup, at least an hour early; if the equipment is already in place, about 15 minutes before the start. Then I follow the party, not a fixed script"
+        ]
       },
-      "faq": [
-        { "q": { "nl": "Hoe ver van tevoren boeken?", "en": "How far in advance should I book?" }, "a": { "nl": "Bij voorkeur 2–6 maanden. Populaire data gaan snel.", "en": "Preferably 2–6 months. Popular dates go fast." } },
-        { "q": { "nl": "Kunnen gasten nummers aanvragen?", "en": "Can guests request songs?" }, "a": { "nl": "Ja, via de Hands Up! app. Ik kijk altijd naar de dansvloer en mix verzoeknummers op een manier die past.", "en": "Yes, via the Hands Up! app. I always watch the dance floor and mix requests in a way that fits." } },
-        { "q": { "nl": "Kan ik ook Just DJ boeken voor mijn bruiloft?", "en": "Can I also book Just DJ for my wedding?" }, "a": { "nl": "Ja. Als de locatie al een geluidsinstallatie heeft, kun je het Just DJ pakket boeken. In overleg stemmen we af wat er nodig is.", "en": "Yes. If the venue already has a sound system, you can book the Just DJ package. We'll agree together what's needed." } }
-      ],
-      "ctaText": { "nl": "Boek bruiloft DJ", "en": "Book wedding DJ" }
+      "extraSections": [],
+      "faq": [],
+      "ctaText": {
+        "nl": "Stuur me een berichtje",
+        "en": "Send me a message"
+      }
     },
     {
       "slug": "verjaardag-dj",
       "eventType": "verjaardag",
-      "title": { "nl": "Verjaardag DJ", "en": "Birthday DJ" },
-      "h1": { "nl": "DJ voor verjaardag", "en": "DJ for birthday" },
-      "metaTitle": { "nl": "Verjaardag DJ | Deejay Tim – Zwijndrecht & Rotterdam", "en": "Birthday DJ | Deejay Tim – Zwijndrecht & Rotterdam" },
-      "metaDescription": { "nl": "DJ voor verjaardagsfeest. 18, 30, 40, 50 jaar – professionele muziek voor elk feest.", "en": "DJ for birthday party. 18, 30, 40, 50 years – professional music for every celebration." },
-      "intro": { "nl": "DJ huren voor een verjaardag? Kies Just DJ als de locatie eigen geluid heeft – dan kom ik alleen met mijn set. Of kies de All-in DJ show: dan neem ik speakerset, DJ booth, verlichting en microfoon mee. Geschikt voor verjaardagen van elke leeftijd.", "en": "Looking to hire a DJ for a birthday? Choose Just DJ if the venue has its own sound – I'll come with just my set. Or choose the All-in DJ show: I'll bring the speaker system, DJ booth, lighting and microphone. Suitable for birthdays of any age." },
-      "watJeKrijgt": {
-        "nl": ["Just DJ of All-in DJ show – afhankelijk van wat de locatie al heeft. Geen dubbel werk, geen onnodige kosten.", "Professionele DJ set (Pioneer XDJ-RX3): bij Just DJ sluit ik aan op bestaand geluid, bij All-in neem ik alles mee", "Hands Up! app: gasten kunnen verzoeknummers doen en stemmen op de volgende track – de jarige en vrienden bepalen mee", "Muziek afgestemd op leeftijd van de jarige en het publiek – 18, 30, 40 of 50: elk feest vraagt om een andere mix", "Flexibele tijden: we stemmen de duur af op jullie programma. Extra uren zijn mogelijk."],
-        "en": ["Just DJ or All-in DJ show – depending on what the venue already has. No double work, no unnecessary costs.", "Professional DJ set (Pioneer XDJ-RX3): with Just DJ I connect to existing sound, with All-in I bring everything", "Hands Up! app: guests can request songs and vote on the next track – the birthday person and friends have a say", "Music tailored to the age of the birthday person and the crowd – 18, 30, 40 or 50: each party calls for a different mix", "Flexible times: we match the duration to your programme. Extra hours are possible."]
+      "faqPage": "verjaardag",
+      "title": {
+        "nl": "Verjaardag DJ",
+        "en": "Birthday DJ"
       },
-      "muziekIntro": { "nl": "De muziek past bij de jarige en de gasten. Van meezingers tot dansbare hits – de sfeer bouwt zich op gedurende de avond.", "en": "The music matches the birthday person and the guests. From sing-alongs to danceable hits – the atmosphere builds throughout the evening." },
+      "h1": {
+        "nl": "DJ voor verjaardag",
+        "en": "DJ for a birthday"
+      },
+      "metaTitle": {
+        "nl": "DJ verjaardag huren | 18 tot 21, 30, 40, 50 jaar | Deejay Tim",
+        "en": "Birthday DJ | 18 to 21, 30, 40, 50 | Deejay Tim"
+      },
+      "metaDescription": {
+        "nl": "DJ huren voor een verjaardag in de Drechtsteden en Rijnmond. Herkenbare muziek, verzoekjes en inspelen op de dansvloer. DJ Only vanaf {justDj}, All-in vanaf {allIn}.",
+        "en": "Hire a birthday DJ in the Drechtsteden and Rijnmond. Recognisable music, requests and reading the dance floor. DJ Only from {justDj}, All-in from {allIn}."
+      },
+      "intro": {
+        "nl": "DJ huren voor een verjaardag? Ik draai herkenbare muziek voor meerdere generaties, speel in op de dansvloer en houd ruimte voor persoonlijke favorieten. DJ Only vanaf {justDj} als de locatie al goede techniek heeft. All-in vanaf {allIn} als geluid en licht ook verzorgd moeten worden. Beide voor 4 uur; extra uur {extraHour}.",
+        "en": "Hiring a DJ for a birthday? I play recognisable music for mixed ages, read the dance floor and leave room for personal favourites. DJ Only from {justDj} if the venue already has good equipment. All-in from {allIn} if sound and lighting also need to be arranged. Both for 4 hours; extra hour {extraHour}."
+      },
+      "introExtra": {
+        "nl": "Voor veel verjaardagen is All-in de makkelijkste keuze: je hoeft zelf geen installatie te regelen. Het feest mag rustig starten en later opbouwen.",
+        "en": "For many birthdays All-in is the easiest choice: you don't have to arrange a setup yourself. The party can start calmly and build later."
+      },
+      "watJeKrijgt": {
+        "nl": [
+          "DJ Only of All-in, afhankelijk van wat de locatie al heeft",
+          "Muziek afgestemd op de jarige én de gasten",
+          "Verzoekjes welkom; ik kijk naar een geschikt moment",
+          "Geen vaste setlist: voorbereiding plus live inspelen",
+          "4 uur inbegrepen, extra uur {extraHour}"
+        ],
+        "en": [
+          "DJ Only or All-in, depending on what the venue already has",
+          "Music matched to the birthday person and the guests",
+          "Requests welcome; I look for a good moment",
+          "No fixed setlist: preparation plus live reading",
+          "4 hours included, extra hour {extraHour}"
+        ]
+      },
+      "muziekIntro": {
+        "nl": "Een 30e voelt muzikaal anders dan een 50e of 60e. Favorieten uit iemands jeugd, huidige hits en verzoekjes van gasten mogen allemaal mee. Geen standaardlijst per leeftijd.",
+        "en": "A 30th often feels different from a 50th or 60th. Favourites from someone's youth, current hits and guest requests can all come along. No standard list per age."
+      },
       "muziek": {
-        "nl": ["Breed repertoire: van 80s en 90s klassiekers tot huidige hits – afgestemd op de leeftijd van de jarige", "Elke leeftijd heeft zijn eigen sfeer: 18 en 20 vragen om andere nummers dan 40 of 50. Ik stem daarop af.", "Verzoeknummers via Hands Up!: de jarige en gasten bepalen mee. Ik kijk naar de dansvloer en mix verzoeknummers op het juiste moment"],
-        "en": ["Wide repertoire: from 80s and 90s classics to current hits – tailored to the birthday person's age", "Each age has its own vibe: 18 and 20 call for different songs than 40 or 50. I adapt accordingly.", "Song requests via Hands Up!: the birthday person and guests have a say. I watch the dance floor and mix requests at the right moment"]
+        "nl": [
+          "18 tot 21: actuele hits, urban, Afro, Latin en dance",
+          "30: 00s/10s, pop, EDM en Nederlandse hits",
+          "40: 80s/90s/00s, eurodance en feestplaten",
+          "50 en 60: disco, soul, 70s/80s en Nederlandse klassiekers",
+          "Verzoeknummers welkom als ze bij het moment passen"
+        ],
+        "en": [
+          "18 to 21: current hits, urban, Afro, Latin and dance",
+          "30: 00s/10s, pop, EDM and Dutch hits",
+          "40: 80s/90s/00s, eurodance and party records",
+          "50 and 60: disco, soul, 70s/80s and Dutch classics",
+          "Song requests welcome if they fit the moment"
+        ]
+      },
+      "musicExamplesIntro": {
+        "nl": "Geen vaste playlist natuurlijk – dit geeft vooral een idee van muzikale richtingen die op zo’n feest voorbij kunnen komen.",
+        "en": "Not a fixed playlist – this mainly gives an idea of directions that can come up at a party like this."
+      },
+      "musicExamples": {
+        "nl": [
+          "Goldband – Noodgeval",
+          "Antoon – Lifestyle",
+          "The Weeknd – Blinding Lights",
+          "Chef'Special – Amigo",
+          "André Hazes Jr. – Wijzer",
+          "Jody Bernal – Que Si Que No",
+          "Whigfield – Saturday Night",
+          "Anouk – Nobody's Wife",
+          "Van Dik Hout – Stil in mij",
+          "Guus Meeuwis – Het is een nacht"
+        ],
+        "en": [
+          "Goldband – Noodgeval",
+          "Antoon – Lifestyle",
+          "The Weeknd – Blinding Lights",
+          "Chef'Special – Amigo",
+          "André Hazes Jr. – Wijzer",
+          "Jody Bernal – Que Si Que No",
+          "Whigfield – Saturday Night",
+          "Anouk – Nobody's Wife",
+          "Van Dik Hout – Stil in mij",
+          "Guus Meeuwis – Het is een nacht"
+        ]
       },
       "apparatuur": {
-        "nl": ["All-in: professionele speakerset, DJ booth, dansvloer verlichting en microfoon – alles inbegrepen", "Just DJ: alleen de DJ – voor locaties met eigen geluidsinstallatie. Ik sluit aan en draai.", "Zie de prijzenpagina voor het verschil tussen Just DJ en All-in – we kiezen samen wat past bij jullie locatie"],
-        "en": ["All-in: professional speaker system, DJ booth, dance floor lighting and microphone – all included", "Just DJ: DJ only – for venues with their own sound system. I connect and play.", "See the pricing page for the difference between Just DJ and All-in – we choose together what fits your venue"]
+        "nl": [
+          "All-in: geluid, dansvloerverlichting, DJ-booth en microfoon – meestal de fijnste keuze",
+          "DJ Only: ik kom draaien als de locatie al passende professionele techniek heeft",
+          "Standaard All-in tot circa 100 gasten; groter in overleg"
+        ],
+        "en": [
+          "All-in: sound, dance floor lighting, DJ booth and microphone – usually the easiest choice",
+          "DJ Only: I play if the venue already has suitable professional equipment",
+          "Standard All-in for around 100 guests; larger by arrangement"
+        ]
       },
       "werkwijzeSteps": {
-        "nl": ["Contact: we bespreken locatie, datum en welk pakket past. Heeft de locatie al geluid? Dan kan Just DJ volstaan.", "Muziek afstemmen: wat wil de jarige horen, wat absoluut niet? We stemmen vooraf af.", "Feest: ik ben graag minimaal een uur van tevoren aanwezig om rustig op te bouwen en te soundchecken. Van eerste nummer tot laatste – ik draai tot het einde"],
-        "en": ["Contact: we discuss venue, date and which package fits. Does the venue already have sound? Then Just DJ may suffice.", "Music alignment: what does the birthday person want to hear, what definitely not? We agree in advance.", "Party: I'm happy to be there at least an hour before the start to set up calmly and soundcheck. From first song to last – I play until the end"]
+        "nl": [
+          "We bespreken locatie, datum en of DJ Only of All-in past",
+          "Je kunt favorieten en een do-not-play lijst doorgeven",
+          "Op de avond: rustig beginnen mag, later opbouwen ook. Ik kijk naar de dansvloer"
+        ],
+        "en": [
+          "We discuss venue, date and whether DJ Only or All-in fits",
+          "You can share favourites and a do-not-play list",
+          "On the night: a calm start is fine, so is a later build. I watch the dance floor"
+        ]
       },
-      "faq": [
-        { "q": { "nl": "Hoeveel kost een verjaardag DJ?", "en": "How much does a birthday DJ cost?" }, "aTemplate": "pricing" }
-      ],
-      "ctaText": { "nl": "Boek verjaardag DJ", "en": "Book birthday DJ" }
+      "faq": [],
+      "ctaText": {
+        "nl": "Stuur me een berichtje",
+        "en": "Send me a message"
+      }
     },
     {
       "slug": "bedrijfsfeest-dj",
       "eventType": "bedrijfsfeest",
-      "title": { "nl": "Bedrijfsfeest DJ", "en": "Corporate event DJ" },
-      "h1": { "nl": "DJ voor bedrijfsfeest", "en": "DJ for corporate event" },
-      "metaTitle": { "nl": "Bedrijfsfeest DJ | Deejay Tim – Zwijndrecht & Rotterdam", "en": "Corporate event DJ | Deejay Tim – Zwijndrecht & Rotterdam" },
-      "metaDescription": { "nl": "DJ voor bedrijfsfeest. Van cocktail tot dans – professionele uitvoering voor uw bedrijf.", "en": "DJ for corporate event. From cocktail to dance – professional execution for your company." },
-      "intro": { "nl": "DJ huren voor een bedrijfsfeest? De All-in DJ show is ideaal: professionele DJ set, speakerset, booth, verlichting en microfoon. Geschikt voor gemengde leeftijden – van netwerkborrel tot dansavond. Heeft de locatie al geluid? Dan volstaat Just DJ.", "en": "Looking to hire a DJ for a corporate event? The All-in DJ show is ideal: professional DJ set, speaker system, booth, lighting and microphone. Suitable for mixed ages – from networking drinks to dance evening. Does the venue already have sound? Then Just DJ will suffice." },
-      "watJeKrijgt": {
-        "nl": ["All-in DJ show of Just DJ – afhankelijk van wat de locatie heeft. Bij All-in neem ik alles mee, bij Just DJ sluit ik aan op bestaande techniek.", "Professionele DJ set (Pioneer XDJ-RX3), speakerset, booth en verlichting – geschikt voor zalen tot circa 100 personen", "Microfoon voor aankondigingen, toespraken en eventuele presentaties", "Muziek van rustige achtergrond tijdens borrel of diner tot een volle dansvloer later op de avond", "Hands Up! app: collega's kunnen verzoeknummers doen – ideaal voor interactie en sfeer", "Aanpasbaar aan thema en sfeer van het bedrijf – van netwerkborrel tot afdelingsfeest"],
-        "en": ["All-in DJ show or Just DJ – depending on what the venue has. With All-in I bring everything, with Just DJ I connect to existing equipment.", "Professional DJ set (Pioneer XDJ-RX3), speaker system, booth and lighting – suitable for venues up to around 100 people", "Microphone for announcements, speeches and any presentations", "Music from relaxed background during drinks or dinner to a packed dance floor later in the evening", "Hands Up! app: colleagues can request songs – ideal for interaction and atmosphere", "Adaptable to the company's theme and vibe – from networking drinks to department party"]
+      "faqPage": "bedrijfsfeest",
+      "title": {
+        "nl": "Bedrijfsfeest DJ",
+        "en": "Corporate event DJ"
       },
-      "muziekIntro": { "nl": "De muziek volgt het programma: rustig tijdens het netwerken, meer energie tijdens het feestgedeelte. Geen expliciete teksten – geschikt voor elke bedrijfssfeer.", "en": "The music follows the programme: relaxed during networking, more energy during the party. No explicit lyrics – suitable for any corporate atmosphere." },
+      "h1": {
+        "nl": "DJ voor bedrijfsfeest",
+        "en": "DJ for a corporate event"
+      },
+      "metaTitle": {
+        "nl": "DJ bedrijfsfeest | All-in of DJ Only | Deejay Tim",
+        "en": "Corporate event DJ | All-in or DJ Only | Deejay Tim"
+      },
+      "metaDescription": {
+        "nl": "DJ voor een bedrijfsfeest in Zwijndrecht, Rotterdam en omgeving. Flexibel van borrel naar dansfeest. DJ Only vanaf {justDj}, All-in vanaf {allIn}.",
+        "en": "DJ for a corporate event in Zwijndrecht, Rotterdam and surroundings. Flexible from drinks to dance floor. DJ Only from {justDj}, All-in from {allIn}."
+      },
+      "intro": {
+        "nl": "Op een bedrijfsfeest zitten vaak verschillende leeftijden en smaken in één zaal. Ik begin rustig bij een borrel of diner en bouw op naar een dansfeest als de avond daar is. DJ Only vanaf {justDj}, All-in vanaf {allIn}. Beide 4 uur; extra uur {extraHour}.",
+        "en": "A corporate event often has mixed ages and tastes in one room. I start calmly at drinks or dinner and build to a dance party when the evening is ready. DJ Only from {justDj}, All-in from {allIn}. Both 4 hours; extra hour {extraHour}."
+      },
+      "watJeKrijgt": {
+        "nl": [
+          "Afstemming met de organisatie over programma en sfeer",
+          "Van achtergrondmuziek naar dansvloer, zonder harde knip",
+          "Verzoeknummers welkom; ik pas ze in als het moment klopt",
+          "All-in of DJ Only, afhankelijk van de locatie",
+          "Microfoon voor toespraken of een korte aankondiging"
+        ],
+        "en": [
+          "Alignment with the organisers on programme and vibe",
+          "From background music to dance floor, without a hard cut",
+          "Song requests welcome; I mix them in when the moment is right",
+          "All-in or DJ Only, depending on the venue",
+          "Microphone for speeches or a short announcement"
+        ]
+      },
+      "muziekIntro": {
+        "nl": "Ik begin vaak breed en herkenbaar, kijk waar de groep op reageert en verbind stijlen logisch. Gedurende de avond kan ik scherper focussen op wat werkt.",
+        "en": "I often start broad and recognisable, watch what the group responds to and blend styles logically. Through the night I can focus more clearly on what works."
+      },
       "muziek": {
-        "nl": ["Van achtergrondmuziek tijdens borrel of diner tot feest op de dansvloer – de opbouw volgt jullie programma", "Breed repertoire voor gemengde leeftijden: van klassiekers tot huidige hits, voor iedereen wat wils", "Geen expliciete teksten – professioneel en geschikt voor elke bedrijfssfeer"],
-        "en": ["From background music during drinks or dinner to party on the dance floor – the build-up follows your programme", "Wide repertoire for mixed ages: from classics to current hits, something for everyone", "No explicit lyrics – professional and suitable for any corporate atmosphere"]
+        "nl": [
+          "Open-format: pop, disco, 90s/00s, Nederlandstalig en dance als de zaal meekomt",
+          "Verzoekjes van collega’s probeer ik op een geschikt moment mee te nemen",
+          "Thema kan, zolang de muziek logisch blijft lopen"
+        ],
+        "en": [
+          "Open-format: pop, disco, 90s/00s, Dutch-language tracks and dance if the room follows",
+          "Colleague requests I try to mix in at a good moment",
+          "A theme is fine as long as the music still flows"
+        ]
+      },
+      "musicExamplesIntro": {
+        "nl": "Voorbeelden van herkenbare platen. Wat de zaal pakt, bepaalt hoe de avond verder gaat.",
+        "en": "Examples of recognisable records. What the room takes determines how the night continues."
+      },
+      "musicExamples": {
+        "nl": [
+          "Journey – Don't Stop Believin'",
+          "Walk the Moon – Shut Up and Dance",
+          "Mark Ronson ft. Bruno Mars – Uptown Funk",
+          "Toto – Africa",
+          "Coldplay – A Sky Full of Stars",
+          "BLØF – Harder dan ik hebben kan",
+          "Katrina and the Waves – Walking on Sunshine",
+          "The Foundations – Build Me Up Buttercup",
+          "Kool & The Gang – Celebration",
+          "Train – Drive By"
+        ],
+        "en": [
+          "Journey – Don't Stop Believin'",
+          "Walk the Moon – Shut Up and Dance",
+          "Mark Ronson ft. Bruno Mars – Uptown Funk",
+          "Toto – Africa",
+          "Coldplay – A Sky Full of Stars",
+          "BLØF – Harder dan ik hebben kan",
+          "Katrina and the Waves – Walking on Sunshine",
+          "The Foundations – Build Me Up Buttercup",
+          "Kool & The Gang – Celebration",
+          "Train – Drive By"
+        ]
       },
       "apparatuur": {
-        "nl": ["All-in: professionele speakerset, DJ booth, dansvloer verlichting en microfoon – geschikt voor zalen tot circa 100 personen", "Just DJ: alleen de DJ – voor locaties met eigen installatie. Ik sluit aan op bestaande techniek.", "Zie de prijzenpagina voor details over de pakketten en wat er bij elk inbegrepen is"],
-        "en": ["All-in: professional speaker system, DJ booth, dance floor lighting and microphone – suitable for venues up to around 100 people", "Just DJ: DJ only – for venues with their own equipment. I connect to existing setup.", "See the pricing page for details on the packages and what's included with each"]
+        "nl": [
+          "All-in als de zaal nog geen goede installatie heeft",
+          "DJ Only als de locatie al passende techniek heeft",
+          "Standaard tot circa 100 gasten; groter in overleg"
+        ],
+        "en": [
+          "All-in if the hall has no proper setup yet",
+          "DJ Only if the venue already has suitable equipment",
+          "Standard up to around 100 guests; larger by arrangement"
+        ]
       },
       "werkwijzeSteps": {
-        "nl": ["Intake: we bespreken programma, tijden en wensen. Wat voor soort feest is het? Borrel, diner, dansavond?", "Afstemming over muziek en sfeer: wat past bij het bedrijf? Geen expliciete teksten, professionele uitstraling.", "Uitvoering: professionele presentatie van begin tot eind. Ik ben op tijd, alles is getest, de avond verloopt soepel"],
-        "en": ["Intake: we discuss programme, times and wishes. What kind of event is it? Drinks, dinner, dance evening?", "Alignment on music and atmosphere: what fits the company? No explicit lyrics, professional impression.", "Execution: professional presentation from start to finish. I'm on time, everything is tested, the evening runs smoothly"]
+        "nl": [
+          "Intake: wat voor avond is het – borrel, diner, feest of alle drie?",
+          "Afstemming over muziek, toespraken en hoe laat het mag knallen",
+          "Uitvoering: op tijd, getest, en flexibel als het programma verschuift"
+        ],
+        "en": [
+          "Intake: drinks, dinner, party, or all three?",
+          "Alignment on music, speeches and when it can lift off",
+          "On the night: on time, tested, and flexible if the programme shifts"
+        ]
       },
-      "faq": [
-        { "q": { "nl": "Factuur mogelijk?", "en": "Is invoicing possible?" }, "a": { "nl": "Ja, facturatie is mogelijk.", "en": "Yes, invoicing is possible." } }
-      ],
-      "ctaText": { "nl": "Boek bedrijfsfeest DJ", "en": "Book corporate event DJ" }
+      "faq": [],
+      "ctaText": {
+        "nl": "Stuur me een berichtje",
+        "en": "Send me a message"
+      }
     },
     {
       "slug": "schoolfeest-dj",
       "eventType": "feest",
-      "title": { "nl": "Schoolfeest DJ", "en": "School party DJ" },
-      "h1": { "nl": "DJ voor schoolfeest", "en": "DJ for school party" },
-      "metaTitle": { "nl": "Schoolfeest DJ | Deejay Tim – Zwijndrecht & Rotterdam", "en": "School party DJ | Deejay Tim – Zwijndrecht & Rotterdam" },
-      "metaDescription": { "nl": "DJ voor schoolfeest. Professionele muziek en entertainment voor jouw school.", "en": "DJ for school party. Professional music and entertainment for your school." },
-      "intro": { "nl": "DJ huren voor een schoolfeest? De All-in DJ show past perfect: professionele set, speakerset, verlichting en microfoon. Muziek die jongeren aanspreekt – populaire hits, dance, geen expliciete teksten. Heeft de school al een geluidsinstallatie? Dan kan Just DJ volstaan.", "en": "Looking to hire a DJ for a school party? The All-in DJ show fits perfectly: professional set, speaker system, lighting and microphone. Music that appeals to young people – popular hits, dance, no explicit lyrics. Does the school already have a sound system? Then Just DJ may suffice." },
-      "watJeKrijgt": {
-        "nl": ["All-in DJ show of Just DJ – afhankelijk van wat de school al heeft. Bij All-in neem ik alles mee, bij Just DJ sluit ik aan op de bestaande installatie.", "Professionele DJ set, speakerset, booth en dansvloer verlichting – geschikt voor gymzalen en feestzalen", "Microfoon voor aankondigingen, prijsuitreikingen of andere momenten", "Hands Up! app: leerlingen kunnen verzoeknummers doen en stemmen – dat maakt het feest interactiever", "Leeftijdsgeschikte muziek – geschikt voor 12+. Geen expliciete teksten, veilig voor elke school.", "Aanpasbaar aan thema of sfeer van het feest – van disco tot thema-avond"],
-        "en": ["All-in DJ show or Just DJ – depending on what the school already has. With All-in I bring everything, with Just DJ I connect to the existing setup.", "Professional DJ set, speaker system, booth and dance floor lighting – suitable for gym halls and party venues", "Microphone for announcements, prize ceremonies or other moments", "Hands Up! app: students can request songs and vote – makes the party more interactive", "Age-appropriate music – suitable for 12+. No explicit lyrics, safe for any school.", "Adaptable to the party's theme or vibe – from disco to themed evening"]
+      "faqPage": "schoolfeest",
+      "title": {
+        "nl": "Schoolfeest DJ",
+        "en": "School party DJ"
       },
-      "muziekIntro": { "nl": "De muziek sluit aan bij wat jongeren aanspreekt: populaire hits en dance. Altijd leeftijdsgeschikt en zonder expliciete teksten.", "en": "The music matches what appeals to young people: popular hits and dance. Always age-appropriate and without explicit lyrics." },
+      "h1": {
+        "nl": "DJ voor schoolfeest",
+        "en": "DJ for a school party"
+      },
+      "metaTitle": {
+        "nl": "Schoolfeest DJ | Deejay Tim – Zwijndrecht & Rotterdam",
+        "en": "School party DJ | Deejay Tim – Zwijndrecht & Rotterdam"
+      },
+      "metaDescription": {
+        "nl": "DJ voor een schoolfeest. Leeftijdsgeschikte muziek, verzoekjes en All-in techniek als dat nodig is. Vanaf {justDj} of {allIn} voor 4 uur.",
+        "en": "DJ for a school party. Age-appropriate music, requests and All-in setup if needed. From {justDj} or {allIn} for 4 hours."
+      },
+      "intro": {
+        "nl": "Voor een schoolfeest draai ik muziek die jongeren kennen, zonder expliciete teksten. All-in vanaf {allIn} als geluid en licht nog geregeld moeten worden. Heeft de school al een goede installatie, dan kan DJ Only vanaf {justDj}.",
+        "en": "At a school party I play music young people know, without explicit lyrics. All-in from {allIn} if sound and lighting still need arranging. If the school already has a good setup, DJ Only from {justDj} works."
+      },
+      "watJeKrijgt": {
+        "nl": [
+          "Leeftijdsgeschikte muziek, afgestemd met de school",
+          "Verzoekjes welkom; ik hou de sfeer in de gaten",
+          "All-in of DJ Only",
+          "Microfoon voor een aankondiging of prijsuitreiking"
+        ],
+        "en": [
+          "Age-appropriate music, agreed with the school",
+          "Requests welcome; I keep the vibe in check",
+          "All-in or DJ Only",
+          "Microphone for an announcement or prize moment"
+        ]
+      },
+      "muziekIntro": {
+        "nl": "Pop, dance, urban, Afro en Latin mogen hier prominenter. Altijd zonder expliciete teksten.",
+        "en": "Pop, dance, urban, Afro and Latin can sit more up front. Always without explicit lyrics."
+      },
       "muziek": {
-        "nl": ["Populaire hits en dance die jongeren aanspreken – van huidige streams tot 00s en 10s klassiekers", "Mix van genres die de doelgroep kent en waarop gedanst wordt", "Aanpasbaar aan thema of sfeer van het feest – we stemmen vooraf af wat wel en niet mag"],
-        "en": ["Popular hits and dance that appeal to young people – from current streams to 00s and 10s classics", "Mix of genres the target audience knows and dances to", "Adaptable to the party's theme or vibe – we agree in advance what is and isn't allowed"]
+        "nl": [
+          "Huidige hits plus herkenbare 00s en 10s",
+          "Thema-avond kan, als we vooraf afspreken wat mag",
+          "Verzoekjes welkom als ze bij de leeftijd passen"
+        ],
+        "en": [
+          "Current hits plus familiar 00s and 10s",
+          "A theme night is fine if we agree what is allowed",
+          "Requests welcome if they fit the age group"
+        ]
+      },
+      "musicExamples": {
+        "nl": [
+          "Martin Garrix – Animals",
+          "Davina Michelle – Duurt te lang",
+          "Dua Lipa – Levitating",
+          "Charlie Puth – Attention",
+          "Jonas Brothers – Sucker",
+          "The Chainsmokers – Something Just Like This",
+          "Zara Larsson – Lush Life",
+          "Post Malone & Swae Lee – Sunflower",
+          "Glass Animals – Heat Waves",
+          "The Neighbourhood – Sweater Weather"
+        ],
+        "en": [
+          "Martin Garrix – Animals",
+          "Davina Michelle – Duurt te lang",
+          "Dua Lipa – Levitating",
+          "Charlie Puth – Attention",
+          "Jonas Brothers – Sucker",
+          "The Chainsmokers – Something Just Like This",
+          "Zara Larsson – Lush Life",
+          "Post Malone & Swae Lee – Sunflower",
+          "Glass Animals – Heat Waves",
+          "The Neighbourhood – Sweater Weather"
+        ]
       },
       "apparatuur": {
-        "nl": ["All-in: professionele speakerset, DJ booth, verlichting en microfoon – geschikt voor gymzalen en feestzalen", "Just DJ: alleen de DJ – voor scholen met eigen geluidsinstallatie. Ik sluit aan en draai.", "Zie de prijzenpagina voor het verschil tussen de pakketten – we kiezen samen wat past bij jullie school"],
-        "en": ["All-in: professional speaker system, DJ booth, lighting and microphone – suitable for gym halls and party venues", "Just DJ: DJ only – for schools with their own sound system. I connect and play.", "See the pricing page for the difference between the packages – we choose together what fits your school"]
+        "nl": [
+          "All-in voor gymzalen en feestzalen zonder eigen set",
+          "DJ Only als de school al passende techniek heeft",
+          "Standaard tot circa 100 personen"
+        ],
+        "en": [
+          "All-in for gym halls and rooms without their own set",
+          "DJ Only if the school already has suitable equipment",
+          "Standard up to around 100 people"
+        ]
       },
       "werkwijzeSteps": {
-        "nl": ["Afspraken: we stemmen tijden, locatie en wensen af. Wat voor feest is het? Thema?", "Feest: ik ben op tijd voor opbouw en soundcheck. Leeftijdsgeschikte muziek, geen expliciete teksten – van begin tot eind"],
-        "en": ["Arrangements: we align times, venue and wishes. What kind of party is it? Theme?", "Party: I'm on time for setup and soundcheck. Age-appropriate music, no explicit lyrics – from start to finish"]
+        "nl": [
+          "Afspraken over tijden, locatie en wat wel/niet mag",
+          "Op tijd aanwezig zodat alles klaarstaat voordat de deuren openen",
+          "Draaien tot de afgesproken eindtijd"
+        ],
+        "en": [
+          "Agree times, venue and what is or isn't allowed",
+          "Arrive in time so everything is ready before doors open",
+          "Play until the agreed end time"
+        ]
       },
-      "faq": [
-        { "q": { "nl": "Vanaf welke leeftijd?", "en": "From what age?" }, "a": { "nl": "Vanaf ongeveer 12 jaar. De muziek is altijd leeftijdsgeschikt.", "en": "From around 12 years old. The music is always age-appropriate." } }
-      ],
-      "ctaText": { "nl": "Boek schoolfeest DJ", "en": "Book school party DJ" }
+      "faq": [],
+      "ctaText": {
+        "nl": "Stuur me een berichtje",
+        "en": "Send me a message"
+      },
+      "musicExamplesIntro": {
+        "nl": "Denk bijvoorbeeld aan deze nummers. Geen vaste playlist: de avond ontstaat uit jullie wensen én wat er op de dansvloer gebeurt.",
+        "en": "Think of tracks like these. Not a fixed playlist: the evening comes from your wishes and what happens on the dance floor."
+      }
     },
     {
       "slug": "buurtfeest-dj",
       "eventType": "feest",
-      "title": { "nl": "Buurtfeest DJ", "en": "Street party DJ" },
-      "h1": { "nl": "DJ voor buurtfeest", "en": "DJ for neighbourhood party" },
-      "metaTitle": { "nl": "Buurtfeest DJ | Deejay Tim – Zwijndrecht & Rotterdam", "en": "Neighbourhood party DJ | Deejay Tim – Zwijndrecht & Rotterdam" },
-      "metaDescription": { "nl": "DJ voor buurtfeest. Professionele muziek voor straatfeest of buurtbarbecue.", "en": "DJ for neighbourhood party. Professional music for street party or neighbourhood barbecue." },
-      "intro": { "nl": "DJ huren voor een buurtfeest? Kies All-in als er nog geen geluid is – dan neem ik speakerset, booth, verlichting en microfoon mee. Heeft de buurt al een installatie? Dan volstaat Just DJ. Van gezellige achtergrond tot volle dansvloer – voor alle leeftijden.", "en": "Looking to hire a DJ for a neighbourhood party? Choose All-in if there's no sound yet – I'll bring the speaker system, booth, lighting and microphone. Does the neighbourhood already have equipment? Then Just DJ will suffice. From cosy background to packed dance floor – for all ages." },
-      "watJeKrijgt": {
-        "nl": ["Just DJ of All-in DJ show – afhankelijk van wat er al is. Straatfeest zonder geluid? All-in. Café of zaal met eigen installatie? Just DJ.", "Just DJ: alleen de DJ, voor locaties met eigen geluidsinstallatie. Ik sluit aan en draai de muziek.", "All-in: speakerset, DJ booth, dansvloer verlichting en microfoon – compleet ingericht voor buiten of zaal", "Hands Up! app: buurtgenoten kunnen verzoeknummers doen – ideaal voor een gezellige, interactieve sfeer", "Breed repertoire voor alle leeftijden – van kinderen tot ouderen, van meezingers tot dansbare hits", "Flexibele opzet: we stemmen af op jullie straatfeest, barbecue of buurtfeest – binnen of buiten"],
-        "en": ["Just DJ or All-in DJ show – depending on what's already there. Street party without sound? All-in. Café or hall with own setup? Just DJ.", "Just DJ: DJ only, for venues with their own sound system. I connect and play the music.", "All-in: speaker system, DJ booth, dance floor lighting and microphone – fully set up for outdoors or indoors", "Hands Up! app: neighbours can request songs – ideal for a cosy, interactive atmosphere", "Wide repertoire for all ages – from children to elderly, from sing-alongs to danceable hits", "Flexible setup: we adapt to your street party, barbecue or neighbourhood party – indoors or outdoors"]
+      "faqPage": "buurtfeest",
+      "title": {
+        "nl": "Buurtfeest DJ",
+        "en": "Street party DJ"
       },
-      "muziekIntro": { "nl": "Een buurtfeest vraagt om muziek voor iedereen: van kinderen tot ouderen. De sfeer bouwt zich op gedurende de dag of avond.", "en": "A neighbourhood party calls for music for everyone: from children to elderly. The atmosphere builds throughout the day or evening." },
+      "h1": {
+        "nl": "DJ voor buurtfeest",
+        "en": "DJ for a neighbourhood party"
+      },
+      "metaTitle": {
+        "nl": "Buurtfeest DJ | Deejay Tim – Drechtsteden & Rijnmond",
+        "en": "Neighbourhood party DJ | Deejay Tim"
+      },
+      "metaDescription": {
+        "nl": "DJ voor buurtfeest of straatfeest. Muziek voor alle leeftijden. DJ Only vanaf {justDj}, All-in vanaf {allIn}.",
+        "en": "DJ for a street or neighbourhood party. Music for all ages. DJ Only from {justDj}, All-in from {allIn}."
+      },
+      "intro": {
+        "nl": "Een buurtfeest vraagt om muziek waar kinderen, ouders en buren iets mee kunnen. All-in vanaf {allIn} als er nog geen installatie is. Staat er al een set, dan volstaat DJ Only vanaf {justDj}.",
+        "en": "A neighbourhood party needs music children, parents and neighbours can share. All-in from {allIn} if there is no setup yet. If there already is one, DJ Only from {justDj} is enough."
+      },
+      "watJeKrijgt": {
+        "nl": [
+          "Muziek voor alle leeftijden, van barbecue tot dansvloer",
+          "Verzoekjes van de buurt, als ze passen",
+          "All-in of DJ Only",
+          "Flexibel binnen of buiten"
+        ],
+        "en": [
+          "Music for all ages, from barbecue to dance floor",
+          "Neighbourhood requests if they fit",
+          "All-in or DJ Only",
+          "Flexible indoors or outdoors"
+        ]
+      },
+      "muziekIntro": {
+        "nl": "Meezingers, Nederlandse feestplaten en herkenbare classics werken hier vaak het best.",
+        "en": "Sing-alongs, Dutch party records and familiar classics often work best here."
+      },
       "muziek": {
-        "nl": ["Breed repertoire – van meezingers tot dansbare hits, voor alle leeftijden", "Van rustige achtergrond tijdens eten of barbecue tot feest op de dansvloer later op de avond", "Verzoeknummers via Hands Up! – buurtgenoten bepalen mee wat er gedraaid wordt"],
-        "en": ["Wide repertoire – from sing-alongs to danceable hits, for all ages", "From relaxed background during eating or barbecue to party on the dance floor later in the evening", "Song requests via Hands Up! – neighbours have a say in what gets played"]
+        "nl": [
+          "Rustig tijdens eten, later meer energie",
+          "Ruimte voor kinderen én voor wie wil dansen",
+          "Verzoekjes van gasten probeer ik op een geschikt moment mee te nemen"
+        ],
+        "en": [
+          "Calm during food, more energy later",
+          "Room for kids and for people who want to dance",
+          "Guest requests I try to mix in at a good moment"
+        ]
+      },
+      "musicExamples": {
+        "nl": [
+          "Gebroeders Ko – Tringeling",
+          "Kinderen voor Kinderen – Recht zo die gaat",
+          "André Hazes – Ik leef mijn droom",
+          "Village People – YMCA",
+          "Frans Duijts – Jij denkt maar",
+          "Jan Smit – Als de morgen is gekomen",
+          "BZN – Mon Amour",
+          "Los del Río – Macarena"
+        ],
+        "en": [
+          "Gebroeders Ko – Tringeling",
+          "Kinderen voor Kinderen – Recht zo die gaat",
+          "André Hazes – Ik leef mijn droom",
+          "Village People – YMCA",
+          "Frans Duijts – Jij denkt maar",
+          "Jan Smit – Als de morgen is gekomen",
+          "BZN – Mon Amour",
+          "Los del Río – Macarena"
+        ]
       },
       "apparatuur": {
-        "nl": ["All-in: professionele speakerset, booth, verlichting en microfoon – geschikt voor buiten of binnen", "Just DJ: alleen de DJ – voor cafés, zalen of plekken met eigen techniek. Ik sluit aan en draai.", "Zie de prijzenpagina voor het verschil tussen de pakketten – we kiezen samen wat past bij jullie buurtfeest"],
-        "en": ["All-in: professional speaker system, booth, lighting and microphone – suitable for outdoors or indoors", "Just DJ: DJ only – for cafés, halls or places with their own equipment. I connect and play.", "See the pricing page for the difference between the packages – we choose together what fits your neighbourhood party"]
+        "nl": [
+          "All-in voor straat of tent zonder eigen geluid",
+          "DJ Only bij een café of zaal met eigen techniek",
+          "Buiten stemmen we volume en opstelling af op de buurt"
+        ],
+        "en": [
+          "All-in for a street or tent without its own sound",
+          "DJ Only at a café or hall with its own setup",
+          "Outdoors we match volume and layout to the neighbourhood"
+        ]
       },
       "werkwijzeSteps": {
-        "nl": ["Contact: we bespreken locatie en wat er al is. Straatfeest zonder geluid? All-in. Café met installatie? Just DJ.", "Afspraken over tijden en muziek: wat voor sfeer wil je? Van rustig tot feest?", "Feest: van opbouw tot afsluiting – ik ben op tijd, alles werkt, de buurt kan genieten"],
-        "en": ["Contact: we discuss venue and what's already there. Street party without sound? All-in. Café with equipment? Just DJ.", "Arrangements on times and music: what kind of atmosphere do you want? From relaxed to party?", "Party: from setup to finish – I'm on time, everything works, the neighbourhood can enjoy"]
+        "nl": [
+          "Contact over locatie, tijden en wat er al staat",
+          "Afspraken over sfeer: van gezellig tot feest",
+          "Op de dag: op tijd aanwezig, rustig beginnen, later opschakelen"
+        ],
+        "en": [
+          "Talk through venue, times and what is already there",
+          "Agree the vibe: easy-going or full party",
+          "On the day: arrive in time, start calmly, lift later"
+        ]
       },
-      "faq": [
-        { "q": { "nl": "Wat is het verschil tussen Just DJ en All-in?", "en": "What's the difference between Just DJ and All-in?" }, "a": { "nl": "Bij Just DJ huur je alleen de DJ – voor plekken met eigen geluid. Bij All-in neem ik ook speakerset, booth en verlichting mee. Zie de prijzenpagina voor details.", "en": "With Just DJ you only hire the DJ – for places with their own sound. With All-in I also bring the speaker system, booth and lighting. See the pricing page for details." } }
-      ],
-      "ctaText": { "nl": "Boek buurtfeest DJ", "en": "Book neighbourhood party DJ" }
+      "faq": [],
+      "ctaText": {
+        "nl": "Stuur me een berichtje",
+        "en": "Send me a message"
+      },
+      "musicExamplesIntro": {
+        "nl": "Denk bijvoorbeeld aan deze nummers. Geen vaste playlist: de avond ontstaat uit jullie wensen én wat er op de dansvloer gebeurt.",
+        "en": "Think of tracks like these. Not a fixed playlist: the evening comes from your wishes and what happens on the dance floor."
+      }
     },
     {
       "slug": "slagingsfeest-dj",
       "eventType": "feest",
-      "title": { "nl": "Slagingsfeest DJ", "en": "Graduation party DJ" },
-      "h1": { "nl": "DJ voor slagingsfeest", "en": "DJ for graduation party" },
-      "metaTitle": { "nl": "Slagingsfeest DJ | Deejay Tim – Zwijndrecht & Rotterdam", "en": "Graduation party DJ | Deejay Tim – Zwijndrecht & Rotterdam" },
-      "metaDescription": { "nl": "DJ voor slagingsfeest. Professionele muziek voor jouw geslaagde examenkandidaten.", "en": "DJ for graduation party. Professional music for your successful graduates." },
-      "intro": { "nl": "DJ huren voor een slagingsfeest? De All-in DJ show is ideaal: professionele set, speakerset, verlichting en microfoon. Vier je diploma met muziek die bij de feestvierders past. Heeft de locatie al geluid? Dan kan Just DJ volstaan.", "en": "Looking to hire a DJ for a graduation party? The All-in DJ show is ideal: professional set, speaker system, lighting and microphone. Celebrate your diploma with music that fits the party-goers. Does the venue already have sound? Then Just DJ may suffice." },
-      "watJeKrijgt": {
-        "nl": ["Just DJ of All-in DJ show – afhankelijk van de locatie. Bij All-in neem ik alles mee, bij Just DJ sluit ik aan op bestaand geluid.", "All-in: speakerset, DJ booth, dansvloer verlichting en microfoon – geschikt voor zalen tot circa 100 personen", "Just DJ: alleen de DJ – voor locaties met eigen installatie", "Hands Up! app: geslaagden kunnen verzoeknummers doen en stemmen – het feest wordt interactiever", "Muziek voor jongeren: populaire hits en dance die bij de doelgroep passen", "Van rustige start tot volle dansvloer – de sfeer bouwt zich op gedurende de avond"],
-        "en": ["Just DJ or All-in DJ show – depending on the venue. With All-in I bring everything, with Just DJ I connect to existing sound.", "All-in: speaker system, DJ booth, dance floor lighting and microphone – suitable for venues up to around 100 people", "Just DJ: DJ only – for venues with their own equipment", "Hands Up! app: graduates can request songs and vote – the party becomes more interactive", "Music for young people: popular hits and dance that fit the target audience", "From relaxed start to packed dance floor – the atmosphere builds throughout the evening"]
+      "faqPage": "slagingsfeest",
+      "title": {
+        "nl": "Slagingsfeest DJ",
+        "en": "Graduation party DJ"
       },
-      "muziekIntro": { "nl": "De muziek sluit aan bij wat jongeren aanspreekt: populaire hits en dance. Geen expliciete teksten – geschikt voor elke slagingsfeest.", "en": "The music matches what appeals to young people: popular hits and dance. No explicit lyrics – suitable for any graduation party." },
+      "h1": {
+        "nl": "DJ voor slagingsfeest",
+        "en": "DJ for a graduation party"
+      },
+      "metaTitle": {
+        "nl": "Slagingsfeest DJ | Deejay Tim",
+        "en": "Graduation party DJ | Deejay Tim"
+      },
+      "metaDescription": {
+        "nl": "DJ voor een slagingsfeest. Pop, dance en urban, verzoekjes welkom. All-in vanaf {allIn}, DJ Only vanaf {justDj}.",
+        "en": "DJ for a graduation party. Pop, dance and urban, requests welcome. All-in from {allIn}, DJ Only from {justDj}."
+      },
+      "intro": {
+        "nl": "Een slagingsfeest mag later op de avond los. Ik draai wat de groep kent: pop, dance, urban, Afro en Latin. All-in vanaf {allIn}, of DJ Only vanaf {justDj} als de locatie al techniek heeft.",
+        "en": "A graduation party can open up later in the evening. I play what the group knows: pop, dance, urban, Afro and Latin. All-in from {allIn}, or DJ Only from {justDj} if the venue already has equipment."
+      },
+      "watJeKrijgt": {
+        "nl": [
+          "Muziek voor een jonge, feestende groep",
+          "Verzoekjes welkom",
+          "All-in of DJ Only",
+          "4 uur, extra uur {extraHour}"
+        ],
+        "en": [
+          "Music for a young, celebrating group",
+          "Requests welcome",
+          "All-in or DJ Only",
+          "4 hours, extra hour {extraHour}"
+        ]
+      },
+      "muziekIntro": {
+        "nl": "Hier mogen nieuwere tracks prominenter. Ik houd het wel dansbaar en lees de zaal.",
+        "en": "Newer tracks can sit more up front here. I still keep it danceable and read the room."
+      },
       "muziek": {
-        "nl": ["Populaire hits en dance die bij de doelgroep passen – van huidige streams tot 00s en 10s klassiekers", "Breed repertoire – van meezingers tot dansbare hits", "Aanpasbaar aan sfeer en thema van het feest – we stemmen vooraf af wat wel en niet mag"],
-        "en": ["Popular hits and dance that fit the target audience – from current streams to 00s and 10s classics", "Wide repertoire – from sing-alongs to danceable hits", "Adaptable to the party's vibe and theme – we agree in advance what is and isn't allowed"]
+        "nl": [
+          "Pop, dance, urban, Afro en Latin",
+          "Verzoekjes welkom; ik pas ze in als het moment klopt",
+          "Afstemming vooraf over wat niet mag"
+        ],
+        "en": [
+          "Pop, dance, urban, Afro and Latin",
+          "Requests welcome; I mix them in when the moment is right",
+          "Agree in advance what is off-limits"
+        ]
+      },
+      "musicExamples": {
+        "nl": [
+          "Frenna – Verleiding",
+          "Ronnie Flex – Energie",
+          "Burna Boy – Last Last",
+          "Karol G – Provenza",
+          "David Guetta & Bebe Rexha – I'm Good (Blue)",
+          "PinkPantheress – Boy's a liar Pt. 2",
+          "Bankzitters – Stapelgek",
+          "Wizkid – Essence"
+        ],
+        "en": [
+          "Frenna – Verleiding",
+          "Ronnie Flex – Energie",
+          "Burna Boy – Last Last",
+          "Karol G – Provenza",
+          "David Guetta & Bebe Rexha – I'm Good (Blue)",
+          "PinkPantheress – Boy's a liar Pt. 2",
+          "Bankzitters – Stapelgek",
+          "Wizkid – Essence"
+        ]
       },
       "apparatuur": {
-        "nl": ["All-in: professionele speakerset, booth, verlichting en microfoon – geschikt voor zalen tot circa 100 personen", "Just DJ: alleen de DJ – voor zalen met eigen geluid. Ik sluit aan en draai.", "Zie de prijzenpagina voor het verschil tussen de pakketten – we kiezen samen wat past bij jullie locatie"],
-        "en": ["All-in: professional speaker system, booth, lighting and microphone – suitable for venues up to around 100 people", "Just DJ: DJ only – for venues with their own sound. I connect and play.", "See the pricing page for the difference between the packages – we choose together what fits your venue"]
+        "nl": [
+          "All-in tot circa 100 gasten",
+          "DJ Only bij een zaal met eigen geluid",
+          "Groter in overleg"
+        ],
+        "en": [
+          "All-in for around 100 guests",
+          "DJ Only in a hall with its own sound",
+          "Larger by arrangement"
+        ]
       },
       "werkwijzeSteps": {
-        "nl": ["Afspraken: we stemmen locatie, tijden en wensen af. Wat voor feest? Hoeveel personen?", "Feest: ik ben op tijd voor opbouw en soundcheck. Van eerste nummer tot laatste – ik draai tot het einde"],
-        "en": ["Arrangements: we align venue, times and wishes. What kind of party? How many people?", "Party: I'm on time for setup and soundcheck. From first song to last – I play until the end"]
+        "nl": [
+          "Afspraken over locatie, tijden en sfeer",
+          "Op tijd aanwezig en draaien tot het einde"
+        ],
+        "en": [
+          "Agree venue, times and vibe",
+          "Arrive in time and play until the end"
+        ]
       },
-      "faq": [
-        { "q": { "nl": "Vanaf hoeveel personen?", "en": "From how many people?" }, "a": { "nl": "Van 20 tot 200+ – de All-in set is geschikt voor tot ±100 personen. Voor grotere feesten kunnen we extra materiaal regelen.", "en": "From 20 to 200+ – the All-in set is suitable for up to ±100 people. For larger parties we can arrange extra equipment." } }
-      ],
-      "ctaText": { "nl": "Boek slagingsfeest DJ", "en": "Book graduation party DJ" }
+      "faq": [],
+      "ctaText": {
+        "nl": "Stuur me een berichtje",
+        "en": "Send me a message"
+      },
+      "musicExamplesIntro": {
+        "nl": "Denk bijvoorbeeld aan deze nummers. Geen vaste playlist: de avond ontstaat uit jullie wensen én wat er op de dansvloer gebeurt.",
+        "en": "Think of tracks like these. Not a fixed playlist: the evening comes from your wishes and what happens on the dance floor."
+      }
     },
     {
       "slug": "dj-18-jaar",
       "eventType": "verjaardag",
-      "title": { "nl": "DJ 18 jaar", "en": "DJ 18 years" },
-      "h1": { "nl": "DJ voor 18e verjaardag", "en": "DJ for 18th birthday" },
-      "metaTitle": { "nl": "DJ 18 jaar | Deejay Tim – Zwijndrecht & Rotterdam", "en": "DJ 18 years | Deejay Tim – Zwijndrecht & Rotterdam" },
-      "metaDescription": { "nl": "DJ voor 18e verjaardag. Professionele muziek voor een feest 18 jaar.", "en": "DJ for 18th birthday. Professional music for an 18th birthday party." },
-      "intro": { "nl": "18 jaar – tijd voor een feest! Kies Just DJ als de locatie eigen geluid heeft, of All-in als ik alles meeneem. Muziek die bij jouw feest en vrienden past – van populaire hits tot dance.", "en": "18 years – time for a party! Choose Just DJ if the venue has its own sound, or All-in if I bring everything. Music that fits your party and friends – from popular hits to dance." },
-      "watJeKrijgt": {
-        "nl": ["Just DJ of All-in DJ show – afhankelijk van de locatie", "Hands Up! app: vrienden kunnen verzoeknummers doen en stemmen", "Muziek afgestemd op 18-jarigen en hun vrienden", "Professionele set en sfeer – geen gedoe"],
-        "en": ["Just DJ or All-in DJ show – depending on the venue", "Hands Up! app: friends can request songs and vote", "Music tailored to 18-year-olds and their friends", "Professional set and atmosphere – no hassle"]
+      "faqPage": "verjaardag",
+      "title": {
+        "nl": "DJ 18 tot 21 jaar",
+        "en": "DJ 18 to 21"
       },
-      "muziekIntro": { "nl": "18 jaar vraagt om muziek die de jarige en vrienden aanspreekt: populaire hits en dance. Geen expliciete teksten – geschikt voor elk feest.", "en": "18 years calls for music that appeals to the birthday person and friends: popular hits and dance. No explicit lyrics – suitable for any party." },
+      "h1": {
+        "nl": "DJ voor 18 tot 21 jaar",
+        "en": "DJ for 18 to 21"
+      },
+      "metaTitle": {
+        "nl": "DJ 18 tot 21 jaar | Verjaardag DJ | Deejay Tim",
+        "en": "DJ 18 to 21 | Birthday DJ | Deejay Tim"
+      },
+      "metaDescription": {
+        "nl": "DJ voor een 18e tot 21e verjaardag. Actuele hits, urban, Afro, Latin en dance. DJ Only vanaf {justDj}, All-in vanaf {allIn}.",
+        "en": "DJ for an 18th to 21st birthday. Current hits, urban, Afro, Latin and dance. DJ Only from {justDj}, All-in from {allIn}."
+      },
+      "intro": {
+        "nl": "Achttien tot eenentwintig: vrienden willen vaak actuele pop, Nederlandse urban, Afro, Latin en dance. Een 20e ligt muzikaal zo dichtbij dat ik die hierbij reken. All-in vanaf {allIn} is voor veel van deze feesten het makkelijkst. Heeft de locatie al goede techniek, dan is DJ Only vanaf {justDj} genoeg.",
+        "en": "Eighteen to twenty-one: friends often want current pop, Dutch urban, Afro, Latin and dance. A 20th sits so close musically that I group it here. All-in from {allIn} is easiest for many of these parties. If the venue already has good equipment, DJ Only from {justDj} is enough."
+      },
+      "watJeKrijgt": {
+        "nl": [
+          "Muziek afgestemd op 18- tot 21-jarigen en hun vrienden",
+          "Verzoekjes mogelijk; ik bewaak de flow",
+          "DJ Only of All-in",
+          "4 uur, extra uur {extraHour}"
+        ],
+        "en": [
+          "Music matched to 18- to 21-year-olds and their friends",
+          "Requests possible; I keep the flow",
+          "DJ Only or All-in",
+          "4 hours, extra hour {extraHour}"
+        ]
+      },
+      "muziekIntro": {
+        "nl": "Nieuwere tracks mogen hier voorop. Ik houd het dansbaar en speel in op de groep. Geen vaste playlist.",
+        "en": "Newer tracks can lead here. I keep it danceable and read the group. No fixed playlist."
+      },
       "muziek": {
-        "nl": ["Populaire hits en dance die bij de doelgroep passen", "Verzoeknummers via Hands Up! – de jarige en vrienden bepalen mee", "Aanpasbaar aan sfeer: van rustig begin tot feest op de dansvloer"],
-        "en": ["Popular hits and dance that fit the target audience", "Song requests via Hands Up! – the birthday person and friends have a say", "Adaptable to the vibe: from relaxed start to party on the dance floor"]
+        "nl": [
+          "Pop, dance, urban, Afro en Latin",
+          "Verzoekjes welkom als ze bij de sfeer passen",
+          "Rustig starten kan, later opbouwen ook"
+        ],
+        "en": [
+          "Pop, dance, urban, Afro and Latin",
+          "Requests welcome if they fit the vibe",
+          "A calm start is fine, so is a later build"
+        ]
+      },
+      "musicExamples": {
+        "nl": [
+          "Roxy Dekker – Sugardaddy",
+          "Joost – Europapa",
+          "Flemming – Amsterdam",
+          "Tyla – Water",
+          "Bad Bunny – Tití Me Preguntó",
+          "Peggy Gou – (It Goes Like) Nanana",
+          "Doja Cat – Woman",
+          "Calvin Harris & Dua Lipa – One Kiss",
+          "Donnie & Ir-Sais – Namaste",
+          "Kris Kross Amsterdam, Ronnie Flex & Teske – Hij Is Van Mij"
+        ],
+        "en": [
+          "Roxy Dekker – Sugardaddy",
+          "Joost – Europapa",
+          "Flemming – Amsterdam",
+          "Tyla – Water",
+          "Bad Bunny – Tití Me Preguntó",
+          "Peggy Gou – (It Goes Like) Nanana",
+          "Doja Cat – Woman",
+          "Calvin Harris & Dua Lipa – One Kiss",
+          "Donnie & Ir-Sais – Namaste",
+          "Kris Kross Amsterdam, Ronnie Flex & Teske – Hij Is Van Mij"
+        ]
       },
       "apparatuur": {
-        "nl": ["All-in: speakerset, DJ booth, verlichting, microfoon – alles inbegrepen", "Just DJ: alleen de DJ – voor locaties met eigen geluid", "Professionele Pioneer XDJ-RX3 set"],
-        "en": ["All-in: speaker system, DJ booth, lighting, microphone – all included", "Just DJ: DJ only – for venues with their own sound", "Professional Pioneer XDJ-RX3 set"]
+        "nl": [
+          "All-in als de locatie nog geen goede techniek heeft",
+          "DJ Only als die er wél is"
+        ],
+        "en": [
+          "All-in if the venue has no proper setup yet",
+          "DJ Only if it already does"
+        ]
       },
       "werkwijzeSteps": {
-        "nl": ["Contact: we bespreken locatie en welk pakket past", "Muziek afstemmen: wat wil de jarige horen?", "Feest: opbouw, soundcheck en draaien tot het einde"],
-        "en": ["Contact: we discuss venue and which package fits", "Music alignment: what does the birthday person want to hear?", "Party: setup, soundcheck and playing until the end"]
+        "nl": [
+          "Contact over locatie en pakket",
+          "Favorieten van de jarige doorgeven",
+          "Feest: opbouw, inspelen, tot het einde"
+        ],
+        "en": [
+          "Talk through venue and package",
+          "Share the birthday person's favourites",
+          "Party: setup, reading the room, through to the end"
+        ]
       },
       "faq": [],
-      "ctaText": { "nl": "Boek DJ 18 jaar", "en": "Book DJ 18 years" }
+      "ctaText": {
+        "nl": "Stuur me een berichtje",
+        "en": "Send me a message"
+      },
+      "musicExamplesIntro": {
+        "nl": "Geen vaste playlist natuurlijk – dit geeft vooral een idee van muzikale richtingen die op zo’n feest voorbij kunnen komen.",
+        "en": "Not a fixed playlist – this mainly gives an idea of directions that can come up at a party like this."
+      }
     },
     {
       "slug": "dj-20-jaar",
       "eventType": "verjaardag",
-      "title": { "nl": "DJ 20 jaar", "en": "DJ 20 years" },
-      "h1": { "nl": "DJ voor 20e verjaardag", "en": "DJ for 20th birthday" },
-      "metaTitle": { "nl": "DJ 20 jaar | Deejay Tim – Zwijndrecht & Rotterdam", "en": "DJ 20 years | Deejay Tim – Zwijndrecht & Rotterdam" },
-      "metaDescription": { "nl": "DJ voor 20e verjaardag. Professionele muziek voor een feest 20 jaar.", "en": "DJ for 20th birthday. Professional music for a 20th birthday party." },
-      "intro": { "nl": "20 jaar – een mooie mijlpaal! Just DJ of All-in, afhankelijk van de locatie. Muziek die bij de jarige en vrienden past – breed repertoire, van hits tot dance.", "en": "20 years – a nice milestone! Just DJ or All-in, depending on the venue. Music that fits the birthday person and friends – wide repertoire, from hits to dance." },
-      "watJeKrijgt": {
-        "nl": ["Just DJ of All-in DJ show – afhankelijk van wat de locatie heeft", "Hands Up! app: vrienden kunnen verzoeknummers doen", "Muziek afgestemd op 20-jarigen en hun publiek", "Professionele uitvoering van begin tot eind"],
-        "en": ["Just DJ or All-in DJ show – depending on what the venue has", "Hands Up! app: friends can request songs", "Music tailored to 20-year-olds and their crowd", "Professional execution from start to finish"]
+      "faqPage": "verjaardag",
+      "title": {
+        "nl": "DJ 20 jaar (18 tot 21)",
+        "en": "DJ 20th birthday (18 to 21)"
       },
-      "muziekIntro": { "nl": "20 jaar: een mix van wat nu populair is en wat de jarige graag hoort. De sfeer bouwt zich op gedurende de avond.", "en": "20 years: a mix of what's popular now and what the birthday person loves to hear. The atmosphere builds throughout the evening." },
+      "h1": {
+        "nl": "DJ voor 20e verjaardag",
+        "en": "DJ for a 20th birthday"
+      },
+      "metaTitle": {
+        "nl": "DJ 20 jaar | 18 tot 21 jaar | Deejay Tim",
+        "en": "DJ 20th birthday | 18 to 21 | Deejay Tim"
+      },
+      "metaDescription": {
+        "nl": "DJ voor een 20e verjaardag. Muzikaal ligt 18 tot 21 dicht bij elkaar: actuele hits, urban, Afro, Latin en dance.",
+        "en": "DJ for a 20th birthday. Musically 18 to 21 sit close together: current hits, urban, Afro, Latin and dance."
+      },
+      "intro": {
+        "nl": "Een 20e verjaardag ligt muzikaal dicht bij 18 tot 21 jaar. Daarom behandel ik die hier hetzelfde: actuele hits, Nederlandse urban, Afro, Latin en dance, plus herkenbare 10s als de groep daarop groeide. All-in vanaf {allIn}, DJ Only vanaf {justDj}.",
+        "en": "A 20th birthday sits musically close to 18–21. I treat them the same here: current hits, Dutch urban, Afro, Latin and dance, plus familiar 10s if the group grew up on them. All-in from {allIn}, DJ Only from {justDj}."
+      },
+      "watJeKrijgt": {
+        "nl": [
+          "Mix van nu en de schooltijd van de jarige",
+          "Verzoekjes welkom; ik pas ze in als het moment klopt",
+          "DJ Only of All-in"
+        ],
+        "en": [
+          "A mix of now and the birthday person's school years",
+          "Requests welcome; I mix them in when the moment is right",
+          "DJ Only or All-in"
+        ]
+      },
+      "muziekIntro": {
+        "nl": "Afhankelijk van jullie wensen en gasten kan een avond bewegen van actuele pop naar urban, Afro of Latin. Dit zijn voorbeelden, geen standaardlijst.",
+        "en": "Depending on your wishes and guests an evening can move from current pop to urban, Afro or Latin. These are examples, not a standard list."
+      },
       "muziek": {
-        "nl": ["Breed repertoire: van huidige hits tot 00s en 10s klassiekers", "Verzoeknummers via Hands Up! – de jarige en vrienden bepalen mee", "Aanpasbaar aan sfeer en thema van het feest"],
-        "en": ["Wide repertoire: from current hits to 00s and 10s classics", "Song requests via Hands Up! – the birthday person and friends have a say", "Adaptable to the party's vibe and theme"]
+        "nl": [
+          "Pop, dance, urban en herkenbare 00s/10s",
+          "Geen vaste playlist",
+          "Inspelen op de dansvloer"
+        ],
+        "en": [
+          "Pop, dance, urban and familiar 00s/10s",
+          "No fixed playlist",
+          "Reading the dance floor"
+        ]
+      },
+      "musicExamples": {
+        "nl": [
+          "Roxy Dekker – Sugardaddy",
+          "Joost – Europapa",
+          "Flemming – Amsterdam",
+          "Tyla – Water",
+          "Bad Bunny – Tití Me Preguntó",
+          "Peggy Gou – (It Goes Like) Nanana",
+          "Doja Cat – Woman",
+          "Calvin Harris & Dua Lipa – One Kiss",
+          "Donnie & Ir-Sais – Namaste",
+          "Kris Kross Amsterdam, Ronnie Flex & Teske – Hij Is Van Mij"
+        ],
+        "en": [
+          "Roxy Dekker – Sugardaddy",
+          "Joost – Europapa",
+          "Flemming – Amsterdam",
+          "Tyla – Water",
+          "Bad Bunny – Tití Me Preguntó",
+          "Peggy Gou – (It Goes Like) Nanana",
+          "Doja Cat – Woman",
+          "Calvin Harris & Dua Lipa – One Kiss",
+          "Donnie & Ir-Sais – Namaste",
+          "Kris Kross Amsterdam, Ronnie Flex & Teske – Hij Is Van Mij"
+        ]
       },
       "apparatuur": {
-        "nl": ["All-in: speakerset, DJ booth, verlichting, microfoon", "Just DJ: alleen de DJ – voor locaties met eigen geluid", "Professionele Pioneer XDJ-RX3 set"],
-        "en": ["All-in: speaker system, DJ booth, lighting, microphone", "Just DJ: DJ only – for venues with their own sound", "Professional Pioneer XDJ-RX3 set"]
+        "nl": [
+          "All-in meestal het makkelijkst",
+          "DJ Only bij bestaande techniek"
+        ],
+        "en": [
+          "All-in is usually easiest",
+          "DJ Only with existing equipment"
+        ]
       },
       "werkwijzeSteps": {
-        "nl": ["Contact: we bespreken locatie en welk pakket past", "Muziek afstemmen: wat wil de jarige horen?", "Feest: opbouw, soundcheck en draaien tot het einde"],
-        "en": ["Contact: we discuss venue and which package fits", "Music alignment: what does the birthday person want to hear?", "Party: setup, soundcheck and playing until the end"]
+        "nl": [
+          "Locatie en pakket afstemmen",
+          "Wensen van de jarige",
+          "Draaien tot het einde"
+        ],
+        "en": [
+          "Align venue and package",
+          "Wishes of the birthday person",
+          "Play until the end"
+        ]
       },
       "faq": [],
-      "ctaText": { "nl": "Boek DJ 20 jaar", "en": "Book DJ 20 years" }
+      "ctaText": {
+        "nl": "Stuur me een berichtje",
+        "en": "Send me a message"
+      },
+      "musicExamplesIntro": {
+        "nl": "Geen vaste playlist natuurlijk – dit geeft vooral een idee van muzikale richtingen die op zo’n feest voorbij kunnen komen.",
+        "en": "Not a fixed playlist – this mainly gives an idea of directions that can come up at a party like this."
+      }
     },
     {
       "slug": "dj-30-jaar",
       "eventType": "verjaardag",
-      "title": { "nl": "DJ 30 jaar", "en": "DJ 30 years" },
-      "h1": { "nl": "DJ voor 30e verjaardag", "en": "DJ for 30th birthday" },
-      "metaTitle": { "nl": "DJ 30 jaar | Deejay Tim – Zwijndrecht & Rotterdam", "en": "DJ 30 years | Deejay Tim – Zwijndrecht & Rotterdam" },
-      "metaDescription": { "nl": "DJ voor 30e verjaardag. Professionele muziek voor een feest 30 jaar.", "en": "DJ for 30th birthday. Professional music for a 30th birthday party." },
-      "intro": { "nl": "30 jaar – een feest waard! Just DJ of All-in, afhankelijk van de locatie. Muziek die bij de jarige en gasten past – van 90s en 00s klassiekers tot huidige hits.", "en": "30 years – worth celebrating! Just DJ or All-in, depending on the venue. Music that fits the birthday person and guests – from 90s and 00s classics to current hits." },
-      "watJeKrijgt": {
-        "nl": ["Just DJ of All-in DJ show – afhankelijk van wat de locatie heeft", "Hands Up! app: gasten kunnen verzoeknummers doen en stemmen", "Muziek afgestemd op 30-jarigen en hun vrienden – vaak een mix van generaties", "Professionele sfeer – van rustig begin tot volle dansvloer"],
-        "en": ["Just DJ or All-in DJ show – depending on what the venue has", "Hands Up! app: guests can request songs and vote", "Music tailored to 30-year-olds and their friends – often a mix of generations", "Professional atmosphere – from relaxed start to packed dance floor"]
+      "faqPage": "verjaardag",
+      "title": {
+        "nl": "DJ 30 jaar",
+        "en": "DJ 30th birthday"
       },
-      "muziekIntro": { "nl": "30 jaar: vaak een gemengd publiek. Van 90s en 00s klassiekers tot huidige hits – voor iedereen wat wils.", "en": "30 years: often a mixed crowd. From 90s and 00s classics to current hits – something for everyone." },
+      "h1": {
+        "nl": "DJ voor 30e verjaardag",
+        "en": "DJ for a 30th birthday"
+      },
+      "metaTitle": {
+        "nl": "DJ 30 jaar | Verjaardag DJ | Deejay Tim",
+        "en": "DJ 30th birthday | Deejay Tim"
+      },
+      "metaDescription": {
+        "nl": "DJ voor een 30e verjaardag. 90s, 00s, Nederlandstalig en huidige hits. All-in vanaf {allIn}.",
+        "en": "DJ for a 30th birthday. 90s, 00s, Dutch-language tracks and current hits. All-in from {allIn}."
+      },
+      "intro": {
+        "nl": "Dertig jaar: vaak vrienden plus een paar ouders. 90s en 00s werken hier hard, naast wat nu speelt. All-in vanaf {allIn}, DJ Only vanaf {justDj}.",
+        "en": "Thirty: often friends plus a few parents. 90s and 00s work hard here, next to what is current. All-in from {allIn}, DJ Only from {justDj}."
+      },
+      "watJeKrijgt": {
+        "nl": [
+          "Mix van generaties, zonder dat het een nostalgia-avond wordt",
+          "Verzoekjes welkom",
+          "All-in of DJ Only"
+        ],
+        "en": [
+          "A mix of generations, without turning it into a nostalgia night only",
+          "Requests welcome",
+          "All-in or DJ Only"
+        ]
+      },
+      "muziekIntro": {
+        "nl": "90s, 00s, Nederlandstalig en huidige hits. Ik kijk wat de vloer doet.",
+        "en": "90s, 00s, Dutch-language tracks and current hits. I watch what the floor does."
+      },
       "muziek": {
-        "nl": ["Breed repertoire: van 90s en 00s tot huidige hits – meezingers en dansbare nummers", "Verzoeknummers via Hands Up! – de jarige en gasten bepalen mee", "Aanpasbaar aan sfeer: van gezellig tot feest op de dansvloer"],
-        "en": ["Wide repertoire: from 90s and 00s to current hits – sing-alongs and danceable tracks", "Song requests via Hands Up! – the birthday person and guests have a say", "Adaptable to the vibe: from cosy to party on the dance floor"]
+        "nl": [
+          "Van rustig begin naar dansvloer",
+          "Persoonlijke favorieten van de jarige",
+          "Open-format, geen vaste lijst"
+        ],
+        "en": [
+          "From a calm start to the dance floor",
+          "Personal favourites of the birthday person",
+          "Open-format, no fixed list"
+        ]
+      },
+      "musicExamples": {
+        "nl": [
+          "Avicii – Wake Me Up",
+          "Usher – Yeah!",
+          "Beyoncé – Crazy in Love",
+          "Kensington – Streets",
+          "Lady Gaga – Poker Face",
+          "Swedish House Mafia – Don't You Worry Child",
+          "Pitbull ft. Kesha – Timber",
+          "Marco Borsato – Dromen zijn bedrog",
+          "Adele – Rolling in the Deep",
+          "The Script – Hall of Fame"
+        ],
+        "en": [
+          "Avicii – Wake Me Up",
+          "Usher – Yeah!",
+          "Beyoncé – Crazy in Love",
+          "Kensington – Streets",
+          "Lady Gaga – Poker Face",
+          "Swedish House Mafia – Don't You Worry Child",
+          "Pitbull ft. Kesha – Timber",
+          "Marco Borsato – Dromen zijn bedrog",
+          "Adele – Rolling in the Deep",
+          "The Script – Hall of Fame"
+        ]
       },
       "apparatuur": {
-        "nl": ["All-in: speakerset, DJ booth, verlichting, microfoon", "Just DJ: alleen de DJ – voor locaties met eigen geluid", "Professionele Pioneer XDJ-RX3 set"],
-        "en": ["All-in: speaker system, DJ booth, lighting, microphone", "Just DJ: DJ only – for venues with their own sound", "Professional Pioneer XDJ-RX3 set"]
+        "nl": [
+          "All-in als je geen gedoe wilt met techniek",
+          "DJ Only bij een zaal met eigen set"
+        ],
+        "en": [
+          "All-in if you don't want to deal with equipment",
+          "DJ Only in a hall with its own set"
+        ]
       },
       "werkwijzeSteps": {
-        "nl": ["Contact: we bespreken locatie en welk pakket past", "Muziek afstemmen: wat wil de jarige horen, wat niet?", "Feest: opbouw, soundcheck en draaien tot het einde"],
-        "en": ["Contact: we discuss venue and which package fits", "Music alignment: what does the birthday person want to hear, what not?", "Party: setup, soundcheck and playing until the end"]
+        "nl": [
+          "Contact, wensen, feest",
+          "Favorieten en do-not-play",
+          "Live inspelen"
+        ],
+        "en": [
+          "Contact, wishes, party",
+          "Favourites and do-not-play",
+          "Live reading"
+        ]
       },
       "faq": [],
-      "ctaText": { "nl": "Boek DJ 30 jaar", "en": "Book DJ 30 years" }
+      "ctaText": {
+        "nl": "Stuur me een berichtje",
+        "en": "Send me a message"
+      },
+      "musicExamplesIntro": {
+        "nl": "Geen vaste playlist natuurlijk – dit geeft vooral een idee van muzikale richtingen die op zo’n feest voorbij kunnen komen.",
+        "en": "Not a fixed playlist – this mainly gives an idea of directions that can come up at a party like this."
+      }
     },
     {
       "slug": "dj-40-jaar",
       "eventType": "verjaardag",
-      "title": { "nl": "DJ 40 jaar", "en": "DJ 40 years" },
-      "h1": { "nl": "DJ voor 40e verjaardag", "en": "DJ for 40th birthday" },
-      "metaTitle": { "nl": "DJ 40 jaar | Deejay Tim – Zwijndrecht & Rotterdam", "en": "DJ 40 years | Deejay Tim – Zwijndrecht & Rotterdam" },
-      "metaDescription": { "nl": "DJ voor 40e verjaardag. Professionele muziek voor een feest 40 jaar.", "en": "DJ for 40th birthday. Professional music for a 40th birthday party." },
-      "intro": { "nl": "40 jaar – tijd voor een feest! Just DJ of All-in, afhankelijk van de locatie. Muziek die bij de jarige en gasten past – van 80s en 90s klassiekers tot huidige hits.", "en": "40 years – time for a party! Just DJ or All-in, depending on the venue. Music that fits the birthday person and guests – from 80s and 90s classics to current hits." },
-      "watJeKrijgt": {
-        "nl": ["Just DJ of All-in DJ show – afhankelijk van wat de locatie heeft", "Hands Up! app: gasten kunnen verzoeknummers doen", "Muziek afgestemd op 40-jarigen – vaak meezingers en dansbare klassiekers", "Professionele sfeer – van gezellig tot feest op de dansvloer"],
-        "en": ["Just DJ or All-in DJ show – depending on what the venue has", "Hands Up! app: guests can request songs", "Music tailored to 40-year-olds – often sing-alongs and danceable classics", "Professional atmosphere – from cosy to party on the dance floor"]
+      "faqPage": "verjaardag",
+      "title": {
+        "nl": "DJ 40 jaar",
+        "en": "DJ 40th birthday"
       },
-      "muziekIntro": { "nl": "40 jaar: vaak een publiek dat meezingt en danst op de nummers van toen en nu. Van 80s en 90s tot huidige hits.", "en": "40 years: often a crowd that sings along and dances to the songs of then and now. From 80s and 90s to current hits." },
+      "h1": {
+        "nl": "DJ voor 40e verjaardag",
+        "en": "DJ for a 40th birthday"
+      },
+      "metaTitle": {
+        "nl": "DJ 40 jaar | Verjaardag DJ | Deejay Tim",
+        "en": "DJ 40th birthday | Deejay Tim"
+      },
+      "metaDescription": {
+        "nl": "DJ voor een 40e verjaardag. 80s, 90s, Nederlandstalig en dansbare hits. Vanaf {justDj} of {allIn}.",
+        "en": "DJ for a 40th birthday. 80s, 90s, Dutch-language tracks and danceable hits. From {justDj} or {allIn}."
+      },
+      "intro": {
+        "nl": "Veertig jaar: meezingers uit de jeugd van de jarige, plus genoeg dat ook jongere gasten kennen. DJ Only vanaf {justDj}, All-in vanaf {allIn}.",
+        "en": "Forty: sing-alongs from the birthday person's youth, plus enough that younger guests know too. DJ Only from {justDj}, All-in from {allIn}."
+      },
+      "watJeKrijgt": {
+        "nl": [
+          "80s en 90s naast latere hits",
+          "Verzoekjes en inspelen op de zaal",
+          "All-in of DJ Only"
+        ],
+        "en": [
+          "80s and 90s next to later hits",
+          "Requests and reading the room",
+          "All-in or DJ Only"
+        ]
+      },
+      "muziekIntro": {
+        "nl": "Herkenbare platen uit de jeugd, aangevuld met Nederlandstalig en wat nieuwer als de vloer het aankan.",
+        "en": "Familiar records from their youth, plus Dutch-language tracks and newer songs if the floor can take it."
+      },
       "muziek": {
-        "nl": ["Breed repertoire: van 80s en 90s klassiekers tot huidige hits – meezingers en dansbare nummers", "Verzoeknummers via Hands Up! – de jarige en gasten bepalen mee", "Aanpasbaar aan sfeer: van rustig begin tot volle dansvloer"],
-        "en": ["Wide repertoire: from 80s and 90s classics to current hits – sing-alongs and danceable tracks", "Song requests via Hands Up! – the birthday person and guests have a say", "Adaptable to the vibe: from relaxed start to packed dance floor"]
+        "nl": [
+          "Disco, pop en 90s dance",
+          "Nederlandse klassiekers waar het publiek op meezingt",
+          "Geen vaste setlist"
+        ],
+        "en": [
+          "Disco, pop and 90s dance",
+          "Dutch classics the room sings along to",
+          "No fixed setlist"
+        ]
+      },
+      "musicExamples": {
+        "nl": [
+          "a-ha – Take On Me",
+          "Bon Jovi – Livin' on a Prayer",
+          "Haddaway – What Is Love",
+          "Snap! – Rhythm Is a Dancer",
+          "André Hazes – Zij gelooft in mij",
+          "Doe Maar – 32 jaar (Sinds 1 dag of 2)",
+          "Whitney Houston – I Wanna Dance with Somebody",
+          "Prince – Kiss",
+          "Madonna – Like a Prayer",
+          "De Dijk – Dansen op de vulkaan"
+        ],
+        "en": [
+          "a-ha – Take On Me",
+          "Bon Jovi – Livin' on a Prayer",
+          "Haddaway – What Is Love",
+          "Snap! – Rhythm Is a Dancer",
+          "André Hazes – Zij gelooft in mij",
+          "Doe Maar – 32 jaar (Sinds 1 dag of 2)",
+          "Whitney Houston – I Wanna Dance with Somebody",
+          "Prince – Kiss",
+          "Madonna – Like a Prayer",
+          "De Dijk – Dansen op de vulkaan"
+        ]
       },
       "apparatuur": {
-        "nl": ["All-in: speakerset, DJ booth, verlichting, microfoon", "Just DJ: alleen de DJ – voor locaties met eigen geluid", "Professionele Pioneer XDJ-RX3 set"],
-        "en": ["All-in: speaker system, DJ booth, lighting, microphone", "Just DJ: DJ only – for venues with their own sound", "Professional Pioneer XDJ-RX3 set"]
+        "nl": [
+          "All-in voor de meeste zalen",
+          "DJ Only bij bestaande techniek"
+        ],
+        "en": [
+          "All-in for most halls",
+          "DJ Only with existing equipment"
+        ]
       },
       "werkwijzeSteps": {
-        "nl": ["Contact: we bespreken locatie en welk pakket past", "Muziek afstemmen: wat wil de jarige horen?", "Feest: opbouw, soundcheck en draaien tot het einde"],
-        "en": ["Contact: we discuss venue and which package fits", "Music alignment: what does the birthday person want to hear?", "Party: setup, soundcheck and playing until the end"]
+        "nl": [
+          "Afstemmen wat de jarige écht wil horen",
+          "Op tijd aanwezig zodat alles klaarstaat",
+          "Avond opbouwen met de gasten"
+        ],
+        "en": [
+          "Align what the birthday person really wants to hear",
+          "Arrive in time so everything is ready",
+          "Build the evening with the guests"
+        ]
       },
       "faq": [],
-      "ctaText": { "nl": "Boek DJ 40 jaar", "en": "Book DJ 40 years" }
+      "ctaText": {
+        "nl": "Stuur me een berichtje",
+        "en": "Send me a message"
+      },
+      "musicExamplesIntro": {
+        "nl": "Geen vaste playlist natuurlijk – dit geeft vooral een idee van muzikale richtingen die op zo’n feest voorbij kunnen komen.",
+        "en": "Not a fixed playlist – this mainly gives an idea of directions that can come up at a party like this."
+      }
     },
     {
       "slug": "dj-50-jaar",
       "eventType": "verjaardag",
-      "title": { "nl": "DJ 50 jaar", "en": "DJ 50 years" },
-      "h1": { "nl": "DJ voor 50e verjaardag", "en": "DJ for 50th birthday" },
-      "metaTitle": { "nl": "DJ 50 jaar | Deejay Tim – Zwijndrecht & Rotterdam", "en": "DJ 50 years | Deejay Tim – Zwijndrecht & Rotterdam" },
-      "metaDescription": { "nl": "DJ voor 50e verjaardag. Professionele muziek voor een feest 50 jaar.", "en": "DJ for 50th birthday. Professional music for a 50th birthday party." },
-      "intro": { "nl": "50 jaar – een feest om nooit te vergeten! Just DJ of All-in, afhankelijk van de locatie. Muziek die bij de jarige en gasten past – van 70s en 80s tot huidige hits.", "en": "50 years – a party to remember! Just DJ or All-in, depending on the venue. Music that fits the birthday person and guests – from 70s and 80s to current hits." },
-      "watJeKrijgt": {
-        "nl": ["Just DJ of All-in DJ show – afhankelijk van wat de locatie heeft", "Hands Up! app: gasten kunnen verzoeknummers doen", "Muziek afgestemd op 50-jarigen – meezingers en dansbare klassiekers", "Professionele sfeer – van gezellig tot feest op de dansvloer"],
-        "en": ["Just DJ or All-in DJ show – depending on what the venue has", "Hands Up! app: guests can request songs", "Music tailored to 50-year-olds – sing-alongs and danceable classics", "Professional atmosphere – from cosy to party on the dance floor"]
+      "faqPage": "verjaardag",
+      "title": {
+        "nl": "DJ 50 jaar",
+        "en": "DJ 50th birthday"
       },
-      "muziekIntro": { "nl": "50 jaar: vaak een publiek dat geniet van de nummers van vroeger en nu. Van 70s en 80s tot huidige hits – meezingers en dansbare klassiekers.", "en": "50 years: often a crowd that enjoys the songs of yesteryear and today. From 70s and 80s to current hits – sing-alongs and danceable classics." },
+      "h1": {
+        "nl": "DJ voor 50e verjaardag",
+        "en": "DJ for a 50th birthday"
+      },
+      "metaTitle": {
+        "nl": "DJ 50 jaar | Verjaardag DJ | Deejay Tim",
+        "en": "DJ 50th birthday | Deejay Tim"
+      },
+      "metaDescription": {
+        "nl": "DJ voor een 50e verjaardag. Disco, 70s/80s en Nederlandse klassiekers. All-in vanaf {allIn}.",
+        "en": "DJ for a 50th birthday. Disco, 70s/80s and Dutch classics. All-in from {allIn}."
+      },
+      "intro": {
+        "nl": "Vijftig jaar: disco, 70s en 80s, Nederlandse klassiekers en genoeg dat kinderen of jongere gasten ook herkennen. All-in vanaf {allIn}, DJ Only vanaf {justDj}.",
+        "en": "Fifty: disco, 70s and 80s, Dutch classics and enough that kids or younger guests recognise too. All-in from {allIn}, DJ Only from {justDj}."
+      },
+      "watJeKrijgt": {
+        "nl": [
+          "Muziek waar 50-plussers op meezingen én op dansen",
+          "Ruimte voor favorieten van de jarige",
+          "All-in of DJ Only"
+        ],
+        "en": [
+          "Music 50+ guests sing and dance to",
+          "Room for the birthday person's favourites",
+          "All-in or DJ Only"
+        ]
+      },
+      "muziekIntro": {
+        "nl": "Klassiekers eerst, nieuwere nummers als de vloer het vraagt. Een 50e mag later nog best los.",
+        "en": "Classics first, newer tracks if the floor asks. A 50th can still open up later."
+      },
       "muziek": {
-        "nl": ["Breed repertoire: van 70s en 80s klassiekers tot huidige hits – meezingers en dansbare nummers", "Verzoeknummers via Hands Up! – de jarige en gasten bepalen mee", "Aanpasbaar aan sfeer: van rustig begin tot volle dansvloer"],
-        "en": ["Wide repertoire: from 70s and 80s classics to current hits – sing-alongs and danceable tracks", "Song requests via Hands Up! – the birthday person and guests have a say", "Adaptable to the vibe: from relaxed start to packed dance floor"]
+        "nl": [
+          "70s, 80s, disco en Nederlandse feestplaten",
+          "Verzoekjes welkom",
+          "Opbouw van gezellig naar dansen"
+        ],
+        "en": [
+          "70s, 80s, disco and Dutch party records",
+          "Requests welcome",
+          "Build from easy-going to dancing"
+        ]
+      },
+      "musicExamples": {
+        "nl": [
+          "Bee Gees – Stayin' Alive",
+          "Donna Summer – Hot Stuff",
+          "Queen – Don't Stop Me Now",
+          "Frans Bauer – Heb je even voor mij",
+          "Boney M. – Daddy Cool",
+          "Pointer Sisters – I'm So Excited",
+          "Rod Stewart – Da Ya Think I'm Sexy",
+          "Golden Earring – Radar Love",
+          "Status Quo – Rockin' All Over the World",
+          "Ramses Shaffy – We zullen doorgaan"
+        ],
+        "en": [
+          "Bee Gees – Stayin' Alive",
+          "Donna Summer – Hot Stuff",
+          "Queen – Don't Stop Me Now",
+          "Frans Bauer – Heb je even voor mij",
+          "Boney M. – Daddy Cool",
+          "Pointer Sisters – I'm So Excited",
+          "Rod Stewart – Da Ya Think I'm Sexy",
+          "Golden Earring – Radar Love",
+          "Status Quo – Rockin' All Over the World",
+          "Ramses Shaffy – We zullen doorgaan"
+        ]
       },
       "apparatuur": {
-        "nl": ["All-in: speakerset, DJ booth, verlichting, microfoon", "Just DJ: alleen de DJ – voor locaties met eigen geluid", "Professionele Pioneer XDJ-RX3 set"],
-        "en": ["All-in: speaker system, DJ booth, lighting, microphone", "Just DJ: DJ only – for venues with their own sound", "Professional Pioneer XDJ-RX3 set"]
+        "nl": [
+          "All-in is voor de meeste 50e verjaardagen het rustigst",
+          "DJ Only als de locatie al een goede set heeft"
+        ],
+        "en": [
+          "All-in is calmer for most 50th birthdays",
+          "DJ Only if the venue already has a good set"
+        ]
       },
       "werkwijzeSteps": {
-        "nl": ["Contact: we bespreken locatie en welk pakket past", "Muziek afstemmen: wat wil de jarige horen?", "Feest: opbouw, soundcheck en draaien tot het einde"],
-        "en": ["Contact: we discuss venue and which package fits", "Music alignment: what does the birthday person want to hear?", "Party: setup, soundcheck and playing until the end"]
+        "nl": [
+          "Wensen van de jarige ophalen",
+          "Op tijd aanwezig zodat alles klaarstaat",
+          "Avond volgen, niet forceren"
+        ],
+        "en": [
+          "Collect the birthday person's wishes",
+          "Arrive in time so everything is ready",
+          "Follow the evening, don't force it"
+        ]
       },
       "faq": [],
-      "ctaText": { "nl": "Boek DJ 50 jaar", "en": "Book DJ 50 years" }
+      "ctaText": {
+        "nl": "Stuur me een berichtje",
+        "en": "Send me a message"
+      },
+      "musicExamplesIntro": {
+        "nl": "Geen vaste playlist natuurlijk – dit geeft vooral een idee van muzikale richtingen die op zo’n feest voorbij kunnen komen.",
+        "en": "Not a fixed playlist – this mainly gives an idea of directions that can come up at a party like this."
+      }
     },
     {
       "slug": "sweet-16-dj",
       "eventType": "verjaardag",
-      "title": { "nl": "Sweet 16 DJ", "en": "Sweet 16 DJ" },
-      "h1": { "nl": "DJ voor Sweet 16", "en": "DJ for Sweet 16" },
-      "metaTitle": { "nl": "Sweet 16 DJ | Deejay Tim – Zwijndrecht & Rotterdam", "en": "Sweet 16 DJ | Deejay Tim – Zwijndrecht & Rotterdam" },
-      "metaDescription": { "nl": "DJ voor Sweet 16 feest. Professionele muziek voor een feest 16 jaar.", "en": "DJ for Sweet 16 party. Professional music for a 16th birthday party." },
-      "intro": { "nl": "Sweet 16 – een feest om nooit te vergeten! Just DJ of All-in, afhankelijk van de locatie. Muziek die bij de jarige en vrienden past – populaire hits en dance, leeftijdsgeschikt.", "en": "Sweet 16 – a party to remember! Just DJ or All-in, depending on the venue. Music that fits the birthday person and friends – popular hits and dance, age-appropriate." },
-      "watJeKrijgt": {
-        "nl": ["Just DJ of All-in DJ show – afhankelijk van wat de locatie heeft", "Hands Up! app: vrienden kunnen verzoeknummers doen en stemmen", "Muziek afgestemd op 16-jarigen – populaire hits, geen expliciete teksten", "Professionele sfeer – van rustig begin tot feest op de dansvloer"],
-        "en": ["Just DJ or All-in DJ show – depending on what the venue has", "Hands Up! app: friends can request songs and vote", "Music tailored to 16-year-olds – popular hits, no explicit lyrics", "Professional atmosphere – from relaxed start to party on the dance floor"]
+      "faqPage": "verjaardag",
+      "title": {
+        "nl": "Sweet 16 DJ",
+        "en": "Sweet 16 DJ"
       },
-      "muziekIntro": { "nl": "Sweet 16 vraagt om muziek die jongeren aanspreekt: populaire hits en dance. Altijd leeftijdsgeschikt en zonder expliciete teksten.", "en": "Sweet 16 calls for music that appeals to young people: popular hits and dance. Always age-appropriate and without explicit lyrics." },
+      "h1": {
+        "nl": "DJ voor Sweet 16",
+        "en": "DJ for a Sweet 16"
+      },
+      "metaTitle": {
+        "nl": "Sweet 16 DJ | Deejay Tim",
+        "en": "Sweet 16 DJ | Deejay Tim"
+      },
+      "metaDescription": {
+        "nl": "DJ voor een Sweet 16. Leeftijdsgeschikte pop en dance. All-in vanaf {allIn}, DJ Only vanaf {justDj}.",
+        "en": "DJ for a Sweet 16. Age-appropriate pop and dance. All-in from {allIn}, DJ Only from {justDj}."
+      },
+      "intro": {
+        "nl": "Sweet 16: populaire hits en dance, zonder expliciete teksten. All-in vanaf {allIn}, of DJ Only vanaf {justDj} als de locatie al techniek heeft.",
+        "en": "Sweet 16: popular hits and dance, without explicit lyrics. All-in from {allIn}, or DJ Only from {justDj} if the venue already has equipment."
+      },
+      "watJeKrijgt": {
+        "nl": [
+          "Leeftijdsgeschikte muziek",
+          "Verzoekjes van vrienden welkom",
+          "All-in of DJ Only"
+        ],
+        "en": [
+          "Age-appropriate music",
+          "Requests from friends welcome",
+          "All-in or DJ Only"
+        ]
+      },
+      "muziekIntro": {
+        "nl": "Pop, dance en meezingers die bij 16-jarigen passen. Ouders mogen later ook een herkenbaar nummer.",
+        "en": "Pop, dance and sing-alongs that fit 16-year-olds. Parents can get a familiar track later too."
+      },
       "muziek": {
-        "nl": ["Populaire hits en dance die bij de doelgroep passen", "Verzoeknummers via Hands Up! – de jarige en vrienden bepalen mee", "Aanpasbaar aan sfeer en thema van het feest"],
-        "en": ["Popular hits and dance that fit the target audience", "Song requests via Hands Up! – the birthday person and friends have a say", "Adaptable to the party's vibe and theme"]
+        "nl": [
+          "Huidige pop en dance",
+          "Verzoekjes als ze passen",
+          "Geen expliciete teksten"
+        ],
+        "en": [
+          "Current pop and dance",
+          "Requests if they fit",
+          "No explicit lyrics"
+        ]
+      },
+      "musicExamples": {
+        "nl": [
+          "K3 – 10.000 luchtballonnen",
+          "Miley Cyrus – Flowers",
+          "Taylor Swift – Shake It Off",
+          "Sia – Cheap Thrills",
+          "Ed Sheeran – Shape of You",
+          "Shawn Mendes & Camila Cabello – Señorita",
+          "Emma Heesters – Waar ben jij",
+          "Ava Max – Kings & Queens",
+          "Justin Bieber – Sorry",
+          "Meghan Trainor – All About That Bass"
+        ],
+        "en": [
+          "K3 – 10.000 luchtballonnen",
+          "Miley Cyrus – Flowers",
+          "Taylor Swift – Shake It Off",
+          "Sia – Cheap Thrills",
+          "Ed Sheeran – Shape of You",
+          "Shawn Mendes & Camila Cabello – Señorita",
+          "Emma Heesters – Waar ben jij",
+          "Ava Max – Kings & Queens",
+          "Justin Bieber – Sorry",
+          "Meghan Trainor – All About That Bass"
+        ]
       },
       "apparatuur": {
-        "nl": ["All-in: speakerset, DJ booth, verlichting, microfoon", "Just DJ: alleen de DJ – voor locaties met eigen geluid", "Professionele Pioneer XDJ-RX3 set"],
-        "en": ["All-in: speaker system, DJ booth, lighting, microphone", "Just DJ: DJ only – for venues with their own sound", "Professional Pioneer XDJ-RX3 set"]
+        "nl": [
+          "All-in meestal het handigst",
+          "DJ Only bij bestaande techniek"
+        ],
+        "en": [
+          "All-in is usually most practical",
+          "DJ Only with existing equipment"
+        ]
       },
       "werkwijzeSteps": {
-        "nl": ["Contact: we bespreken locatie en welk pakket past", "Muziek afstemmen: wat wil de jarige horen?", "Feest: opbouw, soundcheck en draaien tot het einde"],
-        "en": ["Contact: we discuss venue and which package fits", "Music alignment: what does the birthday person want to hear?", "Party: setup, soundcheck and playing until the end"]
+        "nl": [
+          "Afstemmen met ouders en jarige",
+          "Opbouw en feest"
+        ],
+        "en": [
+          "Align with parents and the birthday person",
+          "Setup and party"
+        ]
       },
       "faq": [],
-      "ctaText": { "nl": "Boek Sweet 16 DJ", "en": "Book Sweet 16 DJ" }
+      "ctaText": {
+        "nl": "Stuur me een berichtje",
+        "en": "Send me a message"
+      },
+      "musicExamplesIntro": {
+        "nl": "Geen vaste playlist natuurlijk – dit geeft vooral een idee van muzikale richtingen die op zo’n feest voorbij kunnen komen.",
+        "en": "Not a fixed playlist – this mainly gives an idea of directions that can come up at a party like this."
+      }
     }
   ]
 }

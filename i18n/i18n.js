@@ -37,58 +37,82 @@
     return path.split('.').reduce((o, k) => (o && o[k] !== undefined ? o[k] : null), obj);
   }
 
+  const PRICE_TOKEN_RE = /\{(fromJustDj|fromAllIn|fromWedding|justDj|allIn|wedding|extraHour|kmRate|hours|travelKm|postcode|travel50|hour|km|ex50)\}/;
+
+  function withPrices(str) {
+    if (typeof str !== 'string' || str.indexOf('{') === -1) return str;
+    try {
+      if (typeof window.__djPriceInterpolate === 'function') {
+        return window.__djPriceInterpolate(str);
+      }
+    } catch (_) {}
+    return str;
+  }
+
+  function resolved(str) {
+    const next = withPrices(str);
+    if (typeof next === 'string' && PRICE_TOKEN_RE.test(next)) return null;
+    return next;
+  }
+
   function t(key) {
     const v = get(dict[currentLang], key);
-    return v != null ? String(v) : (get(dict.nl, key) || key);
+    const str = v != null ? String(v) : (get(dict.nl, key) || key);
+    return withPrices(str);
   }
 
   /**
    * @param {Element|Document|undefined} scopeRoot - If an Element, only update i18n nodes inside it (faster after PJAX). Title/meta/lang UI always update.
+   * @param {{ silent?: boolean }} [opts] - silent skips langchange (used after pricing load).
    */
-  function apply(scopeRoot) {
+  function apply(scopeRoot, opts) {
     document.documentElement.lang = currentLang;
     const path = typeof location !== 'undefined' ? location.pathname || '' : '';
+    const isHome = path === '/' || path === '/index.html' || path === '';
     const isInspiratie = /^\/inspiratie\/?$/.test(path) || path === '/inspiratie/index.html';
     const titleKey = isInspiratie ? 'pages.inspiratieIndex.pageTitle' : 'page.title';
     const descKey = isInspiratie ? 'pages.inspiratieIndex.pageDescription' : 'page.description';
-    const title = get(dict[currentLang], titleKey);
-    if (title) document.title = title;
-    const desc = get(dict[currentLang], descKey);
+    const title = resolved(get(dict[currentLang], titleKey));
+    const desc = resolved(get(dict[currentLang], descKey));
+    /* Alleen homepage/inspiratie-index: voorkom dat page.title elke unieke paginatitel overschrijft */
+    if ((isHome || isInspiratie) && title) document.title = title;
     const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc && desc) metaDesc.setAttribute('content', desc);
+    if (metaDesc && desc && (isHome || isInspiratie) && !metaDesc.hasAttribute('data-price-meta')) {
+      metaDesc.setAttribute('content', desc);
+    }
     const metaOgTitle = document.querySelector('meta[property="og:title"]');
-    if (metaOgTitle && title) metaOgTitle.setAttribute('content', title);
+    if (metaOgTitle && title && (isHome || isInspiratie)) metaOgTitle.setAttribute('content', title);
     const metaOgDesc = document.querySelector('meta[property="og:description"]');
-    if (metaOgDesc && desc) metaOgDesc.setAttribute('content', desc);
+    if (metaOgDesc && desc && (isHome || isInspiratie)) metaOgDesc.setAttribute('content', desc);
     const metaTwTitle = document.querySelector('meta[name="twitter:title"]');
-    if (metaTwTitle && title) metaTwTitle.setAttribute('content', title);
+    if (metaTwTitle && title && (isHome || isInspiratie)) metaTwTitle.setAttribute('content', title);
     const metaTwDesc = document.querySelector('meta[name="twitter:description"]');
-    if (metaTwDesc && desc) metaTwDesc.setAttribute('content', desc);
+    if (metaTwDesc && desc && (isHome || isInspiratie)) metaTwDesc.setAttribute('content', desc);
 
     const root =
       scopeRoot && scopeRoot.nodeType === Node.ELEMENT_NODE ? scopeRoot : document;
 
     root.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
-      const val = get(dict[currentLang], key);
+      const val = resolved(get(dict[currentLang], key));
       if (val != null) el.textContent = val;
     });
 
     root.querySelectorAll('[data-i18n-html]').forEach(el => {
       const key = el.getAttribute('data-i18n-html');
-      const val = get(dict[currentLang], key);
+      const val = resolved(get(dict[currentLang], key));
       if (val != null) el.innerHTML = val;
     });
 
     root.querySelectorAll('[data-i18n-aria]').forEach(el => {
       const key = el.getAttribute('data-i18n-aria');
-      const val = get(dict[currentLang], key);
+      const val = resolved(get(dict[currentLang], key));
       if (val != null) el.setAttribute('aria-label', val);
     });
 
     root.querySelectorAll('[data-i18n-alt]').forEach(el => {
       const key = el.getAttribute('data-i18n-alt');
-      const val = get(dict[currentLang], key);
+      const val = resolved(get(dict[currentLang], key));
       if (val != null) el.setAttribute('alt', val);
     });
 
@@ -96,9 +120,19 @@
       const key = ul.getAttribute('data-i18n-list');
       const arr = get(dict[currentLang], key);
       if (Array.isArray(arr)) {
-        ul.querySelectorAll('li').forEach((li, i) => {
-          if (arr[i] != null) li.textContent = arr[i];
-        });
+        const items = arr.map((item) => resolved(item)).filter((v) => v != null);
+        if (!items.length) return;
+        const existing = ul.querySelectorAll('li');
+        if (existing.length === items.length) {
+          existing.forEach((li, i) => { li.textContent = items[i]; });
+        } else {
+          ul.textContent = '';
+          items.forEach((v) => {
+            const li = document.createElement('li');
+            li.textContent = v;
+            ul.appendChild(li);
+          });
+        }
       }
     });
 
@@ -114,7 +148,14 @@
       g.setAttribute('aria-label', t('lang.toggleAria'));
     });
 
-    try { window.dispatchEvent(new CustomEvent('langchange', { detail: { lang: currentLang } })); } catch (_) {}
+    if (!opts || !opts.silent) {
+      try { window.dispatchEvent(new CustomEvent('langchange', { detail: { lang: currentLang } })); } catch (_) {}
+    }
+    try {
+      if (typeof window.__djApplyPricePlaceholders === 'function') {
+        window.__djApplyPricePlaceholders(root === document ? document : root);
+      }
+    } catch (_) {}
   }
 
   async function setLang(lang) {

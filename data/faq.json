@@ -1,0 +1,542 @@
+{
+  "items": {
+    "watKostDjTim": {
+      "q": {
+        "nl": "Wat kost DJ Tim?",
+        "en": "How much does DJ Tim cost?"
+      },
+      "a": {
+        "nl": "Mijn vanafprijzen zijn {justDj} voor DJ Only, {allIn} voor All-in en {wedding} voor een bruiloft. Alle drie zijn gebaseerd op 4 uur draaien. Een extra uur kost {extraHour}. Reiskosten tot {travelKm} km vanuit Zwijndrecht ({postcode}) zijn inbegrepen.",
+        "en": "My starting prices are {justDj} for DJ Only, {allIn} for All-in and {wedding} for a wedding. All three are based on 4 hours of playing. An extra hour costs {extraHour}. Travel up to {travelKm} km from Zwijndrecht ({postcode}) is included."
+      }
+    },
+    "watKrijgIk500": {
+      "q": {
+        "nl": "Wat krijg ik voor {justDj}?",
+        "en": "What do I get for {justDj}?"
+      },
+      "a": {
+        "nl": "Voor vanaf {justDj} boek je DJ Only: ik kom 4 uur draaien, bereid de muziek voor en verzoeknummers zijn mogelijk. Dit pakket is bedoeld voor locaties waar passende professionele techniek al aanwezig is. Geluid, verlichting en DJ-booth zijn niet inbegrepen.",
+        "en": "From {justDj} you book DJ Only: I play for 4 hours, prepare the music and song requests are possible. This package is for venues that already have suitable professional equipment. Sound, lighting and DJ booth are not included."
+      }
+    },
+    "watZitInAllIn": {
+      "q": {
+        "nl": "Wat zit in All-in van {allIn}?",
+        "en": "What's included in All-in from {allIn}?"
+      },
+      "a": {
+        "nl": "All-in is DJ Tim plus de standaard techniek: geluidsinstallatie, dansvloerverlichting, DJ-booth en een microfoon. Gebaseerd op 4 uur, verzoeknummers mogelijk. Standaard geschikt tot circa 100 gasten. Grotere of afwijkende producties stemmen we af.",
+        "en": "All-in is DJ Tim plus the standard setup: sound system, dance floor lighting, DJ booth and a microphone. Based on 4 hours, song requests possible. The standard setup suits around 100 guests. Larger or different productions we discuss in advance."
+      }
+    },
+    "watZitInWedding": {
+      "q": {
+        "nl": "Wat zit in Wedding van {wedding}?",
+        "en": "What's included in the wedding package from {wedding}?"
+      },
+      "a": {
+        "nl": "Het bruiloftpakket is vanaf {wedding} voor 4 uur en omvat licht en geluid, een persoonlijk voorgesprek, uitgebreidere voorbereiding, afstemming van openingsdans en bijzondere momenten, en overleg met ceremoniemeester of locatie.",
+        "en": "The wedding package starts at {wedding} for 4 hours and includes sound and lighting, a personal consultation, more thorough preparation, planning of the first dance and special moments, and coordination with the MC or venue."
+      }
+    },
+    "prijzen4Uur": {
+      "q": {
+        "nl": "Zijn prijzen gebaseerd op 4 uur?",
+        "en": "Are prices based on 4 hours?"
+      },
+      "a": {
+        "nl": "Ja. DJ Only, All-in en Bruiloft DJ gaan uit van 4 uur draaien. Aankomst en klaarzetten zitten daar niet in. Verzorg ik de opbouw van licht en geluid, dan ben ik minimaal een uur eerder. Staat de techniek al klaar, dan ongeveer 15 minuten voor aanvang.",
+        "en": "Yes. DJ Only, All-in and Wedding DJ are based on 4 hours of playing. Arrival and getting ready are extra. If I handle the lighting and sound setup, I arrive at least an hour early. If the equipment is already in place, about 15 minutes before the start."
+      }
+    },
+    "extraUur": {
+      "q": {
+        "nl": "Wat kost een extra uur?",
+        "en": "What does an extra hour cost?"
+      },
+      "a": {
+        "nl": "Een extra uur kost {extraHour}. Dat geldt voor alle pakketten. Hoeveel uur je nodig hebt, hangt af van het programma: een verjaardag is vaak 4 tot 5 uur, een bruiloft soms langer.",
+        "en": "An extra hour costs {extraHour}. That applies to all packages. How many hours you need depends on the programme: a birthday is often 4 to 5 hours, a wedding sometimes longer."
+      }
+    },
+    "reiskosten": {
+      "q": {
+        "nl": "Hoe werken reiskosten?",
+        "en": "How do travel costs work?"
+      },
+      "a": {
+        "nl": "Reiskosten zijn inbegrepen tot {travelKm} km vanuit Zwijndrecht ({postcode}). Daarboven reken ik {kmRate} per extra gereden kilometer. Bij 50 km afstand komt er dus {travel50} bij. Tot ongeveer 50 km rijd ik sowieso. Verder is in overleg.",
+        "en": "Travel is included up to {travelKm} km from Zwijndrecht ({postcode}). Beyond that I charge {kmRate} per extra kilometre driven. At 50 km that adds {travel50}. I generally travel up to about 50 km. Further is by arrangement."
+      }
+    },
+    "wanneerDjOnly": {
+      "q": {
+        "nl": "Wanneer kies ik DJ Only?",
+        "en": "When should I choose DJ Only?"
+      },
+      "a": {
+        "nl": "Kies DJ Only als de locatie al passende professionele geluids- en DJ-techniek heeft. Denk aan een zaal, café of club met een goede installatie. Ik sluit aan, bereid de muziek voor en draai. Twijfel je of de techniek geschikt is? Stuur een foto of vraag het even; dan zeggen we het eerlijk.",
+        "en": "Choose DJ Only if the venue already has suitable professional sound and DJ equipment. Think of a hall, café or club with a proper setup. I connect, prepare the music and play. Not sure if the equipment is suitable? Send a photo or ask; I'll tell you honestly."
+      }
+    },
+    "wanneerAllIn": {
+      "q": {
+        "nl": "Wanneer kies ik All-in?",
+        "en": "When should I choose All-in?"
+      },
+      "a": {
+        "nl": "Kies All-in als je wilt dat DJ én standaard techniek verzorgd worden. Voor veel verjaardagen, bedrijfsfeesten en buurtfeesten is dat de makkelijkste keuze: je hoeft zelf geen geluid of licht te regelen.",
+        "en": "Choose All-in if you want both the DJ and the standard equipment taken care of. For many birthdays, corporate events and neighbourhood parties that's the easiest choice: you don't have to arrange sound or lighting yourself."
+      }
+    },
+    "hoeveelGasten": {
+      "q": {
+        "nl": "Tot hoeveel gasten is de standaard All-in oplossing geschikt?",
+        "en": "How many guests does the standard All-in setup suit?"
+      },
+      "a": {
+        "nl": "De standaard All-in oplossing is geschikt tot circa 100 gasten. Voor grotere feesten of een afwijkende ruimte stemmen we extra geluid of licht af.",
+        "en": "The standard All-in setup suits around 100 guests. For larger parties or an unusual room we arrange extra sound or lighting."
+      }
+    },
+    "locatieTechniek": {
+      "q": {
+        "nl": "Kan locatie-eigen techniek gebruikt worden?",
+        "en": "Can we use the venue's own equipment?"
+      },
+      "a": {
+        "nl": "Ja, als die professioneel en passend is. Dan is DJ Only vaak de logische keuze. Is de installatie te klein, verouderd of onbekend, dan raad ik All-in aan. Dat voorkomt gedoe op de avond zelf.",
+        "en": "Yes, if it is professional and suitable. Then DJ Only is often the logical choice. If the setup is too small, outdated or unknown, I recommend All-in. That avoids hassle on the night."
+      }
+    },
+    "extraGeluidLicht": {
+      "q": {
+        "nl": "Kan extra geluid of licht geregeld worden?",
+        "en": "Can extra sound or lighting be arranged?"
+      },
+      "a": {
+        "nl": "Ja, in overleg. Denk aan extra speakers, meer dansvloerverlichting of een grotere zaal. We stemmen dat af op het aantal gasten en de locatie. Je koopt een complete oplossing; je hoeft de techniek niet zelf te regelen.",
+        "en": "Yes, by arrangement. Think extra speakers, more dance floor lighting or a larger hall. We match that to the guest count and the venue. You buy a complete solution; you don't have to arrange the equipment yourself."
+      }
+    },
+    "microfoon": {
+      "q": {
+        "nl": "Is een microfoon beschikbaar?",
+        "en": "Is a microphone available?"
+      },
+      "a": {
+        "nl": "Ja. Bij All-in en Bruiloft DJ is een microfoon standaard inbegrepen voor aankondigingen, toespraken of een openingsdans. Bij DJ Only hangt het af van wat de locatie al heeft.",
+        "en": "Yes. With All-in and Wedding DJ a microphone is included as standard for announcements, speeches or a first dance. With DJ Only it depends on what the venue already has."
+      }
+    },
+    "welkeMuziek": {
+      "q": {
+        "nl": "Welke muziek draai je?",
+        "en": "What music do you play?"
+      },
+      "a": {
+        "nl": "Ik draai zowel allround/open-format als genregericht. Bij een allround feest mix ik bijvoorbeeld herkenbare pop, Nederlandstalig, 80s, 90s en 00s, disco, dance, urban, Latin en Afro – afgestemd op jullie wensen en wat er op de dansvloer gebeurt. Ook een feest met een specifieke muzikale richting vind ik juist erg leuk. Denk aan Tech House, Techno, Funky House, Deep House, Minimal en UK Garage. Eén genre, een combinatie of gedurende de avond steeds wat steviger: vraag gerust naar de mogelijkheden.",
+        "en": "I play both open-format and genre-focused sets. At an open-format party I mix recognisable pop, Dutch-language tracks, 80s, 90s and 00s, disco, dance, urban, Latin and Afro – matched to your wishes and the dance floor. I also enjoy a night with a clearer direction. Think Tech House, Techno, Funky House, Deep House, Minimal and UK Garage. One genre, a mix, or gradually heavier: just ask."
+      }
+    },
+    "favorietenDoorgeven": {
+      "q": {
+        "nl": "Kan ik muziekwensen doorgeven?",
+        "en": "Can I share music wishes in advance?"
+      },
+      "a": {
+        "nl": "Zeker. Favoriete nummers, artiesten, genres, must-plays en do-not-plays kun je vooraf doorgeven. Die wensen vormen de muzikale richting van de avond. Ik leg alleen liever niet de volledige playlist vooraf vast, zodat ik tijdens het feest kan inspelen op de gasten en de energie op de dansvloer.",
+        "en": "Yes. Favourite tracks, artists, genres, must-plays and do-not-plays are welcome beforehand. Those wishes set the direction of the night. I prefer not to lock a full playlist in advance, so I can respond to the guests and the energy on the floor."
+      }
+    },
+    "verzoeknummers": {
+      "q": {
+        "nl": "Draai je verzoeknummers?",
+        "en": "Do you play song requests?"
+      },
+      "a": {
+        "nl": "Ja, graag zelfs. Verzoekjes geven me ook een goed beeld van wat er onder de gasten leeft. Ik heb veel muziek bij me, maar natuurlijk niet letterlijk alles. Als ik een nummer heb, het bij jullie wensen past en het moment klopt, probeer ik het verzoek op een natuurlijke manier mee te nemen in de mix.",
+        "en": "Yes, gladly. Requests also tell me what the room is into. I have a lot of music with me, but not literally everything. If I have the track, it fits your wishes and the moment is right, I'll try to mix it in naturally."
+      }
+    },
+    "gebruikMicrofoon": {
+      "q": {
+        "nl": "Gebruik je de microfoon?",
+        "en": "Do you use the microphone?"
+      },
+      "a": {
+        "nl": "Zeker als het iets toevoegt. Ik schuw de microfoon niet, maar positioneer mezelf niet als MC die de hele avond door de muziek heen praat. Voor een aankondiging, bijzonder moment of wat extra interactie pak ik hem graag; de muziek blijft centraal staan.",
+        "en": "Yes, when it adds something. I don't avoid the microphone, but I'm not an MC who talks through the music all night. For an announcement, a key moment or a bit of extra interaction I'll pick it up; the music stays central."
+      }
+    },
+    "doNotPlay": {
+      "q": {
+        "nl": "Kan ik een do-not-play lijst doorgeven?",
+        "en": "Can I share a do-not-play list?"
+      },
+      "a": {
+        "nl": "Ja. Zeker bij bruiloften is dat fijn: nummers met een beladen herinnering of teksten die niet passen, blijven staan. Geef ze vooraf door, dan houd ik daar rekening mee.",
+        "en": "Yes. Especially at weddings this helps: tracks with a loaded memory or lyrics that don't fit stay off. Share them beforehand and I'll keep to that."
+      }
+    },
+    "handsUp": {
+      "q": {
+        "nl": "Hoe werkt Hands Up?",
+        "en": "How does Hands Up work?"
+      },
+      "a": {
+        "nl": "Hands Up! is een app waarmee gasten tijdens het feest verzoeknummers kunnen insturen en eventueel stemmen. Ik zie die verzoeken en mix ze in als het past. De app bestuurt de avond niet; ik houd sfeer en opbouw in de gaten.",
+        "en": "Hands Up! is an app where guests can send song requests during the party and optionally vote. I see those requests and mix them in if they fit. The app doesn't run the evening; I keep the vibe and the build in check."
+      }
+    },
+    "openFormat": {
+      "q": {
+        "nl": "Draai je ook genregericht?",
+        "en": "Do you also play genre-focused sets?"
+      },
+      "a": {
+        "nl": "Ja. Allround voor gemengde feesten, en ook graag een avond met een duidelijke richting. Denk aan Tech House, Techno, Funky House, Deep House, Minimal of UK Garage. Eén stijl of een combinatie: vraag gerust naar de mogelijkheden.",
+        "en": "Yes. Open-format for mixed parties, and I also enjoy a night with a clear direction. Think Tech House, Techno, Funky House, Deep House, Minimal or UK Garage. One style or a mix: just ask."
+      }
+    },
+    "openingsdans": {
+      "q": {
+        "nl": "Kun je onze openingsdans begeleiden?",
+        "en": "Can you guide our first dance?"
+      },
+      "a": {
+        "nl": "Ja. We kiezen vooraf het nummer en hoe lang het mag duren. Ik kan het inkorten of laten overgaan in het feestgedeelte, zodat het moment klopt en de dansvloer daarna makkelijk volloopt.",
+        "en": "Yes. We choose the track and how long it should last. I can shorten it or blend into the party so the moment lands and the dance floor fills afterwards."
+      }
+    },
+    "ceremoniemeester": {
+      "q": {
+        "nl": "Stem je af met onze ceremoniemeester?",
+        "en": "Do you coordinate with our master of ceremonies?"
+      },
+      "a": {
+        "nl": "Ja, dat hoort bij het bruiloftpakket. Timing van toespraken, cake, openingsdans en aankondigingen stem ik af met jullie ceremoniemeester of de locatie. Zo hoef je op de dag zelf niet te schakelen.",
+        "en": "Yes, that's part of the wedding package. Timing of speeches, cake, first dance and announcements I coordinate with your MC or the venue. So you don't have to juggle it on the day."
+      }
+    },
+    "voorbereidingBruiloft": {
+      "q": {
+        "nl": "Hoe ziet de voorbereiding van een bruiloft eruit?",
+        "en": "What does wedding preparation look like?"
+      },
+      "a": {
+        "nl": "We plannen een voorgesprek: programma, muziekwensen, do-not-play, openingsdans en bijzondere momenten. Als het kan stem ik ook af met de locatie. Geen dichtgetimmerde standaardlijst, wel een duidelijke basis waar ik live op verder bouw.",
+        "en": "We plan a consultation: programme, music wishes, do-not-play, first dance and special moments. Where possible I also align with the venue. No locked-in standard playlist, but a clear base I build on live."
+      }
+    },
+    "uitvalBackup": {
+      "q": {
+        "nl": "Wat gebeurt er als je onverwacht niet kunt draaien?",
+        "en": "What happens if you unexpectedly cannot play?"
+      },
+      "a": {
+        "nl": "Bij onverwachte uitval kan ik voor iedere boeking – DJ Only, All-in of Bruiloft – mijn vertrouwde DJ-netwerk inzetten om een passende vervanger te zoeken. Vooraf vastgelegde muziekwensen en belangrijke momenten kunnen dan worden overgedragen. Dat is een back-upmogelijkheid, geen absolute belofte dat onder alle omstandigheden altijd iemand aanwezig is.",
+        "en": "If I unexpectedly cannot play, I can use my trusted DJ network for any booking – DJ Only, All-in or Wedding – to look for a suitable replacement. Agreed music wishes and key moments can then be handed over. That is a backup option, not an absolute promise that someone will be there in every possible situation."
+      }
+    },
+    "verschillendeLeeftijden": {
+      "q": {
+        "nl": "Kun je verschillende leeftijden en muzieksmaken combineren?",
+        "en": "Can you combine different ages and music tastes?"
+      },
+      "a": {
+        "nl": "Ja. Dat is juist het werk. Een bruiloft of bedrijfsfeest heeft vaak oma, ouders en vrienden in één zaal. Ik wissel herkenbare klassiekers, Nederlandstalig en nieuwere tracks af en kijk wat de dansvloer doet.",
+        "en": "Yes. That's the job. A wedding or corporate event often has grandparents, parents and friends in one room. I mix recognisable classics, Dutch-language tracks and newer songs and watch what the dance floor does."
+      }
+    },
+    "kostBruiloftDj": {
+      "q": {
+        "nl": "Wat kost een DJ voor een bruiloft?",
+        "en": "How much does a wedding DJ cost?"
+      },
+      "a": {
+        "nl": "Bij mij begint een bruiloft DJ bij {wedding} voor 4 uur, inclusief licht en geluid, voorgesprek en afstemming van momenten. Extra uur {extraHour}. Hoe lang je boekt, hangt af van diner, toespraken en hoe laat het feest begint.",
+        "en": "My wedding DJ package starts at {wedding} for 4 hours, including sound and lighting, a consultation and planning of key moments. Extra hour {extraHour}. How long you book depends on dinner, speeches and when the party starts."
+      }
+    },
+    "hoeLangBruiloft": {
+      "q": {
+        "nl": "Hoe lang boek je een DJ voor een bruiloft?",
+        "en": "How long do you book a DJ for a wedding?"
+      },
+      "a": {
+        "nl": "Vier uur is het startpunt en dekt vaak het feestgedeelte. Wil je ook dinerachtergrond of een langere nacht, dan plannen we extra uren. Veel koppels boeken 5 of 6 uur. Dat bespreken we aan de hand van jullie tijdschema.",
+        "en": "Four hours is the starting point and often covers the party. If you also want dinner background or a longer night, we plan extra hours. Many couples book 5 or 6 hours. We decide that from your schedule."
+      }
+    },
+    "hoeReserveren": {
+      "q": {
+        "nl": "Hoe reserveer ik?",
+        "en": "How do I book?"
+      },
+      "a": {
+        "nl": "Stuur een bericht via het contactformulier of WhatsApp. Vermeld datum, plaats, type feest en ongeveer het aantal gasten. Dan check ik of ik vrij ben en wat het beste pakket is.",
+        "en": "Send a message via the contact form or WhatsApp. Include date, place, type of party and roughly how many guests. I'll check if I'm available and which package fits."
+      }
+    },
+    "rechtstreeksBoeken": {
+      "q": {
+        "nl": "Boek ik jou persoonlijk, of komt er een andere DJ?",
+        "en": "Do I book you personally, or might another DJ show up?"
+      },
+      "a": {
+        "nl": "Je boekt rechtstreeks bij mij. Vanaf het eerste contact bespreken we de wensen samen, en in de normale situatie kom ik zelf draaien. Ik ben geen boekingskantoor waarbij vooraf onbekend is wie er op het feest staat. Voor onverwachte uitval is een back-up DJ mogelijk.",
+        "en": "You book directly with me. From the first contact we discuss the wishes together, and in the normal situation I play myself. I’m not a booking agency where it’s unclear in advance who will be at the party. A backup DJ is possible if I unexpectedly cannot play."
+      }
+    },
+    "hoeVroeg": {
+      "q": {
+        "nl": "Hoe vroeg moet ik boeken?",
+        "en": "How far in advance should I book?"
+      },
+      "a": {
+        "nl": "Voor bruiloften het liefst een paar maanden van tevoren, vooral in het voorjaar en de zomer. Verjaardagen en bedrijfsfeesten kunnen vaak korter van tevoren. Twijfel je? Vraag het gewoon; dan weet je waar je aan toe bent.",
+        "en": "For weddings preferably a few months ahead, especially in spring and summer. Birthdays and corporate events can often be booked closer to the date. Not sure? Just ask; then you know where you stand."
+      }
+    },
+    "anderePartijenLichtGeluid": {
+      "q": {
+        "nl": "Werk je ook met andere partijen voor licht en geluid?",
+        "en": "Do you also work with other parties for lighting and sound?"
+      },
+      "a": {
+        "nl": "Ja. Afhankelijk van de locatie en de boeking gebruik ik mijn eigen materiaal of huur ik professionele licht- en geluidstechniek in. Als ik techniek inhuur, stem ik de levering en opbouw waar nodig af met de locatie. De apparatuur kan dan bijvoorbeeld vooraf worden geplaatst en na het feest of de volgende dag weer worden opgehaald. Voor jou blijft het eenvoudig: bij een All-in of Bruiloft DJ-pakket zorg ik dat de afgesproken techniek geregeld is.",
+        "en": "Yes. Depending on the venue and the booking I use my own equipment or I hire professional lighting and sound. If I hire equipment, I coordinate delivery and setup with the venue where needed. The equipment can then for example be placed in advance and collected after the party or the next day. For you it stays simple: with an All-in or Wedding DJ package I make sure the agreed equipment is arranged."
+      }
+    },
+    "hoeLangVanTevoren": {
+      "q": {
+        "nl": "Hoeveel tijd heeft DJ Tim voor aanvang nodig?",
+        "en": "How much time does DJ Tim need before the start?"
+      },
+      "a": {
+        "nl": "Dat hangt af van de situatie. Verzorg ik zelf de opbouw van licht en geluid, dan ben ik minimaal een uur voor aanvang aanwezig. Staat de techniek al klaar, dan ben ik ongeveer 15 minuten voor aanvang aanwezig. Waar nodig stem ik dit vooraf met de locatie af.",
+        "en": "That depends on the situation. If I handle the lighting and sound setup myself, I arrive at least an hour before the start. If the equipment is already in place, I arrive about 15 minutes before the start. Where needed I align this with the venue in advance."
+      }
+    },
+    "buitenWerkgebied": {
+      "q": {
+        "nl": "Draai je ook buiten je werkgebied?",
+        "en": "Do you also play outside your usual area?"
+      },
+      "a": {
+        "nl": "Mijn kerngebied is Zwijndrecht, de Drechtsteden en Rijnmond. Tot ongeveer 50 km rijd ik meestal. Verder dan 50 km kan, in overleg over reistijd en planning.",
+        "en": "My core area is Zwijndrecht, the Drechtsteden and Rijnmond. I usually travel up to about 50 km. Further than 50 km is possible, by arrangement on travel time and planning."
+      }
+    },
+    "contactWhatsapp": {
+      "q": {
+        "nl": "Hoe neem ik contact op?",
+        "en": "How do I get in touch?"
+      },
+      "a": {
+        "nl": "Het snelst via WhatsApp of het formulier op de contactpagina. Je kunt ook bellen naar 06 21 888 970 of mailen naar contact@deejaytim.nl.",
+        "en": "Fastest via WhatsApp or the form on the contact page. You can also call 06 21 888 970 or email contact@deejaytim.nl."
+      }
+    },
+    "watKostVerjaardag": {
+      "q": {
+        "nl": "Wat kost een DJ voor een verjaardag?",
+        "en": "How much does a birthday DJ cost?"
+      },
+      "a": {
+        "nl": "DJ Only vanaf {justDj} als de locatie goede techniek heeft. All-in vanaf {allIn} als geluid en licht ook geregeld moeten worden. Beide voor 4 uur; extra uur {extraHour}. Voor de meeste verjaardagen is All-in de makkelijkste keuze.",
+        "en": "DJ Only from {justDj} if the venue has good equipment. All-in from {allIn} if sound and lighting also need to be arranged. Both for 4 hours; extra hour {extraHour}. For most birthdays All-in is the easiest choice."
+      }
+    },
+    "zelfApparatuur": {
+      "q": {
+        "nl": "Heb ik zelf apparatuur nodig?",
+        "en": "Do I need my own equipment?"
+      },
+      "a": {
+        "nl": "Alleen bij DJ Only. Heeft de locatie geen passende professionele installatie, kies dan All-in. Dan regel ik geluid, licht en DJ-booth. Je hoeft zelf geen speakers of lampen te huren.",
+        "en": "Only with DJ Only. If the venue has no suitable professional setup, choose All-in. Then I arrange sound, lighting and DJ booth. You don't need to hire speakers or lights yourself."
+      }
+    },
+    "hoeveelUurNodig": {
+      "q": {
+        "nl": "Hoeveel uur DJ heb ik nodig?",
+        "en": "How many hours of DJ do I need?"
+      },
+      "a": {
+        "nl": "Vier uur is voor veel feesten genoeg. Een verjaardag die later op gang komt, of een bruiloft met diner en toespraken, vraagt vaak een extra uur of twee. We kijken naar jullie tijdschema, niet naar een vast recept.",
+        "en": "Four hours is enough for many parties. A birthday that starts later, or a wedding with dinner and speeches, often needs an extra hour or two. We look at your schedule, not a fixed recipe."
+      }
+    },
+    "verschilDjOnlyAllIn": {
+      "q": {
+        "nl": "Wat is het verschil tussen DJ Only en All-in?",
+        "en": "What's the difference between DJ Only and All-in?"
+      },
+      "a": {
+        "nl": "DJ Only is alleen ik, op locaties met passende techniek. All-in is DJ plus standaard geluid, licht, booth en microfoon. Bruiloft DJ is All-in plus uitgebreidere persoonlijke voorbereiding, openingsdans en afstemming van bijzondere momenten. Een back-up DJ via mijn netwerk is bij alle drie de pakketten mogelijk.",
+        "en": "DJ Only is just me, at venues with suitable equipment. All-in is DJ plus standard sound, lighting, booth and microphone. Wedding DJ is All-in plus more personal preparation, first dance and planning of key moments. A backup DJ via my network is possible with all three packages."
+      }
+    },
+    "factuur": {
+      "q": {
+        "nl": "Kan ik een factuur krijgen?",
+        "en": "Can I get an invoice?"
+      },
+      "a": {
+        "nl": "Ja, facturatie is mogelijk. Handig voor bedrijfsfeesten of als de locatie of vereniging betaalt.",
+        "en": "Yes, invoicing is possible. Useful for corporate events or if the venue or association pays."
+      }
+    },
+    "leeftijdSchool": {
+      "q": {
+        "nl": "Vanaf welke leeftijd draai je schoolfeesten?",
+        "en": "From what age do you play school parties?"
+      },
+      "a": {
+        "nl": "Vanaf ongeveer 12 jaar. De muziek is leeftijdsgeschikt, zonder expliciete teksten. We stemmen vooraf af wat wel en niet mag.",
+        "en": "From around 12 years old. The music is age-appropriate, without explicit lyrics. We agree in advance what is and isn't allowed."
+      }
+    }
+  },
+  "pages": {
+    "site": [
+      "watKostDjTim",
+      "prijzen4Uur",
+      "extraUur",
+      "reiskosten",
+      "wanneerDjOnly",
+      "wanneerAllIn",
+      "hoeveelGasten",
+      "zelfApparatuur",
+      "anderePartijenLichtGeluid",
+      "hoeLangVanTevoren",
+      "welkeMuziek",
+      "openFormat",
+      "favorietenDoorgeven",
+      "verzoeknummers",
+      "gebruikMicrofoon",
+      "handsUp",
+      "rechtstreeksBoeken",
+      "uitvalBackup",
+      "hoeReserveren",
+      "contactWhatsapp"
+    ],
+    "prijzen": [
+      "watKostDjTim",
+      "watKrijgIk500",
+      "watZitInAllIn",
+      "watZitInWedding",
+      "prijzen4Uur",
+      "extraUur",
+      "reiskosten",
+      "verschilDjOnlyAllIn",
+      "wanneerDjOnly",
+      "wanneerAllIn",
+      "hoeveelGasten",
+      "locatieTechniek",
+      "anderePartijenLichtGeluid",
+      "hoeLangVanTevoren",
+      "extraGeluidLicht",
+      "microfoon",
+      "verzoeknummers",
+      "favorietenDoorgeven",
+      "handsUp",
+      "hoeveelUurNodig",
+      "hoeReserveren",
+      "kostBruiloftDj",
+      "openingsdans"
+    ],
+    "bruiloft": [
+      "kostBruiloftDj",
+      "hoeLangBruiloft",
+      "favorietenDoorgeven",
+      "verzoeknummers",
+      "welkeMuziek",
+      "gebruikMicrofoon",
+      "openingsdans",
+      "zelfApparatuur",
+      "anderePartijenLichtGeluid",
+      "hoeLangVanTevoren",
+      "rechtstreeksBoeken",
+      "uitvalBackup",
+      "ceremoniemeester",
+      "verschillendeLeeftijden",
+      "voorbereidingBruiloft",
+      "doNotPlay",
+      "handsUp",
+      "hoeVroeg"
+    ],
+    "verjaardag": [
+      "watKostVerjaardag",
+      "wanneerDjOnly",
+      "wanneerAllIn",
+      "anderePartijenLichtGeluid",
+      "hoeLangVanTevoren",
+      "hoeveelUurNodig",
+      "favorietenDoorgeven",
+      "verzoeknummers",
+      "verschillendeLeeftijden",
+      "uitvalBackup",
+      "handsUp",
+      "extraUur"
+    ],
+    "bedrijfsfeest": [
+      "watKostDjTim",
+      "wanneerAllIn",
+      "wanneerDjOnly",
+      "anderePartijenLichtGeluid",
+      "hoeLangVanTevoren",
+      "verschillendeLeeftijden",
+      "welkeMuziek",
+      "favorietenDoorgeven",
+      "verzoeknummers",
+      "gebruikMicrofoon",
+      "factuur",
+      "microfoon",
+      "hoeveelGasten",
+      "uitvalBackup"
+    ],
+    "schoolfeest": [
+      "watKostDjTim",
+      "wanneerAllIn",
+      "leeftijdSchool",
+      "anderePartijenLichtGeluid",
+      "hoeLangVanTevoren",
+      "verzoeknummers",
+      "handsUp",
+      "zelfApparatuur"
+    ],
+    "buurtfeest": [
+      "verschilDjOnlyAllIn",
+      "wanneerAllIn",
+      "anderePartijenLichtGeluid",
+      "hoeLangVanTevoren",
+      "watKostDjTim",
+      "verzoeknummers",
+      "verschillendeLeeftijden",
+      "reiskosten"
+    ],
+    "slagingsfeest": [
+      "watKostDjTim",
+      "wanneerAllIn",
+      "anderePartijenLichtGeluid",
+      "hoeLangVanTevoren",
+      "hoeveelGasten",
+      "verzoeknummers",
+      "welkeMuziek"
+    ],
+    "locatie": [
+      "reiskosten",
+      "watKostDjTim",
+      "wanneerAllIn",
+      "anderePartijenLichtGeluid",
+      "hoeLangVanTevoren",
+      "verzoeknummers",
+      "hoeReserveren",
+      "hoeveelGasten"
+    ]
+  }
+}

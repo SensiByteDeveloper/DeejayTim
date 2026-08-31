@@ -3,71 +3,113 @@
   "packages": [
     {
       "id": "justDj",
-      "title": { "nl": "Just DJ", "en": "Just DJ" },
-      "subtitle": { "nl": "Alleen DJ zonder apparatuur.", "en": "DJ only, no equipment." },
-      "from": 250,
+      "title": { "nl": "DJ Only", "en": "DJ Only" },
+      "shortTitle": { "nl": "Just DJ", "en": "Just DJ" },
+      "subtitle": { "nl": "DJ voor locaties waar professionele techniek aanwezig is.", "en": "DJ for venues where professional equipment is already in place." },
+      "from": 500,
       "hoursIncluded": 4,
-      "note": { "nl": "locatie met eigen geluidsinstallatie", "en": "venue with own sound system" },
+      "note": { "nl": "locatie met passende professionele techniek", "en": "venue with suitable professional equipment" },
+      "choose": { "nl": "Kies dit als de locatie geschikte professionele techniek heeft.", "en": "Choose this if the venue has suitable professional equipment." },
       "bullets": {
-        "nl": ["Alleen Deejay Tim", "Voor locaties met eigen geluidsinstallatie", "Ik verzorg de muziek en het draaien", "Verzoeknummers mogelijk", "Ideaal voor cafés, clubs of events met techniek"],
-        "en": ["Deejay Tim only", "For venues with own sound system", "I provide music and mixing", "Song requests possible", "Ideal for cafés, clubs or events with equipment"]
+        "nl": [
+          "DJ Tim (4 uur)",
+          "Muziekvoorbereiding",
+          "Verzoeknummers mogelijk",
+          "Voor locaties met passende techniek"
+        ],
+        "en": [
+          "DJ Tim (4 hours)",
+          "Music preparation",
+          "Song requests possible",
+          "For venues with suitable equipment"
+        ]
       },
-      "extraNote": { "nl": "Geluid, verlichting en DJ booth zijn niet inbegrepen.", "en": "Sound, lighting and DJ booth not included." }
+      "extraNote": { "nl": "Geluid, verlichting en DJ-booth zijn niet standaard inbegrepen.", "en": "Sound, lighting and DJ booth are not included as standard." }
     },
     {
       "id": "allIn",
-      "title": { "nl": "All-in DJ Show", "en": "All-in DJ Show" },
-      "subtitle": { "nl": "Complete DJ show voor de meeste feesten.", "en": "Complete DJ show for most parties." },
-      "from": 500,
+      "title": { "nl": "All-in DJ", "en": "All-in DJ" },
+      "shortTitle": { "nl": "All-in", "en": "All-in" },
+      "subtitle": { "nl": "DJ met passende licht- en geluidstechniek voor je feest.", "en": "DJ with suitable lighting and sound for your party." },
+      "from": 850,
       "hoursIncluded": 4,
-      "note": { "nl": "incl. geluid en verlichting", "en": "incl. sound and lighting" },
-      "badge": { "nl": "Populair", "en": "Popular" },
+      "note": { "nl": "incl. geluid, licht en DJ-booth", "en": "incl. sound, lighting and DJ booth" },
+      "badge": { "nl": "Meest gekozen", "en": "Most chosen" },
+      "choose": { "nl": "Kies dit als je wilt dat DJ én de benodigde standaard techniek verzorgd worden.", "en": "Choose this if you want both the DJ and the standard equipment taken care of." },
       "bullets": {
-        "nl": ["Professionele DJ set (Pioneer XDJ-RX3)", "Speakerset", "DJ booth", "Dansvloer verlichting", "Microfoon voor aankondigingen", "Verzoeknummers mogelijk"],
-        "en": ["Professional DJ set (Pioneer XDJ-RX3)", "Speaker set", "DJ booth", "Dance floor lighting", "Microphone for announcements", "Song requests possible"]
+        "nl": [
+          "DJ Tim (4 uur)",
+          "Passende geluidsinstallatie",
+          "Dansvloerverlichting",
+          "DJ-booth en microfoon",
+          "Verzoeknummers mogelijk"
+        ],
+        "en": [
+          "DJ Tim (4 hours)",
+          "Suitable sound system",
+          "Dance floor lighting",
+          "DJ booth and microphone",
+          "Song requests possible"
+        ]
       },
-      "audience": { "nl": "Geschikt voor verjaardagen, bedrijfsfeesten, schoolfeesten, buurtfeesten en slagingsfeesten.", "en": "Suitable for birthdays, corporate events, school parties, street parties and graduation parties." }
+      "audience": { "nl": "Standaard geschikt tot circa 100 gasten. Groter of afwijkend in overleg.", "en": "Standard setup suits around 100 guests. Larger or different productions by arrangement." }
     },
     {
       "id": "wedding",
       "title": { "nl": "Bruiloft DJ", "en": "Wedding DJ" },
-      "subtitle": { "nl": "All-in + extra voorbereiding en begeleiding voor jullie bruiloft.", "en": "All-in + extra preparation and guidance for your wedding." },
-      "from": 750,
+      "shortTitle": { "nl": "Bruiloft", "en": "Wedding" },
+      "subtitle": { "nl": "DJ met uitgebreide voorbereiding en persoonlijke afstemming voor jullie trouwfeest.", "en": "DJ with thorough preparation and personal coordination for your wedding." },
+      "from": 950,
       "hoursIncluded": 4,
-      "note": { "nl": "incl. geluid en verlichting", "en": "incl. sound and lighting" },
+      "note": { "nl": "incl. licht, geluid en persoonlijke voorbereiding", "en": "incl. lighting, sound and personal preparation" },
       "bullets": {
-        "nl": ["Persoonlijk voorgesprek", "Begeleiding van de openingsdans", "Afstemming met ceremoniemeester", "Afstemming over speciale momenten", "Muziek afgestemd op jullie wensen"],
-        "en": ["Personal consultation", "First dance guidance", "Coordination with master of ceremonies", "Coordination of special moments", "Music tailored to your wishes"]
+        "nl": [
+          "DJ Tim (4 uur) + licht en geluid",
+          "Persoonlijk voorgesprek",
+          "Uitgebreidere voorbereiding",
+          "Openingsdans en bijzondere momenten",
+          "Afstemming met ceremoniemeester en/of locatie"
+        ],
+        "en": [
+          "DJ Tim (4 hours) + lighting and sound",
+          "Personal consultation",
+          "More thorough preparation",
+          "First dance and special moments",
+          "Coordination with MC and/or venue"
+        ]
       },
-      "optionalNote": { "nl": "Extra persoonlijke afstemming voor jullie bruiloft.", "en": "Extra personal coordination for your wedding." }
+      "optionalNote": { "nl": "Compleet verzorgd, met extra aandacht voor voorbereiding en jullie belangrijke momenten.", "en": "Fully arranged, with extra attention for preparation and your key moments." }
     }
   ],
   "justDj": {
-    "from": 250,
+    "from": 500,
     "hoursIncluded": 4,
-    "note": { "nl": "locatie met eigen geluidsinstallatie", "en": "venue with own sound system" }
+    "note": { "nl": "locatie met passende professionele techniek", "en": "venue with suitable professional equipment" }
   },
   "allIn": {
-    "from": 500,
+    "from": 850,
     "hoursIncluded": 4,
-    "note": { "nl": "incl. geluid en verlichting", "en": "incl. sound and lighting" }
+    "note": { "nl": "incl. geluid, licht en DJ-booth", "en": "incl. sound, lighting and DJ booth" }
   },
   "wedding": {
-    "from": 750,
+    "from": 950,
     "hoursIncluded": 4,
-    "note": { "nl": "incl. geluid en verlichting", "en": "incl. sound and lighting" }
+    "note": { "nl": "incl. licht, geluid en persoonlijke voorbereiding", "en": "incl. lighting, sound and personal preparation" }
   },
-  "typicalRange": {
-    "from": 500,
-    "to": 1000,
-    "text": { "nl": "De meeste feesten vallen tussen {from} en {to}.", "en": "Most parties fall between {from} and {to}." }
+  "extraHour": 100,
+  "travel": {
+    "includedKm": 30,
+    "extraKmRate": 0.35,
+    "postalCode": "3332 SN",
+    "roundTrip": true,
+    "exampleDistanceKm": 50
   },
   "extraKm": 0.35,
-  "extraHour": 100,
-  "travelExample50km": { "nl": "€14", "en": "€14" },
+  "travelIncludedKm": 30,
+  "travelBasePostcode": "3332 SN",
   "subtitle": {
-    "nl": "Particuliere tarieven, geen BTW. Alle pakketten: 4 uur DJ inbegrepen, inclusief 30 km reiskosten vanaf 3332 SN; daarboven €0,35 per extra gereden km (bij 50 km afstand: €14 extra reiskosten op de prijs). Extra uur {hour}.",
-    "en": "Private rates; no VAT. All packages: 4 hours DJ included, including 30 km travel from 3332 SN; beyond that €0.35 per extra km driven (50 km away: €14 extra travel on top of the price). Extra hour {hour}."
+    "nl": "Particuliere tarieven, geen btw. Alle pakketten: {hours} uur DJ inbegrepen, inclusief {travelKm} km reiskosten vanaf {postcode}; daarboven {kmRate} per extra gereden km. Extra uur {extraHour}.",
+    "en": "Private rates; no VAT. All packages: {hours} hours DJ included, including {travelKm} km travel from {postcode}; beyond that {kmRate} per extra km driven. Extra hour {extraHour}."
   },
   "extras": {
     "nl": ["verlichte dansvloer", "extra verlichting", "grotere geluidsinstallatie"],

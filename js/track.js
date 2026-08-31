@@ -42,7 +42,7 @@ function initClickTracking() {
       return;
     }
     const text = (a.textContent || '').trim();
-    if (/Boek nu/i.test(text) || a.classList.contains('hero-cta') || a.classList.contains('cta-button')) {
+    if (/Boek nu/i.test(text) || /Stuur me een berichtje/i.test(text) || /Send me a message/i.test(text) || a.classList.contains('hero-cta') || a.classList.contains('cta-button') || a.classList.contains('packages-cta-btn')) {
       track('click_book_now');
     }
   }, true);
