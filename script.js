@@ -3,7 +3,7 @@
 /* Pjax: laad eerst zodat navigatie geen volledige reload doet – muziek blijft spelen */
 (function () {
   const s = document.createElement('script');
-  s.src = '/js/pjax.js';
+  s.src = '/js/pjax.js?v=2';
   s.async = false;
   document.head.appendChild(s);
 })();

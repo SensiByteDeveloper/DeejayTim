@@ -74,6 +74,65 @@
     return false;
   }
 
+  let scrollLock = 0;
+
+  /** Instant jump. html { scroll-behavior: smooth } makes scrollTo animate, which iOS drops after a pjax swap. */
+  function scrollToY(y) {
+    const root = document.documentElement;
+    root.style.scrollBehavior = 'auto';
+    const scrolling = document.scrollingElement || root;
+    scrolling.scrollTop = y;
+    document.body.scrollTop = y;
+  }
+
+  /**
+   * Keep a scroll position until the new page has laid out.
+   * iOS Safari otherwise reuses the previous page offset, so a tap on the
+   * homepage service buttons opens the next page halfway down.
+   */
+  function holdScroll(y) {
+    const token = ++scrollLock;
+    const root = document.documentElement;
+    const main = document.querySelector(MAIN_SELECTOR);
+    const prevRootAnchor = root.style.overflowAnchor;
+    const prevMainAnchor = main ? main.style.overflowAnchor : '';
+    root.style.overflowAnchor = 'none';
+    if (main) main.style.overflowAnchor = 'none';
+
+    const apply = () => {
+      if (token !== scrollLock) return;
+      scrollToY(y);
+    };
+
+    apply();
+    requestAnimationFrame(() => {
+      apply();
+      requestAnimationFrame(apply);
+    });
+    setTimeout(apply, 0);
+    setTimeout(apply, 60);
+    setTimeout(apply, 300);
+
+    let observer = null;
+    if (y === 0 && main) {
+      observer = new MutationObserver(apply);
+      observer.observe(main, { childList: true, subtree: true });
+    }
+
+    const stop = () => {
+      if (token !== scrollLock) return;
+      scrollLock++;
+      if (observer) observer.disconnect();
+      root.style.overflowAnchor = prevRootAnchor;
+      if (main) main.style.overflowAnchor = prevMainAnchor;
+      root.style.scrollBehavior = '';
+    };
+
+    setTimeout(stop, y === 0 ? 1000 : 400);
+    window.addEventListener('touchstart', stop, { once: true, passive: true });
+    window.addEventListener('wheel', stop, { once: true, passive: true });
+  }
+
   /** Lets the browser paint (e.g. :active on nav) before heavy DOM work — improves INP. */
   function yieldToPaint() {
     return new Promise((resolve) => {
@@ -129,6 +188,13 @@
 
       await yieldToPaint();
 
+      const fromUrl = location.href;
+      const fromScroll = window.scrollY || document.documentElement.scrollTop || 0;
+      const active = document.activeElement;
+      if (active && active !== document.body && typeof active.blur === 'function') {
+        active.blur();
+      }
+
       main.innerHTML = mainHTML;
       ['data-service', 'data-location', 'class'].forEach((name) => main.removeAttribute(name));
       for (const [name, value] of Object.entries(mainAttrs)) {
@@ -139,10 +205,17 @@
       if (meta && metaDesc) meta.setAttribute('content', metaDesc);
 
       if (pushState) {
-        history.pushState({ pjax: true, url }, '', url);
+        const currentState = history.state && typeof history.state === 'object' ? history.state : {};
+        history.replaceState({ ...currentState, pjax: true, url: fromUrl, scrollY: fromScroll }, '');
+        history.pushState({ pjax: true, url, scrollY: 0 }, '', url);
       }
 
-      if (!scrollToHash(url)) window.scrollTo(0, 0);
+      if (!scrollToHash(url)) {
+        const saved = !pushState && history.state && typeof history.state.scrollY === 'number'
+          ? history.state.scrollY
+          : 0;
+        holdScroll(saved);
+      }
 
       const scripts = getScriptsForPath(path);
       for (const src of scripts) {
@@ -162,6 +235,8 @@
   const VIDEO_RETURN_KEY = 'deejaytim-video-return';
 
   function init() {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
     document.addEventListener('click', (e) => {
       const link = e.target.closest('a');
       if (!link || !isInternalLink(link)) return;
